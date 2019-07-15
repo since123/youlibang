@@ -1,0 +1,146 @@
+/* pages/myorder/myorder.wxss */
+
+.pos {
+  width: 750rpx;
+  height: 80rpx;
+  background: #f5f7f9;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 18rpx;
+}
+
+.pos view {
+  width: 90rpx;
+  height: 80rpx;
+  font: 30rpx/76rpx "";
+  color: #333;
+  text-align: center;
+}
+
+.pos .aa {
+  width: 88rpx;
+  height: 4rpx;
+}
+
+.pos view:nth-child(1) .aa {
+  background: #ea4148;
+}
+
+.pos view:nth-child(1) {
+  color: #ea4148;
+}
+
+.box {
+  width: 678rpx;
+  height: 576rpx;
+  background: #e6e6e6;
+  margin: 0 auto;
+  margin-top: 26rpx;
+  overflow: hidden;
+  border-radius: 20rpx;
+}
+
+.box .box_f {
+  font: 24rpx/24rpx "";
+  color: #999;
+  margin-top: 29rpx;
+  margin-left: 28rpx;
+}
+
+image {
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.box .box_pc {
+  display: flex;
+  flex-direction: row;
+  margin-top: 32rpx;
+  margin-left: 20rpx;
+}
+
+.box_rt {
+  margin-left: 21rpx;
+}
+
+.box_rt .box_po {
+  width: 260rpx;
+  height: 62rpx;
+  font: 28rpx/28rpx "";
+  color: #333;
+}
+
+.box_rt .box_no {
+  width: 103rpx;
+  height: 24rpx;
+  font: 24rpx/24rpx '';
+  color: #999;
+  margin-top: 17rpx;
+}
+
+.box_hoh {
+  margin-left: 116rpx;
+}
+
+.box_hoh .box_hh {
+  width: 98rpx;
+  height: 19rpx;
+  font-size: 24rpx;
+}
+
+.box_hoh .box_hr {
+  width: 30rpx;
+  height: 19rpx;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 26rpx;
+}
+
+.vv {
+  width: 286rpx;
+  height: 24rpx;
+  font: 22rpx/24rpx '';
+  color: #999;
+  display: flex;
+  flex-direction: row;
+  margin-left: 385rpx;
+  margin-top: 39rpx;
+}
+
+.oo {
+  display: flex;
+  flex-direction: row;
+  margin-left: 379rpx;
+}
+
+.kk {
+  margin-left: 510rpx;
+}
+
+.yy {
+  width: 126rpx;
+  height: 48rpx;
+  font: 24rpx/48rpx "";
+  color: #333;
+  background: #fff;
+  text-align: center;
+  border-radius: 26rpx;
+  border: 1rpx solid #333;
+  margin-top: 26rpx;
+}
+
+.uu {
+  width: 126rpx;
+  height: 48rpx;
+  font: 24rpx/48rpx "";
+  color: #333;
+  background: #fff;
+  text-align: center;
+  margin-right: 19rpx;
+  border-radius: 26rpx;
+  border: 1rpx solid #333;
+  margin-top: 26rpx;
+}
+ .box .mou{
+  color: #FF9130;
+}

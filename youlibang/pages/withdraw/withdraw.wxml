@@ -1,0 +1,15 @@
+<!--pages/withdrawal/withdrawal.wxml-->
+<view class='amount'>
+  <view class='cash'>
+  <view class='cash_l'>¥</view>
+  <input placeholder="请输入提现金额" />
+</view>
+<view class='line'></view>
+<view class='amount_text'>当前可提现的余额：0.00元，<label>全部提现</label></view>
+</view>
+<view class='coomit' bindtap='withdrawal'>提现</view>
+<view class='mubu' bindtap='quxiao' hidden="{{!status}}"></view>
+<view class='footer' bindchange="toastHide" hidden="{{!status}}">
+  <view class='hands' bindtap='handsWithdraw'>手动提现</view>
+  <view class='hands' bindtap='allWithdraw'>自动提现</view>
+</view>

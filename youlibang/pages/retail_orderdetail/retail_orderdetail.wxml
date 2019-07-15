@@ -1,0 +1,35 @@
+<!--pages/retail_orderdetail/retail_orderdetail.wxml-->
+<!-- 订单信息 -->
+<view class='orderInfo'>
+  <view class='Infotext'>订单进行中</view>
+  <view class='time'>2019-12-09</view>
+  <view class='line'></view>
+  <view class='goodsInfo'>
+    <view class='goodsImg'><image src='../../images/2012031220134655.jpg'></image></view>
+    <view class='goodsdetail'>新款韩版秋装女初恋裙白色复古压褶雪纺长袖连衣裙a字中长裙</view>
+    <view class='types_num'>
+      <view class='types'>粉色、M</view>
+      <view class='num'>X2件</view>
+    </view>
+  </view>
+  <view class='goodsInfo'>
+    <view class='goodsImg'><image src='../../images/2012031220134655.jpg'></image></view>
+    <view class='goodsdetail'>新款韩版秋装女初恋裙白色复古压褶雪纺长袖连衣裙a字中长裙</view>
+    <view class='types_num'>
+      <view class='types'>毛衣+连衣裙,均码</view>
+      <view class='num'>X2件</view>
+    </view>
+  </view>
+  <view class='line'></view>
+  <view class='yunfei'>
+    <view class='yunfeitext'>运费</view>
+    <view class='mianyunfei'>免运费</view>
+  </view>
+   <view class='heji'>
+    <view class='total'>合计</view>
+    <view class='money'><label>￥</label>2800.00</view>
+  </view>
+  <view class='line'></view>
+  <view class='rebate'>返利</view>
+  <view class='rebate_money'><label>￥</label>280.00</view>
+</view>

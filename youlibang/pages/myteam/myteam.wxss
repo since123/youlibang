@@ -1,0 +1,145 @@
+/* pages/myteam/myteam.wxss */
+.top{
+  width: 100%;
+  height: 100rpx;
+  background-color: #ffffff;
+}
+.statustop{
+  width:50%;
+  height: 100%;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  font-size:34rpx;
+  font-family:sans-serif;
+  font-weight:500;
+}
+
+.statustop1{
+  width:50%;
+  height: 100%;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #EA4148;
+  border-bottom: 5rpx solid #EA4148;
+  background-color: white;
+  font-size:34rpx;
+  font-family:sans-serif;
+  font-weight:500;
+}
+.body_contents{
+  width: 100%;
+  
+}
+.statusboxcode{
+  width:100%;
+  height: 200rpx;
+  float: left;
+  margin-top: 20rpx;
+  background-color: #ffffff;
+}
+.statusboxcode1{
+  width:15%;
+  height: 120rpx;
+  float: left;
+  margin-top: 10rpx;
+}
+.statusbox{
+  width: 100%;
+  height:100%;
+
+}
+.userInfo{
+  width: 100%;
+  height: 119rpx;
+  /* background-color: yellow; */
+}
+.userheadImg{
+float: left;
+width: 80rpx;
+height: 80rpx;
+/* background-color: red; */
+margin-top: 20rpx;
+margin-left: 30rpx;
+border-radius:50%;
+}
+.userheadImg image{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius:50%;
+}
+.name_time{
+  float: left;
+  width: 50%;
+  height: 80rpx;
+  /* background-color: red; */
+  margin-top: 20rpx;
+
+}
+.username{
+  float: left;
+  width:100rpx;
+  height:28rpx;
+  font-size:30rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+  line-height:50rpx;
+  margin-left: 20rpx;
+}
+.registertime{
+  float: left;
+  width:257rpx;
+  height:23rpx;
+  font-size:24rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(102,102,102,1);
+  line-height:90rpx;
+  margin-left: 20rpx;
+}
+.num{
+  float: left;
+  width:100rpx;
+  height:23rpx;
+  font-size:24rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(234,65,72,1);
+  line-height:90rpx;
+  margin-left: 18%;
+}
+.li{
+  float: left;
+  width:670rpx;
+  height:1rpx;
+  background:rgba(238,238,238,1);
+  margin-top: 3%;
+  margin-left: 5%;
+}
+.spand{
+  float: left;
+  margin-left: 30rpx;
+  width:200rpx;
+  height:26rpx;
+  font-size:28rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+  line-height:80rpx;
+}
+.orderNum{
+  float: left;
+  width:120rpx;
+  height:26rpx;
+  font-size:28rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+  line-height:80rpx;
+  margin-left: 50%;
+}

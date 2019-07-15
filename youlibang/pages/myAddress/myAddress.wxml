@@ -1,0 +1,16 @@
+<!--pages/myaddress/myaddress.wxml-->
+<view wx:for='{{addressList}}'  wx:for-item='item' data-index="{{item.index}}" data-id="{{item.id}}" >
+  <view class='coll'>
+    <view class='coll_u'>
+      <view class='coll_t'>{{item.username}} {{item.tel}}</view>
+      <view class='coll_b'>{{item.address}}</view>
+    </view>
+    <view class='coll_v'>
+      <checkbox class='check_box' checked='checked'></checkbox>
+      <view class='coll_f'>设为默认</view>
+      <view class='coll_L' bindtap='editAddress'><image src='../../images/edit@2x.png'></image><view class='coll_o'>编辑</view></view>
+      <view class='coll_k' bindtap='deleteAddress'><image src='../../images/delete@2x.png'></image><view class='coll_o'>删除</view></view>
+    </view>
+  </view>
+</view>
+<view class='diss' bindtap='addAddress'>新增收货地址</view>

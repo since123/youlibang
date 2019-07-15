@@ -1,0 +1,39 @@
+<!--pages/personal_data/personal_data.wxml-->
+<view class='headImg'>
+  <view class='headtext'>头像</view>
+  <view class='rightImg'><image mode="{{item.mode}}" src="{{src}}"></image></view>
+</view>
+<view class='vipinfo'>
+  <view class='infotext'>会员名</view>
+  <label class='rightinfo'>{{vipname}}</label>
+</view>
+<view class='vipinfo'>
+  <view class='infotext'>绑定手机号码</view>
+  <label class='rightinfo'>{{bindphone}}</label>
+</view>
+<view class='vipinfo'>
+  <view class='infotext'>性别</view>
+  <label class='rightinfo'>{{sex}}</label>
+</view>
+<view class='vipinfo'>
+  <view class='infotext'>地址</view>
+  <label class='rightinfo'>{{address}}</label>
+</view>
+<view class='vipinfo'>
+  <view class='infotext'>微信</view>
+  <label class='rightinfo'>{{wechat}}</label>
+</view>
+<view class='vipinfo'>
+  <view class='infotext'>推荐ID</view>
+  <label class='rightinfo'>{{tuijianID}}</label>
+</view>
+
+  <view class='uploadIDCard'>身份证</view>
+  <view class='IDCard'>
+      <view class='idcardImg'><image src='{{idCard1}}'></image></view>
+      <view class='idcardImg'><image src='{{idCard2}}'></image></view>
+  </view>
+  <view class='uploadIDCard'>营业执照</view>
+  <view class='addImg'>
+      <view class='imginfo'><image src='{{businesslicense}}'></image></view>
+  </view>

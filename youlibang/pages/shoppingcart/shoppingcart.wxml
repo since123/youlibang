@@ -1,0 +1,32 @@
+<!--pages/ShoppingCart/ShoppingCart.wxml-->
+<view wx:for="{{carts}}">
+  <view class='Shopping_list'>
+    <!-- wx:if 是否选中 -->
+    <icon wx:if="{{item.selected}}" type="success" color="red" bindtap="selectList" data-index="{{index}}" size='40rpx' />
+    <icon wx:else type="circle" bindtap="selectList" data-index="{{index}}" size='40rpx' />
+    <navigator url="../details/details?id={{item.id}}">
+      <image src="{{item.image}}"></image>
+    </navigator>
+    <view class='explain'>
+      <text class='explain_top'>{{item.title}}</text>
+      <view class='explain_bottom'>
+        <text class='Price'>￥{{item.price}}</text>
+        <view class='Key'>
+          <text bindtap="minusCount" data-index="{{index}}" class='Key_reduce'>-</text>
+          <text class='number'>{{item.num}}</text>
+          <text bindtap="addCount" data-index="{{index}}" class='Key_plus'>+</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='Settlement'>
+    <view class='Settlement_left'>
+      <!-- wx:if 是否全选显示不同图标 -->
+      <icon wx:if="{{selectAllStatus}}" type="success" color='red' bindtap="selectAll" size='40rpx' />
+      <icon wx:else type="circle" color="#e6e6e6" bindtap="selectAll" size='40rpx' />
+      <text class='total'>全选</text>
+    </view>
+    <text class='Settlement_Middle'>合计:{{totalPrice}}</text>
+    <view class='Settlement_right' bindtap='search'>结算</view>
+  </view>
+</view>

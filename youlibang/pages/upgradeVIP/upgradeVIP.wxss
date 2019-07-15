@@ -1,0 +1,62 @@
+/* pages/upgradeVIP/upgradeVIP.wxss */
+.upgrade{
+  width: 100%;
+  height: 320rpx;
+  float: left;
+  /* background:linear-gradient(0deg,rgba(255,146,150,1) 1%,rgba(234,65,72,1) 99%); */
+}
+.upgrade image{
+ width: 750rpx;
+ height: 320rpx;
+}
+.yongjin{
+  width: 750rpx;
+  float: left;
+  margin-top: 2%;
+  text-align: center;
+  font-size:28rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  line-height:70rpx;
+  position: absolute;
+  background-color: black；
+}
+.money{
+  width: 750rpx;
+  float: left;
+  font-size:60rpx;
+  font-family:sans-serif;
+  font-weight:bold;
+  color:rgba(255,255,255,1);
+  line-height:70rpx;
+  text-align: center;
+  margin-top: 10%;
+  position: absolute;
+}
+.money label{
+  font-size: 28rpx;
+}
+.applys{
+  float: left;
+  width: 750rpx;
+  height: 80rpx;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  margin-top: 20%;
+}
+.apply{
+  float: left;
+  width:160rpx;
+  height:60rpx;
+  border:2rpx solid rgba(255,255,255,1);
+  border-radius:8rpx;
+  font-size:32rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  line-height:60rpx;
+  text-align: center;
+}

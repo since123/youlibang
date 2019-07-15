@@ -1,0 +1,42 @@
+<!--pages/applyVIP/applyVIP.wxml-->
+<view class='firstDiv'>
+  <view class='minbox'>
+    <view class='rechargeImg'><image src='../../images/recharge@2x.png'></image></view>
+    <view class='recharge'>充值</view>
+    <view class='righttext'>会员专享超多优惠返利！</view>
+  </view>
+  <view class='line'></view>
+  <view class='vipGrade'>
+      <view class='mindiv'>
+          <view class='viptext'>普通VIP</view>
+          <view class='money'><label>￥</label>100</view>
+      </view>
+      <view class='mindiv'>
+          <view class='viptext'>入门VIP</view>
+          <view class='money'><label>￥</label>1000</view>
+          <view class='vipnum'>限额1000名</view>
+      </view>
+      <view class='mindiv'>
+          <view class='viptext'>初级VIP</view>
+          <view class='money'><label>￥</label>5000</view>
+          <view class='vipnum'>充值可得免费铺货6000元</view>
+      </view>
+      <view class='mindiv'>
+          <view class='viptext'>中级VIP</view>
+          <view class='money'><label>￥</label>5000</view>
+          <view class='vipnum'>充值可得免费铺货6000元</view>
+      </view>
+  </view>
+  <view class='tuijian'>推荐ID</view>
+  <view class='inputInfo'><input type='text' placeholder='请输入'></input></view>
+  <view class='uploadIDCard'>上传身份证</view>
+  <view class='IDCard'>
+      <view class='idcardImg'><image src='../../images/idCard@2x.png'></image></view>
+      <view class='idcardImg'><image src='../../images/idCardbg@2x.png'></image></view>
+  </view>
+  <view class='uploadIDCard'>上传营业执照</view>
+  <view class='addImg'>
+      <view class='imginfo'></view>
+  </view>
+  <view class='apply_now'>立即申请</view>
+</view>

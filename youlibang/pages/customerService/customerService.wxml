@@ -1,0 +1,15 @@
+<!--pages/customerService/customerService.wxml-->
+<block wx:for='{{infolist}}' wx:for-item='item' we:key='{{id}}'>
+    <view class='listInfo' bindtap='customer' data-serviceid='{{item.serviceTel}}'>
+        <image src='../../images/bohao@2x.png'></image>
+        <view class='text'>{{item.serviceTel}}（{{item.kefuNum}}）</view>
+    </view>
+    <!-- <view class='listInfo' bindtap='customer'>
+        <image src='../../images/bohao@2x.png'></image>
+        <view class='text'>020-23787989（客服02）</view>
+    </view>
+    <view class='listInfo' bindtap='customer'>
+        <image src='../../images/bohao@2x.png'></image>
+        <view class='text'>020-23787989（客服03）</view>
+    </view> -->
+</block>

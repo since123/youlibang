@@ -1,0 +1,10 @@
+<!--pages/upgradeVIP/upgradeVIP.wxml-->
+<view class='box'>
+    <view class='upgrade'><image src='../../images/vipbgImg@2x.png'></image> </view>
+    <view class='yongjin'>可提现佣金</view>
+    <view class='money'><label>￥</label>0.00</view>
+    <view class='applys'>
+      <view class='apply'>申请会员</view>
+    </view>
+</view>
+

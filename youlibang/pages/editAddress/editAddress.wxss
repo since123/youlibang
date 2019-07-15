@@ -1,0 +1,31 @@
+/* pages/editAddress/editAddress.wxss */
+.name{
+  width: 750rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction:row;
+  border-bottom: 0.8rpx solid #e6e6e6;
+}
+.name .name_r{
+  font: 32rpx/100rpx "";
+  color: #333;
+  margin-left: 39rpx;
+  margin-right: 69rpx;
+}
+.name .input{
+  width: 400rpx;
+  height: 100rpx;
+  font: 32rpx/100rpx "";
+  color: #333;
+}
+.roll{
+  width: 620rpx;
+  height: 88rpx;
+  background:linear-gradient(-90deg,rgba(255,146,150,1),rgba(234,65,72,1));
+  font: 36rpx/88rpx "";
+  text-align: center;
+  color: #fff;
+  margin: 0 auto;
+  margin-top:102rpx;
+  border-radius: 8rpx;
+}

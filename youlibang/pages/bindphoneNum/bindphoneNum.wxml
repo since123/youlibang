@@ -1,0 +1,9 @@
+<!--pages/bindphoneNum/bindphoneNum.wxml-->
+<view class='imgcontents'>
+    <view class='phoneImg'></view>
+</view>
+<view class='localphonenum'>当前手机号</view>
+<view class='tel'>13789065434</view>
+<view class='tishi'>更换手机号，下次可使用新手机号验证登录。</view>
+<view class='updatephone'>更换手机号</view>
+

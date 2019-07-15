@@ -1,0 +1,67 @@
+/* pages/detailed/detailed.wxss */
+
+.page {
+  width: 750rpx;
+  height: 103rpx;
+  background: #f5f7f9;
+  overflow: hidden;
+}
+
+.page .page_flst {
+  font: 28rpx/28rpx '';
+  color: #333;
+  margin-top: 21rpx;
+  margin-left: 41rpx;
+}
+
+.page .page_two {
+  width: 358rpx;
+  display: flex;
+  flex-direction: row;
+  font-size: 24rpx;
+  margin-left: 41rpx;
+  margin-top: 16rpx;
+}
+
+.page .page_two .left {
+  color: #999;
+  margin-right: 20rpx;
+}
+
+.page .page_two .right {
+  color: #999;
+}
+
+.tips {
+  width: 750rpx;
+  height: 102rpx;
+  border-bottom: 1rpx solid #e6e6e6;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tips .tips_left {
+  margin-top: 17rpx;
+  margin-left: 41rpx;
+}
+
+.tips_left .text {
+  font: 700 30rpx/30rpx "";
+  color: #333;
+}
+
+.tips_left .tiems {
+  font: 24rpx/24rpx "";
+  color: #999;
+  margin-top: 17rpx;
+}
+
+.tips .tips_right {
+  font: 30rpx/102rpx "";
+  color: #333;
+  margin-right: 26rpx;
+}
+
+.tips .all {
+  color: #f9728b;
+}

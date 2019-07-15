@@ -1,0 +1,35 @@
+<!--pages/cashoutDetail/cashoutDetail.wxml-->
+<view class='top'>
+    <view  class="{{order?'statustop1':'statustop'}}" bindtap='openstatus'>待审核</view>
+    <view  class="{{order?'statustop':'statustop1'}}" bindtap='opendetail'>已打款</view>
+</view>
+<view class='body_contents'>
+     <view wx:if='{{order}}' class='statusboxcode'>
+        <view class='tixian'>
+            <view class='leftinfo'>
+              <view class='tixiantext'>提现</view>
+              <view class='datetime'>10月9日 00:09:01</view>
+            </view> 
+            <view class='money'>200.00</view>
+        </view>
+        <view class='tixian'>
+            <view class='leftinfo'>
+              <view class='tixiantext'>提现</view>
+              <view class='datetime'>10月9日 00:09:01</view>
+            </view> 
+            <view class='money'>200.00</view>
+        </view>
+        
+    </view>
+    
+   
+    <view wx:if='{{!order}}' class='statusboxcode'>
+        <view class='tixian'>
+            <view class='leftinfo'>
+              <view class='tixiantext'>提现</view>
+              <view class='datetime'>10月9日 00:09:01</view>
+            </view> 
+            <view class='money'>200.00</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,85 @@
+<!--pages/goodsDetail/goodsDetail.wxml-->
+<!-- 商品幻灯片 -->
+<view class='goodsImg'>
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" class="banner" duration="{{duration}}" circular="{{duration}}">
+    <block wx:for="{{goods_img}}" wx:key="goods_info">
+      <swiper-item>
+        <image src="{{imghref}}{{item.img}}" class="slide-image" mode="aspectFill" data-src='{{imghref}}{{item.img}}' bindtap="previewImage" />
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+<!-- 商品介绍 -->
+<view class='goodsjieshao'>
+  <view class='price'>
+    <view class='money'><label>￥</label>{{param.newprice}}</view>
+    <view class='money1'><label>￥</label>{{param.yuanjia}}</view>
+    <view class='superVIP'><label>超级会员</label></view>
+    <view class='yunfei'>运费:<label>{{param.yunfei}}</label>
+  </view>
+  </view>
+  <view class='goodsdetail'>{{param.goodsinfo}}</view>
+</view>
+<view class="zhong_title">
+  <view class="zhong_title_text">
+    ——— <text class="zhong_size">商品详情</text>———
+  </view>
+</view>
+<view class='Imgdetail'>
+</view>
+<!-- 底部 -->
+<view class='footer'>
+  <view class='kefu'>
+    <view class='Img'>
+      <image src='../../images/kefu (2).png'></image>
+    </view>
+    <view class='texts'>客服</view>
+  </view>
+  <view class='kefu'>
+    <view class='Img'>
+      <image src='../../images/shoppCart (1)@2x.png'></image>
+    </view>
+    <view class='texts'>购物车</view>
+  </view>
+  <view class='buttons'>
+    <view class='addCart' bindtap="addCartBtn" formType="submit">加入购物车</view>
+    <view class='buy' bindtap='buyNow'>立即购买</view>
+  </view>
+</view>
+<!-- <view  class='backtop'></view> -->
+<!-- 购买弹出层 -->
+<view class='mubu' bindtap='quxiao' hidden="{{!status}}"></view>
+  <view class='goodsType' bindchange="toastHide" hidden="{{!status}}">
+    <view  class='close' bindtap='quxiao' hidden="{{!status}}"><image src=''></image></view>
+    <view class='goodsdetailImg'><image src='../../images/2013062320262198.jpg'></image></view>
+    <view class='priceDiv'>
+      <view class='detailprice'><label>￥</label>{{param.newprice}}</view>
+      <view class='types'><block wx:if="{{type_txt==''}}">请选择规格</block><block wx:else>已选<label>{{type_txt}}</label></block>
+</view>
+    </view>
+    <view class='color'>颜色</view>
+    <view class='colorfenlei' >
+      <view class='list' wx:for='{{type1}}' wx:for-item='item'>{{item.color}}</view>
+      <!-- <view class='list'>粉色</view>
+      <view class='list'>奶白色</view>
+      <view class='list'>黑色</view>
+      <view class='list'>奶白色</view>
+      <view class='list'>奶白色</view> -->
+    </view>
+    <view class='size'>尺寸</view>
+    <view class='sizefenlei'>
+      <view class='sizelist' wx:for='{{type2}}' wx:for-item='item'>{{item.size}}</view>
+      <!-- <view class='sizelist'>M</view>
+      <view class='sizelist'>L</view>
+      <view class='sizelist'>XL</view>
+      <view class='sizelist'>XXL</view>
+      <view class='sizelist'>XXXL</view> -->
+    </view>
+    <view class='amount'>数量</view>
+    <view class='stepper sum'>
+      <text class='{{minusStatus}}' type='number' bindtap='bindMinus'>-</text>
+      <input bindinput='bindManual' value='{{num}}'></input>
+      <text bindtap='bindPlus'>+</text>
+    </view>
+    <view class='btn'>确定</view>
+  </view>

@@ -1,0 +1,127 @@
+<!--pages/myorder/myorder.wxml-->
+<view class='pos'>
+  <view>全部
+    <view class='aa'></view>
+  </view>
+  <view>待付款
+    <view class='aa'></view>
+  </view>
+  <view>待发货
+    <view class='aa'></view>
+  </view>
+  <view>待收货
+    <view class='aa'></view>
+  </view>
+  <view>已完成
+    <view class='aa'></view>
+  </view>
+</view>
+<view class='box'>
+  <view class='box_f'>已取消</view>
+  <view class='box_pc'>
+    <image src='../../images/youhuiquan@2x.png'></image>
+    <view class='box_rt'>
+      <view class='box_po'>Pepe Jeans秋季新款 女士长袖系带连衣裙</view>
+      <view class='box_no'>黑色;L;件</view>
+    </view>
+    <view class='box_hoh'>
+      <view class='box_hh'>¥ 120.00</view>
+      <view class='box_hr'>X8</view>
+    </view>
+
+  </view>
+  <view class='box_pc'>
+    <image src='../../images/youhuiquan@2x.png'></image>
+    <view class='box_rt'>
+      <view class='box_po'>Pepe Jeans秋季新款 女士长袖系带连衣裙</view>
+      <view class='box_no'>黑色;L;件</view>
+    </view>
+    <view class='box_hoh'>
+      <view class='box_hh'>¥ 120.00</view>
+      <view class='box_hr'>X8</view>
+    </view>
+
+  </view>
+  <view class='vv'>
+    共2件商品 合计：
+    <view class='vc'>¥200.00</view>
+  </view>
+  <view class='yy kk'>删除订单</view>
+
+</view>
+<view class='box'>
+  <view class='box_f mou'>待发货</view>
+  <view class='box_pc'>
+    <image src='../../images/youhuiquan@2x.png'></image>
+    <view class='box_rt'>
+      <view class='box_po'>Pepe Jeans秋季新款 女士长袖系带连衣裙</view>
+      <view class='box_no'>黑色;L;件</view>
+    </view>
+    <view class='box_hoh'>
+      <view class='box_hh'>¥ 120.00</view>
+      <view class='box_hr'>X8</view>
+    </view>
+
+  </view>
+  <view class='box_pc'>
+    <image src='../../images/youhuiquan@2x.png'></image>
+    <view class='box_rt'>
+      <view class='box_po'>Pepe Jeans秋季新款 女士长袖系带连衣裙</view>
+      <view class='box_no'>黑色;L;件</view>
+    </view>
+    <view class='box_hoh'>
+      <view class='box_hh'>¥ 120.00</view>
+      <view class='box_hr'>X8</view>
+    </view>
+
+  </view>
+  <view class='vv'>
+    共2件商品 合计：
+    <view class='vc'>¥200.00</view>
+  </view>
+  <view class='oo'>
+    <view class='uu'>取消订单</view>
+    <view class='yy '>催TA发货</view>
+  </view>
+
+
+</view>
+
+<view class='box'>
+  <view class='box_f mou'>待收货</view>
+  <view class='box_pc'>
+    <image src='../../images/youhuiquan@2x.png'></image>
+    <view class='box_rt'>
+      <view class='box_po'>Pepe Jeans秋季新款 女士长袖系带连衣裙</view>
+      <view class='box_no'>黑色;L;件</view>
+    </view>
+    <view class='box_hoh'>
+      <view class='box_hh'>¥ 120.00</view>
+      <view class='box_hr'>X8</view>
+    </view>
+
+  </view>
+  <view class='box_pc'>
+    <image src='../../images/youhuiquan@2x.png'></image>
+    <view class='box_rt'>
+      <view class='box_po'>Pepe Jeans秋季新款 女士长袖系带连衣裙</view>
+      <view class='box_no'>黑色;L;件</view>
+    </view>
+    <view class='box_hoh'>
+      <view class='box_hh'>¥ 120.00</view>
+      <view class='box_hr'>X8</view>
+    </view>
+
+  </view>
+  <view class='vv'>
+    共2件商品 合计：
+    <view class='vc'>¥200.00</view>
+  </view>
+  <!-- <view class='uu'>取消订单</view> -->
+
+  <view class='oo'>
+    <view class='uu'>申请退款</view>
+    <view class='yy '>确认收货</view>
+  </view>
+
+</view>
