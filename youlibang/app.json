@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/myOrder/myOrder",
+   
     "pages/index/index",
     "pages/logs/logs",
     "pages/mine/mine",
@@ -33,7 +33,7 @@
     "pages/recharge/recharge",
     "pages/withdraw/withdraw",
     "pages/retailOrder/retailOrder",
-
+"pages/myOrder/myOrder",
    
     "pages/editAddress/editAddress",
     "pages/test/test"
