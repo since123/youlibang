@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    currtab: 0,
     swipertab: [{ name: '全部', index: 0 }, { name: '待付款', index: 1 }, { name: '待发货', index: 2 }, { name: '待收货', index: 3 }, { name: '已完成', index: 4 }],
+    waitPayOrder: [{ index: '0', image: '/images/2012031220134655.jpg', title: 'Pepe Jeans秋冬新款女士长袖连衣裙', color: '黑色', size: 'L', unit: '件', price: '120', number: '8'}]
   },
 
   /**
@@ -21,7 +23,19 @@ Page({
   onReady: function () {
 
   },
-
+  /**
+    * @Explain：选项卡点击切换
+    */
+  tabSwitch: function(e) {
+    var that = this
+    if (this.data.currtab === e.target.dataset.current) {
+      return false
+    } else {
+      that.setData({
+        currtab: e.target.dataset.current
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面显示
    */

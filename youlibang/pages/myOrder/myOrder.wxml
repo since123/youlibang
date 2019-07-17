@@ -1,11 +1,50 @@
 <!--pages/myorder/myorder.wxml-->
 <view class="swiper-tab">
   <block wx:for="{{swipertab}}" wx:key="sptab">
-    <view bindtap="tabSwitch">{{item.name}}</view>
+    <view class="swiper-tab-list {{currtab == item.index ? 'on' : ''}}" 
+    data-current="{{item.index}}" 
+    bindtap="tabSwitch">{{item.name}}</view>
   </block>
 </view>
 
-<view class='box'>
+<swiper current="{{currtab}}">
+  <swiper-item>全部</swiper-item>
+  <swiper-item>
+    <scroll-view class="hot-box">
+      <view class="order">
+        <view class="orderList" wx:for="{{waitPayOrder}}" wx:key="{{item.index}}">
+            <image src='{{item.image}}'></image>
+            <view class='orderDetail'>
+              <view class='orderTitle'>{{item.title}}</view>
+              <view class='orderStyle'>
+                <view class="orderColor">{{item.color}}</view>
+                <view class="orderSize">{{item.size}}</view>
+                <view class="orderUnit">{{item.unit}}</view>
+              </view>
+            </view>
+            <view class='orderInfor'>
+              <view class='orderPrice'>{{item.price}}</view>
+              <view class='orderNum'>{{item.number}}</view>
+            </view>
+        </view>
+        <view class='orderSumPri'>
+          共2件商品 合计：
+          <view class='orderPri'>¥200.00</view>
+        </view>
+        <view class="orderHander">
+          <button class="orderCancel">取消订单</button>
+          <button class="orderConfirm">确认付款</button>
+        </view>
+      </view>
+    </scroll-view>
+  </swiper-item>
+  <swiper-item>待发货</swiper-item>
+  <swiper-item>待收货</swiper-item>
+  <swiper-item>
+   已完成
+  </swiper-item>
+</swiper>
+<!-- <view class='box'>
   <view class='box_f'>已取消</view>
   <view class='box_pc'>
     <image src='../../images/youhuiquan@2x.png'></image>
@@ -17,8 +56,8 @@
       <view class='box_hh'>¥ 120.00</view>
       <view class='box_hr'>X8</view>
     </view>
-
   </view>
+
   <view class='box_pc'>
     <image src='../../images/youhuiquan@2x.png'></image>
     <view class='box_rt'>
@@ -108,9 +147,9 @@
   </view>
   <!-- <view class='uu'>取消订单</view> -->
 
-  <view class='oo'>
+  <!-- <view class='oo'>
     <view class='uu'>申请退款</view>
     <view class='yy '>确认收货</view>
   </view>
 
-</view>
+</view> -->

@@ -1,5 +1,8 @@
 /* pages/myorder/myorder.wxss */
-
+.on {
+border-bottom:2px solid red;
+color: red;
+}
 .swiper-tab {
   width: 750rpx;
   height: 80rpx;
@@ -17,9 +20,9 @@
   text-align: center;
 }
 
-.box {
+.order {
   width: 678rpx;
-  height: 576rpx;
+  height: 326rpx;
   background: #e6e6e6;
   margin: 0 auto;
   margin-top: 26rpx;
@@ -27,37 +30,37 @@
   border-radius: 20rpx;
 }
 
-.box .box_f {
+/* .order .box_f {
   font: 24rpx/24rpx "";
   color: #999;
   margin-top: 29rpx;
   margin-left: 28rpx;
-}
+} */
 
 image {
   width: 150rpx;
   height: 150rpx;
 }
 
-.box .box_pc {
+.order .orderList {
   display: flex;
   flex-direction: row;
   margin-top: 32rpx;
   margin-left: 20rpx;
 }
 
-.box_rt {
+.orderDetail {
   margin-left: 21rpx;
 }
 
-.box_rt .box_po {
+.orderDetail .orderTitle {
   width: 260rpx;
   height: 62rpx;
   font: 28rpx/28rpx "";
   color: #333;
 }
 
-.box_rt .box_no {
+.orderDetail .orderStyle {
   width: 103rpx;
   height: 24rpx;
   font: 24rpx/24rpx '';
@@ -65,17 +68,17 @@ image {
   margin-top: 17rpx;
 }
 
-.box_hoh {
+.orderInfor {
   margin-left: 116rpx;
 }
 
-.box_hoh .box_hh {
+.orderInfor .orderPrice {
   width: 98rpx;
   height: 19rpx;
   font-size: 24rpx;
 }
 
-.box_hoh .box_hr {
+.orderInfor .orderNum {
   width: 30rpx;
   height: 19rpx;
   font-size: 24rpx;
@@ -83,18 +86,18 @@ image {
   margin-top: 26rpx;
 }
 
-.vv {
+.orderSumPri {
   width: 286rpx;
-  height: 24rpx;
+  height: 20rpx;
   font: 22rpx/24rpx '';
   color: #999;
   display: flex;
   flex-direction: row;
   margin-left: 385rpx;
-  margin-top: 39rpx;
+  margin-top: 10rpx;
 }
 
-.oo {
+.orderHander {
   display: flex;
   flex-direction: row;
   margin-left: 379rpx;
@@ -104,30 +107,30 @@ image {
   margin-left: 510rpx;
 }
 
-.yy {
-  width: 126rpx;
-  height: 48rpx;
-  font: 24rpx/48rpx "";
+.orderConfirm {
+  width: 130rpx;
+  height: 35rpx;
+  font: 19rpx/35rpx "";
   color: #333;
   background: #fff;
   text-align: center;
-  border-radius: 26rpx;
+  border-radius: 20rpx;
   border: 1rpx solid #333;
-  margin-top: 26rpx;
+  margin-top: 20rpx;
 }
 
-.uu {
-  width: 126rpx;
-  height: 48rpx;
-  font: 24rpx/48rpx "";
+.orderCancel {
+  width: 130rpx;
+  height: 35rpx;
+  font: 19rpx/35rpx "";
   color: #333;
   background: #fff;
   text-align: center;
   margin-right: 19rpx;
   border-radius: 26rpx;
   border: 1rpx solid #333;
-  margin-top: 26rpx;
+  margin-top: 20rpx;
 }
- .box .mou{
+ .order .mou{
   color: #FF9130;
 }
