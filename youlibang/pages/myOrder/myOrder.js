@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    swipertab: [{ name: '全部', index: 0 }, { name: '待付款', index: 1 }, { name: '待发货', index: 2 }, { name: '待收货', index: 3 }, { name: '已完成', index: 4 }],
   },
 
   /**

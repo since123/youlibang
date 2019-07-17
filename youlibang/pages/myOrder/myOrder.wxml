@@ -1,21 +1,10 @@
 <!--pages/myorder/myorder.wxml-->
-<view class='pos'>
-  <view>全部
-    <view class='aa'></view>
-  </view>
-  <view>待付款
-    <view class='aa'></view>
-  </view>
-  <view>待发货
-    <view class='aa'></view>
-  </view>
-  <view>待收货
-    <view class='aa'></view>
-  </view>
-  <view>已完成
-    <view class='aa'></view>
-  </view>
+<view class="swiper-tab">
+  <block wx:for="{{swipertab}}" wx:key="sptab">
+    <view bindtap="tabSwitch">{{item.name}}</view>
+  </block>
 </view>
+
 <view class='box'>
   <view class='box_f'>已取消</view>
   <view class='box_pc'>

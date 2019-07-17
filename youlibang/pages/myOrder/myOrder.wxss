@@ -1,6 +1,6 @@
 /* pages/myorder/myorder.wxss */
 
-.pos {
+.swiper-tab {
   width: 750rpx;
   height: 80rpx;
   background: #f5f7f9;
@@ -9,25 +9,12 @@
   margin-top: 18rpx;
 }
 
-.pos view {
+.swiper-tab view {
   width: 90rpx;
   height: 80rpx;
   font: 30rpx/76rpx "";
   color: #333;
   text-align: center;
-}
-
-.pos .aa {
-  width: 88rpx;
-  height: 4rpx;
-}
-
-.pos view:nth-child(1) .aa {
-  background: #ea4148;
-}
-
-.pos view:nth-child(1) {
-  color: #ea4148;
 }
 
 .box {
