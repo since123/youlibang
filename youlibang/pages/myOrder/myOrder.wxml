@@ -7,11 +7,16 @@
   </block>
 </view>
 
-<swiper current="{{currtab}}">
-  <swiper-item>全部</swiper-item>
+<swiper current="{{currtab}}" style="height:{{ height }}px;" bindchange="onTabChange">
+  <swiper-item>
+    <view class="container-0">
+    全部
+    </view>
+  </swiper-item>
   <swiper-item>
     <scroll-view class="hot-box">
-      <view class="order">
+      <view class="container-1">
+        <view class="order">
         <view class="orderList" wx:for="{{waitPayOrder}}" wx:key="{{item.index}}">
             <image src='{{item.image}}'></image>
             <view class='orderDetail'>
@@ -32,16 +37,27 @@
           <view class='orderPri'>¥200.00</view>
         </view>
         <view class="orderHander">
-          <button class="orderCancel">取消订单</button>
-          <button class="orderConfirm">确认付款</button>
+          <view class="orderCancel">取消订单</view>
+          <view class="orderConfirm">确认付款</view>
         </view>
+      </view>
       </view>
     </scroll-view>
   </swiper-item>
-  <swiper-item>待发货</swiper-item>
-  <swiper-item>待收货</swiper-item>
   <swiper-item>
-   已完成
+    <view class="container-2">
+      代发货
+    </view>  
+  </swiper-item>
+  <swiper-item>
+  <view class="container-3">
+  待收货
+  </view>
+  </swiper-item>
+  <swiper-item>
+  <view class="container-4">
+    已完成
+  </view>
   </swiper-item>
 </swiper>
 <!-- <view class='box'>

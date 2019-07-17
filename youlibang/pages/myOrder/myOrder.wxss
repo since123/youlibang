@@ -3,6 +3,11 @@
 border-bottom:2px solid red;
 color: red;
 }
+
+swiper {
+  height: auto;
+}
+
 .swiper-tab {
   width: 750rpx;
   height: 80rpx;
@@ -20,14 +25,20 @@ color: red;
   text-align: center;
 }
 
+.container-1 {
+  box-sizing: border-box;
+  /* padding:36rpx 0;  */
+  padding: 36rpx 0;
+}
+
 .order {
+  box-sizing: border-box;
   width: 678rpx;
-  height: 326rpx;
   background: #e6e6e6;
   margin: 0 auto;
-  margin-top: 26rpx;
-  overflow: hidden;
   border-radius: 20rpx;
+  padding-bottom: 32rpx; 
+
 }
 
 /* .order .box_f {
@@ -45,8 +56,8 @@ image {
 .order .orderList {
   display: flex;
   flex-direction: row;
-  margin-top: 32rpx;
-  margin-left: 20rpx;
+  padding-top: 32rpx;
+  padding-left: 20rpx;
 }
 
 .orderDetail {
@@ -98,9 +109,13 @@ image {
 }
 
 .orderHander {
+  box-sizing: border-box;
+  width: 100%;
+
   display: flex;
   flex-direction: row;
-  margin-left: 379rpx;
+  padding-left: 379rpx;
+  padding-top: 10rpx;
 }
 
 .kk {
@@ -116,7 +131,7 @@ image {
   text-align: center;
   border-radius: 20rpx;
   border: 1rpx solid #333;
-  margin-top: 20rpx;
+  /* margin-top: 20rpx; */
 }
 
 .orderCancel {
@@ -129,7 +144,7 @@ image {
   margin-right: 19rpx;
   border-radius: 26rpx;
   border: 1rpx solid #333;
-  margin-top: 20rpx;
+  /* margin-top: 20rpx; */
 }
  .order .mou{
   color: #FF9130;
