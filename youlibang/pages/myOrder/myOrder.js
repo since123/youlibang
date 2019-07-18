@@ -37,38 +37,29 @@ Page({
     if (this.data.currtab === e.target.dataset.current) {
       return false
     } else {
-      function get_wxml(className, callback) {
-        wx.createSelectorQuery().select(className).boundingClientRect(callback).exec()
-      }
-
       let tab = e.target.dataset.current
-
-      get_wxml('.container-' + tab, rect => {
-        const height = rect.height
-
-        that.setData({
-          height: height,
-          currtab: tab
-        })
+      that.setData({
+        currtab: tab
       })
     }
   },
 
-  
   onTabChange: function(e) {
     var that = this
     function get_wxml(className, callback) {
       wx.createSelectorQuery().select(className).boundingClientRect(callback).exec()
     }
     let tab = e.detail.current
+    that.setData({
+      currtab: tab
+    })
+    this.orderShow()
     get_wxml('.container-' + tab, rect => {
       const height = rect.height
       that.setData({
         height: height,
-        currtab: tab 
       })
     })
-    this.orderShow()
   },
   orderShow: function() {
     let that = this
