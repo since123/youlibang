@@ -7,17 +7,12 @@
   </block>
 </view>
 
-<swiper current="{{currtab}}" style="height:{{ height }}px;" bindchange="onTabChange">
+<swiper current="{{currtab}}" style="height:{{ height}}px;" bindchange="onTabChange">
   <swiper-item>
     <view class="container-0">
-    全部
-    </view>
-  </swiper-item>
-  <swiper-item>
-    <scroll-view class="hot-box">
-      <view class="container-1">
-        <view class="order">
-        <view class="orderList" wx:for="{{waitPayOrder}}" wx:key="{{item.index}}">
+      <view class="order" wx:for="{{allOrderS}}" wx:key="{{item.orderId}}" wx:for-item="order">
+      <view class="storeName">{{order.storeName}}</view>
+        <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index">
             <image src='{{item.image}}'></image>
             <view class='orderDetail'>
               <view class='orderTitle'>{{item.title}}</view>
@@ -41,22 +36,128 @@
           <view class="orderConfirm">确认付款</view>
         </view>
       </view>
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <scroll-view class="hot-box">
+      <view class="container-1">
+        <view class="order" wx:for="{{waitPayOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
+          <view class="storeName">{{order.storeName}}</view>
+          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index">
+              <image src='{{item.image}}'></image>
+              <view class='orderDetail'>
+                <view class='orderTitle'>{{item.title}}</view>
+                <view class='orderStyle'>
+                  <view class="orderColor">{{item.color}}</view>
+                  <view class="orderSize">{{item.size}}</view>
+                  <view class="orderUnit">{{item.unit}}</view>
+                </view>
+              </view>
+              <view class='orderInfor'>
+                <view class='orderPrice'>{{item.price}}</view>
+                <view class='orderNum'>{{item.number}}</view>
+              </view>
+          </view>
+          <view class='orderSumPri'>
+            共2件商品 合计：
+            <view class='orderPri'>¥200.00</view>
+          </view>
+          <view class="orderHander">
+            <view class="orderCancel">取消订单</view>
+            <view class="orderConfirm">确认付款</view>
+          </view>
+        </view>
       </view>
     </scroll-view>
   </swiper-item>
   <swiper-item>
     <view class="container-2">
-      代发货
+      <view class="order" wx:for="{{waitPayOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
+          <view class="storeName">{{order.storeName}}</view>
+          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index">
+              <image src='{{item.image}}'></image>
+              <view class='orderDetail'>
+                <view class='orderTitle'>{{item.title}}</view>
+                <view class='orderStyle'>
+                  <view class="orderColor">{{item.color}}</view>
+                  <view class="orderSize">{{item.size}}</view>
+                  <view class="orderUnit">{{item.unit}}</view>
+                </view>
+              </view>
+              <view class='orderInfor'>
+                <view class='orderPrice'>{{item.price}}</view>
+                <view class='orderNum'>{{item.number}}</view>
+              </view>
+          </view>
+          <view class='orderSumPri'>
+            共2件商品 合计：
+            <view class='orderPri'>¥200.00</view>
+          </view>
+          <view class="orderHander">
+            <view class="orderCancel">取消订单</view>
+            <view class="orderConfirm">确认付款</view>
+          </view>
+        </view>
     </view>  
   </swiper-item>
   <swiper-item>
   <view class="container-3">
-  待收货
+    <view class="order" wx:for="{{waitPayOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
+          <view class="storeName">{{order.storeName}}</view>
+          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index">
+              <image src='{{item.image}}'></image>
+              <view class='orderDetail'>
+                <view class='orderTitle'>{{item.title}}</view>
+                <view class='orderStyle'>
+                  <view class="orderColor">{{item.color}}</view>
+                  <view class="orderSize">{{item.size}}</view>
+                  <view class="orderUnit">{{item.unit}}</view>
+                </view>
+              </view>
+              <view class='orderInfor'>
+                <view class='orderPrice'>{{item.price}}</view>
+                <view class='orderNum'>{{item.number}}</view>
+              </view>
+          </view>
+          <view class='orderSumPri'>
+            共2件商品 合计：
+            <view class='orderPri'>¥200.00</view>
+          </view>
+          <view class="orderHander">
+            <view class="orderCancel">取消订单</view>
+            <view class="orderConfirm">确认付款</view>
+          </view>
+        </view>
   </view>
   </swiper-item>
   <swiper-item>
   <view class="container-4">
-    已完成
+    <view class="order" wx:for="{{waitPayOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
+          <view class="storeName">{{order.storeName}}</view>
+          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index">
+              <image src='{{item.image}}'></image>
+              <view class='orderDetail'>
+                <view class='orderTitle'>{{item.title}}</view>
+                <view class='orderStyle'>
+                  <view class="orderColor">{{item.color}}</view>
+                  <view class="orderSize">{{item.size}}</view>
+                  <view class="orderUnit">{{item.unit}}</view>
+                </view>
+              </view>
+              <view class='orderInfor'>
+                <view class='orderPrice'>{{item.price}}</view>
+                <view class='orderNum'>{{item.number}}</view>
+              </view>
+          </view>
+          <view class='orderSumPri'>
+            共2件商品 合计：
+            <view class='orderPri'>¥200.00</view>
+          </view>
+          <view class="orderHander">
+            <view class="orderCancel">取消订单</view>
+            <view class="orderConfirm">确认付款</view>
+          </view>
+        </view>
   </view>
   </swiper-item>
 </swiper>

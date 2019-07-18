@@ -1,7 +1,6 @@
 /* pages/myorder/myorder.wxss */
 .on {
 border-bottom:2px solid red;
-color: red;
 }
 
 swiper {
@@ -24,13 +23,30 @@ swiper {
   color: #333;
   text-align: center;
 }
-
+.container-0 {
+  box-sizing: border-box;
+  padding: 36rpx 0;
+}
 .container-1 {
   box-sizing: border-box;
   /* padding:36rpx 0;  */
   padding: 36rpx 0;
 }
-
+.container-2 {
+  box-sizing: border-box;
+  padding: 36rpx 0;
+}
+.container-3 {
+  box-sizing: border-box;
+  padding: 36rpx 0;
+}
+.container-4 {
+  box-sizing: border-box;
+  padding: 36rpx 0;
+}
+.storeName {
+  font-size: 24rpx;
+}
 .order {
   box-sizing: border-box;
   width: 678rpx;
@@ -38,7 +54,7 @@ swiper {
   margin: 0 auto;
   border-radius: 20rpx;
   padding-bottom: 32rpx; 
-
+  margin-bottom: 20rpx;
 }
 
 /* .order .box_f {
