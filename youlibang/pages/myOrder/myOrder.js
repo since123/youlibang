@@ -8,6 +8,9 @@ Page({
     currtab: 0,
     swipertab: [{ name: '全部', index: 0 }, { name: '待付款', index: 1 }, { name: '待发货', index: 2 }, { name: '待收货', index: 3 }, { name: '已完成', index: 4 }],
     height: 0,
+    number: 0,
+    sum: 0,
+    orderSumPri: []
   },
 
   /**
@@ -77,7 +80,7 @@ Page({
     }
   },
   allOrderShow: function () {
-    this.setData({
+    this.setData({ 
       allOrderS: [
         {
           orderId: '001',
@@ -89,8 +92,11 @@ Page({
                 index: '0',
                 image: '/images/2012031220134655.jpg',
                 title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
-                color: '黑色', size: 'L', unit: '件',
-                price: '120', number: '8'
+                color: '黑色', 
+                size: 'L', 
+                unit: '件',
+                price: '3', 
+                number: '1'
               },
               {
                 index: '1',
@@ -99,9 +105,9 @@ Page({
                 color: '黑色',
                 size: 'L',
                 unit: '件',
-                price: '120',
-                number: '8'
-              }]
+                price: '2',
+                number: '1'
+              }],
         },
         {
           orderId: '002',
@@ -114,13 +120,35 @@ Page({
             color: '黑色',
             size: 'L',
             unit: '件',
-            price: '120',
-            number: '8'
-          }]
+            price: '6',
+            number: '1'
+          }],
         }
       ]
     })
+    // console.log(this.data.allOrderS[1].orders.length)
+    let array = []
+    for (let i=0; i<this.data.allOrderS.length; i++){
+      let sumPrice  = 0
+      let sumNumber = 0
+      for (let j=0; j<this.data.allOrderS[i].orders.length; j++){
+        let goodsPrice =  parseFloat(this.data.allOrderS[i].orders[j].price)
+        let goodsNumber =  parseFloat(this.data.allOrderS[i].orders[j].number)
+        sumPrice += goodsPrice * goodsNumber 
+        sumNumber += goodsNumber
+      }
+
+      array.push(
+        Object.assign({}, this.data.allOrderS[i], { totalNumber: sumNumber, totalPrice: sumPrice })
+      )
+      console.log(sumPrice)
+      console.log(sumNumber)
+    }
+    this.setData({
+      allOrderS: array
+    })
   },
+
   waitPayShow: function (){
     this.setData({
       waitPayOrder: [{
@@ -148,7 +176,7 @@ Page({
       waitSentOrder: [{
         orderId: '001',
         storeName: 'storeName',
-        status: '待收货',
+        status: '待发货',
         orders:
           [
             {

@@ -92,6 +92,26 @@ Page({
       url: '../myOrder/myOrder',
     })
   },
+  waitPay: function () {
+    wx.navigateTo({
+      url: '../myOrder/myOrder',
+    })
+  },
+  waitSent: function () {
+    wx.navigateTo({
+      url: '../myOrder/myOrder',
+    })
+  },
+  waitReceived: function () {
+    wx.navigateTo({
+      url: '../myOrder/myOrder',
+    })
+  },
+  completed: function () {
+    wx.navigateTo({
+      url: '../myOrder/myOrder',
+    })
+  },
   //地址管理
   address:function(){
     wx.navigateTo({

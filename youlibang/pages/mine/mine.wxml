@@ -29,19 +29,19 @@
   </view>
   <view class='line'></view>
   <view class="user_three">
-    <view class="user_three_li nav_li" bindtap=''>
+    <view class="user_three_li nav_li" bindtap='waitPay'>
       <image class="nav_img" src="../../images/qianbao@2x.png"></image>
       <view class="nav_text">待付款</view>
     </view>
-    <view class="user_three_li nav_li" bindtap=''>
+    <view class="user_three_li nav_li" bindtap='waitSent'>
       <image class="nav_img" src="../../images/fahuo@2x.png"></image>
       <view class="nav_text">待发货</view>
     </view>
-    <view class="user_three_li" bindtap=''>
+    <view class="user_three_li" bindtap='waitReceived'>
       <image class="nav_img" src="../../images/shouhuo@2x.png"></image>
       <view class="nav_text">待收货</view>
     </view>
-     <view class="user_three_li" bindtap=''>
+     <view class="user_three_li" bindtap='completed'>
       <image class="nav_img" src="../../images/tuihuo@2x.png"></image>
       <view class="nav_text">已完成</view>
     </view>

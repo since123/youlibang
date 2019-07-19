@@ -1,6 +1,7 @@
 /* pages/myorder/myorder.wxss */
 .on {
-border-bottom:2px solid red;
+  color: red;
+  border-bottom:2px solid red;
 }
 
 swiper {
@@ -45,7 +46,19 @@ swiper {
   padding: 36rpx 0;
 }
 .storeName {
+  float: left;
   font-size: 24rpx;
+  padding-left: 20rpx;
+  padding-top: 10rpx;
+
+}
+.orderStatus {
+  float: right;
+  font-size: 28rpx;
+  padding-left: 20rpx;
+  padding-top: 10rpx;
+  padding-right: 19rpx;
+  color: orangered;
 }
 .order {
   box-sizing: border-box;
@@ -70,6 +83,7 @@ image {
 }
 
 .order .orderList {
+  clear: both;
   display: flex;
   flex-direction: row;
   padding-top: 32rpx;
@@ -93,6 +107,9 @@ image {
   font: 24rpx/24rpx '';
   color: #999;
   margin-top: 17rpx;
+  display: flex;
+  flex-direction: row;
+
 }
 
 .orderInfor {

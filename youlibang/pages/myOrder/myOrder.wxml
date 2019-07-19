@@ -11,14 +11,15 @@
   <swiper-item>
     <view class="container-0">
       <view class="order" wx:for="{{allOrderS}}" wx:key="{{item.orderId}}" wx:for-item="order">
-      <view class="storeName">{{order.storeName}}</view>
+        <view class="storeName">{{order.storeName}}</view>
+        <view class="orderStatus">{{order.status}}</view>
         <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index">
             <image src='{{item.image}}'></image>
             <view class='orderDetail'>
               <view class='orderTitle'>{{item.title}}</view>
               <view class='orderStyle'>
-                <view class="orderColor">{{item.color}}</view>
-                <view class="orderSize">{{item.size}}</view>
+                <view class="orderColor">{{item.color}},</view>
+                <view class="orderSize">{{item.size}},</view>
                 <view class="orderUnit">{{item.unit}}</view>
               </view>
             </view>
@@ -28,12 +29,12 @@
             </view>
         </view>
         <view class='orderSumPri'>
-          共2件商品 合计：
-          <view class='orderPri'>¥200.00</view>
+          共{{order.totalNumber}}件商品 合计：
+          <view class='orderPri'>{{order.totalPrice}}元</view>
         </view>
         <view class="orderHander">
-          <view class="orderCancel">取消订单</view>
-          <view class="orderConfirm">确认付款</view>
+          <view class="orderCancel" bindtap="cancelOrder">取消订单</view>
+          <view class="orderConfirm" bindtap="confirmPay">确认付款</view>
         </view>
       </view>
     </view>
