@@ -144,7 +144,6 @@ image {
 .orderHander {
   box-sizing: border-box;
   width: 100%;
-
   display: flex;
   flex-direction: row;
   padding-left: 379rpx;
@@ -154,20 +153,7 @@ image {
 .kk {
   margin-left: 510rpx;
 }
-
-.orderConfirm {
-  width: 130rpx;
-  height: 35rpx;
-  font: 19rpx/35rpx "";
-  color: #333;
-  background: #fff;
-  text-align: center;
-  border-radius: 20rpx;
-  border: 1rpx solid #333;
-  /* margin-top: 20rpx; */
-}
-
-.orderCancel {
+.orderCancel, .applyrefund{
   width: 130rpx;
   height: 35rpx;
   font: 19rpx/35rpx "";
@@ -177,7 +163,16 @@ image {
   margin-right: 19rpx;
   border-radius: 26rpx;
   border: 1rpx solid #333;
-  /* margin-top: 20rpx; */
+}
+.orderConfirm, .urgeSent, .confirmReceipt {
+  width: 130rpx;
+  height: 35rpx;
+  font: 19rpx/35rpx "";
+  color: #333;
+  background: #fff;
+  text-align: center;
+  border-radius: 20rpx;
+  border: 1rpx solid #333;
 }
  .order .mou{
   color: #FF9130;

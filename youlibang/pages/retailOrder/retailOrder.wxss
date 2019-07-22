@@ -1,6 +1,6 @@
 /* pages/retailOrder/retailOrder.wxss */
-.swiper-tab{  
-  margin-top: 18rpx;
+.swiper-tab {  
+    margin-top: 18rpx;
     width: 100%;  
     /* border-bottom: 4rpx solid #f0f0f0;   */
     text-align: center;  
@@ -8,10 +8,10 @@
     background:#fff;
     }
  
-.swiper-tab-list{ 
-   font-size: 28rpx;  
+.swiper-tab-list { 
+    font-size: 25rpx;  
     display: inline-block;  
-    width: 25%;  
+    width: 20%;  
     color: #333333;  
     position: relative;
 }  
@@ -19,7 +19,7 @@
     color: #EA4148;  
      /* border-bottom: 4rpx solid #01aa94;  */
     }  
-   .on::after{
+   .on::after {
     content: '';
     width:88rpx;
     height:4rpx;
@@ -30,14 +30,40 @@
     margin-left:-40rpx;
     border-radius: 6rpx;
   } 
-  .swiper-box{ 
+  .swiper-box { 
     display: block; 
-    height: 100%; 
-    width: 100%; 
     overflow: auto; 
     }  
-  .listInfo{
+  .listInfo {
     width:100%;
-    height:300rpx;
     background: #fff;
+    padding-left: 30rpx;
+  }
+  .retailOrder {
+    font-size: 25rpx;
+    align-items: center;
+    display: flex;
+  }
+  .retailOrderInfo {
+    align-items: center;
+    display: flex;
+    font-size: 20rpx;
+  }
+  .orderStatus {
+    padding: 10rpx;
+    font-size: 20rpx;
+    color: red;
+    border-bottom: 1px solid #eee
+  }
+  .customerImage {
+    width: 70rpx;
+    height: 70rpx;
+  }
+  .rebate {
+    font-size: 20rpx;
+    margin-left: 300rpx;
+    color: #666
+  }
+  .rebate text {
+    color: red
   }

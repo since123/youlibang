@@ -7,13 +7,14 @@
   </block>
 </view>
 
-<swiper current="{{currtab}}" style="height:{{ height}}px;" bindchange="onTabChange">
+<swiper current="{{currtab}}" style="height:{{deviceH-31}}px" bindchange="onTabChange">
   <swiper-item>
+  <scroll-view class="hot-box">
     <view class="container-0">
       <view class="order" wx:for="{{allOrderS}}" wx:key="{{item.orderId}}" wx:for-item="order">
         <view class="storeName">{{order.storeName}}</view>
         <view class="orderStatus">{{order.status}}</view>
-        <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index">
+        <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index" bindtap="orderDetailShow">
             <image src='{{item.image}}'></image>
             <view class='orderDetail'>
               <view class='orderTitle'>{{item.title}}</view>
@@ -38,13 +39,14 @@
         </view>
       </view>
     </view>
+    </scroll-view>
   </swiper-item>
   <swiper-item>
     <scroll-view class="hot-box">
       <view class="container-1">
         <view class="order" wx:for="{{waitPayOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
           <view class="storeName">{{order.storeName}}</view>
-          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index">
+          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index" bindtap="orderDetailShow">
               <image src='{{item.image}}'></image>
               <view class='orderDetail'>
                 <view class='orderTitle'>{{item.title}}</view>
@@ -60,9 +62,9 @@
               </view>
           </view>
           <view class='orderSumPri'>
-            共2件商品 合计：
-            <view class='orderPri'>¥200.00</view>
-          </view>
+          共{{order.totalNumber}}件商品 合计：
+          <view class='orderPri'>{{order.totalPrice}}元</view>
+        </view>
           <view class="orderHander">
             <view class="orderCancel">取消订单</view>
             <view class="orderConfirm">确认付款</view>
@@ -72,10 +74,11 @@
     </scroll-view>
   </swiper-item>
   <swiper-item>
+  <scroll-view class="hot-box">
     <view class="container-2">
-      <view class="order" wx:for="{{waitPayOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
+      <view class="order" wx:for="{{waitSentOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
           <view class="storeName">{{order.storeName}}</view>
-          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index">
+          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index" bindtap="orderDetailShow">
               <image src='{{item.image}}'></image>
               <view class='orderDetail'>
                 <view class='orderTitle'>{{item.title}}</view>
@@ -90,22 +93,24 @@
                 <view class='orderNum'>{{item.number}}</view>
               </view>
           </view>
-          <view class='orderSumPri'>
-            共2件商品 合计：
-            <view class='orderPri'>¥200.00</view>
-          </view>
+         <view class='orderSumPri'>
+          共{{order.totalNumber}}件商品 合计：
+          <view class='orderPri'>{{order.totalPrice}}元</view>
+        </view>
           <view class="orderHander">
             <view class="orderCancel">取消订单</view>
-            <view class="orderConfirm">确认付款</view>
+            <view class="urgeSent">催TA发货</view>
           </view>
         </view>
     </view>  
+    </scroll-view>
   </swiper-item>
   <swiper-item>
+  <scroll-view class="hot-box">
   <view class="container-3">
-    <view class="order" wx:for="{{waitPayOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
+    <view class="order" wx:for="{{waitReceivedOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
           <view class="storeName">{{order.storeName}}</view>
-          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index">
+          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index" bindtap="orderDetailShow">
               <image src='{{item.image}}'></image>
               <view class='orderDetail'>
                 <view class='orderTitle'>{{item.title}}</view>
@@ -120,22 +125,25 @@
                 <view class='orderNum'>{{item.number}}</view>
               </view>
           </view>
-          <view class='orderSumPri'>
-            共2件商品 合计：
-            <view class='orderPri'>¥200.00</view>
-          </view>
+         <view class='orderSumPri'>
+          共{{order.totalNumber}}件商品 合计：
+          <view class='orderPri'>{{order.totalPrice}}元</view>
+        </view>
           <view class="orderHander">
-            <view class="orderCancel">取消订单</view>
-            <view class="orderConfirm">确认付款</view>
+            <view class="applyrefund">申请退款</view>
+            <view class="confirmReceipt">确认收货</view>
           </view>
         </view>
   </view>
+  </scroll-view>
   </swiper-item>
   <swiper-item>
+  <scroll-view class="hot-box">
   <view class="container-4">
-    <view class="order" wx:for="{{waitPayOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
+    <view class="order" wx:for="{{completeOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
           <view class="storeName">{{order.storeName}}</view>
-          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index">
+          <view class="orderStatus">{{order.status}}</view>
+          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index" bindtap="orderDetailShow">
               <image src='{{item.image}}'></image>
               <view class='orderDetail'>
                 <view class='orderTitle'>{{item.title}}</view>
@@ -151,15 +159,12 @@
               </view>
           </view>
           <view class='orderSumPri'>
-            共2件商品 合计：
-            <view class='orderPri'>¥200.00</view>
-          </view>
-          <view class="orderHander">
-            <view class="orderCancel">取消订单</view>
-            <view class="orderConfirm">确认付款</view>
-          </view>
+          共{{order.totalNumber}}件商品 合计：
+          <view class='orderPri'>{{order.totalPrice}}元</view>
+        </view>
         </view>
   </view>
+  </scroll-view>
   </swiper-item>
 </swiper>
 <!-- <view class='box'>

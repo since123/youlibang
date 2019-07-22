@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -50,13 +50,19 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": 0,
 					"name": "123",
 					"pathName": "pages/myAddress/myAddress",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/retailOrder/retailOrder",
+					"pathName": "pages/retailOrder/retailOrder",
 					"scene": null
 				}
 			]

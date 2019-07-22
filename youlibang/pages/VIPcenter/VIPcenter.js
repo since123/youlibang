@@ -40,6 +40,18 @@ Page({
       url: '../settledRebate/settledRebate',
     })
   },
+  //分销订单
+  retailOrder: function(){
+    wx.navigateTo({
+      url: '../retailOrder/retailOrder',
+    })
+  },
+  //提现明细
+  cashoutDetail: function(){
+    wx.navigateTo({
+      url: '../cashoutDetail/cashoutDetail'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -9,7 +9,6 @@ Page({
     vipid:'0123',
     userImg_url:'../../images/headImg.png',
     price:'188.00'
-
   },
 
   /**
@@ -89,27 +88,27 @@ Page({
   //查看更多订单
   moreOrder:function(){
     wx.navigateTo({
-      url: '../myOrder/myOrder',
+      url: '../myOrder/myOrder?currtab=0',
     })
   },
   waitPay: function () {
     wx.navigateTo({
-      url: '../myOrder/myOrder',
+      url: '../myOrder/myOrder?currtab=1',
     })
   },
   waitSent: function () {
     wx.navigateTo({
-      url: '../myOrder/myOrder',
+      url: '../myOrder/myOrder?currtab=2',
     })
   },
   waitReceived: function () {
     wx.navigateTo({
-      url: '../myOrder/myOrder',
+      url: '../myOrder/myOrder?currtab=3',
     })
   },
   completed: function () {
     wx.navigateTo({
-      url: '../myOrder/myOrder',
+      url: '../myOrder/myOrder?currtab=4',
     })
   },
   //地址管理

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/retailOrder/retailOrder",
     "pages/index/index",
     "pages/logs/logs",
     "pages/mine/mine",
@@ -31,7 +32,6 @@
     "pages/myAddress/myAddress",
     "pages/recharge/recharge",
     "pages/withdraw/withdraw",
-    "pages/retailOrder/retailOrder",
     "pages/myOrder/myOrder",
     "pages/editAddress/editAddress",
     "pages/test/test"

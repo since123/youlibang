@@ -42,12 +42,12 @@
         <view class='back'><image src='../../images/next@2x.png'></image></view>
     </view>
     <view class='li'></view>
-     <view class='listInfo'>
+     <view class='listInfo' bindtap="retailOrder">
         <view class='lookdetail'>分销订单</view>
         <view class='back'><image src='../../images/next@2x.png'></image></view>
     </view>
     <view class='li'></view>
-     <view class='listInfo'>
+     <view class='listInfo' bindtap="cashoutDetail">
         <view class='lookdetail'>提现明细</view>
         <view class='back'><image src='../../images/next@2x.png'></image></view>
     </view>
