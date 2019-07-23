@@ -34,8 +34,8 @@
           <view class='orderPri'>{{order.totalPrice}}元</view>
         </view>
         <view class="orderHander">
-          <view class="orderCancel" bindtap="cancelOrder">取消订单</view>
-          <view class="orderConfirm" bindtap="confirmPay">确认付款</view>
+          <view class="orderCancel" bindtap="orderHandleOne">{{order.orderHandleOne}}</view>
+          <view class="orderConfirm" bindtap="orderHandleTwo">{{order.orderHandleTwo}}</view>
         </view>
       </view>
     </view>

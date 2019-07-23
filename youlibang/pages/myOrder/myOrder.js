@@ -134,15 +134,29 @@ Page({
     for (let i = 0; i < this.data.allOrderS.length; i++) {
       let sumPrice = 0
       let sumNumber = 0
+      let orderHandleOne = ''
+      let orderHandleTwo = ''
       for (let j = 0; j < this.data.allOrderS[i].orders.length; j++) {
         let goodsPrice = parseFloat(this.data.allOrderS[i].orders[j].price)
         let goodsNumber = parseFloat(this.data.allOrderS[i].orders[j].number)
         sumPrice += goodsPrice * goodsNumber
         sumNumber += goodsNumber
       }
+      if (this.data.allOrderS[i].status == '待付款'){
+        orderHandleOne = '取消订单'
+        orderHandleTwo = '确认付款'
+      }
+      else if (this.data.allOrderS[i].status == '待发货'){
+        orderHandleOne = '取消订单'
+        orderHandleTwo = '催TA发货'
+      }
+      else {
+        orderHandleOne = '申请退款'
+        orderHandleTwo = '确认收货'
+      }
 
       array.push(
-        Object.assign({}, this.data.allOrderS[i], { totalNumber: sumNumber, totalPrice: sumPrice })
+        Object.assign({}, this.data.allOrderS[i], { totalNumber: sumNumber, totalPrice: sumPrice, orderHandleOne: orderHandleOne, orderHandleTwo: orderHandleTwo})
       )
     }
     this.setData({

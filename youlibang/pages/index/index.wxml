@@ -4,8 +4,6 @@
   <input class='inputinfo' type='text' placeholder='请输入商品名称'></input>
 </view>
 <!-- 轮播图 -->
-<view class="header_lun">
-<view class="header_lun">
 <view class="header_lun" >
   <swiper class="swiper" indicator-dots="true" indecator-color="rgba(120,120,120,1)" autoplay="true" bindchange="">
     <block wx:for="{{movies}}" wx:key="{{movies}}" wx:for-index="index">

@@ -14,11 +14,11 @@ Page({
   onLoad: function (options) {
 
   },
-  vipApply(){
-    wx.navigateTo({
-      url: '',
+  // vipApply(){
+  //   wx.navigateTo({
+  //     url: '',
      
-  },
+  // },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
