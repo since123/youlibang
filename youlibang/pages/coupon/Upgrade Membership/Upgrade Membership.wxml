@@ -1,0 +1,18 @@
+<!--pages/Upgrade Membership/Upgrade Membership.wxml-->
+<view class="all">
+ <view>
+    <image class='Membership' src='../../images/vipbgImg@2x.png'></image>
+  </view>
+     <view class="content">
+  <view class="header">
+    可提现佣金
+  </view>
+    <view>
+  <text class="price_1">￥</text>
+  <text class="price_2">0.00</text>
+    </view>
+  <view class="apply" bindtap="vipApply">
+     申请会员
+     </view>
+  </view>
+</view>

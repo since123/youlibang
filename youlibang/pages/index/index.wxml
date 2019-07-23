@@ -5,10 +5,12 @@
 </view>
 <!-- 轮播图 -->
 <view class="header_lun">
+<view class="header_lun">
+<view class="header_lun" >
   <swiper class="swiper" indicator-dots="true" indecator-color="rgba(120,120,120,1)" autoplay="true" bindchange="">
     <block wx:for="{{movies}}" wx:key="{{movies}}" wx:for-index="index">
       <swiper-item>
-        <image src="{{item.url}}" class="slide-image" />
+        <image src="{{item.url}}" class="slide-image" bindtap="changePath"/>
       </swiper-item>
     </block>
   </swiper>

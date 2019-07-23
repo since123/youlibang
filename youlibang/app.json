@@ -34,7 +34,9 @@
     "pages/withdraw/withdraw",
     "pages/myOrder/myOrder",
     "pages/editAddress/editAddress",
-    "pages/test/test"
+    "pages/test/test",
+    "pages/questionDetail/questionDetail",
+    "pages/searchDetail/searchDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

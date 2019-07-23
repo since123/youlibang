@@ -4,7 +4,7 @@
     <!-- wx:if 是否选中 -->
     <icon wx:if="{{item.selected}}" type="success" color="red" bindtap="selectList" data-index="{{index}}" size='40rpx' />
     <icon wx:else type="circle" bindtap="selectList" data-index="{{index}}" size='40rpx' />
-    <navigator url="../details/details?id={{item.id}}">
+    <navigator url="../goodsDetail/goodsDetail?id={{item.id}}">
       <image src="{{item.image}}"></image>
     </navigator>
     <view class='explain'>

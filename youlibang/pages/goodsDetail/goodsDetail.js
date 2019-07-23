@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    param:{},
     num:1,
     status: false,
     is_shoucang: 0,
@@ -141,17 +142,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that=this;
-    var goodsId = options.goodsId;
-    console.log(options);
+    var goodsId = options.id;
+    console.log(goodsId)
+    console.log(this.data.productsList[goodsId])
     this.setData({
-      // showprice:this.data.productsList.newprice,
+      //  showprice:this.data.productsList.newprice,
       // showImg: this.data.productsList.img,
       // showDesc: this.data.productsList.desc,
       // showyuanjia:this.date.productsList.yuanjia,
-      // showyunfei: this.date.productsList.yunfei
+      // showyunfei: this.date.productsList.yunfei,
      param:this.data.productsList[goodsId]
-    });
+    })
+    console.log(this.data.param)
   },
 
   /**

@@ -66,6 +66,16 @@ Page({
   onShow: function () {
 
   },
+  //点击进行跳转
+  question(e){
+    console.log(e)
+    var id=e.target.dataset.id
+    console.log(id)
+  wx.navigateTo({
+    url: '../questionDetail/questionDetail?id='+id,
+   
+    })
+  },
   //发送
   sendto:function(e){
     console.log('发送信息');

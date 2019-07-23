@@ -33,8 +33,8 @@ Page({
     this.setData({
       hasList: true,        // 既然有数据了，那设为true吧
       carts: [
-        { id: 1, title: '新西兰A2脱脂高钙儿童学生成人奶1kg...', image: '../../images/kefu@2x.png', num: 4, price: 119.00, selected: true },
-        { id: 2, title: '新西兰A2脱脂高钙儿童学生成人奶1kg...', image: '../../images/kefu@2x.png', num: 1, price: 119.00, selected: true }
+        { id: 0, title: '新西兰A2脱脂高钙儿童学生成人奶1kg...', image: '../../images/kefu@2x.png', num: 4, price: 119.00, selected: true },
+        { id: 1, title: '新西兰A2脱脂高钙儿童学生成人奶1kg...', image: '../../images/kefu@2x.png', num: 1, price: 119.00, selected: true }
       ]
     });
   },
