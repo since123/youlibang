@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/retailOrder/retailOrder",
     "pages/index/index",
     "pages/logs/logs",
     "pages/mine/mine",
@@ -36,7 +35,8 @@
     "pages/editAddress/editAddress",
     "pages/test/test",
     "pages/questionDetail/questionDetail",
-    "pages/searchDetail/searchDetail"
+    "pages/searchDetail/searchDetail",
+    "pages/retailOrder/retailOrder"
   ],
   "window": {
     "backgroundTextStyle": "light",

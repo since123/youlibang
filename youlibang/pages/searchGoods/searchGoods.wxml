@@ -1,10 +1,10 @@
 <!--pages/searchGoods/searchGoods.wxml-->
 <view class='search'>
-    <input class='inputInfo' type='' placeholder='请输入商品名称'></input>
-    <view class='sousuo'>搜索</view>
+    <input class='inputInfo' type='' placeholder='请输入商品名称' bindchange="search"></input>
+    <view class='sousuo' bindtap="searchPath">搜索</view>
 </view>
 <view class='sousuoContents'>
-    <view class='biaoqian'>优力邦</view>
-    <view class='biaoqian'>墙面医生</view>
-    <view class='biaoqian'>优力邦</view>
+    <view class='biaoqian' bindtap="dianji">优力邦</view>
+    <view class='biaoqian' bindtap="dianji">墙面医生</view>
+    <view class='biaoqian' bindtap="dianji">优力邦</view>
 </view>

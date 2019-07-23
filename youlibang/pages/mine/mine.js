@@ -15,25 +15,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that=this;
-    this.userInfo();
-    const wxreq = wx.request({
-      url: '',
-      data: {
-        //id:"1",
-        //name:'Leanne Graham'
-      },
-      success: function (res) {
-        console.log(res.data);
-        // this.userData = res.data; //无效不能实时的渲染到页面
-        // that.setData({ userData: res.data });//和页面进行绑定可以动态的渲染到页面
+    // var that=this;
+    // this.userInfo();
+    // const wxreq = wx.request({
+    //   url: '',
+    //   data: {
+    //     //id:"1",
+    //     //name:'Leanne Graham'
+    //   },
+    //   success: function (res) {
+    //     console.log(res.data);
+    //     // this.userData = res.data; //无效不能实时的渲染到页面
+    //     // that.setData({ userData: res.data });//和页面进行绑定可以动态的渲染到页面
 
-      },
-      fail: function (res) {
-        console.log(res.data);
-        // this.userData = "数据获取失败";
-      }
-    })
+    //   },
+    //   fail: function (res) {
+    //     console.log(res.data);
+    //     // this.userData = "数据获取失败";
+    //   }
+    // })
   },
   //获取用户信息
   userInfo:function(){

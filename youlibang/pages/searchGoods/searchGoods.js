@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+      value:""
   },
 
   /**
@@ -21,6 +21,37 @@ Page({
   onReady: function () {
 
   },
+  //获取输入内容
+  search(e){
+   
+    var value=e.detail.value
+   
+     this.setData({
+       value
+     })
+    console.log(this.data.value)
+  },
+  //点击跳转搜索详情
+  searchPath(){
+    if(this.data.value==""){
+      return false
+    }
+     wx.navigateTo({
+       url: '../searchDetail/searchDetail?value='+this.data.value
+     })
+  },
+   //点击查找
+   dianji(e){
+   
+     var inputvalue=e._relatedInfo.anchorTargetText
+     this.setData({
+       value:inputvalue
+     })
+     console.log(this.data.value)
+     wx.navigateTo({
+       url: '../searchDetail/searchDetail?value=' + this.data.value
+     })
+   },
 
   /**
    * 生命周期函数--监听页面显示

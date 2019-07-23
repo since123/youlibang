@@ -142,7 +142,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var goodsId = options.id;
+    var goodsId = options.goodsId;
     console.log(goodsId)
     console.log(this.data.productsList[goodsId])
     this.setData({

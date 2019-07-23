@@ -62,7 +62,7 @@
     </view>
     <view class="user_three_li" bindtap='coupon'>
       <image class="nav_img" src="../../images/juan@2x.png"></image>
-      <view class="nav_text">优惠卷</view>
+      <view class="nav_text">优惠券</view>
     </view>
   </view>
 </view> 

@@ -1,4 +1,4 @@
-// pages/shoppingcart/shoppingcart.js
+//pages/shoppingcart/shoppingcart.js
 var goodsId=null;
 Page({
 
@@ -8,7 +8,7 @@ Page({
   data: {
     carts: [],               // 购物车列表
     hasList: false,          // 列表是否有数据
-    totalPrice: 0,           // 总价，初始为0
+    totalPrice: "",           // 总价，初始为0
     selectAllStatus: true    // 全选状态，默认全选
   },
 
@@ -16,20 +16,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
     this.setData({
       hasList: true,        // 既然有数据了，那设为true吧
       carts: [
@@ -37,6 +23,21 @@ Page({
         { id: 1, title: '新西兰A2脱脂高钙儿童学生成人奶1kg...', image: '../../images/kefu@2x.png', num: 1, price: 119.00, selected: true }
       ]
     });
+     
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    this.getTotalPrice()
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+   
   },
 
   /**
@@ -79,7 +80,7 @@ Page({
       url: '../submitOrder/submitOrder',
     })
   },
-  //计算总价
+  //封装的计算总价方法
   getTotalPrice() {
     let carts = this.data.carts;                  // 获取购物车列表
     let total = 0;
@@ -88,10 +89,12 @@ Page({
         total += carts[i].num * carts[i].price;     // 所有价格加起来
       }
     }
+    console.log(carts)
     this.setData({                                // 最后赋值到data中渲染到页面
       carts: carts,
       totalPrice: total.toFixed(2)
-    });
+    })
+    console.log(total)
   },
   //选择事件
   selectList(e) {
@@ -159,3 +162,5 @@ Page({
   }
 
 })
+
+

@@ -9,17 +9,20 @@ Page({
     col1: [],
     movies: [{
         url: '/images/2012031220134655.jpg',
-        link: ''
+        link: '',
+        id:0
         
       },
       {
         url: '/images/2013062320262198.jpg',
-        link: ''
+        link: '',
+        id:0
         
       },
       {
         url: '/images/82bOOOPICcb.jpg',
-        link: ''
+        link: '',
+        id:1
       
       }
     ]
@@ -32,9 +35,12 @@ Page({
   },
 
   //点击图片进行跳转
-  changePath() {
+  changePath(e) {
+  
+    var id=e.target.dataset.id
+    console.log(id)
     wx.navigateTo({
-      url: '../goodsDetail/goodsDetail',
+      url: '../goodsDetail/goodsDetail?id='+id,
 
     })
   },
@@ -60,7 +66,7 @@ Page({
     var that = this;
     var goodsId = e.currentTarget.dataset.goodsid;
     console.log(goodsId);
-    console.log('goodsId' + goodsId)
+    //console.log('goodsId' + goodsId)
     wx.navigateTo({
       url: '../goodsDetail/goodsDetail?goodsId='+goodsId,
     })

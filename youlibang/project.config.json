@@ -50,7 +50,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 4,
 			"list": [
 				{
 					"id": 0,
@@ -60,16 +60,31 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/retailOrder/retailOrder",
-					"pathName": "pages/retailOrder/retailOrder",
+					"id": 1,
+					"name": "pages/myOrder/myOrder",
+					"pathName": "pages/myOrder/myOrder",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "pages/coupon/coupon",
+					"pathName": "pages/coupon/coupon",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "pages/myOrder/myOrder",
-					"pathName": "pages/myOrder/myOrder",
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/withdraw/withdraw",
+					"pathName": "pages/withdraw/withdraw",
+					"query": "",
 					"scene": null
 				}
 			]

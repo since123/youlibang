@@ -1,4 +1,4 @@
-<!--pages/coupon/coupon.wxml-->
+<!-- pages/coupon/coupon.wxml
 <view class='coupon'>
   <image src='../../images/youhuiquan@2x.png'></image>
   <view class='coupon_left'>
@@ -35,4 +35,25 @@
     <view class='kod coll'>已过期</view>
   </view>
 </view>
-
+ -->
+<view class="app">
+  <view class="wrapper">
+    <view class="content">
+      <view class="title">
+        50
+      </view>
+      <view class="time">
+        优惠券
+      </view>
+    </view>
+    <view class="split-line"></view>
+    <view class="tip">
+      <view class="money">
+        满500元使用
+      </view>
+      <view class="pay-line">
+        立即使用
+      </view>
+    </view>
+  </view>
+</view>

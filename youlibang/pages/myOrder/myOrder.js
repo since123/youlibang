@@ -1,4 +1,10 @@
 // pages/myOrder/myOrder.js
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
@@ -12,11 +18,26 @@ Page({
     sum: 0,
     orderSumPri: []
   },
-
+  /**
+   * 请求数据
+   */
+  getGoods: function () {
+    
+    },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'order/getorder',
+    }).then((res) => {
+      console.log(res)
+    })
+
     this.orderShow()
     let tab = option.currtab
     this.setData({
@@ -88,7 +109,6 @@ Page({
       allOrderS: [
         {
           orderId: '001',
-          storeName: '美衣旗舰店',
           status: '待付款',
           orders:
             [
@@ -115,7 +135,6 @@ Page({
         },
         {
           orderId: '002',
-          storeName: '俏韵旗舰店',
           status: '待收货',
           orders: [{
             index: '0',
