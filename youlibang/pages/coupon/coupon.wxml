@@ -39,21 +39,25 @@
 <view class="app">
   <view class="wrapper">
     <view class="content">
-      <view class="title">
-        50
-      </view>
-      <view class="time">
-        优惠券
+        <view class="money">
+          <text>¥</text>50
+        </view>
+      <view class='co'>
+        <view class='co_w'></view>
+        <view class="title">
+          优惠券
+        </view>
+        <view class='co_l'></view>
       </view>
     </view>
     <view class="split-line"></view>
     <view class="tip">
-      <view class="money">
+      <view class="conditions">
         满500元使用
       </view>
-      <view class="pay-line">
-        立即使用
-      </view>
+      <button class="useNow" bindtap="">
+      立即使用
+      </button>
     </view>
   </view>
 </view>

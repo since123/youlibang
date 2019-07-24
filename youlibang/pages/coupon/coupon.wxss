@@ -120,22 +120,19 @@
 .content {
   position: relative;
   flex: 1;
-  padding: 10rpx 30rpx;
-  /* background:linear-gradient(-90deg,rgba(255,146,150,1),rgba(234,65,72,1)); */
+  padding: 20rpx 30rpx;
   text-align: center;
 }
 .tip {
   position: relative;
-  padding:  30rpx 30rpx;
+  padding:  50rpx 30rpx;
   flex: 0 0 200rpx;
-  /* background:linear-gradient(-90deg,rgb(243, 145, 53),rgba(255,146,150,1)); */
   text-align: center;
 }
 .split-line {
     position: relative;
     flex: 0 0 0;
     margin: 0 10rpx 0 6rpx;
-    /* background:linear-gradient(-90deg,rgb(243, 145, 53),rgba(255,146,150,1)); */
     border-left: 4rpx dashed #eee;   
 }
 .split-line:before, .split-line:after {
@@ -173,10 +170,45 @@
     right: -16rpx;
     z-index: 1;
 }
-.title {
-  font-size: 120rpx;
+
+.money {
+  font-size: 110rpx;
   color: #eee;
 }
-.time {
+.money text {
+  font-size: 50rpx;
+  padding-right: 20rpx; 
+}
+.title {
   color: #eee;
+  font-size: 30rpx;
+}
+.conditions {
+  color: #eee;
+  font-size: 30rpx;
+  padding:15rpx;
+}
+.useNow {
+  color: rgba(254,50,103,1);
+  font-size: 30rpx;
+  border-radius: 50rpx;
+  border-style: none;
+}
+.co {
+  padding-top:10rpx; 
+}
+.co .co_w {
+  width: 64rpx;
+  height: 1rpx;
+  background: #fff;
+  margin-left: 60rpx;
+  margin-bottom: -20rpx;
+}
+
+.co .co_l {
+  width: 64rpx;
+  height: 1rpx;
+  background: #fff;
+  margin-left: 260rpx;
+  margin-top: -15rpx;
 }

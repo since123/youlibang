@@ -16,18 +16,14 @@ Page({
     height: 0,
     number: 0,
     sum: 0,
-    orderSumPri: []
+    orderSumPri: [],
+    allOrderS: {}
   },
   /**
    * 请求数据
    */
   getGoods: function () {
-    
-    },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (option) {
+    let that = this
     httpReq({
       header: {
         'Content-Type': 'application/json',
@@ -35,9 +31,17 @@ Page({
       },
       url: ApiUrl.phplist + 'order/getorder',
     }).then((res) => {
-      console.log(res)
+      that.setData({
+        allOrderS: res.data.lists
+      })
+      console.log(this.data.allOrderS)
     })
-
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (option) {
+    this.getGoods()
     this.orderShow()
     let tab = option.currtab
     this.setData({
@@ -106,81 +110,81 @@ Page({
    */
   allOrderShow: function () {
     this.setData({
-      allOrderS: [
-        {
-          orderId: '001',
-          status: '待付款',
-          orders:
-            [
-              {
-                index: '0',
-                image: '/images/2012031220134655.jpg',
-                title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
-                color: '黑色',
-                size: 'L',
-                unit: '件',
-                price: '3',
-                number: '1'
-              },
-              {
-                index: '1',
-                image: '/images/2012031220134655.jpg',
-                title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
-                color: '黑色',
-                size: 'L',
-                unit: '件',
-                price: '2',
-                number: '1'
-              }],
-        },
-        {
-          orderId: '002',
-          status: '待收货',
-          orders: [{
-            index: '0',
-            image: '/images/2012031220134655.jpg',
-            title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
-            color: '黑色',
-            size: 'L',
-            unit: '件',
-            price: '6',
-            number: '1'
-          }],
-        }
-      ]
-    })
-    let array = []
-    for (let i = 0; i < this.data.allOrderS.length; i++) {
-      let sumPrice = 0
-      let sumNumber = 0
-      let orderHandleOne = ''
-      let orderHandleTwo = ''
-      for (let j = 0; j < this.data.allOrderS[i].orders.length; j++) {
-        let goodsPrice = parseFloat(this.data.allOrderS[i].orders[j].price)
-        let goodsNumber = parseFloat(this.data.allOrderS[i].orders[j].number)
-        sumPrice += goodsPrice * goodsNumber
-        sumNumber += goodsNumber
-      }
-      if (this.data.allOrderS[i].status == '待付款'){
-        orderHandleOne = '取消订单'
-        orderHandleTwo = '确认付款'
-      }
-      else if (this.data.allOrderS[i].status == '待发货'){
-        orderHandleOne = '取消订单'
-        orderHandleTwo = '催TA发货'
-      }
-      else {
-        orderHandleOne = '申请退款'
-        orderHandleTwo = '确认收货'
-      }
+      // allOrderS: [
+      //   {
+      //     orderId: '001',
+      //     status: '待付款',
+      //     orders:
+      //       [
+      //         {
+      //           index: '0',
+      //           image: '/images/2012031220134655.jpg',
+      //           title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
+      //           color: '黑色',
+      //           size: 'L',
+      //           unit: '件',
+      //           price: '3',
+      //           number: '1'
+      //         },
+      //         {
+      //           index: '1',
+      //           image: '/images/2012031220134655.jpg',
+      //           title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
+      //           color: '黑色',
+      //           size: 'L',
+      //           unit: '件',
+      //           price: '2',
+      //           number: '1'
+      //         }],
+      //   },
+      //   {
+      //     orderId: '002',
+      //     status: '待收货',
+      //     orders: [{
+      //       index: '0',
+      //       image: '/images/2012031220134655.jpg',
+      //       title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
+      //       color: '黑色',
+      //       size: 'L',
+      //       unit: '件',
+      //       price: '6',
+      //       number: '1'
+      //     }],
+      //   }
+      // ]
+       })
+  //   let array = []
+  //   for (let i = 0; i < this.data.allOrderS.length; i++) {
+  //     let sumPrice = 0
+  //     let sumNumber = 0
+  //     let orderHandleOne = ''
+  //     let orderHandleTwo = ''
+  //     for (let j = 0; j < this.data.allOrderS[i].orders.length; j++) {
+  //       let goodsPrice = parseFloat(this.data.allOrderS[i].orders[j].price)
+  //       let goodsNumber = parseFloat(this.data.allOrderS[i].orders[j].number)
+  //       sumPrice += goodsPrice * goodsNumber
+  //       sumNumber += goodsNumber
+  //     }
+  //     if (this.data.allOrderS[i].status == '待付款'){
+  //       orderHandleOne = '取消订单'
+  //       orderHandleTwo = '确认付款'
+  //     }
+  //     else if (this.data.allOrderS[i].status == '待发货'){
+  //       orderHandleOne = '取消订单'
+  //       orderHandleTwo = '催TA发货'
+  //     }
+  //     else {
+  //       orderHandleOne = '申请退款'
+  //       orderHandleTwo = '确认收货'
+  //     }
 
-      array.push(
-        Object.assign({}, this.data.allOrderS[i], { totalNumber: sumNumber, totalPrice: sumPrice, orderHandleOne: orderHandleOne, orderHandleTwo: orderHandleTwo})
-      )
-    }
-    this.setData({
-      allOrderS: array
-    })
+  //     array.push(
+  //       Object.assign({}, this.data.allOrderS[i], { totalNumber: sumNumber, totalPrice: sumPrice, orderHandleOne: orderHandleOne, orderHandleTwo: orderHandleTwo})
+  //     )
+  //   }
+  //   this.setData({
+  //     allOrderS: array
+  //   })
   },
   /**
    * 显示待付款页面
