@@ -1,0 +1,9 @@
+<!--pages/service/service.wxml-->
+<view class='listInfo' bindtap='onlineService'>
+    <image src='../../images/kefu@2x.png'></image>
+    <view class='text'>在线客服</view>
+</view>
+<view class='listInfo' bindtap='customerService'>
+    <image src='../../images/bohao@2x.png'></image>
+    <view class='text'>人工客服</view>
+</view>

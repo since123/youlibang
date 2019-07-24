@@ -1,0 +1,36 @@
+<!--pages/rebateDetail/rebateDetail.wxml-->
+<view class='box'>
+  <view class='upgrade'><image src='../../images/vipbgImg@2x.png'></image></view>
+  <view class='yongjin'>累计收益</view>
+  <view class='money'><label>￥</label>200.00</view>
+</view>
+
+<view class='threeDiv'>
+    <view class='listInfo'>
+        <view class='userImg'><image src='../../images/2013062320262198.jpg'></image></view>
+        <view class='leftInfo'>
+            <view class='lookdetail'>张三购买的订单已完成</view>
+            <view class='rebatetime'>2019-08-09</view>
+        </view>
+        <view class='rebateMoney'><label>￥</label>10.00</view>
+    </view>
+    <view class='li'></view>
+     <view class='listInfo'>
+        <view class='userImg'><image src='../../images/2013062320262198.jpg'></image></view>
+        <view class='leftInfo'>
+            <view class='lookdetail'>张三购买的订单已完成</view>
+            <view class='rebatetime'>2019-08-09</view>
+        </view>
+        <view class='rebateMoney'><label>￥</label>10.00</view>
+    </view>
+    <view class='li'></view>
+     <view class='listInfo'>
+        <view class='userImg'><image src='../../images/2013062320262198.jpg'></image></view>
+        <view class='leftInfo'>
+            <view class='lookdetail'>张三购买的订单已完成</view>
+            <view class='rebatetime'>2019-08-09</view>
+        </view>
+        <view class='rebateMoney'><label>￥</label>10.00</view>
+    </view>
+
+</view>

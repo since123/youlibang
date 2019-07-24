@@ -1,0 +1,67 @@
+/* pages/updatePhone/updatePhone.wxss */
+.phoneinput{
+  float: left;
+  width: 640rpx;
+  height: 100rpx;
+  background-color: #ffffff;
+  border-radius:10rpx;
+  margin-left: 55rpx;
+  margin-top: 150rpx;
+}
+.yzcodeinput{
+  float: left;
+  width: 640rpx;
+  height: 100rpx;
+  background-color: #ffffff;
+  border-radius:10rpx;
+  margin-left: 55rpx;
+  margin-top: 41rpx;
+}
+input{
+  float: left;
+  /* background-color: red; */
+  width: 430rpx;
+  height: 80rpx;
+  margin-top: 10rpx;
+  margin-left: 15rpx;
+  font-size:28rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(204,204,204,1);
+  line-height:70rpx;
+}
+.line{
+  float: left;
+  width:2rpx;
+  height:88rpx;
+  background:rgba(204,204,204,1);
+  margin-top: 7rpx;
+  margin-left: 10rpx;
+}
+.sendCode{
+  float: left;
+  margin-top: 14rpx;
+  margin-left: 10rpx;
+  font-size:28rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(234,65,72,1);
+  line-height:70rpx;
+}
+.confirm{
+  float: left;
+  width:600rpx;
+  height:88rpx;
+  background:linear-gradient(-90deg,rgba(255,146,150,1),rgba(234,65,72,1));
+  border-radius:10rpx;
+  margin-top: 150rpx;
+  margin-left: 10%;
+  font-size:36rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(254,254,254,1);
+  line-height:70rpx;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  }

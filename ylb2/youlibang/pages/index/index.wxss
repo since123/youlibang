@@ -1,0 +1,146 @@
+/**index.wxss**/
+.inputSearch{
+  width: 670rpx;
+  height: 60rpx;
+  /* background:rgba(255,255,255,1); */
+  background-color: #ffffff;
+  border-radius:8rpx;
+  /* background: red; */
+  margin-top: 3%;
+  /* margin-left: 6%; */
+  margin: 20rpx auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.inputSearch image{
+width: 30rpx;
+height: 30rpx;
+}
+.inputinfo{
+  background-color: #ffffff;
+ font-size:24rpx;
+ text-align: center;
+ border: none
+}
+
+.header_lun {
+  width: 670rpx;
+  height: 300rpx;
+  justify-content: center;
+  display: flex;
+  margin: 20rpx auto 0;
+  border-radius: 10rpx;
+  /* background-color: red */
+}
+
+.swiper, .swiper image {
+  width: 100%;
+  height: 100%;
+}
+.news{
+  float: left;
+  width: 670rpx;
+  height: 60rpx;
+  background-color: #FF9130;
+  border-radius:8rpx;
+  margin: 20rpx auto 0;
+  margin-left: 5%;
+}
+.news image{
+  float: left;
+  margin-top: 2%;
+  margin-left: 3%;
+  width: 36rpx;
+  height: 30rpx;
+}
+.swiper_container {
+float: left;
+ /* background-color: red; */
+ height: 40rpx;
+ width: 580rpx;
+ margin-top: 2%;
+ margin-left: 2%;
+ font-family:sans-serif;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  line-height:35rpx;
+}
+.swiper_item {
+ font-size: 24rpx;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+}
+.contents{
+  float: left;
+  width: 100%;
+  margin-top: 3%;
+}
+.listInfo{
+  border:1rpx solid rgb(238, 236, 236);
+  width: 100%;
+  height: 218rpx;
+  background-color: #ffffff;
+}
+.leftImg{
+  float: left;
+  width: 140rpx;
+  height: 140rpx;
+  /* background-color: green; */
+  margin-top: 5%;
+  margin-left: 5%;
+}
+.leftImg image{
+  width: 140rpx;
+  height: 140rpx;
+}
+.textInfo{
+  float: left;
+  width: 480rpx;
+  height: 66rpx;
+  margin-top:5%;
+  margin-left: 5%;
+  font-size: 28rpx;
+  /* margin-top: 5%; */
+  /* background-color: green */
+}
+.price{
+  float: left;
+  /* background-color: green; */
+  width: 200rpx;
+  margin-left: 5%;
+  margin-top: 5%;
+  font-size: 30rpx;
+  color: #EA4148;
+}
+.price label{
+font-size: 24rpx;
+color: #EA4148;
+background-color: white
+}
+.Buy{
+  float: left;
+  width: 200rpx;
+  height: 70rpx;
+  /* background-color: yellow; */
+  margin-left: 10%;
+  margin-top: 3%;
+  text-align: right;
+}
+.buy{
+  /* background-color: green; */
+  float: left;
+  width: 100rpx;
+  height: 50rpx;
+  font-size: 30rpx;
+  border:2rpx solid rgba(234,65,72,1);
+  border-radius:25rpx;
+  text-align: center;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(234,65,72,1);
+  line-height:45rpx;
+  margin-top: 4%;
+  margin-left: 40%;
+}

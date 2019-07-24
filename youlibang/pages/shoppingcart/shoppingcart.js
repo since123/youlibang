@@ -1,4 +1,7 @@
 //pages/shoppingcart/shoppingcart.js
+import {
+  httpReq
+} from '../../utils/http.js';
 var goodsId=null;
 Page({
 
@@ -16,13 +19,44 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      hasList: true,        // 既然有数据了，那设为true吧
-      carts: [
-        { id: 0, title: '新西兰A2脱脂高钙儿童学生成人奶1kg...', image: '../../images/kefu@2x.png', num: 4, price: 119.00, selected: true },
-        { id: 1, title: '新西兰A2脱脂高钙儿童学生成人奶1kg...', image: '../../images/kefu@2x.png', num: 1, price: 119.00, selected: true }
-      ]
+//请求接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: "http://www.ylb.com/api/cart/getcart",
+    }).then((res) => {
+      //console.log(res)
+      var dataList=res.data.lists
+      console.log(dataList)
+      //进行数据重组
+      var arr=[]
+      for(let i=0;i<dataList.length;i++){
+            var obj={}
+        obj.id=dataList[i].user_id
+       // obj.title = dataList[i].user_id
+        obj.num = dataList[i].number
+        obj.price = dataList[i].goods_price
+        obj.selected=true
+        arr.push(obj)
+      }
+      console.log(arr)
+      this.setData({
+        hasList:true,
+        carts:arr
+      })
+      this.getTotalPrice()
     });
+   
+
+    // this.setData({
+    //   hasList: true,        // 既然有数据了，那设为true吧
+    //   carts: [
+    //     { id: 0, title: '新西兰A2脱脂高钙儿童学生成人奶1kg...', image: '../../images/kefu@2x.png', num: 4, price: 119.00, selected: true },
+    //     { id: 1, title: '新西兰A2脱脂高钙儿童学生成人奶1kg...', image: '../../images/kefu@2x.png', num: 1, price: 119.00, selected: true }
+    //   ]
+    // });
      
   },
 
@@ -30,7 +64,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getTotalPrice()
+    
   },
 
   /**

@@ -1,0 +1,63 @@
+<!-- pages/coupon/coupon.wxml
+<view class='coupon'>
+  <image src='../../images/youhuiquan@2x.png'></image>
+  <view class='coupon_left'>
+    <view class='ko'>
+      <view class='ko_w'>¥</view>
+      <view class='ko_e'>50</view>
+    </view>
+    <view class='co'>
+      <view class='co_w'></view>
+      <view class='co_e'>优惠券</view>
+      <view class='co_l'></view>
+    </view>
+  </view>
+  <view class='coupon_right'>
+   <view class='kit'>满500元使用</view>
+    <view class='kod'>立即使用</view>
+  </view>
+</view>
+<view class='coupon'>
+  <image src='../../images/shixiao.png'></image>
+  <view class='coupon_left'>
+    <view class='ko'>
+      <view class='ko_w'>¥</view>
+      <view class='ko_e'>30</view>
+    </view>
+    <view class='co'>
+      <view class='co_w'></view>
+      <view class='co_e'>优惠券</view>
+      <view class='co_l'></view>
+    </view>
+  </view>
+  <view class='coupon_right'>
+   <view class='kit'>满500元使用</view>
+    <view class='kod coll'>已过期</view>
+  </view>
+</view>
+ -->
+<view class="app">
+  <view class="wrapper">
+    <view class="content">
+        <view class="money">
+          <text>¥</text>50
+        </view>
+      <view class='co'>
+        <view class='co_w'></view>
+        <view class="title">
+          优惠券
+        </view>
+        <view class='co_l'></view>
+      </view>
+    </view>
+    <view class="split-line"></view>
+    <view class="tip">
+      <view class="conditions">
+        满500元使用
+      </view>
+      <button class="useNow" bindtap="">
+      立即使用
+      </button>
+    </view>
+  </view>
+</view>

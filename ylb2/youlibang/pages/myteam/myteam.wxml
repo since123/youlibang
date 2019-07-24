@@ -1,0 +1,35 @@
+<!--pages/myteam/myteam.wxml-->
+<view class='top'>
+    <view  class="{{order?'statustop1':'statustop'}}" bindtap='openstatus'>一级(2)</view>
+    <view  class="{{order?'statustop':'statustop1'}}" bindtap='opendetail'>二级(3)</view>
+</view>
+<view class='body_contents'>
+    <view wx:if='{{order}}' class='statusboxcode'>
+        <view class='userInfo'>
+            <view class='userheadImg'><image src='../../images/2013062320262198.jpg'></image></view>
+            <view class='name_time'>
+                <view class='username'>张三</view>
+                <view class='registertime'>注册时间：2019-01-01</view>
+            </view>
+            <view class='num'>推广2人</view>
+            <view class='li'></view>
+            <view class='spand'>消费：40.00元</view>
+            <view class='orderNum'>1个订单</view>
+        </view>
+    </view>
+    <view wx:if='{{order}}' class='statusboxcode'>
+        <view class='userInfo'>
+            <view class='userheadImg'><image src='../../images/2013062320262198.jpg'></image></view>
+            <view class='name_time'>
+                <view class='username'>张三</view>
+                <view class='registertime'>注册时间：2019-01-01</view>
+            </view>
+            <view class='num'>推广2人</view>
+            <view class='li'></view>
+            <view class='spand'>消费：40.00元</view>
+            <view class='orderNum'>1个订单</view>
+        </view>
+    </view>
+    
+</view>
+<view wx:if='{{!order}}' class='statusbox'>nihao</view>

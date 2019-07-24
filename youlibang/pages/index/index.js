@@ -1,10 +1,12 @@
 //index.js
 //获取应用实例
+import { httpReq} from '../../utils/http.js';
 const app = getApp()
 var goods = null;
 var goodsID = null;
 Page({
   data: {
+    status:true,
     images: [],
     col1: [],
     movies: [{
@@ -44,7 +46,7 @@ Page({
 
     })
   },
-
+ 
   //搜索
   search: function() {
     wx.navigateTo({
@@ -71,7 +73,48 @@ Page({
       url: '../goodsDetail/goodsDetail?goodsId='+goodsId,
     })
   },
+  //上拉加载
+  onReachBottom(){
+    var that=this
+   //重新请求接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: 'http://www.ylb.com/api/goods/index'
+    }).then((res) => {
+      console.log(res)
+      setTimeout(()=>{
+          this.setData({
+            status:false
+          })
+      },1000)
+      //处理商品信息
+      var dataLists = res.data.lists
+      this.setData({
+        col1: dataLists
+      })
+    })
+  },
   onLoad: function(options) {
+   //请求接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: 'http://www.ylb.com/api/goods/index'
+    }).then((res) => {
+         console.log(res)
+         //处理商品信息
+         var dataLists=res.data.lists
+         dataLists=dataLists.slice(0,3)
+         this.setData({
+           col1:dataLists
+         })
+    })
+     //处理通知栏
     var that = this;
        goodsID = options.goodsID;
     this.setData({
@@ -88,38 +131,38 @@ Page({
           title: "北大教工合唱团出国演出遇尴尬:被要求给他人伴唱"
         }
       ]
-    });
-    this.loadImages();
+    })
+   
   },
   //商品信息列表显示
-  loadImages: function() {
-    this.setData({
-      // hasList: true, // 既然有数据了，那设为true吧
-      col1:[{
-        goodsId: 0,
-        goodsInfo: '新西兰A2脱脂高钙儿童学生成人高钙奶粉1kg...',
-        url: 'bill',
-        imageurl: '/images/2012031220134655.jpg',
-        newprice: "86",
+  // loadImages: function() {
+  //   this.setData({
+  //     // hasList: true, // 既然有数据了，那设为true吧
+  //     col1:[{
+  //       goodsId: 0,
+  //       goodsInfo: '新西兰A2脱脂高钙儿童学生成人高钙奶粉1kg...',
+  //       url: 'bill',
+  //       imageurl: '/images/2012031220134655.jpg',
+  //       newprice: "86",
       
-      },
-      {
-        goodsId: 1,
-        goodsInfo: '新西兰A2脱脂高钙儿童学生成人高钙奶粉1kg...',
-        url: 'bill',
-        imageurl: '/images/2013062320262198.jpg',
-        newprice: "92",
-      },
-      {
-        goodsId: 2,
-        goodsInfo: '新西兰A2脱脂高钙儿童学生成人高钙奶粉1kg...',
-        url: 'bill',
-        imageurl: '/images/2013062320262198.jpg',
-        newprice: "128",
-      }
-    ]
-    })
-  },
+  //     },
+  //     {
+  //       goodsId: 1,
+  //       goodsInfo: '新西兰A2脱脂高钙儿童学生成人高钙奶粉1kg...',
+  //       url: 'bill',
+  //       imageurl: '/images/2013062320262198.jpg',
+  //       newprice: "92",
+  //     },
+  //     {
+  //       goodsId: 2,
+  //       goodsInfo: '新西兰A2脱脂高钙儿童学生成人高钙奶粉1kg...',
+  //       url: 'bill',
+  //       imageurl: '/images/2013062320262198.jpg',
+  //       newprice: "128",
+  //     }
+  //   ]
+  //   })
+  // },
 
   getUserInfo: function(e) {
     // console.log(e)

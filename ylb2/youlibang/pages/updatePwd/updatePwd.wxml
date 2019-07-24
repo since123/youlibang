@@ -1,0 +1,13 @@
+<!--pages/updatePwd/updatePwd.wxml-->
+<view class='infotext'>短信验证码将发送至：132****7580</view>
+<view class='yzcodeinput'>
+    <input type='text' placeholder='请输入验证码' bindinput='entryCode'></input>
+    <view class='line'></view>
+    <view class='sendCode'>{{sendCode}}</view>
+</view>
+<view class='yzcodeinput'>
+    <input type='text' placeholder='请设置密码'></input>
+    <view class='pwd'><image></image></view>
+</view>
+<view class='tishi'>注:密码由6~20位数字，字母(区分大小写)组成</view>
+<view class='over'>完成</view>

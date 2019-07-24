@@ -17,7 +17,7 @@ Page({
     number: 0,
     sum: 0,
     orderSumPri: [],
-    allOrderS: {}
+    allOrderS: []
   },
   /**
    * 请求数据
@@ -31,10 +31,40 @@ Page({
       },
       url: ApiUrl.phplist + 'order/getorder',
     }).then((res) => {
+      let lists = res.data.lists
+      console.log(lists)
+        //数据重组
+      let orders = []
+      
+      for(let m in lists){
+        let ss = {}
+        let goods = [] 
+        ss.orderId = m
+        for(let n in lists[m]){ 
+          let mm = {} 
+          if (n!="pay_status"){
+            // console.log(lists[m][n])
+            ss.status = lists[m][n].pay_status
+          }
+          if (lists[m][n].hasOwnProperty('goods_name')){
+              mm.title = lists[m][n].goods_name
+            // console.log(lists[m][n].goods_name)
+            console.log(mm)
+            goods.push(mm)
+          }
+          
+          
+          ss.goods = goods 
+          //console.log(goods)
+        }
+        
+      //  console.log(goods)
+        orders.push(ss)
+     }
+      // console.log(orders)
       that.setData({
-        allOrderS: res.data.lists
+        allOrderS: orders
       })
-      console.log(this.data.allOrderS)
     })
   },
   /**
@@ -42,11 +72,18 @@ Page({
    */
   onLoad: function (option) {
     this.getGoods()
-    this.orderShow()
     let tab = option.currtab
     this.setData({
       currtab: tab
     })
+    
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    this.getDeviceInfo()
+    this.orderShow()
   },
   /*
   * 设置swiper高度
@@ -109,50 +146,11 @@ Page({
    * 显示全部订单
    */
   allOrderShow: function () {
-    this.setData({
-      // allOrderS: [
-      //   {
-      //     orderId: '001',
-      //     status: '待付款',
-      //     orders:
-      //       [
-      //         {
-      //           index: '0',
-      //           image: '/images/2012031220134655.jpg',
-      //           title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
-      //           color: '黑色',
-      //           size: 'L',
-      //           unit: '件',
-      //           price: '3',
-      //           number: '1'
-      //         },
-      //         {
-      //           index: '1',
-      //           image: '/images/2012031220134655.jpg',
-      //           title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
-      //           color: '黑色',
-      //           size: 'L',
-      //           unit: '件',
-      //           price: '2',
-      //           number: '1'
-      //         }],
-      //   },
-      //   {
-      //     orderId: '002',
-      //     status: '待收货',
-      //     orders: [{
-      //       index: '0',
-      //       image: '/images/2012031220134655.jpg',
-      //       title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
-      //       color: '黑色',
-      //       size: 'L',
-      //       unit: '件',
-      //       price: '6',
-      //       number: '1'
-      //     }],
-      //   }
-      // ]
-       })
+    console.log(this.data.allOrderS)
+
+    // for (let index in this.data.allOrderS) {
+    //   console.log(index)
+    // }
   //   let array = []
   //   for (let i = 0; i < this.data.allOrderS.length; i++) {
   //     let sumPrice = 0
@@ -393,20 +391,13 @@ Page({
       url: '../orderDetail/orderDetail'
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    this.orderShow()
-    this.getDeviceInfo()
-  },
+  
  
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**

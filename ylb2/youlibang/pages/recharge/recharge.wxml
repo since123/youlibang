@@ -1,0 +1,10 @@
+<!--pages/recharge/recharge.wxml-->
+<view class='amount'>
+  <view class='amount_text'>充值金额</view>
+  <view class='line'></view>
+  <view class='cash'>
+  <view class='cash_l'>¥</view>
+  <input type='text' placeholder="请输入充值金额" />
+</view>
+</view>
+<view class='coomit' bindtap='recharge'>充值</view>

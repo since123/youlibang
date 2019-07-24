@@ -45,7 +45,7 @@ swiper {
   box-sizing: border-box;
   padding: 36rpx 0;
 }
-.storeName {
+.orderNumber {
   float: left;
   font-size: 24rpx;
   padding-left: 20rpx;

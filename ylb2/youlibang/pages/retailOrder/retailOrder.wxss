@@ -1,0 +1,69 @@
+/* pages/retailOrder/retailOrder.wxss */
+.swiper-tab {  
+    margin-top: 18rpx;
+    width: 100%;  
+    /* border-bottom: 4rpx solid #f0f0f0;   */
+    text-align: center;  
+    line-height: 80rpx;
+    background:#fff;
+    }
+ 
+.swiper-tab-list { 
+    font-size: 25rpx;  
+    display: inline-block;  
+    width: 20%;  
+    color: #333333;  
+    position: relative;
+}  
+.on{
+    color: #EA4148;  
+     /* border-bottom: 4rpx solid #01aa94;  */
+    }  
+   .on::after {
+    content: '';
+    width:88rpx;
+    height:4rpx;
+    background:rgba(234,65,72,1);
+    position: absolute;
+    bottom:0;
+    left:50%;
+    margin-left:-40rpx;
+    border-radius: 6rpx;
+  } 
+  .swiper-box { 
+    display: block; 
+    overflow: auto; 
+    }  
+  .listInfo {
+    width:100%;
+    background: #fff;
+    padding-left: 30rpx;
+  }
+  .retailOrder {
+    font-size: 25rpx;
+    align-items: center;
+    display: flex;
+  }
+  .retailOrderInfo {
+    align-items: center;
+    display: flex;
+    font-size: 20rpx;
+  }
+  .orderStatus {
+    padding: 10rpx;
+    font-size: 20rpx;
+    color: red;
+    border-bottom: 1px solid #eee
+  }
+  .customerImage {
+    width: 70rpx;
+    height: 70rpx;
+  }
+  .rebate {
+    font-size: 20rpx;
+    margin-left: 300rpx;
+    color: #666
+  }
+  .rebate text {
+    color: red
+  }

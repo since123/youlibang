@@ -13,11 +13,11 @@
     </block>
   </swiper>
 </view>
-消息栏
+<!-- 消息栏 -->
 <view class='news'>
   <image src='../../images/gonggao (1)@3x.png'></image>
   <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="1000">
-    <block wx:for="{{msgList}}" wx:key="item.index">
+    <block wx:for="{{msgList}}">
       <navigator url="/pages/index/index?title={{item.url}}" open-type="navigate">
         <swiper-item>
           <view class="swiper_item">{{item.title}}</view>
@@ -27,11 +27,12 @@
   </swiper>
 </view>
 <!-- 列表信息 -->
-<view class='contents' bindscrolltolower="loadImages" >
-  <view class='listInfo' wx:for='{{col1}}' wx:for-item='item' data-goodsid='{{item.goodsId}}' catchtap='goodsdetail' wx:key="item.index">
-    <view class='leftImg'><image src="{{item.imageurl}}"></image></view>
-    <view class='textInfo'>{{item.goodsInfo}}</view>
-    <view class='price'><label>￥</label>{{item.newprice}}</view>
+<scroll-view class='contents'>
+  <view class='listInfo' wx:for='{{col1}}' wx:for-item='item' data-goodsid='{{item.id}}' catchtap='goodsdetail'>
+    <view class='leftImg'><image src="{{item.goods_log}}"></image></view>
+    <view class='textInfo'>{{item.goods_name}}</view>
+    <view class='price'><label>￥</label>{{item.goods_price}}</view>
     <view class='Buy'><view class='buy' bindtap='tobuy'>购买</view></view>
   </view>
-</view>
+  <view wx:if="{{status}}">加载中...</view>
+</scroll-view>

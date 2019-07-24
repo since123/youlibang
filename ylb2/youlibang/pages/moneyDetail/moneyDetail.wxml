@@ -1,0 +1,66 @@
+<!--pages/detailed/detailed.wxml-->
+<view class='page'>
+<picker mode="date" value="{{date}}" start="2000-10-01" end="2050-10-08" bindchange="changeDate">
+    <view class='page_flst'>{{date}}∨</view>
+</picker>
+  <view class='page_two'>
+    <view class='left'>收入 ¥3524.00</view>
+    <view class='right'>支出 ¥12000.00</view>
+  </view>
+</view>
+<view class='tips' wx:for='{{listinfo}}' wx:for-item='item'>
+  <view class='tips_left'>
+    <view class='text'>{{item.text}}</view>
+    <view class='tiems'>{{item.datetime}}</view>
+  </view>
+  <view class='tips_right'>{{item.money}}</view>
+</view>
+<!-- <view class='tips'>
+  <view class='tips_left'>
+    <view class='text'>返利</view>
+    <view class='tiems'>10月9日 00:09:01</view>
+  </view>
+  <view class='tips_right all'>+2000.00</view>
+</view>
+<view class='tips'>
+  <view class='tips_left'>
+    <view class='text'>消费</view>
+    <view class='tiems'>10月9日 00:09:01</view>
+  </view>
+  <view class='tips_right'>-500.00</view>
+</view>
+<view class='tips'>
+  <view class='tips_left'>
+    <view class='text'>提现-到微信</view>
+    <view class='tiems'>10月9日 00:09:01</view>
+  </view>
+  <view class='tips_right'>-100.00</view>
+</view>
+<view class='tips'>
+  <view class='tips_left'>
+    <view class='text'>提现-到微信</view>
+    <view class='tiems'>10月9日 00:09:01</view>
+  </view>
+  <view class='tips_right'>-2000.00</view>
+</view>
+<view class='tips'>
+  <view class='tips_left'>
+    <view class='text'>消费</view>
+    <view class='tiems'>10月9日 00:09:01</view>
+  </view>
+  <view class='tips_right all'>+2000.00</view>
+</view>
+<view class='tips'>
+  <view class='tips_left'>
+    <view class='text'>提现-到微信</view>
+    <view class='tiems'>10月9日 00:09:01</view>
+  </view>
+  <view class='tips_right'>-500.00</view>
+</view>
+<view class='tips'>
+  <view class='tips_left'>
+    <view class='text'>提现-到微信</view>
+    <view class='tiems'>10月9日 00:09:01</view>
+  </view>
+  <view class='tips_right'>-100.00</view>
+</view> -->

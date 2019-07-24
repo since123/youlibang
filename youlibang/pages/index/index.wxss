@@ -104,6 +104,12 @@ float: left;
   font-size: 28rpx;
   /* margin-top: 5%; */
   /* background-color: green */
+  /* 超出一行的文字替换成。。。 */
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
 }
 .price{
   float: left;

@@ -1,0 +1,110 @@
+/* pages/extension_QRcode/extension_QRcode.wxss */
+.bgImg{
+  float: left;
+  width: 100%;
+  height: 100%;
+}
+.bgImg image{
+  width:100%;
+  height:1200rpx;
+}
+.qrdiv{
+  width: 600rpx;
+  height: 800rpx;
+  background-color: #ffffff;
+  position: absolute;
+  float: left;
+  border-radius:30px;
+  margin-top: 20%;
+  margin-left: 10%;
+}
+.QRImg{
+  width: 500rpx;
+  height: 500rpx;
+  background-color: green;
+  margin-top: 10%;
+  margin-left: 8%;
+}
+.QRImg image{
+  width: 500rpx;
+  height: 500rpx;
+}
+.userDiv{
+  float: left;
+  margin-top: 3%;
+  width: 100%;
+  height: 100rpx;
+  /* background-color: yellow; */
+}
+.userInfo{
+  float: left;
+  margin-left: 8%;
+  /* margin-top: 3%; */
+  width: 350rpx;
+  height: 120rpx;
+  /* background-color: red */
+}
+.username{
+  width:150rpx;
+  height:32rpx;
+  font-size:34rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+  line-height:70rpx;
+}
+.vipId{
+  width:250rpx;
+  height:29rpx;
+  font-size:30rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+  line-height:70rpx;
+  margin-top: 5%;
+}
+.userImg{
+  float: left;
+  width: 80rpx;
+  height: 78rpx;
+  margin-left: 7%;
+  margin-top: 2%;
+  border-radius:50%;
+}
+.userImg image{
+  width: 80rpx;
+  height: 78rpx;
+  border-radius:50%;
+}
+.upload{
+  float: left;
+  width: 230rpx;
+  height: 50rpx;
+  /* background-color: red; */
+  margin-left: 7%;
+  margin-top: 4%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.uploadImg{
+  float: left;
+  width: 38rpx;
+  height: 36rpx;
+  /* background-color: yellow; */
+}
+.uploadImg image{
+  width: 38rpx;
+  height: 36rpx;
+}
+.saveImg{
+  float: left;
+  width:150rpx;
+  height:28rpx;
+  font-size:30rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+  line-height:35rpx;
+  margin-left: 10%;
+}

@@ -1,0 +1,84 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/mine/mine",
+    "pages/shoppingcart/shoppingcart",
+    "pages/service/service",
+    "pages/onlineService/onlineService",
+    "pages/customerService/customerService",
+    "pages/goodsDetail/goodsDetail",
+    "pages/orderDetail/orderDetail",
+    "pages/submitOrder/submitOrder",
+    "pages/searchGoods/searchGoods",
+    "pages/upgradeVIP/upgradeVIP",
+    "pages/VIPcenter/VIPcenter",
+    "pages/rebateDetail/rebateDetail",
+    "pages/extension_QRcode/extension_QRcode",
+    "pages/myteam/myteam",
+    "pages/settledRebate/settledRebate",
+    "pages/retail_orderdetail/retail_orderdetail",
+    "pages/cashoutDetail/cashoutDetail",
+    "pages/applyVIP/applyVIP",
+    "pages/bindphoneNum/bindphoneNum",
+    "pages/updatePwd/updatePwd",
+    "pages/updatePhone/updatePhone",
+    "pages/set/set",
+    "pages/personal_data/personal_data",
+    "pages/address/address",
+    "pages/coupon/coupon",
+    "pages/moneyDetail/moneyDetail",
+    "pages/myAddress/myAddress",
+    "pages/recharge/recharge",
+    "pages/withdraw/withdraw",
+    "pages/myOrder/myOrder",
+    "pages/editAddress/editAddress",
+    "pages/test/test",
+    "pages/questionDetail/questionDetail",
+    "pages/searchDetail/searchDetail",
+    "pages/retailOrder/retailOrder"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "优力帮墙面医生",
+    "navigationBarTextStyle": "black"
+  },
+    "tabBar": {
+      "color": "#080808",
+      "selectedColor": "#EA4148",
+      "borderStyle": "black",
+      "list": [
+        {
+          "selectedIconPath": "images/shouye1@2x.png",
+          "iconPath": "images/shouye2@2x.png",
+          "pagePath": "pages/index/index",
+          "text": "首页"
+        },
+        {
+          "selectedIconPath": "images/shoppCart@2x.png",
+          "iconPath": "images/gouwuche@2x.png",
+          "pagePath": "pages/shoppingcart/shoppingcart",
+          "text": "购物车"
+        },
+        {
+          "selectedIconPath": "images/service@2x.png",
+          "iconPath": "images/kefu@2x(1).png",
+          "pagePath": "pages/service/service",
+          "text": "在线客服"
+        },
+        {
+          "selectedIconPath": "images/wode@2x.png",
+          "iconPath": "images/wode@2x (2).png",
+          "pagePath": "pages/mine/mine",
+          "text": "我的"
+        }
+      ]
+    },
+    "permission": {
+      "scope.userLocation": {
+        "desc": "请点击确定"
+      }
+    },
+  "sitemapLocation": "sitemap.json"
+}

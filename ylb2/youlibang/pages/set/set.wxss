@@ -1,0 +1,47 @@
+/* pages/set/set.wxss */
+.listInfo{
+  width: 750rpx;
+  height: 100rpx;
+  background-color: #ffffff;
+  margin-top: 2rpx;
+}
+
+.text{
+  width: 25%;
+  /* background-color: yellow; */
+  float: left;
+  margin-top: 1%;
+  margin-left: 5%;
+  font-size:30rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+  line-height:90rpx;
+}
+.next{
+  float: left;
+  width: 11rpx;
+  height: 20rpx;
+  /* background-color: red; */
+  margin-top: 3%;
+  margin-left: 62%;
+}
+.next image{
+  width: 11rpx;
+  height: 20rpx;
+}
+.Logout{
+  width: 100%;
+  height: 88rpx;
+  background-color: #ffffff;
+  bottom: 0;
+  position: absolute;
+  font-size:36rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+  line-height:70rpx;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}

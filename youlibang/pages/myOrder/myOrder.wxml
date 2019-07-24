@@ -12,9 +12,9 @@
   <scroll-view class="hot-box">
     <view class="container-0">
       <view class="order" wx:for="{{allOrderS}}" wx:key="{{item.orderId}}" wx:for-item="order">
-        <view class="storeName">{{order.storeName}}</view>
+        <view class="orderNumber">{{order.orderId}}</view>
         <view class="orderStatus">{{order.status}}</view>
-        <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index" bindtap="orderDetailShow">
+        <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow">
             <image src='{{item.image}}'></image>
             <view class='orderDetail'>
               <view class='orderTitle'>{{item.title}}</view>
@@ -46,7 +46,7 @@
       <view class="container-1">
         <view class="order" wx:for="{{waitPayOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
           <view class="storeName">{{order.storeName}}</view>
-          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index" bindtap="orderDetailShow">
+          <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow">
               <image src='{{item.image}}'></image>
               <view class='orderDetail'>
                 <view class='orderTitle'>{{item.title}}</view>
@@ -78,7 +78,7 @@
     <view class="container-2">
       <view class="order" wx:for="{{waitSentOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
           <view class="storeName">{{order.storeName}}</view>
-          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index" bindtap="orderDetailShow">
+          <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow">
               <image src='{{item.image}}'></image>
               <view class='orderDetail'>
                 <view class='orderTitle'>{{item.title}}</view>
@@ -110,7 +110,7 @@
   <view class="container-3">
     <view class="order" wx:for="{{waitReceivedOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
           <view class="storeName">{{order.storeName}}</view>
-          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index" bindtap="orderDetailShow">
+          <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow">
               <image src='{{item.image}}'></image>
               <view class='orderDetail'>
                 <view class='orderTitle'>{{item.title}}</view>
@@ -143,7 +143,7 @@
     <view class="order" wx:for="{{completeOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
           <view class="storeName">{{order.storeName}}</view>
           <view class="orderStatus">{{order.status}}</view>
-          <view class="orderList" wx:for="{{order.orders}}" wx:key="item.index" bindtap="orderDetailShow">
+          <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow">
               <image src='{{item.image}}'></image>
               <view class='orderDetail'>
                 <view class='orderTitle'>{{item.title}}</view>

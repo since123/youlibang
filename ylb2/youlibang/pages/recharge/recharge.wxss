@@ -1,0 +1,51 @@
+/* pages/recharge/recharge.wxss */
+
+.amount {
+  width: 750rpx;
+  height: 201rpx;
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+.amount_text {
+  /* background-color: green; */
+  float: left;
+  width: 500rpx;
+  height: 90rpx;
+  font: 28rpx/26rpx "";
+  margin-top: 10rpx;
+  margin-left: 40rpx;
+  align-items: center;
+  display: flex;
+}
+.line{
+  float: left;
+  width:750rpx;
+  height:1rpx;
+  background:rgba(230,230,230,1);
+}
+
+.cash {
+  width: 750rpx;
+  height: 110rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cash .cash_l {
+  font: 700 44rpx/110rpx "";
+  margin-left: 40rpx;
+  margin-right: 30rpx;
+}
+
+.coomit {
+  width: 620rpx;
+  height: 88rpx;
+  background:linear-gradient(-90deg,rgba(255,146,150,1),rgba(234,65,72,1));
+  border-radius:8rpx;
+  margin: 0 auto;
+  margin-top: 115rpx;
+  font: 36rpx/88rpx "";
+  color: #fff;
+  text-align: center;
+}
