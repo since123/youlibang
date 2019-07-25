@@ -31,41 +31,58 @@ Page({
       },
       url: ApiUrl.phplist + 'order/getorder',
     }).then((res) => {
-      let lists = res.data.lists
-      console.log(lists)
-        //数据重组
+      // console.log(res.data)
+      let lists = res.data
+      // console.log(lists)
+      //数据重组
       let orders = []
-      
-      for(let m in lists){
+
+      for (let m in lists) {
         let ss = {}
-        let goods = [] 
+        let goods = []
         ss.orderId = m
-        for(let n in lists[m]){ 
-          let mm = {} 
-          if (n!="pay_status"){
+        for (let n in lists[m]) {
+          let mm = {}
+          if (n != "pay_status") {
             // console.log(lists[m][n])
             ss.status = lists[m][n].pay_status
           }
-          if (lists[m][n].hasOwnProperty('goods_name')){
-              mm.title = lists[m][n].goods_name
-            // console.log(lists[m][n].goods_name)
-            console.log(mm)
-            goods.push(mm)
+          if (lists[m][n].hasOwnProperty('goods_logo')) {
+            mm.image = lists[m][n].goods_logo
           }
-          
-          
-          ss.goods = goods 
+          if (lists[m][n].hasOwnProperty('goods_name')) {
+            mm.title = lists[m][n].goods_name
+          }
+          if (lists[m][n].hasOwnProperty('goods_attr_ids')){
+            mm.properties = lists[m][n].goods_attr_ids
+          }
+          if (lists[m][n].hasOwnProperty('goods_price')) {
+            mm.price = lists[m][n].goods_price
+          }
+          if (lists[m][n].hasOwnProperty('number')) {
+            mm.number = lists[m][n].number
+          }
+          goods.push(mm)
+          ss.goods = goods
           //console.log(goods)
         }
-        
-      //  console.log(goods)
+
+        //  console.log(goods)
         orders.push(ss)
-     }
+      }
       // console.log(orders)
+      // console.log(that)
       that.setData({
         allOrderS: orders
       })
+      that.orderShow()
+      // console.log(this.data.allOrderS)//有数据
     })
+   
+
+    // console.log(this.data)
+    // console.log(this.data.swipertab)
+    // console.log(this.data.allOrderS)//无数据
   },
   /**
    * 生命周期函数--监听页面加载
@@ -76,14 +93,16 @@ Page({
     this.setData({
       currtab: tab
     })
-    
+   
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    // this.getGoods()
+    // console.log(this.data.allOrderS);
     this.getDeviceInfo()
-    this.orderShow()
+    // this.orderShow()
   },
   /*
   * 设置swiper高度
@@ -122,14 +141,14 @@ Page({
     that.setData({
       currtab: tab
     })
-    this.orderShow()
+    // this.orderShow()
   },
   /**
    * 显示页面
    */
   orderShow: function () {
     let that = this
-    switch (this.data.currtab) {
+    switch (Number(this.data.currtab)) {
       case 0: that.allOrderShow()
         break;
       case 1: that.waitPayShow()
@@ -146,43 +165,39 @@ Page({
    * 显示全部订单
    */
   allOrderShow: function () {
-    console.log(this.data.allOrderS)
+    let array = []
+    for (let i = 0; i < this.data.allOrderS.length; i++) {
+      let sumPrice = 0
+      let sumNumber = 0
+      let orderHandleOne = ''
+      let orderHandleTwo = ''
+      for (let j = 0; j < this.data.allOrderS[i].goods.length; j++) {
+        let goodsPrice = parseFloat(this.data.allOrderS[i].goods[j].price)
+        let goodsNumber = parseFloat(this.data.allOrderS[i].goods[j].number)
+        sumPrice += goodsPrice * goodsNumber
+        sumNumber += goodsNumber
+        
+      }
+      if (this.data.allOrderS[i].status == '待付款'){
+        orderHandleOne = '取消订单'
+        orderHandleTwo = '确认付款'
+      }
+      else if (this.data.allOrderS[i].status == '待发货'){
+        orderHandleOne = '取消订单'
+        orderHandleTwo = '催TA发货'
+      }
+      else {
+        orderHandleOne = '申请退款'
+        orderHandleTwo = '确认收货'
+      }
 
-    // for (let index in this.data.allOrderS) {
-    //   console.log(index)
-    // }
-  //   let array = []
-  //   for (let i = 0; i < this.data.allOrderS.length; i++) {
-  //     let sumPrice = 0
-  //     let sumNumber = 0
-  //     let orderHandleOne = ''
-  //     let orderHandleTwo = ''
-  //     for (let j = 0; j < this.data.allOrderS[i].orders.length; j++) {
-  //       let goodsPrice = parseFloat(this.data.allOrderS[i].orders[j].price)
-  //       let goodsNumber = parseFloat(this.data.allOrderS[i].orders[j].number)
-  //       sumPrice += goodsPrice * goodsNumber
-  //       sumNumber += goodsNumber
-  //     }
-  //     if (this.data.allOrderS[i].status == '待付款'){
-  //       orderHandleOne = '取消订单'
-  //       orderHandleTwo = '确认付款'
-  //     }
-  //     else if (this.data.allOrderS[i].status == '待发货'){
-  //       orderHandleOne = '取消订单'
-  //       orderHandleTwo = '催TA发货'
-  //     }
-  //     else {
-  //       orderHandleOne = '申请退款'
-  //       orderHandleTwo = '确认收货'
-  //     }
-
-  //     array.push(
-  //       Object.assign({}, this.data.allOrderS[i], { totalNumber: sumNumber, totalPrice: sumPrice, orderHandleOne: orderHandleOne, orderHandleTwo: orderHandleTwo})
-  //     )
-  //   }
-  //   this.setData({
-  //     allOrderS: array
-  //   })
+      array.push(
+        Object.assign({}, this.data.allOrderS[i], { totalNumber: sumNumber, totalPrice: sumPrice, orderHandleOne: orderHandleOne, orderHandleTwo: orderHandleTwo})
+      )
+    }
+    this.setData({
+      allOrderS: array
+    })
   },
   /**
    * 显示待付款页面

@@ -6,7 +6,7 @@
       <view class='coll_b'>{{item.address}}</view>
     </view>
     <view class='coll_v'>
-      <checkbox class='check_box' checked='checked'></checkbox>
+      <checkbox class='check_box' checked='{{item.status}}'></checkbox>
       <view class='coll_f'>设为默认</view>
       <view class='coll_L' bindtap='editAddress'><image src='../../images/edit@2x.png'></image><view class='coll_o'>编辑</view></view>
       <view class='coll_k' bindtap='deleteAddress'><image src='../../images/delete@2x.png'></image><view class='coll_o'>删除</view></view>

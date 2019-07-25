@@ -9,7 +9,7 @@
 
 <swiper current="{{currtab}}" style="height:{{deviceH-31}}px" bindchange="onTabChange">
   <swiper-item>
-  <scroll-view class="hot-box">
+  <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
     <view class="container-0">
       <view class="order" wx:for="{{allOrderS}}" wx:key="{{item.orderId}}" wx:for-item="order">
         <view class="orderNumber">{{order.orderId}}</view>
@@ -19,9 +19,9 @@
             <view class='orderDetail'>
               <view class='orderTitle'>{{item.title}}</view>
               <view class='orderStyle'>
-                <view class="orderColor">{{item.color}},</view>
-                <view class="orderSize">{{item.size}},</view>
-                <view class="orderUnit">{{item.unit}}</view>
+                <view class="orderColor">{{item.properties}}</view>
+                <!-- <view class="orderSize">{{item.size}},</view>
+                <view class="orderUnit">{{item.unit}}</view> -->
               </view>
             </view>
             <view class='orderInfor'>

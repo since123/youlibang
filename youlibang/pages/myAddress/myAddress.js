@@ -6,8 +6,8 @@ Page({
    */
   data: {
     addressList: [
-      {index:'0',username: '张兰', tel: '12345678910', address:'广东省广州市天河区汇诚大厦365'},
-      { index: '1', username: '哆啦A梦', tel: '12345678910', address: '广东省广州市天河区汇诚大厦365' }
+      {index:'0',username: '张兰', tel: '12345678910', address:'广东省广州市天河区汇诚大厦365',status:1},
+      { index: '1', username: '哆啦A梦', tel: '12345678910', address: '广东省广州市天河区汇诚大厦365',status:0}
     ],
     address: '',
   },
