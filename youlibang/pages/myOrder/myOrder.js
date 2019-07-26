@@ -78,11 +78,7 @@ Page({
       that.orderShow()
       // console.log(this.data.allOrderS)//有数据
     })
-   
-
-    // console.log(this.data)
-    // console.log(this.data.swipertab)
-    // console.log(this.data.allOrderS)//无数据
+  
   },
   /**
    * 生命周期函数--监听页面加载

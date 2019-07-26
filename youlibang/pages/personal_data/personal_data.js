@@ -1,4 +1,10 @@
 // pages/personal_data/personal_data.js
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
@@ -15,7 +21,6 @@ Page({
     idCard1:'../../images/idCard@2x.png',
     idCard2:'../../images/idCardbg@2x.png',
     businesslicense:'../../images/Business_license@2x.png'
-
   },
 
   /**
@@ -33,19 +38,24 @@ Page({
   getPersonalInfo() {
     var that = this;
     wx.request({
-      url: '',
+      url: ApiUrl.phplist +'user/getdetail',
       data: {
-
-
+        user_id: 1
       },
       header: { //请求头
-        "Content-Type": "applciation/json"
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
       },
       method: "GET", //get为默认方法/POST
       success: function(res) {
-        console.log(res.data); //res.data相当于ajax里面的data,为后台返回的数据　　　
+        console.log(res.data.list); //res.data相当于ajax里面的data,为后台返回的数据
+        let list = res.data.list
         that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
-          logs: res.data.result　　　　　　　
+          logs: res.data.result,
+          vipname: list.user_nickname,
+          src: list.user_logo,
+          bindphone: list.user_phone,
+          sex: list.sex
         })
       },
       fail: function(err) {}, //请求失败
@@ -53,7 +63,7 @@ Page({
     })
 
   },
-
+ 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

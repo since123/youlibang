@@ -1,4 +1,10 @@
 // pages/mine/mine.js
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
@@ -15,26 +21,41 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // var that=this;
-    // this.userInfo();
-    // const wxreq = wx.request({
-    //   url: '',
-    //   data: {
-    //     //id:"1",
-    //     //name:'Leanne Graham'
-    //   },
-    //   success: function (res) {
-    //     console.log(res.data);
-    //     // this.userData = res.data; //无效不能实时的渲染到页面
-    //     // that.setData({ userData: res.data });//和页面进行绑定可以动态的渲染到页面
+    var that=this;
+    // this.userInfo();//如果不是注册的会员就显示自己的微信信息
+    const wxreq = wx.request({
+      url: ApiUrl.phplist + 'user/getdetail',
+      data: {
+        id:"1",
+        name:'Leanne Graham'
+      },
+      header: { //请求头
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        console.log(res.data.lists);
+        let list = res.data.lists
+        that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
+          // logs: res.data.result,
+          vipid: list.user_member,
+          username: list.user_nickname,
+          userImg_url: list.user_logo
+          
+        })
+        // this.userData = res.data; //无效不能实时的渲染到页面
+        // that.setData({ userData: res.data });//和页面进行绑定可以动态的渲染到页面
 
-    //   },
-    //   fail: function (res) {
-    //     console.log(res.data);
-    //     // this.userData = "数据获取失败";
-    //   }
-    // })
+      },
+      fail: function (res) {
+        // console.log(res.data);
+        // this.userData = "数据获取失败";
+      }
+    })
   },
+  /**
+   * 获取页面数据
+   */
   //获取用户信息
   userInfo:function(){
     var that=this;

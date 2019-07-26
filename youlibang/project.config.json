@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 2,
 			"list": [
 				{
 					"id": 0,
@@ -66,8 +66,8 @@
 				},
 				{
 					"id": 2,
-					"name": "pages/coupon/coupon",
-					"pathName": "pages/coupon/coupon",
+					"name": "pages/personal_data/personal_data",
+					"pathName": "pages/personal_data/personal_data",
 					"query": "",
 					"scene": null
 				},
@@ -79,9 +79,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 4,
 					"name": "pages/withdraw/withdraw",
-					"pathName": "pages/withdraw/withdraw",
+					"pathName": "pages/personal_data/personal_data",
 					"query": "",
 					"scene": null
 				}

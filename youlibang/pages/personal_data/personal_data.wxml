@@ -1,26 +1,26 @@
 <!--pages/personal_data/personal_data.wxml-->
 <view class='headImg'>
-  <view class='headtext'>头像</view>
-  <view class='rightImg'><image mode="{{item.mode}}" src="{{src}}"></image></view>
+  <view class='headtext'><label>*</label>头像</view>
+  <view class='rightImg'><image mode="{{item.mode}}" src="{{src}}" ></image></view>
 </view>
 <view class='vipinfo'>
-  <view class='infotext'>会员名</view>
-  <label class='rightinfo'>{{vipname}}</label>
+  <view class='infotext'><label>*</label>会员名</view>
+  <input class='rightinfo' value="{{vipname}}"></input>
 </view>
 <view class='vipinfo'>
   <view class='infotext'>绑定手机号码</view>
   <label class='rightinfo'>{{bindphone}}</label>
 </view>
 <view class='vipinfo'>
-  <view class='infotext'>性别</view>
-  <label class='rightinfo'>{{sex}}</label>
+  <view class='infotext'><label>*</label>性别</view>
+  <input class='rightinfo' value="{{sex}}"></input>
 </view>
 <view class='vipinfo'>
-  <view class='infotext'>地址</view>
-  <label class='rightinfo'>{{address}}</label>
+  <view class='infotext'><label>*</label>地址</view>
+  <input class='rightinfo' value="{{address}}"></input>
 </view>
 <view class='vipinfo'>
-  <view class='infotext'>微信</view>
+  <view class='infotext'>微信号</view>
   <label class='rightinfo'>{{wechat}}</label>
 </view>
 <view class='vipinfo'>
@@ -37,3 +37,4 @@
   <view class='addImg'>
       <view class='imginfo'><image src='{{businesslicense}}'></image></view>
   </view>
+  <button class="perserve" bindtap="changeAvatar">保存</button>

@@ -15,6 +15,10 @@
   margin-top: 20rpx;
   margin-left: 38rpx;
 }
+.headtext label {
+  color: red;
+  margin-right: 10rpx;
+}
 .rightImg{
   width: 80rpx;
   height: 80rpx;
@@ -46,8 +50,13 @@
   margin-top: 9rpx;
   margin-left: 38rpx;
 }
+.infotext label {
+  color: red;
+  margin-right: 10rpx;
+}
 .rightinfo{
   width: 60%;
+  height: 100%;
   float: left;
   margin-top: 7rpx;
   /* margin-left: 10%; */
@@ -94,6 +103,7 @@
   width: 100%;
   height: 220rpx;
   background-color: #ffffff;
+  margin-bottom: 30rpx;
 }
 .imginfo{
   float: left;
@@ -102,8 +112,16 @@
   /* background-color: green; */
   margin-top: 20rpx;
   margin-left: 40rpx;
+  
+
 }
 .imginfo image{
   width: 320rpx;
   height: 180rpx;
+}
+.perserve {
+  background:linear-gradient(-90deg,rgba(255,146,150,1),rgba(234,65,72,1));
+  width:80%;
+  height: 100%;
+  margin-bottom: 30rpx;
 }
