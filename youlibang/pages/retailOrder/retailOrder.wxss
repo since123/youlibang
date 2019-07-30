@@ -4,12 +4,12 @@
     width: 100%;  
     /* border-bottom: 4rpx solid #f0f0f0;   */
     text-align: center;  
-    line-height: 80rpx;
+    line-height: 100rpx;
     background:#fff;
     }
  
 .swiper-tab-list { 
-    font-size: 25rpx;  
+    font-size: 30rpx;  
     display: inline-block;  
     width: 20%;  
     color: #333333;  
@@ -40,29 +40,35 @@
     padding-left: 30rpx;
   }
   .retailOrder {
-    font-size: 25rpx;
     align-items: center;
     display: flex;
   }
   .retailOrderInfo {
     align-items: center;
     display: flex;
-    font-size: 20rpx;
+    font-size: 30rpx;
   }
   .orderStatus {
     padding: 10rpx;
-    font-size: 20rpx;
+    font-size: 25rpx;
     color: red;
     border-bottom: 1px solid #eee
   }
   .customerImage {
-    width: 70rpx;
-    height: 70rpx;
+    width: 120rpx;
+    height: 120rpx;
+  }
+  .customerName {
+   overflow: hidden;
+   text-overflow:ellipsis;
+   white-space: nowrap;
+   width: 110rpx;
   }
   .rebate {
-    font-size: 20rpx;
-    margin-left: 300rpx;
-    color: #666
+    font-size: 25rpx;
+    margin-left: 140rpx;
+    color: #666;
+    flex: 0 0 210rpx;
   }
   .rebate text {
     color: red

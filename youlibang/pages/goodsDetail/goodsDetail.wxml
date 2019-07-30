@@ -29,13 +29,13 @@
 </view>
 <!-- 底部 -->
 <view class='footer'>
-  <view class='kefu'>
+  <view class='kefu' bindtap="tokefu">
     <view class='Img'>
       <image src='../../images/kefu (2).png'></image>
     </view>
     <view class='texts'>客服</view>
   </view>
-  <view class='kefu'>
+  <view class='kefu' bindtap="shopcar">
     <view class='Img'>
       <image src='../../images/shoppCart (1)@2x.png'></image>
     </view>

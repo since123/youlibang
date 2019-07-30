@@ -59,7 +59,24 @@ Page({
         }
         that.setData({
           addressList: addressList
-        }); 
+        });
+        wx.request({
+          url: '',
+          data: {
+            // linkname: linkname,
+            // moblie: moblie,
+            // addressdetail: addressdetail,
+            // region: region,
+            //改为需要传到后台的数据
+          },
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success(res) {
+            console.log(res.data);
+          }
+
+        })
       },
     
     })

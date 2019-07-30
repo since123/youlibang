@@ -9,81 +9,91 @@
     <!-- 全部 -->
     <swiper-item style="overflow:auto">
       <scroll-view bindscrolltolower="bindDownLoad" scroll-y="true">
-          <view class='listInfo' bindtap="retailOrderDetail">
-            <view class="orderStatus">待付款</view>
+        <view>
+          <view class='listInfo' wx:for="{{allRetailOrder}}" wx:key="item.index" bindtap="retailOrderDetail">
+            <view class="orderStatus">{{item.status}}</view>
             <view class="retailOrder">
               <view class="retailOrderInfo">
-                <image class="customerImage" src="../../images/headImg.png"></image>
-                <view class="customerName">张三</view>
-                <view class="customerGrade">（一级）</view>
+                <image class="customerImage" src="{{item.image}}"></image>
+                <view class="customerName">{{item.userName}}</view>
+                <view class="customerGrade">{{item.userGrade}}</view>
               </view>
-              <view class="rebate">预计返利：<text class="rebatePrice">24.00</text>元</view>
+              <view class="rebate">预计返利：<text class="rebatePrice">{{item.money}}</text>元</view>
             </view>
           </view>
+        </view>
       </scroll-view>
     </swiper-item>
     <!-- 待付款 -->
     <swiper-item style="overflow:auto">
       <scroll-view bindscrolltolower="bindDownLoad" scroll-y="true">
-        <view class='listInfo' bindtap="retailOrderDetail">
-            <view class="orderStatus">待付款</view>
+        <view>
+          <view class='listInfo' wx:for="{{waitPayOrder}}" wx:key="item.index" bindtap="retailOrderDetail">
+            <view class="orderStatus">{{item.status}}</view>
             <view class="retailOrder">
               <view class="retailOrderInfo">
-                <image class="customerImage" src="../../images/headImg.png"></image>
-                <view class="customerName">张三</view>
-                <view class="customerGrade">（一级）</view>
+                <image class="customerImage" src="{{item.image}}"></image>
+                <view class="customerName">{{item.userName}}</view>
+                <view class="customerGrade">{{item.userGrade}}</view>
               </view>
-              <view class="rebate">预计返利：<text class="rebatePrice">24.00</text>元</view>
+              <view class="rebate">预计返利：<text class="rebatePrice">{{item.money}}</text>元</view>
             </view>
           </view>
+        </view>
       </scroll-view>
     </swiper-item>
     <!-- 待发货 -->
     <swiper-item style="overflow:auto">
       <scroll-view bindscrolltolower="bindDownLoad" scroll-y="true">
-        <view class='listInfo' bindtap="retailOrderDetail">
-            <view class="orderStatus">待付款</view>
+        <view>
+          <view class='listInfo' wx:for="{{waitSendOrder}}" wx:key="item.index" bindtap="retailOrderDetail">
+            <view class="orderStatus">{{item.status}}</view>
             <view class="retailOrder">
               <view class="retailOrderInfo">
-                <image class="customerImage" src="../../images/headImg.png"></image>
-                <view class="customerName">张三</view>
-                <view class="customerGrade">（一级）</view>
+                <image class="customerImage" src="{{item.image}}"></image>
+                <view class="customerName">{{item.userName}}</view>
+                <view class="customerGrade">{{item.userGrade}}</view>
               </view>
-              <view class="rebate">预计返利：<text class="rebatePrice">24.00</text>元</view>
+              <view class="rebate">预计返利：<text class="rebatePrice">{{item.money}}</text>元</view>
             </view>
           </view>
+        </view>
       </scroll-view>
     </swiper-item>
     <!-- 待收货 -->
     <swiper-item style="overflow:auto">
       <scroll-view bindscrolltolower="bindDownLoad" scroll-y="true">
-        <view class='listInfo' bindtap="retailOrderDetail">
-            <view class="orderStatus">待付款</view>
+        <view>
+          <view class='listInfo' wx:for="{{waitReceived}}" wx:key="item.index" bindtap="retailOrderDetail">
+            <view class="orderStatus">{{item.status}}</view>
             <view class="retailOrder">
               <view class="retailOrderInfo">
-                <image class="customerImage" src="../../images/headImg.png"></image>
-                <view class="customerName">张三</view>
-                <view class="customerGrade">（一级）</view>
+                <image class="customerImage" src="{{item.image}}"></image>
+                <view class="customerName">{{item.userName}}</view>
+                <view class="customerGrade">{{item.userGrade}}</view>
               </view>
-              <view class="rebate">预计返利：<text class="rebatePrice">24.00</text>元</view>
+              <view class="rebate">预计返利：<text class="rebatePrice">{{item.money}}</text>元</view>
             </view>
           </view>
+        </view>
       </scroll-view>
     </swiper-item>
     <!-- 已完成  -->
     <swiper-item style="overflow:auto">
       <scroll-view bindscrolltolower="bindDownLoad" scroll-y="true">
-        <view class='listInfo' bindtap="retailOrderDetail">
-            <view class="orderStatus">待付款</view>
+        <view>
+          <view class='listInfo' wx:for="{{completeOrder}}" wx:key="item.index" bindtap="retailOrderDetail">
+            <view class="orderStatus">{{item.status}}</view>
             <view class="retailOrder">
               <view class="retailOrderInfo">
-                <image class="customerImage" src="../../images/headImg.png"></image>
-                <view class="customerName">张三</view>
-                <view class="customerGrade">（一级）</view>
+                <image class="customerImage" src="{{item.image}}"></image>
+                <view class="customerName">{{item.userName}}</view>
+                <view class="customerGrade">{{item.userGrade}}</view>
               </view>
-              <view class="rebate">预计返利：<text class="rebatePrice">24.00</text>元</view>
+              <view class="rebate">预计返利：<text class="rebatePrice">{{item.money}}</text>元</view>
             </view>
           </view>
+        </view>
       </scroll-view>
     </swiper-item>
   </swiper>

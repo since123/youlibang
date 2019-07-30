@@ -1,20 +1,62 @@
 // pages/orderDetail/orderDetail.js
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    userName: '李开心',
+    phoneNumber: '13260995055',
+    adress: '广东省广州市天河区汇诚大厦365',
+    order: [
+      {
+        goodsImg: '../../images/2012031220134655.jpg',
+        goodsdetail: '新款韩版秋装女初恋裙白色复古压褶雪纺长袖连衣裙a字中长裙',
+        types: '粉色、M',
+        num: 'X2件'
+      },{
+        goodsImg: '../../images/2012031220134655.jpg',
+        goodsdetail: '新款韩版秋装女初恋裙白色复古压褶雪纺长袖连衣裙a字中长裙',
+        types: '粉色、M',
+        num: 'X2件'
+      },
+      {
+        goodsImg: '../../images/2012031220134655.jpg',
+        goodsdetail: '新款韩版秋装女初恋裙白色复古压褶雪纺长袖连衣裙a字中长裙',
+        types: '粉色、M',
+        num: 'X2件'
+      }
+    ]
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: function (option) {
+    // console.log("options: " + option.orderId)//7777
+    let orderId = option.orderId
+    // this.getOrder(orderId)
   },
-
+  getOrder: function (orderId) {
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + ' ',
+      data: {
+        orderId: orderId
+      },
+    }).then((res) => {
+      console.log(res.data)
+    })
+    console.log("1")
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -14,7 +14,7 @@
       <view class="order" wx:for="{{allOrderS}}" wx:key="{{item.orderId}}" wx:for-item="order">
         <view class="orderNumber">{{order.orderId}}</view>
         <view class="orderStatus">{{order.status}}</view>
-        <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow">
+        <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow" data-orderid="{{order.orderId}}">
             <image src='{{item.image}}'></image>
             <view class='orderDetail'>
               <view class='orderTitle'>{{item.title}}</view>
@@ -42,18 +42,20 @@
     </scroll-view>
   </swiper-item>
   <swiper-item>
-    <scroll-view class="hot-box">
+    <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
       <view class="container-1">
         <view class="order" wx:for="{{waitPayOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
-          <view class="storeName">{{order.storeName}}</view>
+          <view class="orderNumber">{{order.orderId}}</view>
+          <view class="orderStatus">{{order.status}}</view>
           <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow">
               <image src='{{item.image}}'></image>
               <view class='orderDetail'>
                 <view class='orderTitle'>{{item.title}}</view>
                 <view class='orderStyle'>
-                  <view class="orderColor">{{item.color}}</view>
+                  <view class="orderColor">{{item.properties}}</view>
+                  <!-- <view class="orderColor">{{item.color}}</view>
                   <view class="orderSize">{{item.size}}</view>
-                  <view class="orderUnit">{{item.unit}}</view>
+                  <view class="orderUnit">{{item.unit}}</view> -->
                 </view>
               </view>
               <view class='orderInfor'>
@@ -74,18 +76,20 @@
     </scroll-view>
   </swiper-item>
   <swiper-item>
-  <scroll-view class="hot-box">
+  <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
     <view class="container-2">
       <view class="order" wx:for="{{waitSentOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
-          <view class="storeName">{{order.storeName}}</view>
+          <view class="orderNumber">{{order.orderId}}</view>
+          <view class="orderStatus">{{order.status}}</view>
           <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow">
               <image src='{{item.image}}'></image>
               <view class='orderDetail'>
                 <view class='orderTitle'>{{item.title}}</view>
                 <view class='orderStyle'>
-                  <view class="orderColor">{{item.color}}</view>
+                  <view class="orderColor">{{item.properties}}</view>
+                  <!-- <view class="orderColor">{{item.color}}</view>
                   <view class="orderSize">{{item.size}}</view>
-                  <view class="orderUnit">{{item.unit}}</view>
+                  <view class="orderUnit">{{item.unit}}</view> -->
                 </view>
               </view>
               <view class='orderInfor'>
@@ -93,8 +97,8 @@
                 <view class='orderNum'>{{item.number}}</view>
               </view>
           </view>
-         <view class='orderSumPri'>
-          共{{order.totalNumber}}件商品 合计：
+          <view class='orderSumPri'>
+            共{{order.totalNumber}}件商品 合计：
           <view class='orderPri'>{{order.totalPrice}}元</view>
         </view>
           <view class="orderHander">
@@ -106,18 +110,20 @@
     </scroll-view>
   </swiper-item>
   <swiper-item>
-  <scroll-view class="hot-box">
+  <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
   <view class="container-3">
     <view class="order" wx:for="{{waitReceivedOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
-          <view class="storeName">{{order.storeName}}</view>
+          <view class="orderNumber">{{order.orderId}}</view>
+          <view class="orderStatus">{{order.status}}</view>
           <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow">
               <image src='{{item.image}}'></image>
               <view class='orderDetail'>
                 <view class='orderTitle'>{{item.title}}</view>
                 <view class='orderStyle'>
-                  <view class="orderColor">{{item.color}}</view>
+                  <view class="orderColor">{{item.properties}}</view>
+                  <!-- <view class="orderColor">{{item.color}}</view>
                   <view class="orderSize">{{item.size}}</view>
-                  <view class="orderUnit">{{item.unit}}</view>
+                  <view class="orderUnit">{{item.unit}}</view> -->
                 </view>
               </view>
               <view class='orderInfor'>
@@ -125,8 +131,8 @@
                 <view class='orderNum'>{{item.number}}</view>
               </view>
           </view>
-         <view class='orderSumPri'>
-          共{{order.totalNumber}}件商品 合计：
+          <view class='orderSumPri'>
+            共{{order.totalNumber}}件商品 合计：
           <view class='orderPri'>{{order.totalPrice}}元</view>
         </view>
           <view class="orderHander">
@@ -138,19 +144,20 @@
   </scroll-view>
   </swiper-item>
   <swiper-item>
-  <scroll-view class="hot-box">
+  <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
   <view class="container-4">
     <view class="order" wx:for="{{completeOrder}}" wx:key="{{item.orderId}}" wx:for-item="order">
-          <view class="storeName">{{order.storeName}}</view>
+          <view class="orderNumber">{{order.orderId}}</view>
           <view class="orderStatus">{{order.status}}</view>
-          <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow">
+          <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow" data->
               <image src='{{item.image}}'></image>
               <view class='orderDetail'>
                 <view class='orderTitle'>{{item.title}}</view>
                 <view class='orderStyle'>
-                  <view class="orderColor">{{item.color}}</view>
+                  <view class="orderColor">{{item.properties}}</view>
+                  <!-- <view class="orderColor">{{item.color}}</view>
                   <view class="orderSize">{{item.size}}</view>
-                  <view class="orderUnit">{{item.unit}}</view>
+                  <view class="orderUnit">{{item.unit}}</view> -->
                 </view>
               </view>
               <view class='orderInfor'>

@@ -7,6 +7,7 @@ var goodsID = null;
 Page({
   data: {
     status:true,
+    state:true,
     images: [],
     col1: [],
     movies: [{
@@ -77,6 +78,9 @@ Page({
   onReachBottom(){
     var that=this
    //重新请求接口
+   if(that.data.state!=true){
+        return false
+   }
     httpReq({
       header: {
         'Content-Type': 'application/json',
@@ -85,11 +89,10 @@ Page({
       url: 'http://www.ylb.com/api/goods/index'
     }).then((res) => {
       console.log(res)
-      setTimeout(()=>{
           this.setData({
-            status:false
+            status:false,
+            state:false
           })
-      },1000)
       //处理商品信息
       var dataLists = res.data.lists
       this.setData({

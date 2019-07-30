@@ -2,29 +2,21 @@
 <view class='detailInfo'>
     <view class='addressImg'><image src='../../images/dizhi1@2x.png'></image></view>
     <view class='name_phone'>
-      <view class='username'>李开心</view>
-      <view class='phone'>13765430986</view>
+      <view class='username'>{{userName}}</view>
+      <view class='phone'>{{phoneNumber}}</view>
     </view>
-    <view class='address'>广东省广州市天河区汇诚大厦365</view>
+    <view class='address'>{{adress}}</view>
 </view>
 <!-- 订单信息 -->
 <view class='orderInfo'>
   <view class='Infotext'>订单信息</view>
   <view class='line'></view>
-  <view class='goodsInfo'>
-    <view class='goodsImg'><image src='../../images/2012031220134655.jpg'></image></view>
-    <view class='goodsdetail'>新款韩版秋装女初恋裙白色复古压褶雪纺长袖连衣裙a字中长裙</view>
+  <view class='goodsInfo' wx:for="{{order}}" wx:key="item.index">
+    <view class='goodsImg'><image src='{{order.goodsImg}}'></image></view>
+    <view class='goodsdetail'>{{item.goodsdetail}}</view>
     <view class='types_num'>
-      <view class='types'>粉色、M</view>
-      <view class='num'>X2件</view>
-    </view>
-  </view>
-  <view class='goodsInfo'>
-    <view class='goodsImg'><image src='../../images/2012031220134655.jpg'></image></view>
-    <view class='goodsdetail'>新款韩版秋装女初恋裙白色复古压褶雪纺长袖连衣裙a字中长裙</view>
-    <view class='types_num'>
-      <view class='types'>毛衣+连衣裙,均码</view>
-      <view class='num'>X2件</view>
+      <view class='types'>{{item.types}}</view>
+      <view class='num'>{{item.num}}</view>
     </view>
   </view>
   <view class='line'></view>

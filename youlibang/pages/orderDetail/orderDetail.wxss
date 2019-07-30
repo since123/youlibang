@@ -52,8 +52,6 @@
 }
 .orderInfo{
   width: 750rpx;
-  height: 590rpx;
-  background-color: #ffffff;
   margin-top: 3%;
 }
 .Infotext{
@@ -75,8 +73,9 @@
 }
 .goodsInfo{
   float: left;
-  width: 750rpx;
-  height: 160rpx;
+  background-color: #ffffff;
+  /* width: 750rpx;
+  height: 160rpx; */
   /* background-color: green; */
 }
 .goodsImg{
@@ -195,12 +194,13 @@
 }
 .beizhu{
   float: left;
-  width:160rpx;
-  height:23rpx;
   font-size:24rpx;
   font-family:sans-serif;
   font-weight:500;
   color:rgba(86,103,149,1);
   margin-left: 5%;
   margin-top: 1%;
+  /* background: red; */
+  margin-bottom: 20%;
+
 }

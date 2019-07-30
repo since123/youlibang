@@ -77,7 +77,23 @@ Page({
       mobile:this.data.mobile,
       address:this.data.address
     }
- 
+    wx.request({
+      url: '',
+      data: {
+        // linkname: linkname,
+        // moblie: moblie,
+        // addressdetail: addressdetail,
+        // region: region,
+        //改为上述编辑过的数据键和值
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        console.log(res.data);
+      }
+
+    })
   },
 
   /**

@@ -58,6 +58,21 @@ Page({
       }
       ]
   },
+  //事件处理
+  //点击查看购物车
+  shopcar(){
+  console.log(1111)
+   wx.switchTab({
+     url: '../shoppingCart/shoppingCart',
+   })
+  },
+  //点击查看在线客服
+  tokefu(){
+    console.log(1111)
+    wx.navigateTo({
+      url: '../onlineService/onlineService',
+    })
+  },
 
   previewImage: function(e) {
     var current = e.target.dataset.src;
@@ -74,16 +89,14 @@ Page({
   },
   //加入购物车
   addCartBtn:function(e){
-    console.log(e);
-    wx.showToast({
-      title: '加入购物车成功',
-      icon: 'success',
-      duration: 2000,
-    });
-    console.info("关闭");
+    var status = this.data.status;
+    // console.log("触发了点击事件，弹出toast")
+    status = !status;
     this.setData({
-      showDialog: false
-    });
+      status: status
+    })　　　　 //setData方法可以建立新的data属性，从而起到跟视图实时同步的效果
+
+    
   },
   //立即购买
   buyNow: function() {

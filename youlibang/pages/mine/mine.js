@@ -21,13 +21,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that=this;
-    // this.userInfo();//如果不是注册的会员就显示自己的微信信息
+    var that=this
+    this.getPersonalInfo()//如果不是注册的会员就显示自己的微信信息,此处需要加判断
+    //this.getVipUserInfo()//如果是会员时，后台返回数据，展示会员信息
+  },
+  /**是会员时，后台返回数据，展示会员信息 */
+  getVipUserInfo: function() {
     const wxreq = wx.request({
       url: ApiUrl.phplist + 'user/getdetail',
       data: {
-        id:"1",
-        name:'Leanne Graham'
+        id: "1",
+        name: 'Leanne Graham'
       },
       header: { //请求头
         'Content-Type': 'application/json',
@@ -41,7 +45,6 @@ Page({
           vipid: list.user_member,
           username: list.user_nickname,
           userImg_url: list.user_logo
-          
         })
         // this.userData = res.data; //无效不能实时的渲染到页面
         // that.setData({ userData: res.data });//和页面进行绑定可以动态的渲染到页面
@@ -54,27 +57,34 @@ Page({
     })
   },
   /**
-   * 获取页面数据
+   * 获取页面数据（普通用户信息）
    */
-  //获取用户信息
-  userInfo:function(){
-    var that=this;
+  getPersonalInfo:function() {
+    var that = this;
     wx.getUserInfo({
       success: function (res) {
-        console.log(res.userInfo)
-        var city = res.userInfo.city
-        var country = res.userInfo.country
-        var nickName = res.userInfo.nickName
-        var province = res.userInfo.province
+        // console.log("1")
+        let userInfo = res.userInfo
+        let nickName = userInfo.nickName
+        let src = userInfo.avatarUrl
+        let sex = userInfo.gender //性别 0：未知、1：男、2：女
+        //此处需要加个判断，如果是会员则vipname = nickName,先默认昵称为会员名
+        //success
+        // console.log(sex)
         that.setData({
-          city: city,
-          country: country,
-          nickName: nickName,
-          province: province
+          username: nickName,
+          userImg_url: src
         })
+      },
+      fail: function () {
+        //fail
+        console.log("获取失败")
+      },
+      complete: function () {
+        //complete
+        console.log("获取用户信息完成！")
       }
     })
-
   },
   //个人资料
   userinfo:function(){

@@ -1,13 +1,13 @@
 <!--pages/personal_data/personal_data.wxml-->
 <view class='headImg'>
   <view class='headtext'><label>*</label>头像</view>
-  <view class='rightImg'><image mode="{{item.mode}}" src="{{src}}" ></image></view>
+  <view class='rightImg'><image mode="{{item.mode}}" src="{{src}}" bindtap="changeImage"></image></view>
 </view>
 <view class='vipinfo'>
   <view class='infotext'><label>*</label>会员名</view>
   <input class='rightinfo' value="{{vipname}}"></input>
 </view>
-<view class='vipinfo'>
+<view class='vipinfo' bindtap="bindPhoneNumber">
   <view class='infotext'>绑定手机号码</view>
   <label class='rightinfo'>{{bindphone}}</label>
 </view>

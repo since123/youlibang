@@ -17,7 +17,11 @@ Page({
     number: 0,
     sum: 0,
     orderSumPri: [],
-    allOrderS: []
+    allOrderS: [],
+    waitPayOrder: [],
+    waitSentOrder: [],
+    waitReceivedOrder: [],
+    completeOrder: []
   },
   /**
    * 请求数据
@@ -32,20 +36,28 @@ Page({
       url: ApiUrl.phplist + 'order/getorder',
     }).then((res) => {
       // console.log(res.data)
-      let lists = res.data
+      let lists = res.data.lists
       // console.log(lists)
       //数据重组
       let orders = []
-
+      let waitPayOrder = []
+      let waitSentOrder = []
+      let waitReceivedOrder = []
+      let completeOrder = []
       for (let m in lists) {
+        // console.log(lists)
         let ss = {}
         let goods = []
         ss.orderId = m
         for (let n in lists[m]) {
           let mm = {}
+          let pay_status = ""
+          let send_status = ""
           if (n != "pay_status") {
             // console.log(lists[m][n])
-            ss.status = lists[m][n].pay_status
+            // if (lists[m][n].pay_status == )
+            pay_status = lists[m][n].pay_status
+            // ss.status = 
           }
           if (lists[m][n].hasOwnProperty('goods_logo')) {
             mm.image = lists[m][n].goods_logo
@@ -62,23 +74,54 @@ Page({
           if (lists[m][n].hasOwnProperty('number')) {
             mm.number = lists[m][n].number
           }
+          if (lists[m][n].hasOwnProperty('courier_status')) {
+            send_status = lists[m][n].courier_status.send_type
+            if (pay_status == "1" && send_status == "0") {
+              ss.status = "待发货"
+            } else if (pay_status == "1" && send_status == "1") {
+              ss.status = "待收货"
+            } else if (pay_status == "1" && send_status == "2") {
+              ss.status = "已完成"
+            } else {
+              ss.status = "待付款"
+            }
+            // console.log(lists[m][n].courier_status.send_type)
+            // mm.status = lists[m][n][courier_number].send_type
+          }
           goods.push(mm)
           ss.goods = goods
-          //console.log(goods)
+          // console.log(ss.status)
+          
+          // console.log(ss.goods)
         }
-
-        //  console.log(goods)
+        // console.log(goods)
+        if (ss.status == "待付款") {
+          waitPayOrder.push(ss)
+        }
+        if (ss.status == "待发货") {
+          waitSentOrder.push(ss)
+        }
+        if (ss.status == "待收货") {
+          waitReceivedOrder.push(ss)
+        }
+        if (ss.status == "已完成") {
+          completeOrder.push(ss)
+        }
+        completeOrder
         orders.push(ss)
       }
       // console.log(orders)
       // console.log(that)
       that.setData({
-        allOrderS: orders
+        allOrderS: orders,
+        waitPayOrder: waitPayOrder,
+        waitSentOrder: waitSentOrder,
+        waitReceivedOrder: waitReceivedOrder,
+        completeOrder: completeOrder
       })
       that.orderShow()
       // console.log(this.data.allOrderS)//有数据
     })
-  
   },
   /**
    * 生命周期函数--监听页面加载
@@ -98,7 +141,7 @@ Page({
     // this.getGoods()
     // console.log(this.data.allOrderS);
     this.getDeviceInfo()
-    // this.orderShow()
+    this.orderShow()
   },
   /*
   * 设置swiper高度
@@ -137,17 +180,20 @@ Page({
     that.setData({
       currtab: tab
     })
-    // this.orderShow()
+    this.orderShow()
   },
   /**
    * 显示页面
    */
   orderShow: function () {
     let that = this
+    // console.log("Number(this.data.currtab) " + Number(this.data.currtab))
     switch (Number(this.data.currtab)) {
       case 0: that.allOrderShow()
         break;
-      case 1: that.waitPayShow()
+      case 1:
+        // console.log("waitPayShow")
+      that.waitPayShow()
         break;
       case 2: that.waitSentShow()
         break;
@@ -167,6 +213,7 @@ Page({
       let sumNumber = 0
       let orderHandleOne = ''
       let orderHandleTwo = ''
+      // console.log(this.data.allOrderS[i].goods)
       for (let j = 0; j < this.data.allOrderS[i].goods.length; j++) {
         let goodsPrice = parseFloat(this.data.allOrderS[i].goods[j].price)
         let goodsNumber = parseFloat(this.data.allOrderS[i].goods[j].number)
@@ -199,33 +246,13 @@ Page({
    * 显示待付款页面
    */
   waitPayShow: function () {
-    this.setData({
-      waitPayOrder: [{
-        orderId: '001',
-        storeName: '连衣裙QIJIANDIAN',
-        status: '待收货',
-        orders:
-          [
-            {
-              index: '0',
-              image: '/images/2012031220134655.jpg',
-              title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
-              color: '黑色',
-              size: 'L',
-              unit: '件',
-              price: '120',
-              number: '8'
-            }
-          ]
-      }],
-    })
     let array = []
     for (let i = 0; i < this.data.waitPayOrder.length; i++) {
       let sumPrice = 0
       let sumNumber = 0
-      for (let j = 0; j < this.data.waitPayOrder[i].orders.length; j++) {
-        let goodsPrice = parseFloat(this.data.waitPayOrder[i].orders[j].price)
-        let goodsNumber = parseFloat(this.data.waitPayOrder[i].orders[j].number)
+      for (let j = 0; j < this.data.waitPayOrder[i].goods.length; j++) {
+        let goodsPrice = parseFloat(this.data.waitPayOrder[i].goods[j].price)
+        let goodsNumber = parseFloat(this.data.waitPayOrder[i].goods[j].number)
         sumPrice += goodsPrice * goodsNumber
         sumNumber += goodsNumber
       }
@@ -242,43 +269,13 @@ Page({
    * 显示待发货页面
    */
   waitSentShow: function () {
-    this.setData({
-      waitSentOrder: [{
-        orderId: '001',
-        storeName: 'Pepe',
-        status: '待发货',
-        orders:
-          [
-            {
-              index: '0',
-              image: '/images/2012031220134655.jpg',
-              title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
-              color: '黑色',
-              size: 'L',
-              unit: '件',
-              price: '120',
-              number: '8'
-            },
-            {
-              index: '1',
-              image: '/images/2012031220134655.jpg',
-              title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
-              color: '黑色',
-              size: 'L',
-              unit: '件',
-              price: '120',
-              number: '8'
-            }
-          ]
-      }],
-    })
     let array = []
     for (let i = 0; i < this.data.waitSentOrder.length; i++) {
       let sumPrice = 0
       let sumNumber = 0
-      for (let j = 0; j < this.data.waitSentOrder[i].orders.length; j++) {
-        let goodsPrice = parseFloat(this.data.waitSentOrder[i].orders[j].price)
-        let goodsNumber = parseFloat(this.data.waitSentOrder[i].orders[j].number)
+      for (let j = 0; j < this.data.waitSentOrder[i].goods.length; j++) {
+        let goodsPrice = parseFloat(this.data.waitSentOrder[i].goods[j].price)
+        let goodsNumber = parseFloat(this.data.waitSentOrder[i].goods[j].number)
         sumPrice += goodsPrice * goodsNumber
         sumNumber += goodsNumber
       }
@@ -295,43 +292,13 @@ Page({
    * 显示待收货页面
    */
   waitReceivedShow: function () {
-    this.setData({
-      waitReceivedOrder: [{
-        orderId: '001',
-        storeName: 'Pepe Jeans',
-        status: '待收货',
-        orders:
-          [
-            {
-              index: '0',
-              image: '/images/2012031220134655.jpg',
-              title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
-              color: '黑色',
-              size: 'L',
-              unit: '件',
-              price: '120',
-              number: '8'
-            },
-            {
-              index: '1',
-              image: '/images/2012031220134655.jpg',
-              title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
-              color: '黑色',
-              size: 'L',
-              unit: '件',
-              price: '120',
-              number: '8'
-            }
-          ]
-      }],
-    })
     let array = []
     for (let i = 0; i < this.data.waitReceivedOrder.length; i++) {
       let sumPrice = 0
       let sumNumber = 0
-      for (let j = 0; j < this.data.waitReceivedOrder[i].orders.length; j++) {
-        let goodsPrice = parseFloat(this.data.waitReceivedOrder[i].orders[j].price)
-        let goodsNumber = parseFloat(this.data.waitReceivedOrder[i].orders[j].number)
+      for (let j = 0; j < this.data.waitReceivedOrder[i].goods.length; j++) {
+        let goodsPrice = parseFloat(this.data.waitReceivedOrder[i].goods[j].price)
+        let goodsNumber = parseFloat(this.data.waitReceivedOrder[i].goods[j].number)
         sumPrice += goodsPrice * goodsNumber
         sumNumber += goodsNumber
       }
@@ -348,43 +315,13 @@ Page({
    * 显示已完成页面
    */
   completeShow: function () {
-    this.setData({
-      completeOrder: [{
-        orderId: '001',
-        storeName: 'Pepe',
-        status: '已完成',
-        orders:
-          [
-            {
-              index: '0',
-              image: '/images/2012031220134655.jpg',
-              title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
-              color: '黑色',
-              size: 'L',
-              unit: '件',
-              price: '120',
-              number: '8'
-            },
-            {
-              index: '1',
-              image: '/images/2012031220134655.jpg',
-              title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
-              color: '黑色',
-              size: 'L',
-              unit: '件',
-              price: '120',
-              number: '8'
-            }
-          ]
-      }],
-    })
     let array = []
     for (let i = 0; i < this.data.completeOrder.length; i++) {
       let sumPrice = 0
       let sumNumber = 0
-      for (let j = 0; j < this.data.completeOrder[i].orders.length; j++) {
-        let goodsPrice = parseFloat(this.data.completeOrder[i].orders[j].price)
-        let goodsNumber = parseFloat(this.data.completeOrder[i].orders[j].number)
+      for (let j = 0; j < this.data.completeOrder[i].goods.length; j++) {
+        let goodsPrice = parseFloat(this.data.completeOrder[i].goods[j].price)
+        let goodsNumber = parseFloat(this.data.completeOrder[i].goods[j].number)
         sumPrice += goodsPrice * goodsNumber
         sumNumber += goodsNumber
       }
@@ -397,14 +334,13 @@ Page({
       completeOrder: array
     })
   },
-  orderDetailShow: function() {
+  orderDetailShow: function(e) {
+    // console.log(e.currentTarget.dataset.orderid)
+    let orderid = e.currentTarget.dataset.orderid
     wx.navigateTo({
-      url: '../orderDetail/orderDetail'
+      url: '../orderDetail/orderDetail?orderId='+ orderid
     })
   },
-  
- 
-
   /**
    * 生命周期函数--监听页面显示
    */

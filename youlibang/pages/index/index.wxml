@@ -1,4 +1,5 @@
 <!--index.wxml-->
+<!-- <button open-type="getUserInfo">授权用户信息</button> -->
 <view class='inputSearch' bindtap='search'>
   <image src='../../images/search@2x.png'></image>
   <input class='inputinfo' type='text' placeholder='请输入商品名称'></input>
