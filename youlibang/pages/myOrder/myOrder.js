@@ -162,10 +162,10 @@ Page({
    */
   tabSwitch: function (e) {
     var that = this
-    if (this.data.currtab === e.target.dataset.current) {
+    let tab = e.target.dataset.current
+    if (this.data.currtab === tab) {
       return false
     } else {
-      let tab = e.target.dataset.current
       that.setData({
         currtab: tab
       })

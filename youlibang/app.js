@@ -10,13 +10,19 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        // console.log(res.code)
+        console.log("res.code: "+res.code)
         if(res.code) {
           //发起网络请求
           wx.request({
             url: '',
             data: {
-              code: res.code
+              code: res.code,
+              // appid: "你的小程序AppID",
+              // secret: "你的小程序secret"
+            },
+            success: function (res) {
+              wx.setStorageSync("openid", res.openid)
+              wx.setStorageSync("session_key", res.session_key)
             }
           })
         } else {
@@ -28,6 +34,7 @@ App({
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
+          console.log(res.authSetting['scope.userInfo'])
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
@@ -39,10 +46,17 @@ App({
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
               }
-            }
+            },
+            fail: function(res) {}
+          })
+        } else {
+          wx.showModal({
+            title: '警告通知',
+            content: '您点击了拒绝授权,将无法正常显示个人信息,点击确定重新获取授权。',
           })
         }
-      }
+      },
+      fail: function(res) {}
     })
   },
   globalData: {

@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    src: "../../images/Business_license@2x.png",
+    src: '../../images/headImg.png',
     vipname:'蜡笔小新',
     bindphone:'13589068345',
     sex:'男',
@@ -83,15 +83,16 @@ Page({
   changeImage: function(e) {
     let that = this
     wx.chooseImage({
-      count: 1,//默认9
+      count: 1,//默认9f
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: function(res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths;
         that.setData({
-          src: tempFilePaths
+          src: tempFilePaths[0]
         })
+        // console.log(that.data.src)
       },
       radioChange: function (e) {  
         console.log('radio发生change事件，携带value值为：', e.detail.value)
@@ -99,12 +100,22 @@ Page({
 
     })
   },
+  // /**预览头像 */
+  // previewImage: function (e) {
+  //   // var current = e.target.dataset.src
+
+  //   wx.previewImage({
+  //     current: e.currentTarget.id,
+  //     urls: this.data.imageList
+  //   })
+  // },
+
   /**更新保存个人资料修改（红星星部分） */
   changeAvatar: function (e) {
     //这里是上传操作
     wx.uploadFile({
       url: '', //里面填写你的上传图片服务器API接口的路径
-      filePath: this.data.src[0],//要上传文件资源的路径，此处只有一张，为数组第一项， String类型 
+      filePath: this.data.src,//要上传文件资源的路径，此处只有一张，为数组第一项， String类型 
       name: '',//按个人情况填写，文件对应的 key,开发者在服务器端通过这个 key 可以获取到文件二进制内容，(后台接口规定的关于图片的请求参数)
       header: {
 
@@ -149,12 +160,20 @@ Page({
       }
     })
   },
-  bindPhoneNumber: function() {
-    wx.navigateTo({
-      url: '../bindphoneNum/bindphoneNum',
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+  bindPhoneNumber: function(e) {
+    var detail = e.detail;
+    wx.request({
+      url: '',  //解密手机号码接口
+      data: {
+        // "appid": ,
+        // "session_key": wx.getStorageSync('session_key'),
+        // "encryptedData": detail.encryptedData,
+        // "iv": detail.iv
+      },
+      success: function (res) {
+        console.log(res.data.phoneNumber);
+        wx.setStorageSync("phonenumber", res.data.phoneNumber);
+      }
     })
   },
   /**

@@ -1,35 +1,43 @@
 <!--pages/cashoutDetail/cashoutDetail.wxml-->
 <view class='top'>
-    <view  class="{{order?'statustop1':'statustop'}}" bindtap='openstatus'>待审核</view>
-    <view  class="{{order?'statustop':'statustop1'}}" bindtap='opendetail'>已打款</view>
+  <block wx:for="{{swipertab}}" wx:key="sptab">
+    <view class="swiper-tab-list {{currentab == item.index ? 'statustop1' : 'statustop'}}" 
+    data-current="{{item.index}}" 
+    bindtap="tabSwitch">{{item.name}}</view>
+  </block>
 </view>
-<view class='body_contents'>
-     <view wx:if='{{order}}' class='statusboxcode'>
-        <view class='tixian'>
-            <view class='leftinfo'>
-              <view class='tixiantext'>提现</view>
-              <view class='datetime'>10月9日 00:09:01</view>
-            </view> 
-            <view class='money'>200.00</view>
-        </view>
-        <view class='tixian'>
-            <view class='leftinfo'>
-              <view class='tixiantext'>提现</view>
-              <view class='datetime'>10月9日 00:09:01</view>
-            </view> 
-            <view class='money'>200.00</view>
-        </view>
-        
-    </view>
-    
-   
-    <view wx:if='{{!order}}' class='statusboxcode'>
-        <view class='tixian'>
-            <view class='leftinfo'>
-              <view class='tixiantext'>提现</view>
-              <view class='datetime'>10月9日 00:09:01</view>
-            </view> 
-            <view class='money'>200.00</view>
-        </view>
-    </view>
+<view class='body_contents' current="{{currentab}}" bindchange="onTabChange">
+
+  <swiper current="{{currentab}}" style="height:{{deviceH-31}}px" bindchange="onTabChange">
+    <swiper-item>
+      <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
+        <block wx:for="{{openstatusList}}" wx:key="{{item.index}}">
+            <view class='statusboxcode'>
+              <view class='tixian'>
+                  <view class='leftinfo'>
+                    <view class='tixiantext'>提现</view>
+                    <view class='datetime'>{{item.withdrawTime}}</view>
+                  </view> 
+                  <view class='money'>{{item.withdrawMoney}}</view>
+              </view>
+            </view>
+        </block>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
+        <block wx:for="{{opendetailList}}" wx:key="{{item.index}}">  
+          <view  class='statusboxcode'>
+              <view class='tixian'>
+                  <view class='leftinfo'>
+                    <view class='tixiantext'>提现</view>
+                    <view class='datetime'>{{item.withdrawTime}}</view>
+                  </view> 
+                  <view class='money'>{{item.withdrawMoney}}</view>
+              </view>
+          </view>
+        </block>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
 </view>

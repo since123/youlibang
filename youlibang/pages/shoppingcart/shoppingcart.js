@@ -19,37 +19,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-//请求接口
-    httpReq({
-      header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      url: "http://www.ylb.com/api/cart/getcart",
-    }).then((res) => {
-      //console.log(res)
-      var dataList=res.data.lists
-      console.log(dataList)
-      //进行数据重组
-      var arr=[]
-      for(let i=0;i<dataList.length;i++){
-            var obj={}
-        obj.id=dataList[i].user_id
-       // obj.title = dataList[i].user_id
-        obj.num = dataList[i].number
-        obj.price = dataList[i].goods_price
-        obj.selected=true
-        arr.push(obj)
-      }
-      console.log(arr)
-      this.setData({
-        hasList:true,
-        carts:arr
-      })
-      this.getTotalPrice()
-    });
-   
-
     // this.setData({
     //   hasList: true,        // 既然有数据了，那设为true吧
     //   carts: [
@@ -57,28 +26,101 @@ Page({
     //     { id: 1, title: '新西兰A2脱脂高钙儿童学生成人奶1kg...', image: '../../images/kefu@2x.png', num: 1, price: 119.00, selected: true }
     //   ]
     // });
-     
+   
+     this.getTotalPrice()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+ 
+   
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   
+    var that = this
+    //请求接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: "http://www.ylb.com/api/cart/getcart",
+    }).then((res) => {
+      console.log(res)
+      var dataList = res.data.lists
+      console.log(dataList)
+      //进行数据重组
+      var arr = []
+      console.log(arr)
+      for (let i = 0; i < dataList.length; i++) {
+        var obj = {}
+        obj.id = dataList[i].goods_id
+        obj.title = dataList[i].goods_name
+        obj.num = dataList[i].number
+        obj.price = dataList[i].goods_price
+        obj.selected = true
+        arr.push(obj)
+      }
+
+      console.log(arr)
+      that.setData({
+        hasList: true,
+        carts: arr
+      })
+      console.log(this.data.carts)
+      //获取本地存储
+      // wx.getStorage({
+      //   key: 'shop',
+      //   success: function (res) {
+      //     console.log(res)
+      //     var arr = res.data
+      //     var carts = that.data.carts
+      //     //循环添加
+      //     for (let i = 0; i < arr.length; i++) {
+      //       var array = arr[i] 
+      //       carts.push(array)
+      //     }
+      //     //重新赋值
+      //     that.setData({
+      //       carts
+      //     })
+      //   },
+      // })
+      //同步成功
+      try {
+        var value = wx.getStorageSync('shop')
+        if (value) {
+          var arr = value
+          var carts = this.data.carts
+          //循环添加
+          for (let i = 0; i < arr.length; i++) {
+            var array = arr[i] 
+            carts.push(array)
+          }
+         
+        }
+        //若同步失败，本地存储内没有值
+      } catch (e) {
+          console.log(e)
+      }
+      //console.log(carts.length)
+      this.setData({
+        carts
+      })
+      this.getTotalPrice()
+    });
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+        
   },
 
   /**
@@ -116,14 +158,19 @@ Page({
   },
   //封装的计算总价方法
   getTotalPrice() {
-    let carts = this.data.carts;                  // 获取购物车列表
+    //console.log(this.data.carts.length)
+    let carts = this.data.carts; 
+    //console.log(carts)   
+    //console.log(carts.length)              // 获取购物车列表
     let total = 0;
-    for (let i = 0; i < carts.length; i++) {         // 循环列表得到每个数据
+    for (let i = 0; i < carts.length; i++) {
+      //console.log(carts.length)         // 循环列表得到每个数据
       if (carts[i].selected) {                   // 判断选中才会计算价格
         total += carts[i].num * carts[i].price;     // 所有价格加起来
+        console.log(carts[i].num,carts[i].price)
       }
     }
-    console.log(carts)
+    console.log(total)
     this.setData({                                // 最后赋值到data中渲染到页面
       carts: carts,
       totalPrice: total.toFixed(2)
@@ -151,6 +198,7 @@ Page({
       selectAllStatus: that.data.selectAllStatus
     });
     this.getTotalPrice();                           // 重新获取总价
+ 
   },
   //点击全部选择事件
   selectAll(e) {

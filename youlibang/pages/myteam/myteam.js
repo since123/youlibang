@@ -1,18 +1,64 @@
 // pages/myteam/myteam.js
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    order: true
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+    order: true,
+    currentab: 0,
+    oneGradeNum: 2,
+    twoGradeNum: 3,
+    oneTeamInfor: [
+      {
+        image: '/../images/2013062320262198.jpg',
+        userName: '张三',
+        time: '2019-01-01',
+        personNun: 2,
+        money: '40.00',
+        orderNum: 2
+      },
+      {
+        image: '/../images/2013062320262198.jpg',
+        userName: '张三',
+        time: '2019-01-01',
+        personNun: 2,
+        money: '40.00',
+        orderNum: 2
+      }
+    ],
+    twoTeamInfor: [
+      {
+        image: '/../images/2013062320262198.jpg',
+        userName: '李四',
+        time: '2019-01-01',
+        personNun: 2,
+        money: '40.00',
+        orderNum: 2
+      },
+      {
+        image: '/../images/2013062320262198.jpg',
+        userName: '李四',
+        time: '2019-01-01',
+        personNun: 2,
+        money: '40.00',
+        orderNum: 2
+      },
+      {
+        image: '/../images/2013062320262198.jpg',
+        userName: '李四',
+        time: '2019-01-01',
+        personNun: 2,
+        money: '40.00',
+        orderNum: 2
+      }
+    ]
   },
   openstatus: function () {
     var that = this
@@ -36,6 +82,28 @@ Page({
 
     }
   },
+  /**
+   * 获取后台数据
+   */
+  getTeamInfor: function() {
+    let that = this
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + '',
+    }).then((res) => {
+      // console.log(res.data)
+    })
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    // this.getTeamInfor()
+  },
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    dedCommission: 200,
+    propRebate: 148,
+    unpaidRebate: 50
   },
   applyVIP:function(){
     wx.navigateTo({
@@ -53,10 +55,22 @@ Page({
     })
   },
   /**
+   * 获取后台返回的可提现佣金，已提现返利，未提现返利
+   */
+  getInfor: function() {
+    let that = this
+    httpReq({
+
+    }).then((res) => {
+      console.log(res.data)
+      //取到数据后赋值可提现佣金，已提现返利，未提现返利
+    })
+  },
+  /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // this.getInfor()//获取后台返回的可提现佣金，已提现返利，未提现返利
   },
 
   /**

@@ -5,7 +5,7 @@
   </view>
   <view class='yongjin'>可提现佣金</view>
   <view class='money'>
-    <label>￥</label>200.00</view>
+    <label>￥</label>{{dedCommission}}</view>
   <view class='upgradeVIP' bindtap='applyVIP'>升级会员</view>
   <view class='tixian' bindtap='withdraw'>提现</view>
 </view>
@@ -13,11 +13,11 @@
 <view class='seconedbox'>
     <view class="mine_complane" style="height:130rpx;border-right: 1rpx solid #999;width: 50%;">
       <view class="mine_num">已提现返利</view>
-      <view class="mine_dd" id="account">148.00</view>
+      <view class="mine_dd" id="account">{{propRebate}}</view>
     </view>
     <view class="mine_complane" style="width: 50%; height: 130rpx; line-height: 70rpx;">
       <view class="mine_num">未提现返利</view>
-      <view class="mine_dd" id="types">48.00</view>
+      <view class="mine_dd" id="types">{{unpaidRebate}}</view>
     </view>
 </view>
 

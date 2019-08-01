@@ -5,14 +5,65 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    totalMoney: 200.00,
+    teamRebateList: [
+      {
+        image: '/../images/2013062320262198.jpg',
+        userName: '张三',
+        time: '2019 - 08 - 09',
+        userMoney: 20.00
+      },
+      {
+        image: '/../images/2013062320262198.jpg',
+        userName: '李四',
+        time: '2019 - 08 - 09',
+        userMoney: 20.00
+      },
+      {
+        image: '/../images/2013062320262198.jpg',
+        userName: '张三',
+        time: '2019 - 08 - 09',
+        userMoney: 10.00
+      },
+      {
+        image: '/../images/2013062320262198.jpg',
+        userName: '李三',
+        time: '2019 - 08 - 09',
+        userMoney: 20.00
+      }
+    ]
   },
+  /**
+   * 获取后台数据
+   */
+  getTeamRebate: function() {
+    let that = this
+    httpReq({
 
+    }).then((res) => {
+      //获取后台数据
+    })
+  },
+  /**
+   * 计算总收益
+   */
+  getTotalRebate: function () {
+    let that = this
+    let total = 0
+    for (let i = 0; i < this.data.teamRebateList.length; i++) {
+      total += this.data.teamRebateList[i].userMoney
+    }
+    that.setData({
+      totalMoney : total
+    })
+    console.log(tihs.data.totalMoney)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // this.getTeamRebate()//获取后台数据
+    this.getTotalRebate()
   },
 
   /**

@@ -5,39 +5,93 @@ Page({
    * 页面的初始数据
    */
   data: {
-    order:true
+    order:true,
+    currentab: 0,
+    swipertab: [{ index: 0, name: '待审核' }, { index: 1, name: '已打款'}],
+    openstatusList: 
+      [
+        {
+          withdrawTime: '10月8日 00: 09: 01',
+          withdrawMoney: 200
+        },
+        {
+          withdrawTime: '10月9日 00: 09: 01',
+          withdrawMoney: 500
+        }
+      ],
+    opendetailList:
+      [
+        {
+          withdrawTime: '10月7日 00: 09: 01',
+          withdrawMoney: 100
+        },
+        {
+          withdrawTime: '10月6日 00: 09: 01',
+          withdrawMoney: 200
+        }
+      ]
 
   },
 
+  // openstatus: function () {
+  //   var that = this
+  //   var order = this.data.order
+  //   if (order == true) {
+
+  //   } else {
+  //     that.setData({
+  //       order: true
+  //     })
+  //   }
+  // },
+  // opendetail: function () {
+  //   var that = this
+  //   var order = this.data.order
+  //   if (order == true) {
+  //     that.setData({
+  //       order: false
+  //     })
+  //   } else {
+  //   }
+  // },
+  tabSwitch: function (e) {
+    let that = this
+    let tab  = e.target.dataset.current
+    if (this.data.currentab === tab) {
+      return false
+    } else {
+      that.setData({
+        currentab: tab
+      })
+    }
+    // console.log(this.data.currentab)
+  },
+  onTabChange: function (e) {
+    // console.log(e.detail.current)
+    var that = this
+    let tab = e.detail.current
+    that.setData({
+      currentab: tab
+    })
+  },
+  /**
+   * 获取后台数据
+   */
+  getWithdrawInfor: function () {
+    let that = this
+    httpReq({
+
+    }).then((res) => {
+      //获取后台数据
+      //console.log(res.data)
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // this.getWithdrawInfor()
   },
-  openstatus: function () {
-    var that = this
-    var order = this.data.order
-    if (order == true) {
-
-    } else {
-      that.setData({
-        order: true
-      })
-    }
-  },
-  opendetail: function () {
-    var that = this
-    var order = this.data.order
-    if (order == true) {
-      that.setData({
-        order: false
-      })
-    } else {
-
-    }
-  },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

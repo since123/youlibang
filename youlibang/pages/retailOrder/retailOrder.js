@@ -62,7 +62,6 @@ Page({
     })
   },
   showOrderPages: function() {
-    console.log(this.data.currentTab)
     let that = this
     switch (Number(this.data.currentTab)) {
       case 0 : that.getAllRetailOrder()
@@ -80,7 +79,6 @@ Page({
    * 全部
    */
   getAllRetailOrder: function () {
-    console.log("allRetailOrder")
     this.setData({
       allRetailOrder:[
         {
@@ -98,7 +96,6 @@ Page({
       }
     ]
     })
-    console.log(this.data.status)
   },
   /**
    * 待付款
@@ -111,7 +108,7 @@ Page({
           image: "../../images/headImg.png",
           userName: "张三",
           userGrade: "一级",
-          money: "25"
+          money: "10"
         }, {
           status: "待付款",
           image: "../../images/headImg.png",

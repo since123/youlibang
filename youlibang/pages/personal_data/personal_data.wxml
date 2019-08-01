@@ -7,8 +7,9 @@
   <view class='infotext'><label>*</label>会员名</view>
   <input class='rightinfo' value="{{vipname}}"></input>
 </view>
-<view class='vipinfo' bindtap="bindPhoneNumber">
-  <view class='infotext'>绑定手机号码</view>
+<view class='vipinfo'>
+  <view class='infotext' bindtap="bindPhoneNumber">绑定手机号码</view>
+  <!-- <button class='infotext' bindtap="bindPhoneNumber"> 绑定手机号码 </button> -->
   <label class='rightinfo'>{{bindphone}}</label>
 </view>
 <view class='vipinfo'>

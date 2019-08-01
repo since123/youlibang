@@ -7,36 +7,43 @@
   </view>
   <view class='line'></view>
   <view class='vipGrade'>
-      <view class='mindiv'>
-          <view class='viptext'>普通VIP</view>
-          <view class='money'><label>￥</label>100</view>
+  <block wx:for="{{vipRules}}" wx:key="{{item.index}}">
+    <view bindtap="chooseGrade" data-current="{{index}}" data-rechargemoney="{{item.rechargeMoney}}">
+      <view class='mindiv' style="{{index == currentIndex?'border-color:red':'border-color:gray'}}">
+          <view class='viptext'>{{item.userGrade}}</view>
+          <view class='money'><label>￥</label>{{item.rechargeMoney}}</view>
+          <view class='vipnum'>{{item.preferentialInfo}}</view>
       </view>
-      <view class='mindiv'>
+    </view>
+  </block>
+    </view>
+      
+      <!-- <view class='mindiv' bindtap="chooseGrade" data-id="{{index}}">
           <view class='viptext'>入门VIP</view>
-          <view class='money'><label>￥</label>1000</view>
-          <view class='vipnum'>限额1000名</view>
+          <view class='money'><label>￥</label>{{introductionRecharge}}</view>
+          <view class='vipnum'>限额{{limitsNumber}}名</view>
       </view>
-      <view class='mindiv'>
+      <view class='mindiv' bindtap="chooseGrade">
           <view class='viptext'>初级VIP</view>
-          <view class='money'><label>￥</label>5000</view>
-          <view class='vipnum'>充值可得免费铺货6000元</view>
+          <view class='money'><label>￥</label>{{juniorRecharge}}</view>
+          <view class='vipnum'>充值可得免费铺货{{juniorMoney}}元</view>
       </view>
       <view class='mindiv'>
           <view class='viptext'>中级VIP</view>
-          <view class='money'><label>￥</label>5000</view>
-          <view class='vipnum'>充值可得免费铺货6000元</view>
-      </view>
-  </view>
+          <view class='money'><label>￥</label>{{middleRecharge}}</view>
+          <view class='vipnum'>充值可得免费铺货{{middleMoney}}元</view>
+      </view> -->
+  
   <view class='tuijian'>推荐ID</view>
-  <view class='inputInfo'><input type='text' placeholder='请输入'></input></view>
+  <view class='inputInfo'><input type='text' value='{{inputID}}' bindinput="getInput" placeholder='请输入'></input></view>
   <view class='uploadIDCard'>上传身份证</view>
   <view class='IDCard'>
-      <view class='idcardImg'><image src='../../images/idCard@2x.png'></image></view>
-      <view class='idcardImg'><image src='../../images/idCardbg@2x.png'></image></view>
+      <view class='idcardImg'><image src='{{frontID}}' bindtap="changeImage" bindtap="changeFrontID"></image></view>
+      <view class='idcardImg'><image src='{{backID}}' bindtap="changeImage" bindtap="changeBackID"></image></view>
   </view>
   <view class='uploadIDCard'>上传营业执照</view>
   <view class='addImg'>
-      <view class='imginfo'></view>
+      <view class='imginfo'><image src="{{businessLicense}}" bindtap="changeBusinessLicense"></image></view>
   </view>
-  <view class='apply_now'>立即申请</view>
+  <view class='apply_now' bindtap="applyClick">立即申请</view>
 </view>

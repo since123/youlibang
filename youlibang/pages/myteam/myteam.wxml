@@ -1,10 +1,24 @@
 <!--pages/myteam/myteam.wxml-->
 <view class='top'>
-    <view  class="{{order?'statustop1':'statustop'}}" bindtap='openstatus'>一级(2)</view>
-    <view  class="{{order?'statustop':'statustop1'}}" bindtap='opendetail'>二级(3)</view>
+    <view  class="{{order?'statustop1':'statustop'}}" bindtap='openstatus'>一级({{oneGradeNum}})</view>
+    <view  class="{{order?'statustop':'statustop1'}}" bindtap='opendetail'>二级({{twoGradeNum}})</view>
 </view>
 <view class='body_contents'>
+<block wx:for="{{oneTeamInfor}}" wx:key="{{item.index}}">
     <view wx:if='{{order}}' class='statusboxcode'>
+        <view class='userInfo'>
+            <view class='userheadImg'><image src='{{item.image}}'></image></view>
+            <view class='name_time'>
+                <view class='username'>{{item.userName}}</view>
+                <view class='registertime'>注册时间：{{item.time}}</view>
+            </view>
+            <view class='num'>推广{{item.personNun}}人</view>
+            <view class='li'></view>
+            <view class='spand'>消费：{{item.money}}元</view>
+            <view class='orderNum'>{{item.orderNum}}个订单</view>
+        </view>
+    </view>
+    <!-- <view wx:if='{{order}}' class='statusboxcode'>
         <view class='userInfo'>
             <view class='userheadImg'><image src='../../images/2013062320262198.jpg'></image></view>
             <view class='name_time'>
@@ -16,20 +30,22 @@
             <view class='spand'>消费：40.00元</view>
             <view class='orderNum'>1个订单</view>
         </view>
+    </view> -->
+</block>
+<block wx:for="{{twoTeamInfor}}" wx:key="{{item.index}}">
+  <view wx:if='{{!order}}' class='statusboxcode'>
+    <view class='userInfo'>
+      <view class='userheadImg'><image src='{{item.image}}'></image></view>
+      <view class='name_time'>
+          <view class='username'>{{item.userName}}</view>
+          <view class='registertime'>注册时间：{{item.time}}</view>
+      </view>
+      <view class='num'>推广{{item.personNun}}人</view>
+      <view class='li'></view>
+      <view class='spand'>消费：{{item.money}}元</view>
+      <view class='orderNum'>{{item.orderNum}}个订单</view>
     </view>
-    <view wx:if='{{order}}' class='statusboxcode'>
-        <view class='userInfo'>
-            <view class='userheadImg'><image src='../../images/2013062320262198.jpg'></image></view>
-            <view class='name_time'>
-                <view class='username'>张三</view>
-                <view class='registertime'>注册时间：2019-01-01</view>
-            </view>
-            <view class='num'>推广2人</view>
-            <view class='li'></view>
-            <view class='spand'>消费：40.00元</view>
-            <view class='orderNum'>1个订单</view>
-        </view>
-    </view>
-    
+  </view>
+</block>
 </view>
-<view wx:if='{{!order}}' class='statusbox'>nihao</view>
+

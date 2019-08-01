@@ -5,14 +5,45 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    accumulatedIncome: 140,
+    nameList: [
+      {
+        image: '/../images/2013062320262198.jpg',
+        userName: '张三',
+        income: 10.00,
+      },
+      {
+        image: '/../images/2013062320262198.jpg',
+        userName: '张三',
+        income: 20.00,
+      },
+      {
+        image: '/../images/2013062320262198.jpg',
+        userName: '张三',
+        income: 50.00,
+      },
+      {
+        image: '/../images/2013062320262198.jpg',
+        userName: '张三',
+        income: 60.00,
+      }
+    ]
   },
-
+  getAccumulatedIncome: function() {
+    let total = 0
+    for (let i = 0; i < this.data.nameList.length; i++) {
+      total += this.data.nameList[i].income
+    }
+    this.setData({
+      accumulatedIncome: total
+    })
+    // console.log(this.data.accumulatedIncome)//已经成功取到
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getAccumulatedIncome()
   },
 
   /**

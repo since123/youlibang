@@ -58,8 +58,8 @@
 </view>
     </view>
     <view class='color'>颜色</view>
-    <view class='colorfenlei' >
-      <view class='list' wx:for='{{type1}}' wx:for-item='item'>{{item.color}}</view>
+    <view class="colorfenlei" >
+      <view class="list{{(index+1)==idx?'active':''}}" wx:for='{{type1}}'  data-index="{{index}}" bindtap="getValue">{{item.color}}</view>
       <!-- <view class='list'>粉色</view>
       <view class='list'>奶白色</view>
       <view class='list'>黑色</view>
@@ -68,7 +68,7 @@
     </view>
     <view class='size'>尺寸</view>
     <view class='sizefenlei'>
-      <view class='sizelist' wx:for='{{type2}}' wx:for-item='item'>{{item.size}}</view>
+      <view class="sizelist{{(index+1)==size?'active':''}}"data-index="{{index}}" wx:for='{{type2}}' bindtap="getVal">{{item.size}}</view>
       <!-- <view class='sizelist'>M</view>
       <view class='sizelist'>L</view>
       <view class='sizelist'>XL</view>
@@ -81,5 +81,5 @@
       <input bindinput='bindManual' value='{{num}}'></input>
       <text bindtap='bindPlus'>+</text>
     </view>
-    <view class='btn'>确定</view>
+    <view class='btn'bindtap="confirm">确定</view>
   </view>
