@@ -4,8 +4,8 @@
     <view class='page_flst'>{{date}}∨</view>
 </picker>
   <view class='page_two'>
-    <view class='left'>收入 ¥3524.00</view>
-    <view class='right'>支出 ¥12000.00</view>
+    <view class='left'>收入 ¥{{comeInAmount}}</view>
+    <view class='right'>支出 ¥{{expendAmount}}</view>
   </view>
 </view>
 <view class='tips' wx:for='{{listinfo}}' wx:for-item='item'>

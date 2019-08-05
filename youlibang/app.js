@@ -1,4 +1,10 @@
 //app.js
+import {
+  ApiUrl
+} from 'utils/apiurl.js';
+import {
+  httpReq
+} from 'utils/http.js';
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -13,19 +19,24 @@ App({
         console.log("res.code: "+res.code)
         if(res.code) {
           //发起网络请求
-          wx.request({
-            url: '',
-            data: {
-              code: res.code,
-              // appid: "你的小程序AppID",
-              // secret: "你的小程序secret"
+          httpReq({
+            header: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
             },
+            url:'',
+            // url: ApiUrl.phplist + 'index/gettoken',
             success: function (res) {
               wx.setStorageSync("openid", res.openid)
               wx.setStorageSync("session_key", res.session_key)
+            },
+            fail: function () {
+              wx.setStorageSync("openid", "txjfalseopenid")
+              wx.setStorageSync("session_key", "txjfalsesession_key")
             }
           })
         } else {
+          
           console.log('登录失败' + res.errMsg)
         }
       }
@@ -34,7 +45,7 @@ App({
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
-          console.log(res.authSetting['scope.userInfo'])
+          // console.log(res.authSetting['scope.userInfo'])
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
@@ -52,7 +63,7 @@ App({
         } else {
           wx.showModal({
             title: '警告通知',
-            content: '您点击了拒绝授权,将无法正常显示个人信息,点击确定重新获取授权。',
+            content: '您点击了拒绝授权,将无法正常显示个人信息,在设置中确定重新获取授权。',
           })
         }
       },
@@ -60,6 +71,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    vipid: 'txjfalsevipid'
   }
 })

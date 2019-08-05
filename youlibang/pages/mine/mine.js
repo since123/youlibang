@@ -11,6 +11,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userInfo:[],
+    vipid: '',
     username:'蜡笔小新',
     vipid:'0123',
     userImg_url:'../../images/headImg.png',
@@ -21,52 +23,55 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    // let openId = (wx.getStorageSync('openId'))
-    // if (openId) {
-    //   this.getPersonalInfo()
-    // } else {
-
-    // }
+    let app = getApp()
+    let openid = wx.getStorageSync('openid')
+    if (openid) {
+      console.log(app.globalData.vipid)
+      if (app.globalData.vipid) {
+        this.setData({
+          vipid: app.globalData.vipid
+        })
+        
+        this.getVipUserInfo()
+      } else {
+        if (app.globalData.userInfo) {
+          this.setData({
+            userInfo: app.globalData.userInfo
+          })
+          this.getPersonalInfo()
+        } else {
+          console.log("获取个人信息失败")
+        }
+      }
+    } else {
+      console.log("openid获取失败")
+    } 
     
-    this.getPersonalInfo()//如果不是注册的会员就显示自己的微信信息,此处需要加判断
+    console.log(openid)
+    //如果不是注册的会员就显示自己的微信信息,此处需要加判断
     // this.getVipUserInfo()//如果是会员时，后台返回数据，展示会员信息
   },
   /**是会员时，后台返回数据，展示会员信息 */
   getVipUserInfo: function() {
     let that = this
-    const wxreq = wx.request({
-      url: ApiUrl.phplist + 'user/getdetail',
-      data: {
-        id: "1",
-        name: 'Leanne Graham'
-      },
-      header: { //请求头
+    httpReq({
+      header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      success: function (res) {
-        console.log(res.data.lists);
+      url: ApiUrl.phplist + 'user/getdetail',
+    }).then((res) => {
+      console.log(res);
         let list = res.data.lists
         that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
           // logs: res.data.result,
-          vipid: list.user_member,
-          username: list.user_nickname,
-          userImg_url: list.user_logo,
-          price: list.balance
+          // vipid: list.user_member,
+          // username: list.user_nickname,
+          // userImg_url: list.user_logo,
+          // price: list.balance
         })
         // this.userData = res.data; //无效不能实时的渲染到页面
-        // that.setData({ userData: res.data });//和页面进行绑定可以动态的渲染到页面
-
-      },
-      fail: function (res) {
-        // console.log(res.data);
-        // this.userData = "数据获取失败";
-        wx.showModal({
-          title: '警告通知',
-          content: '您点击了拒绝授权,将无法正常显示个人信息,点击确定重新获取授权。',
-        })
-      }
+        // that.setData({ userData: res.data });//和页面进行绑定可以动态的渲染到页
     })
   },
   /**
@@ -74,36 +79,17 @@ Page({
    */
   getPersonalInfo:function() {
     var that = this;
-      wx.getUserInfo({
-        success: function (res) {
-          // console.log("1")
-          let userInfo = res.userInfo
-          let nickName = userInfo.nickName
-          let src = userInfo.avatarUrl
-          let sex = userInfo.gender //性别 0：未知、1：男、2：女
-          //此处需要加个判断，如果是会员则vipname = nickName,先默认昵称为会员名
-          //success
-          // console.log(sex)
-          that.setData({
-            username: nickName,
-            userImg_url: src
-          })
-        },
-        fail: function () {
-          //fail
-          console.log("获取失败")
-          wx.showModal({
-            title: '警告通知',
-            content: '您点击了拒绝授权,将无法正常显示个人信息,点击确定重新获取授权。',
-         })
-        },
-        complete: function () {
-          //complete
-          console.log("获取用户信息完成！")
-        }
-      })
     
-  
+    let nickName = this.data.userInfo.nickName
+    let src = this.data.userInfo.avatarUrl
+    // let sex = this.data.userInfo.gender //性别 0：未知、1：男、2：女
+    //此处需要加个判断，如果是会员则vipname = nickName,先默认昵称为会员名
+    //success
+    // console.log(sex)
+    that.setData({
+      username: nickName,
+      userImg_url: src
+    })
   },
   //个人资料
   userinfo:function(){
