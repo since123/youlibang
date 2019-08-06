@@ -301,3 +301,12 @@ transform: translate(-50%, -50%) scale(1);
   display: flex;
   margin-top: 3%;
 }
+.check_box{
+   margin-left: 380rpx;
+   line-height: 80rpx;
+  
+}
+radio .wx-radio-input.wx-radio-input-checked{
+  background: red!important;
+  border:none;
+}

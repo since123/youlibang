@@ -13,6 +13,7 @@ Page({
   data: {
     userInfo:[],
     vipid: '',
+    openid: '',
     username:'蜡笔小新',
     vipid:'0123',
     userImg_url:'../../images/headImg.png',
@@ -26,12 +27,11 @@ Page({
     let app = getApp()
     let openid = wx.getStorageSync('openid')
     if (openid) {
-      console.log(app.globalData.vipid)
       if (app.globalData.vipid) {
         this.setData({
-          vipid: app.globalData.vipid
+          vipid: app.globalData.vipid,
+          openid: openid
         })
-        
         this.getVipUserInfo()
       } else {
         if (app.globalData.userInfo) {
@@ -46,8 +46,6 @@ Page({
     } else {
       console.log("openid获取失败")
     } 
-    
-    console.log(openid)
     //如果不是注册的会员就显示自己的微信信息,此处需要加判断
     // this.getVipUserInfo()//如果是会员时，后台返回数据，展示会员信息
   },
@@ -59,16 +57,16 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'user/getdetail',
+      url: ApiUrl.phplist + 'user/getdetail?openid=' + this.data.openid,
     }).then((res) => {
       console.log(res);
         let list = res.data.lists
         that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
-          // logs: res.data.result,
-          // vipid: list.user_member,
-          // username: list.user_nickname,
-          // userImg_url: list.user_logo,
-          // price: list.balance
+          logs: res.data.result,
+          vipid: list.user_member,
+          username: list.user_nickname,
+          userImg_url: list.user_logo,
+          price: list.balance
         })
         // this.userData = res.data; //无效不能实时的渲染到页面
         // that.setData({ userData: res.data });//和页面进行绑定可以动态的渲染到页

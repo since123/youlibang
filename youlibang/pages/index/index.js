@@ -120,52 +120,39 @@ Page({
      //处理通知栏
     var that = this;
        goodsID = options.goodsID;
-    this.setData({
-      msgList: [{
-          url: "url",
-          title: "全员会员招募中，满1000送500，满500送200，详情咨询客服"
-        },
-        {
-          url: "url",
-          title: "交了20多年的国内漫游费将取消 你能省多少话费？"
-        },
-        {
-          url: "url",
-          title: "北大教工合唱团出国演出遇尴尬:被要求给他人伴唱"
-        }
-      ]
+    //请求接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: 'http://www.ylb.com/api/operatedata/getlist?type=1'
+    }).then((res) => {
+     var dataList=res.data.lists
+     console.log(dataList)
+     this.setData({
+       dataList
+     })
     })
+
+    // this.setData({
+    //   msgList: [{
+    //       url: "url",
+    //       title: "全员会员招募中，满1000送500，满500送200，详情咨询客服"
+    //     },
+    //     {
+    //       url: "url",
+    //       title: "交了20多年的国内漫游费将取消 你能省多少话费？"
+    //     },
+    //     {
+    //       url: "url",
+    //       title: "北大教工合唱团出国演出遇尴尬:被要求给他人伴唱"
+    //     }
+    //   ]
+    // })
    
   },
-  //商品信息列表显示
-  // loadImages: function() {
-  //   this.setData({
-  //     // hasList: true, // 既然有数据了，那设为true吧
-  //     col1:[{
-  //       goodsId: 0,
-  //       goodsInfo: '新西兰A2脱脂高钙儿童学生成人高钙奶粉1kg...',
-  //       url: 'bill',
-  //       imageurl: '/images/2012031220134655.jpg',
-  //       newprice: "86",
-      
-  //     },
-  //     {
-  //       goodsId: 1,
-  //       goodsInfo: '新西兰A2脱脂高钙儿童学生成人高钙奶粉1kg...',
-  //       url: 'bill',
-  //       imageurl: '/images/2013062320262198.jpg',
-  //       newprice: "92",
-  //     },
-  //     {
-  //       goodsId: 2,
-  //       goodsInfo: '新西兰A2脱脂高钙儿童学生成人高钙奶粉1kg...',
-  //       url: 'bill',
-  //       imageurl: '/images/2013062320262198.jpg',
-  //       newprice: "128",
-  //     }
-  //   ]
-  //   })
-  // },
+ 
 
   getUserInfo: function(e) {
     // console.log(e)

@@ -1,22 +1,22 @@
 <!--pages/address/address.wxml-->
 <view class='name'>
   <view class='name_r'>收货人</view>
-  <input class="input" type='text' name='linkname' placeholder="请输入名字" value='{{linkname}}'/>
+  <input class="input" type='text' name='linkname' placeholder="请输入名字" value='{{linkname}}' bindchange="linkname"/>
 </view>
 <view class='name'>
   <view class='name_r'>手机号码</view>
-  <input class="input" type='text' name='phone' placeholder="请输入手机号" maxlength='11' value='{{moblie}}'/>
+  <input class="input" type='text' name='phone' placeholder="请输入手机号" maxlength='11' value='{{moblie}}' bindchange="phone"/>
 </view>
 <view class='name'>
   <view class='name_r'>联系地址</view>
-  <picker mode="region" class="input" name='contactAddress' value='{{region}}'custom-item="{{customItem}}" bindchange="bindRegionChange">
+  <picker mode="region" class="input" name='contactAddress' value='{{region}}'custom-item="{{customItem}}" bindchange="region">
       <view class='picker'>{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
   </picker>
 
 </view>
 <view class='name'>
   <view class='name_r'>详细地址</view>
-  <input class="input" type='text' name='detailAddress' placeholder="请输入详细地址" value='{{addressdetail}}'/>
+  <input class="input" type='text' name='detailAddress' placeholder="请输入详细地址" value='{{addressdetail}}'bindchange="addressdetail"/>
 </view>
 <view class='roll' bindtap='saveAddress'>保存</view>
 

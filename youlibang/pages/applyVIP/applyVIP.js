@@ -12,6 +12,8 @@ Page({
     businessLicense: '../../images/Business_license@2x.png',
     imgList: [],
     inputID: '',
+    ifhidden: true,
+    informHidden: true,
     vipRules: [
       {
         userGrade: '普通VIP',
@@ -27,17 +29,57 @@ Page({
         preferentialInfo: '充值可得免费铺货1000元'
       },{
         userGrade: '中级VIP',
+        rechargeMoney: 1000,
+        preferentialInfo: '充值可得免费铺货5000元'
+      },
+      {
+        userGrade: '高级VIP',
+        rechargeMoney: 3000,
+        preferentialInfo: '充值可得免费铺货5000元'
+      },
+      {
+        userGrade: '经销级VIP',
         rechargeMoney: 5000,
         preferentialInfo: '充值可得免费铺货5000元'
-      }]
+      },
+      {
+        userGrade: '特约经销VIP',
+        rechargeMoney: 10000,
+        preferentialInfo: '充值可得免费铺货5000元'
+      },
+      {
+        userGrade: '总经销VIP',
+        rechargeMoney: 20000,
+        preferentialInfo: '充值可得免费铺货5000元充值可得免费铺货5000元充值可得免费铺货5000元充值可得免费铺货5000元充值可得免费铺货5000元'
+      },
+
+      ]
   },
   chooseGrade: function(e) {
+    console.log(e)
     let rechargemoney = e.currentTarget.dataset.rechargemoney//获取当前充值金额
     // console.log(rechargemoney)
-    let current = e.currentTarget.dataset.current;  //获取自定义的current  
+    let current = e.currentTarget.dataset.current;
     this.setData({
       currentIndex: current,
-      currentRechargemoney: rechargemoney  //把获取的自定义current赋给当前组件的currentIndex(即获取当前组件)  
+      currentRechargemoney: rechargemoney,
+      informHidden:false
+        //把获取的自定义current赋给当前组件的currentIndex(即获取当前组件)  
+    })
+    if (current > 3) {
+      this.setData({
+        ifhidden: false
+      })
+    } else {
+      this.setData({
+        ifhidden: true
+      })
+    }
+     //获取自定义的current  
+  },
+  returnPage: function() {
+    this.setData({
+      informHidden: true
     })
   },
   changeFrontID: function() {
@@ -161,7 +203,9 @@ Page({
       }
     })
   },
-  
+  ifhidden: function() {
+    ifhidden: true
+  },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -16,27 +16,34 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log("res.code: "+res.code)
         if(res.code) {
+          console.log("res.code: " + res.code)
           //发起网络请求
           httpReq({
             header: {
               'Content-Type': 'application/json',
               'Accept': 'application/json'
             },
-            url:'',
-            // url: ApiUrl.phplist + 'index/gettoken',
-            success: function (res) {
-              wx.setStorageSync("openid", res.openid)
-              wx.setStorageSync("session_key", res.session_key)
-            },
-            fail: function () {
-              wx.setStorageSync("openid", "txjfalseopenid")
-              wx.setStorageSync("session_key", "txjfalsesession_key")
-            }
+            method: 'GET',
+            url: ApiUrl.phplist + 'index/gettoken?code=' + res.code,
+            // success: function (res) {
+            //   console.log(res.openid)
+            //   wx.setStorageSync("openid", res.openid)
+            //   wx.setStorageSync("session_key", res.session_key)
+            // },
+            // fail: function () {
+            //   console.log('获取失败' + res.errMsg)
+            //   wx.setStorageSync("openid", "txjfalseopenid")
+            //   wx.setStorageSync("session_key", "txjfalsesession")
+            // }
+          }).then((res) =>{
+            console.log(res)
+            wx.setStorageSync("openid", "txjfalseopenid")
+            wx.setStorageSync("session_key", "txjfalsesession")
+            // wx.setStorageSync("openid", res.openid)
+            // wx.setStorageSync("session_key", res.session_key)
           })
         } else {
-          
           console.log('登录失败' + res.errMsg)
         }
       }

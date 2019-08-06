@@ -62,7 +62,7 @@ Page({
         obj.id = dataList[i].goods_id
         obj.title = dataList[i].goods_name
         obj.num = dataList[i].number
-        obj.price = dataList[i].goods_price
+        obj.price = 2
         obj.selected = true
         arr.push(obj)
       }
@@ -102,16 +102,16 @@ Page({
             var array = arr[i] 
             carts.push(array)
           }
-         
+          this.setData({
+            carts
+          })
         }
         //若同步失败，本地存储内没有值
       } catch (e) {
           console.log(e)
       }
       //console.log(carts.length)
-      this.setData({
-        carts
-      })
+      
       this.getTotalPrice()
     });
   },
@@ -152,8 +152,11 @@ Page({
   },
   //结算
   search: function () {
+    var total=this.data.totalPrice
+    var carts=this.data.carts
+    console.log(carts)
     wx.navigateTo({
-      url: '../submitOrder/submitOrder',
+      url: '../submitOrder/submitOrder?totalPrice='+carts+'&total='+total,
     })
   },
   //封装的计算总价方法

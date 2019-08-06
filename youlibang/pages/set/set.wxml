@@ -1,4 +1,5 @@
 <!--pages/set/set.wxml-->
+<button open-type="getUserInfo">授权用户信息</button>
 <view class='listInfo' bindtap='updatephone'>
     <view class='text'>更改手机号</view>
     <view class='next'><image src='../../images/next@2x.png'></image></view>

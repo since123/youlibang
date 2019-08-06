@@ -42,18 +42,20 @@
 <!-- 支付方式 -->
 <view class='way'>
   <view class='payforWay'><label>支付方式</label></view>
+  <radio-group>
   <view class='wexinPayfor'>
       <image src='../../images/weixin@2x.png'></image>
       <view class='wexintext'>微信支付</view>
-      <checkbox class='check_box'></checkbox>
+      <radio class='check_box' bindtap="payway"></radio>
   </view>
   <view class='li'></view>
   <view class='wexinPayfor'>
       <image src='../../images/wallet-copy@2x.png'></image>
-      <view class='wexintext'>钱包支付</view>
-      <checkbox class='check_box'></checkbox>
+      <view class='wexintext' >钱包支付</view>
+      <radio class='check_box' bindtap="payWay"></radio>
   </view>
+  </radio-group>
 </view>
-<view class='btn'>确认支付</view>
+<view class='btn' bindtap="confirm">确认支付</view>
 
 

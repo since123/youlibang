@@ -13,11 +13,7 @@ Page({
    */
   data: {
     date: "2019-08-02",
-    listinfo: [
-      {text:'提现-到微信',datetime: '10月9日 00:09:01', money: '2000'},
-      {text: '返利',datetime: '10月9日 00:09:01', money: '2000' },
-      { text: '消费', datetime: '10月9日 00:09:01', money: '2000' },
-      ],
+    listinfo: [],
     comeInAmount: '3524.00',
     expendAmount: '12000.00'
     // nowDate: new Date(date.getTime())
@@ -63,12 +59,12 @@ Page({
         moneylist.text = lists[m].describe
         moneylist.datetime = lists[m].create_time
         
-        if (Number(lists[m].type) == 0) {
-          moneylist.money = "-" + lists[m].order_amount
-          expend += Number(lists[m].order_amount)
+        if (Number(lists[m].pay_type) == 0) {
+          moneylist.money = "-" + lists[m].amount
+          expend += Number(lists[m].amount)
         } else {
-          moneylist.money = Number(lists[m].order_amount)
-          comeIn += Number(lists[m].order_amount)
+          moneylist.money = Number(lists[m].amount)
+          comeIn += Number(lists[m].amount)
         }
         listinfo.push(moneylist)
       }

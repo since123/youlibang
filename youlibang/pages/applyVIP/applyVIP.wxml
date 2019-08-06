@@ -7,16 +7,24 @@
   </view>
   <view class='line'></view>
   <view class='vipGrade'>
-  <block wx:for="{{vipRules}}" wx:key="{{item.index}}">
-    <view bindtap="chooseGrade" data-current="{{index}}" data-rechargemoney="{{item.rechargeMoney}}">
-      <view class='mindiv' style="{{index == currentIndex?'border-color:red':'border-color:gray'}}">
-          <view class='viptext'>{{item.userGrade}}</view>
-          <view class='money'><label>￥</label>{{item.rechargeMoney}}</view>
-          <view class='vipnum'>{{item.preferentialInfo}}</view>
+    <block wx:for="{{vipRules}}" wx:key="{{item.index}}" >
+      <view bindtap="chooseGrade" data-current="{{index}}" data-rechargemoney="{{item.rechargeMoney}}">
+        <view class='mindiv' style="{{index == currentIndex?'border-color:red':'border-color:gray'}}">
+            <view class='viptext'>{{item.userGrade}}</view>
+            <view class='money'><label>￥</label>{{item.rechargeMoney}}</view>
+            <view class='vipnum'>{{item.preferentialInfo}}</view>
+        </view>
       </view>
+    </block>
+    <view class="informlist" hidden="{{informHidden}}" >
+      <text>优惠明细</text>
+      <view  class="inform" wx:for="{{vipRules}}" wx:key="{{item.index}}">
+      
+      <text>{{item.userGrade}}充值</text>：{{item.rechargeMoney}}，优惠活动：{{item.preferentialInfo}}
+      </view>
+      <button class="informButton" bindtap="returnPage">收起</button>
     </view>
-  </block>
-    </view>
+  </view>
       
       <!-- <view class='mindiv' bindtap="chooseGrade" data-id="{{index}}">
           <view class='viptext'>入门VIP</view>
@@ -36,14 +44,16 @@
   
   <view class='tuijian'>推荐ID</view>
   <view class='inputInfo'><input type='text' value='{{inputID}}' bindinput="getInput" placeholder='请输入'></input></view>
-  <view class='uploadIDCard'>上传身份证</view>
-  <view class='IDCard'>
-      <view class='idcardImg'><image src='{{frontID}}' bindtap="changeImage" bindtap="changeFrontID"></image></view>
-      <view class='idcardImg'><image src='{{backID}}' bindtap="changeImage" bindtap="changeBackID"></image></view>
-  </view>
-  <view class='uploadIDCard'>上传营业执照</view>
-  <view class='addImg'>
-      <view class='imginfo'><image src="{{businessLicense}}" bindtap="changeBusinessLicense"></image></view>
+  <view hidden='{{ifhidden}}'>
+    <view class='uploadIDCard'>上传身份证</view>
+    <view class='IDCard'>
+        <view class='idcardImg'><image src='{{frontID}}' bindtap="changeImage" bindtap="changeFrontID"></image></view>
+        <view class='idcardImg'><image src='{{backID}}' bindtap="changeImage" bindtap="changeBackID"></image></view>
+    </view>
+    <view class='uploadIDCard'>上传营业执照</view>
+    <view class='addImg'>
+        <view class='imginfo'><image src="{{businessLicense}}" bindtap="changeBusinessLicense"></image></view>
+    </view>
   </view>
   <view class='apply_now' bindtap="applyClick">立即申请</view>
 </view>

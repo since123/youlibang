@@ -82,7 +82,7 @@ border-radius:50%;
 }
 .username{
   float: left;
-  width:100rpx;
+  width:200rpx;
   height:28rpx;
   font-size:30rpx;
   font-family:sans-serif;

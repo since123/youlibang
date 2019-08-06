@@ -1,4 +1,10 @@
 // pages/retailOrder/retailOrder.js
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
   
   /**
@@ -13,7 +19,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let that = this
+    let app = getApp()
+    let openid = wx.getStorageSync('openid')
+    if (openid) {
+      httpReq({
+        header: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        url: ApiUrl.phplist + 'distribution/getall?openid' + openid,
+      }).then((res) => {
+        console.log(res)
+      })
+    } else {
+      console.log("分销订单页面openid获取失败")
+    }
+    
   },
 
   /** 

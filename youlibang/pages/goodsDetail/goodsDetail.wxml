@@ -12,13 +12,13 @@
 <!-- 商品介绍 -->
 <view class='goodsjieshao'>
   <view class='price'>
-    <view class='money'><label>￥</label>{{param.newprice}}</view>
-    <view class='money1'><label>￥</label>{{param.yuanjia}}</view>
+    <view class='money'><label>￥</label>{{productsList.goods_member_price}}</view>
+    <view class='money1'><label>￥</label>{{productsList.goods_price}}</view>
     <view class='superVIP'><label>超级会员</label></view>
     <view class='yunfei'>运费:<label>{{param.yunfei}}</label>
   </view>
   </view>
-  <view class='goodsdetail'>{{param.goodsinfo}}</view>
+  <view class='goodsdetail'>{{productsList.goods_introduce}}</view>
 </view>
 <view class="zhong_title">
   <view class="zhong_title_text">
@@ -53,28 +53,31 @@
     <view  class='close' bindtap='quxiao' hidden="{{!status}}"><image src=''></image></view>
     <view class='goodsdetailImg'><image src='../../images/2013062320262198.jpg'></image></view>
     <view class='priceDiv'>
-      <view class='detailprice'><label>￥</label>{{param.newprice}}</view>
+      <view class='detailprice'><label>￥</label>{{productsList.goods_member_price}}</view>
       <view class='types'><block wx:if="{{type_txt==''}}">请选择规格</block><block wx:else>已选<label>{{type_txt}}</label></block>
 </view>
     </view>
-    <view class='color'>颜色</view>
-    <view class="colorfenlei" >
-      <view class="list{{(index+1)==idx?'active':''}}" wx:for='{{type1}}'  data-index="{{index}}" bindtap="getValue">{{item.color}}</view>
-      <!-- <view class='list'>粉色</view>
-      <view class='list'>奶白色</view>
-      <view class='list'>黑色</view>
-      <view class='list'>奶白色</view>
-      <view class='list'>奶白色</view> -->
-    </view>
-    <view class='size'>尺寸</view>
-    <view class='sizefenlei'>
-      <view class="sizelist{{(index+1)==size?'active':''}}"data-index="{{index}}" wx:for='{{type2}}' bindtap="getVal">{{item.size}}</view>
-      <!-- <view class='sizelist'>M</view>
-      <view class='sizelist'>L</view>
-      <view class='sizelist'>XL</view>
-      <view class='sizelist'>XXL</view>
-      <view class='sizelist'>XXXL</view> -->
-    </view>
+
+<view>
+<!-- 硬度 -->
+        <view class='color'>{{goodsInfo[0].attr_name}}</view>
+   <view class="colorfenlei" >
+      <view class="list{{(index+1)==idx?'active':''}}" wx:for='{{arr1}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getValue">{{item}}
+      </view>
+  </view>
+  <!-- 味道 -->
+      <view class='color'>{{goodsInfo[1].attr_name}}</view>
+   <view class="colorfenlei" >
+      <view class="list{{(index+1)==idex?'active':''}}" wx:for='{{arr2}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getVal">{{item}}
+      </view>
+  </view>
+  <!-- 产地 -->
+      <view class='color'>{{goodsInfo[2].attr_name}}</view>
+   <view class="colorfenlei" >
+      <view class="list{{(index+1)==sx?'active':''}}" wx:for='{{arr3}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getVa">{{item}}
+      </view>
+  </view>
+</view>
     <view class='amount'>数量</view>
     <view class='stepper sum'>
       <text class='{{minusStatus}}' type='number' bindtap='bindMinus'>-</text>

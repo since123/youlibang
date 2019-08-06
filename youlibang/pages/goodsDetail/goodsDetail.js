@@ -1,4 +1,7 @@
 // pages/goodsDetail/goodsDetail.js
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
@@ -38,8 +41,7 @@ Page({
     idx:"",
     size:"",
     //定义选择的商品
-    color:"",
-    sz:"",
+    price:"",
     type2: [{ size: 'M' }, { size: 'L' }, { size: 'XL' }, { size: 'XXL' }],
     indicatorDots: true,
     autoplay: true,
@@ -79,72 +81,93 @@ Page({
       url: '../onlineService/onlineService',
     })
   },
-  //点击加入购物车，点击颜色
   getValue(e) {
     console.log(e)
-    //处理点击的样式、尺寸
-    let index = e.target.dataset.index+1
-    console.log(index)
-    var color = e._relatedInfo.anchorRelatedText
+    var idx = e.currentTarget.dataset.index+1
+    var yd = e._relatedInfo.anchorTargetText
     this.setData({
-      idx: index,
-      color:color
+      yd,
+      idx
     })
-    console.log(color)
-
+ 
   },
-  //点击尺寸
   getVal(e){
     console.log(e)
-    let index = e.target.dataset.index+1
-    console.log(index)
-    var sz = e._relatedInfo.anchorRelatedText
+    var idex = e.currentTarget.dataset.index + 1
+    var wd = e._relatedInfo.anchorTargetText
     this.setData({
-      size: index,
-      sz:sz
+      wd,
+      idex
     })
   },
+  getVa(e) {
+    console.log(e)
+    var sx = e.currentTarget.dataset.index + 1
+    var cd = e._relatedInfo.anchorTargetText
+    this.setData({
+      cd,
+      sx
+    })
+  },
+ 
   //点击确定
   confirm(){
-  
-    var that=this
-      //是否选择
-    if(this.data.color==""||this.data.sz==""){
+    var that = this
+    //是否选择
+    if (this.data.yd == "" || this.data.wd == ""||this.data.cd==""){
       return false
     }
-    var param=this.data.param
-    console.log(param)
+ 
+   
     //重组数据
     var obj={}
-      var size=this.data.sz    //获取点击尺寸
-      var color=this.data.color //获取点击颜色
-      obj.color=color
-      obj.size=size
+    obj.yd = this.data.yd
+      obj.wd=this.data.wd
+      obj.cd=this.data.cd
       obj.selected=true
       obj.num=this.data.num
-      obj.price=param.newprice
+      obj.price=this.data.price
       console.log(obj)
+      var array=this.data.newarr
+     array.push(obj)
+     this.setData({
+       newarr:array
+     })
+     console.log(this.data.newarr)
+
       //处理弹出层
       this.setData({
         status:false
       })
+   
+     var arr=[]
      
-       
-    
-    
-      var newarr=that.data.newarr
-     
-      newarr.push(obj)
-    console.log(that.data.newarr)
-    var data=newarr
+      arr.push(obj)
+     console.log(arr)
+    var data=arr
     console.log(data)
+    var info = JSON.stringify(data)
+    console.log(info)
+    var bar=this.data.newarr
+    console.log(bar)
+    //判断点击的是加入还是立即购买
+    if (this.data.state == 0) {
+      console.log("去到购物车！")
       wx.setStorage({
         key: 'shop',
-        data: data,
+        data: bar,
       })
       wx.showToast({
         title: '添加成功！',
       })
+    } else if (this.data.state == 1) {
+      console.log("去到提交订单！")
+      
+      wx.navigateTo({
+        url: '../submitOrder/submitOrder?info='+info,
+      })
+    }
+     
   },
   //输入数量
   bindManual(e){
@@ -174,7 +197,8 @@ Page({
     // console.log("触发了点击事件，弹出toast")
     status = !status;
     this.setData({
-      status: status
+      status: status,
+      state:0
     })　　　　 //setData方法可以建立新的data属性，从而起到跟视图实时同步的效果
 
     
@@ -185,9 +209,10 @@ Page({
     // console.log("触发了点击事件，弹出toast")
     status = !status;
     this.setData({
-      status: status
+      status: status,
+      state:1
     })　　　　 //setData方法可以建立新的data属性，从而起到跟视图实时同步的效果
-
+    
   },
 
   toastHide: function(event) {
@@ -238,16 +263,37 @@ Page({
   onLoad: function(options) {
     var goodsId = options.goodsId;
     console.log(goodsId)
-    console.log(this.data.productsList[goodsId])
-    this.setData({
-      //  showprice:this.data.productsList.newprice,
-      // showImg: this.data.productsList.img,
-      // showDesc: this.data.productsList.desc,
-      // showyuanjia:this.date.productsList.yuanjia,
-      // showyunfei: this.date.productsList.yunfei,
-     param:this.data.productsList[goodsId]
-    })
-    console.log(this.data.param)
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: 'http://www.ylb.com/api/goods/getdetail',
+    }).then((res) => {
+      console.log(res)
+      var productsList=res.data.lists
+      this.setData({
+        productsList
+      })
+      var goodsInfo = productsList.goods_attr_ids
+      for(let i=0;i<goodsInfo.length;i++){
+       var data= goodsInfo[i].attr_values.split(",")
+        goodsInfo[i].attr_values=data
+      }
+      var price = productsList.goods_price
+      console.log(goodsInfo)
+      var arr1 = goodsInfo[0].attr_values
+      var arr2 = goodsInfo[1].attr_values
+      var arr3 = goodsInfo[2].attr_values
+      this.setData({
+        goodsInfo,
+        arr1,
+        arr2,
+        arr3,
+        price
+      })
+      console.log(this.data.arr3)
+    });
   },
 
   /**
@@ -273,6 +319,7 @@ Page({
         that.setData({
           newarr: datalist
         })
+        console.log(that.data.newarr)
       }, fail: function (res) {
         console.log(res)
       }
