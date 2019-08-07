@@ -25,7 +25,9 @@ App({
               'Accept': 'application/json'
             },
             method: 'GET',
-            url: ApiUrl.phplist + 'index/gettoken?code=' + res.code,
+            url: '',
+            // url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wxf7a9fda47682a9a6&secret=cc74bba5adfa5e077038c5cb8baca13c&js_code='+ res.code+'&grant_type=authorization_code'
+            // url: ApiUrl.phplist + 'index/gettoken?code=' + res.code,
             // success: function (res) {
             //   console.log(res.openid)
             //   wx.setStorageSync("openid", res.openid)
@@ -37,7 +39,8 @@ App({
             //   wx.setStorageSync("session_key", "txjfalsesession")
             // }
           }).then((res) =>{
-            console.log(res)
+            // console.log(res.data.lists.token)
+            // console.log(wx.getStorageSync(res.data.lists.token))
             wx.setStorageSync("openid", "txjfalseopenid")
             wx.setStorageSync("session_key", "txjfalsesession")
             // wx.setStorageSync("openid", res.openid)

@@ -1,4 +1,7 @@
 // pages/myAddress/myAddress.js
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
@@ -6,8 +9,7 @@ Page({
    */
   data: {
     addressList: [
-      {index:'0',username: '张兰', tel: '12345678910', address:'广东省广州市天河区汇诚大厦365',status:1},
-      { index: '1', username: '哆啦A梦', tel: '12345678910', address: '广东省广州市天河区汇诚大厦365',status:0}
+    
     ],
     address: '',
   },
@@ -23,97 +25,133 @@ Page({
     // this.setData({
     //   addressList: arr
     // });
+    // var address=this.data.addressList[0]
+    //获取本地存储
+    // try{
+    //   var addressList=wx.getStorageSync('address')
+    //   if(addressList){
+    //      addressList[0].selected=true
+    //      console.log(addressList)
+    //      this.setData({
+    //        addressList
+    //      })
+    //      console.log(this.data.addressList)
+    //   }
+    // }catch(e){
+
+    // }
+    // 请求地址展示接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: 'http://www.ylb.com/api/user/getaddress',
+    }).then((res) => {
+      var addressList = res.data.lists
+      //console.log(addressList)
+      console.log(res)
+      if (addressList == undefined) {
+        this.setData({
+          user_id: 5
+        })
+      } else {
+
+        var user_id = addressList[0].user_id
+        addressList[0].state=true
+        console.log(addressList)
+        this.setData({
+          addressList,
+          user_id
+        })
+      }
+
+    });
+    
+  },
+  //事件处理
+  //设为默认
+  setDefault(e){
+    console.log(e)
+    var id=e.target.dataset.id
+   // console.log(id)
+    var addressList=this.data.addressList
+    var address = []
+    for(let i=0;i<addressList.length;i++){
+        if(addressList[i].id==id){
+            // console.log(addressList[i])
+          address.push(addressList[i])
+        }
+    }
+    //console.log(address)
+    //更改数据库里面的
+    address[0].address_type=1
+    var address_type = address[0].address_type
+    var address_id = address[0].id
+    console.log(address_id,address_type)
+    //返出对应的数据
+   
   },
   //新增地址
-  addAddress:function(){
+  addAddress:function(e){
+    var user_id=this.data.user_id
     wx.navigateTo({
-      url: '../address/address',
+      url: '../address/address?user_id='+user_id,
     })
   },
   //编辑收货地址
-  editAddress: function () {
+  editAddress: function (e) {
+    console.log(e)
+    var id=e.target.dataset.id
+    var user_id = e.target.dataset.user_id
     wx.navigateTo({
-      url: '../editAddress/editAddress',
+      url: '../editAddress/editAddress?id='+id+'&user_id='+user_id,
     })
   },
   //删除地址
   deleteAddress: function (e) {
-    var that = this;
-    var index=e.currentTarget.dataset.index;
-    var addressList = that.data.addressList;
-    // addressList.splice(index, 1);
-    // that.setData({ 
-    //   addressList: addressList 
-    //   }); 
+   var user_id=this.data.user_id
+    var address_id = e.target.dataset.id
+    console.log(user_id,address_id)
     wx.showModal({
       title: '提示',
       content: '确定要删除吗？',
       success: function (res) {
         if (res.confirm) {
-          addressList.splice(index, 1);
-          // 用户点击了确定 可以调用删除方法了
-          // deleteInfo();
+         //请求删除接口
+          httpReq({
+            header: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            url: 'http://www.ylb.com/api/user/deladdress?user_id='+user_id+'&address_id='+address_id,
+          }).then((res) => {
+          console.log(res)
+            this.onShow();
+        });
+        
         } else if (res.cancel) {
           return false;
           console.log('用户点击取消')
         }
-        that.setData({
-          addressList: addressList
-        });
-        wx.request({
-          url: '',
-          data: {
-            // linkname: linkname,
-            // moblie: moblie,
-            // addressdetail: addressdetail,
-            // region: region,
-            //改为需要传到后台的数据
-          },
-          header: {
-            'content-type': 'application/json' // 默认值
-          },
-          success(res) {
-            console.log(res.data);
-          }
-
-        })
       },
     
     })
 
   },
-  //删除方法
-  // deleteInfo: function (e) {
-  //   this.data.addressList.splice(e.target.id.substring(3), 1);
-  //   // 更新data数据对象  
-  //   if (this.data.addressList.length > 0) {
-  //     this.setData({
-  //       addressList: this.data.addressList
-  //     })
-  //     wx.setStorageSync('addressList', this.data.addressList);
-  //   } else {
-  //     this.setData({
-  //       addressList: this.data.addressList
-  //     })
-  //     wx.setStorageSync('addressList', []);
-  //   }
-  // },
-
-
   
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.onLoad();
-
+   
   },
 
   /**

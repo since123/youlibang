@@ -1,4 +1,10 @@
 // pages/recharge/recharge.js
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
@@ -14,19 +20,13 @@ Page({
     var that=this;
     var openId=wx.getStorageSync("openId")
     var amount,token,openId;
-    wx.request({　　
-      url: "",
-      method: "POST",
-      dataType: "json",
+    httpReq({
       header: {
-        'content-type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
-      data: {
-        amount: amount, // 充值金额
-        token: token,
-        openId: openId
-      },
-      success: function(res) {
+      url: ApiUrl.phplist + 'order/orderpay?pay_amount=' + pay_amount + '&body=' + body + '&openid=' + openid}).then((res)=>{
+        console.log(res)
         if (res.data.code == '1') {
           that.setData({
             payParams: res.data.data // 后端从微信得到的统一下单的参数
@@ -43,21 +43,51 @@ Page({
           }, 1000)  //定时函数确保状态显示之后再返回上一页
           that.xcxPay(); // 拿到统一下单的参数后唤起微信支付页面
         }
-      },
-      fail:function(res){
-        console.log(res);
-        wx.showToast({
-          title:'充值失败',
-          icon:'warn',
-          duration:2000,//持续时间
-        })
-        setTimeout(function(){
-          wx.navigateTo({
-            url: '',
-          },1000)
-        })
-      }
-    })
+      })
+    // wx.request({　　
+    //   url: "",
+    //   method: "POST",
+    //   dataType: "json",
+    //   header: {
+    //     'content-type': 'application/x-www-form-urlencoded'
+    //   },
+    //   data: {
+    //     amount: amount, // 充值金额
+    //     token: token,
+    //     openId: openId
+    //   },
+      // success: function(res) {
+        // if (res.data.code == '1') {
+        //   that.setData({
+        //     payParams: res.data.data // 后端从微信得到的统一下单的参数
+        //   })
+        //   wx.showToast({
+        //     title: '充值成功',
+        //     icon: "success",
+        //     duration: 2000, //持续的时间
+        //   })
+        //   setTimeout(function () {
+        //     wx.navigateTo({
+        //       url: '',
+        //     })
+        //   }, 1000)  //定时函数确保状态显示之后再返回上一页
+        //   that.xcxPay(); // 拿到统一下单的参数后唤起微信支付页面
+        // }
+      // },
+      // fail:function(res){
+      //   console.log(res);
+      //   wx.showToast({
+      //     title:'充值失败',
+      //     icon:'warn',
+      //     duration:2000,//持续时间
+      //   })
+      //   setTimeout(function(){
+      //     wx.navigateTo({
+      //       url: '',
+      //     },1000)
+      //   })
+      // }
+    // })
 
   },
   /**

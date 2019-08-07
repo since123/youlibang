@@ -1,19 +1,35 @@
 // pages/withdraw/withdraw.js
-var amount=''
+// var amount=''
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    amount:''
+    // amount:'',
+    balance: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let that = this
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'user/tixianlist?member_id=2',
+    }).then((res)=>{
+      console.log(res)
+    })
   },
   withdrawal:function(){
     var status = this.data.status;
@@ -22,6 +38,7 @@ Page({
     this.setData({
       status: status
     })　　　　 //setData方法可以建立新的data属性，从而起到跟视图实时同步的效果
+    
   },
   toastHide: function (event) {
     // console.log("触发bindchange，隐藏toast")

@@ -5,7 +5,7 @@
   <input placeholder="请输入提现金额"/>
 </view>
 <view class='line'></view>
-<view class='amount_text'>当前可提现的余额：0.00元，<label>全部提现</label></view>
+<view class='amount_text'>当前可提现的余额：{{balance}}元，<label>全部提现</label></view>
 </view>
 <view class='coomit' bindtap='withdrawal'>提现</view>
 <view class='mubu' bindtap='quxiao' hidden="{{!status}}"></view>

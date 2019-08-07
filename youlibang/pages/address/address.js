@@ -1,4 +1,7 @@
 // pages/address/address.js
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
@@ -6,6 +9,7 @@ Page({
    */
   data: {
     index:'',
+    user_id:'',
     linkname:'',
     region: ['广东省', '广州市', '海珠区'], // 初始值
     customItem: '全部'
@@ -20,6 +24,7 @@ Page({
   //获取输入的手机号
   phone(e){
     var moblie = e.detail.value
+    console.log(moblie)
     this.setData({
         moblie
     })
@@ -37,28 +42,34 @@ Page({
     this.setData({
       addressdetail
     })
-    console.log(this.data)
+    //console.log(this.data)
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      try{
-        var address=wx.getStorageSync('address')
-        if(address){
-           var index=address.length
-           this.setData({
-             index
-           })
-        }else{
-           this.setData({
-             index:0
-           })
-        }
-      }catch(e){
+    var user_id=options.user_id
+    this.setData({
+      user_id
+    })
+    console.log(user_id)
+      // try{
+      //   var address=wx.getStorageSync('address')
+      //   if(address){
+      //      var index=address.length
+      //      this.setData({
+      //        index
+      //      })
+      //   }else{
+      //      this.setData({
+      //        index:0
+      //      })
+      //   }
+      // }catch(e){
          
-      }
+      // }
+
   },
 
   /**
@@ -77,14 +88,13 @@ Page({
   },
     //保存新增
   saveAddress: function () {
-    var index=this.data.index
-    console.log(index)
-    var linkname=this.data.linkname
-    var moblie=this.data.moblie
-    var region=this.data.region
+    var address_name=this.data.linkname
+    var address_phone=this.data.moblie
+    var address=this.data.region
     var addressdetail=this.data.addressdetail
-   
-    if (linkname==''){
+     var user_id=this.data.user_id
+     console.log(user_id)
+    if (address_name==''){
       wx.showToast({
         title: '提示',
         content:'请填写联系人姓名',
@@ -92,7 +102,7 @@ Page({
       })
       return
     }
-    if(moblie==''){
+    if (address_phone==''){
       wxx.showToast({
         title:'提示',
         content: '请填写联系人电话',
@@ -101,46 +111,22 @@ Page({
       return
     }
     //验证手机号
-    // if (!/^1[3|4|5|7|8]\d{9}$/.test(this.data.mobile)) {
-    //   wx.showToast({ title: '手机格式有误，请重新输入' });
-    //   return;
-    // }
-   
-    console.log(index)
-    console.log(region)
-    var  data={
-      index,
-       linkname,
-       moblie,
-       region,
-       addressdetail,
-       selected:false
+    if (!(/^1[3456789]\d{9}$/.test(this.data.moblie))) {
+      wx.showToast({ title: '手机格式有误，请重新输入' });
+      return;
     }
-    index++
-
-    this.setData({
-      index
-    })
-    console.log(this.data.index)
-    //  //执行新增逻辑
-    try {
-      var address = wx.getStorageSync('address')
-      if (address) {
-        address.push(data)
-        wx.setStorageSync('address', address)
-      } else {
-        var arr = []
-        arr.push(data)
-        wx.setStorageSync('address', arr)
-      }
-
-    } catch (e) {
-      console.log(e)
-    }
-
-
-
-
+    address = address+addressdetail
+    console.log(address)
+   //请求新增接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: 'http://www.ylb.com/api/user/addaddress?user_id='+user_id+'&address_name='+address_name+'&address_phone='+address_phone+'&address='+address,
+    }).then((res) => {
+        console.log(res)
+    });
     wx.navigateTo({
       url: '../myAddress/myAddress',
     })

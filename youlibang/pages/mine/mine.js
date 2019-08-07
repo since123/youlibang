@@ -57,15 +57,15 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'user/getdetail?openid=' + this.data.openid,
+      url: ApiUrl.phplist + 'user/getdetail?user_id=2',
     }).then((res) => {
-      console.log(res);
+      console.log(res.data.lists);
         let list = res.data.lists
         that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
-          logs: res.data.result,
-          vipid: list.user_member,
-          username: list.user_nickname,
-          userImg_url: list.user_logo,
+          // logs: res.data.result,
+          vipid: list.member_id,
+          username: list.nickname,
+          userImg_url: list.avatar,
           price: list.balance
         })
         // this.userData = res.data; //无效不能实时的渲染到页面

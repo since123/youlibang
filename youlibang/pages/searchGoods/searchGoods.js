@@ -1,4 +1,7 @@
 // pages/searchGoods/searchGoods.js
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
@@ -9,22 +12,7 @@ Page({
       state:true,
       status:false,
       searchGoods:[
-       { title:"优力邦墙面医生",
-          price:"500.00",
-          img:"../../images/2012031220134655.jpg",
-          id:1
-        }, {
-          title: "优力邦牛奶",
-          price: "500.00",
-          img: "../../images/2012031220134655.jpg",
-          id:2
-        },
-        {
-          title: "优力邦中药",
-          price: "500.00",
-          img: "../../images/2012031220134655.jpg",
-          id:3
-        }
+       
 
       ]
   },
@@ -56,39 +44,72 @@ Page({
   searchPath(){
     //如果没输入
     if(this.data.value==""){
-      this.setData({
-        state:false
-      })
       return false
     }
     //获取搜索关键字
     var that=this
     var search=that.data.value
     console.log(search)
-    var searchGoods=that.data.searchGoods
-     console.log(searchGoods)
-    let arr = searchGoods.map((v) => {
-      v.title = v.title.replace(search,"<b style='color:red'>"+search+"</b>")
-        return v
-    })
-    console.log(arr)
-     this.setData({
-       searchGoods:arr,
-       status:true
-     })
-     that.onLoad()
-     console.log(this.data.searchGoods)
+   //请求搜索接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url:'http://www.ylb.com/api/goods/goodsearch?search='+search,
+    }).then((res) => {
+       console.log(res)
+       var searchGoods=res.data.lists
+       if(searchGoods==undefined){
+          console.log("暂无数据匹配！")
+       }else{
+         let goods=searchGoods.map((v)=>{
+           v.goods_name=v.goods_name.replace(search,"<b style='color:red'>"+search+"</b>")
+           return v
+         })
+         console.log(goods)
+         this.setData({
+           searchGoods:goods,
+           status: true,
+         })
+       }
+       
+    });
+
   },
    //点击查找
    dianji(e){
    
      var inputvalue=e._relatedInfo.anchorTargetText
-     this.setData({
-       value:inputvalue,
-       state:false,
-       status:true
-     })
-     console.log(this.data.value)
+     //console.log(inputvalue)
+    //请求接口
+
+     httpReq({
+       header: {
+         'Content-Type': 'application/json',
+         'Accept': 'application/json'
+       },
+       url: 'http://www.ylb.com/api/goods/goodsearch?search=' + inputvalue,
+     }).then((res) => {
+       console.log(res)
+       var searchGoods = res.data.lists
+       if (searchGoods == undefined) {
+         console.log("暂无数据匹配！")
+       } else {
+         let goods = searchGoods.map((v) => {
+           v.goods_name = v.goods_name.replace(inputvalue, "<b style='color:red'>" + inputvalue + "</b>")
+           return v
+         })
+         console.log(goods)
+         this.setData({
+           searchGoods: goods,
+           state: false,
+           status: true
+         
+         })
+       }
+
+     });
     
    },
 

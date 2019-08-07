@@ -4,15 +4,17 @@
     <view class='sousuo' bindtap="searchPath">搜索</view>
 </view>
 <view class='sousuoContents' >
-    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">优力邦</view>
-    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">墙面医生</view>
-    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">优力邦</view>
+    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">Apple</view>
+    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">新</view>
+    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">腻子粉</view>
     <!-- 搜索结果 -->
 <view class='contents' bindscrolltolower="loadImages" wx:if="{{status}}" >
   <view class='listInfo' wx:for="{{searchGoods}}"  data-goodsid='{{item.id}}' catchtap='goodsdetail'>
-    <view class='leftImg'><image src="{{item.img}}"></image></view>
-  <rich-text class='textInfo' nodes="{{item.title}}"></rich-text>
-    <view class='price'><label>￥</label>{{item.price}}</view>
+    <view class='leftImg'>
+    <image src="{{item.goods_log}}"></image>
+    </view>
+  <rich-text class='textInfo' nodes="{{item.goods_name}}"></rich-text>
+    <view class='price'><label>￥</label>{{item.goods_member_price}}</view>
     <view class='Buy'><view class='buy' bindtap='tobuy'>购买</view></view>
   </view>
 </view>

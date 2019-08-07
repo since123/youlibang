@@ -48,7 +48,9 @@ Page({
       },
       url: ApiUrl.phplist + 'user/flowAccount?openid=' + openid + '&time=' + nowDate,
     }).then((res) => {
-      console.log(res.data.lists)
+      console.log()
+      console.log(nowDate)
+      console.log(res)
       let lists = res.data.lists
       let listinfo = []
       let comeIn = 0
