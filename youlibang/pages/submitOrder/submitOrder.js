@@ -1,26 +1,38 @@
 // pages/submitOrder/submitOrder.js
+import {
+  httpReq
+} from '../../utils/http.js';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+   status:true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var data=options.info
-    data=JSON.parse(data)
-    console.log(data)
-    var total=data[0].price
-    this.setData({
-      price:total,
-      goodsInfo:data
+    //console.log(options)
 
+    var dataList=JSON.parse(options.info)
+   //console.log(dataList)
+    this.setData({
+      dataList
     })
+    var that=this
+   wx.getStorage({
+     key: 'total',
+     success: function(res) {
+       var total=res.data
+       that.setData({
+         total
+       })
+     },
+   })
   },
   payway(){
      console.log("通过微信支付！")
@@ -35,13 +47,48 @@ Page({
      })
     
   },
+   describe(){
+      var status=this.data.status
+      //console.log(status)
+      status=!status
+      //console.log(status)
+      this.setData({
+        status
+      })
+   },
+   //失焦隐藏
+   finish(){
+      this.setData({
+        status:true
+      })
+   },
+   //获取输入框内容
+   inputvalue(e){
+       //console.log(e)
+       var describe=e.detail.value
+       this.setData({
+         describe
+       })
+   },
+
+  //确认支付
   confirm(){
+   var describe=this.data.describe    //卖家备注
+    var way=this.data.way             //支付方式
+    var dataList=this.data.dataList   //订单信息
+    var total=this.data.total         //总价
    
-    var way=this.data.way
+    if(describe==undefined){
+      describe=''
+    }
+   // console.log(describe, dataList, total)
     //判断支付方式
     if(way=="微信"){
        //调取微信支付接口
        console.log("微信支付！")
+      
+
+
     }else{
        //从本地存储中将余额拿出来
       //采用钱包余额支付

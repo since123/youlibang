@@ -1,4 +1,5 @@
 <!--pages/onlineService/onlineService.wxml-->
+<view class="body">
 <view class='texttitle'>猜你想问</view>
 <view class='contents'>
 <view class='question' bindtap="question" data-id="1">如何修改退款，售后申请？</view>
@@ -9,18 +10,14 @@
 <view class='li'></view>
 <view class='question' bindtap="question" data-id="4">如何申请退款？</view>
 </view>
-
   <view class='serviceinfo'  wx:for='{{infolist}}'>
-    <view class="{{item.states}}==1?'userheadImg':'serviceheadImg'"><image src='{{item.userheadImg}}'></image></view>
-    <!-- <view class='servicename'>多拉A梦</view> -->
-    <view class="{{item.states}}==1?'infos':'info'">{{item.infos}}</view>
+    <view class="{{item.states==1?'userheadImg':'serviceheadImg'}}">
+    <image src='{{item.userheadImg}}'></image>
+    </view>
+    <view class="{{item.states==1?'infos':'info'}}">{{item.infos}}</view>
   </view>
-  <!-- <view class='userinfo' >
-    <view class='userheadImg'><image src='{{item.userheadImg}}'></image></view>
-    <view class='infos'>{{item.infos}}</view>
-  </view> -->
-
+</view>
 <view class='footer'>
-    <input class='inputInfo' bindinput='bindkeyinput' value='{{inputvalue}}' value='{{inputValue}}' placeholder='在这里输入你想知道的问题...'></input>
+    <input class='inputInfo' bindchange='bindkeyinput' value='{{inputvalue}}'  placeholder='在这里输入你想知道的问题...'></input>
     <text class='user_input_text' bindtap='sendto'>发送</text>
 </view>

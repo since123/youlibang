@@ -3,27 +3,44 @@
   <view class='minbox'>
     <view class='rechargeImg'><image src='../../images/recharge@2x.png'></image></view>
     <view class='recharge'>充值</view>
-    <view class='righttext'>会员专享超多优惠返利！</view>
+    <view class='righttext' bindtap="returnPage">{{buttonText}}</view>
   </view>
   <view class='line'></view>
+
+  <!-- <view class="header_lun" >
+    <swiper class="swiper" indicator-dots="true" indecator-color="rgba(120,120,120,1)" autoplay="true" bindchange="">
+      <block wx:for="{{movies}}" wx:key="{{movies}}" wx:for-index="index">
+        <swiper-item>
+          <image src="{{item.url}}" class="slide-image" bindtap="changePath" data-id="{{item.id}}"/>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view> -->
+
   <view class='vipGrade'>
-    <block wx:for="{{vipRules}}" wx:key="{{item.index}}" >
-      <view bindtap="chooseGrade" data-current="{{index}}" data-rechargemoney="{{item.rechargeMoney}}">
-        <view class='mindiv' style="{{index == currentIndex?'border-color:red':'border-color:gray'}}">
-            <view class='viptext'>{{item.userGrade}}</view>
-            <view class='money'><label>￥</label>{{item.rechargeMoney}}</view>
-            <view class='vipnum'>{{item.preferentialInfo}}</view>
+    <swiper indicator-dots="true" indecator-color="rgba(120,120,120,1)" autoplay="true" bindchange="">
+      <block wx:for="{{vipRules}}" wx:key="{{item.index}}" >
+      <swiper-item>
+      <view wx:for="{{vipRules[index]}}" wx:key="{{item.index}}">
+        <view bindtap="chooseGrade" data-current="{{index}}" data-rechargemoney="{{item.rechargeMoney}}">
+          <view class='mindiv' style="{{index == currentIndex?'border-color:red':'border-color:gray'}}">
+              <view class='viptext'>{{item.userGrade}}</view>
+              <view class='money'><label>￥</label>{{item.rechargeMoney}}</view>
+              <view class='vipnum'>{{item.preferentialInfo}}</view>
+          </view>
         </view>
       </view>
-    </block>
-    <view class="informlist" hidden="{{informHidden}}" >
+      </swiper-item>
+      </block>
+    </swiper>
+    <view class="informlist" hidden="{{informHidden}}">
       <text>优惠明细</text>
-      <view  class="inform" wx:for="{{vipRules}}" wx:key="{{item.index}}">
-      
-      <text>{{item.userGrade}}充值</text>：{{item.rechargeMoney}}，优惠活动：{{item.preferentialInfo}}
+        <view  wx:for="{{vipRules}}" wx:key="{{item.index}}" >
+          <view  class="inform" wx:for="{{vipRules[index]}}" wx:key="{{item.index}}">
+          <text>{{item.userGrade}}充值</text>：{{item.rechargeMoney}}，优惠活动：{{item.preferentialInfo}}
+          </view>
+        </view>
       </view>
-      <button class="informButton" bindtap="returnPage">收起</button>
-    </view>
   </view>
       
       <!-- <view class='mindiv' bindtap="chooseGrade" data-id="{{index}}">
@@ -43,7 +60,7 @@
       </view> -->
   
   <view class='tuijian'>推荐ID</view>
-  <view class='inputInfo'><input type='text' value='{{inputID}}' bindinput="getInput" placeholder='请输入'></input></view>
+  <view class='inputInfo'><input type='text' bindinput="getInputValue" placeholder='请输入'>{{inputID}}</input></view>
   <view hidden='{{ifhidden}}'>
     <view class='uploadIDCard'>上传身份证</view>
     <view class='IDCard'>

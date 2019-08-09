@@ -1,4 +1,7 @@
 // pages/onlineService/onlineService.js
+import {
+  httpReq
+} from '../../utils/http.js';
 var app=getApp();
 var SocketOpen=false;
 var userId='';
@@ -16,10 +19,9 @@ Page({
     time:'',
     is_send:'',
     num:0,
-    infolist: [{userheadImg:'../../images/2012031220134655.jpg',infos:'你好，有什么需要帮助？',states:0},
-      { userheadImg: '../../images/2012031220134655.jpg', infos: '你好，退款未到账', states:0 }],
+    infolist: [{userheadImg:'../../images/2012031220134655.jpg',infos:'你好，有什么需要帮助？',states:1},
+      { userheadImg: '../../images/2012031220134655.jpg', infos: '你好，退款未到账', states:0}],
     allContentList: [{}, { is_ai: [] }],
-
   },
 
   /**
@@ -68,18 +70,58 @@ Page({
   },
   //点击进行跳转
   question(e){
-    console.log(e)
-    var id=e.target.dataset.id
-    console.log(id)
-  wx.navigateTo({
-    url: '../questionDetail/questionDetail?id='+id,
    
+    var infolist=this.data.infolist
+    var search = e._relatedInfo.anchorTargetText
+    var obj={}
+    obj.userheadImg = '../../images/2012031220134655.jpg'
+    obj.infos = search
+    obj.states = 1
+    infolist.push(obj)
+    //请求客服接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: 'http://www.ylb.com/api/user/searchCall?questions=' + search,
+    }).then((res) => {
+      console.log(res)
+      var answer = res.data.msg
+      //console.log(answer)
+      var obj = {}
+      obj.userheadImg = '../../images/2012031220134655.jpg'
+      obj.infos = answer
+      obj.states = 0
+      var infolist = this.data.infolist
+      infolist.push(obj)
+      this.setData({
+        infolist
+      })
     })
+    this.setData({
+      inputvalue: ''
+    })
+
   },
   //发送
   sendto:function(e){
     console.log('发送信息');
     console.log(e);
+    var info=this.data.inputvalue
+    console.log(info)
+    if(info==''){
+      return
+    }
+    var datamsg=this.data.infolist
+    var object={}
+    object.userheadImg = '../../images/2012031220134655.jpg'
+    object.infos = info
+    object.states = 1
+   datamsg.push(object)
+   this.setData({
+     infolist:datamsg
+   })
     var that=this;
     var data = {
       avatarUrl: wx.getStorageSync('avatarUrl'),
@@ -91,22 +133,49 @@ Page({
       return;
     }
     console.log('提交信息',data)
-
+    //请求在线客服接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url:'http://www.ylb.com/api/user/searchCall?questions='+info,
+    }).then((res) => {
+     console.log(res)
+     var answer=res.data.msg
+       //console.log(answer)
+       var obj={}
+      obj.userheadImg = '../../images/2012031220134655.jpg'
+      obj.infos=answer
+      obj.states=0
+      var infolist=this.data.infolist
+      infolist.push(obj)
+      this.setData({
+        infolist
+      })
+    })
+    this.setData({
+      inputvalue: ''
+    })
 
   },
   bindkeyinput:function(e){
     console.log(e);
-    if (e.detail.value == "") {
-      this.setData({
-        is_send: false,
-        inputValue: e.detail.value
-      })
-    } else {
-      this.setData({
-        is_send: true,
-        inputValue: e.detail.value
-      })
-    }
+    var inputvalue=e.detail.value
+    this.setData({
+       inputvalue
+    })
+    // if (e.detail.value == "") {
+    //   this.setData({
+    //     is_send: false,
+    //     inputValue: e.detail.value
+    //   })
+    // } else {
+    //   this.setData({
+    //     is_send: true,
+    //     inputValue: e.detail.value
+    //   })
+    // }
   },
 
   /**

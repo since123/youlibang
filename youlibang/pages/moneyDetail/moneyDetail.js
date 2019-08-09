@@ -46,7 +46,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'user/flowAccount?openid=' + openid + '&time=' + nowDate,
+      url: ApiUrl.phplist + 'user/flowAccount?user_id=1&time=' + nowDate,
     }).then((res) => {
       console.log()
       console.log(nowDate)

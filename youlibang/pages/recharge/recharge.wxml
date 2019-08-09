@@ -4,7 +4,7 @@
   <view class='line'></view>
   <view class='cash'>
   <view class='cash_l'>¥</view>
-  <input type='text' placeholder="请输入充值金额" />
+  <input type='text' bindinput="getAmoutValue" placeholder="请输入充值金额" />
 </view>
 </view>
 <view class='coomit' bindtap='recharge'>充值</view>

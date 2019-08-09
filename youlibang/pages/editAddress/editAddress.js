@@ -81,13 +81,14 @@ Page({
     var addressdetail=this.data.addressdetail
     var address=region+addressdetail
     var user_id=this.data.user_id
+    console.log(address_name)
    //请求编辑接口
     httpReq({
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url:'http://www.ylb.com/api/user/editaddress?address_id='+address_id+'&address_phone='+address_phone+'&address='+address+'&user_id='+user_id,
+      url:'http://www.ylb.com/api/user/editaddress?address_id='+address_id+'&address_phone='+address_phone+'&address='+address+'&user_id='+user_id+'&address_name='+address_name,
     }).then((res) => {
         console.log(res)
     });

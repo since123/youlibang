@@ -62,6 +62,10 @@ Page({
        var searchGoods=res.data.lists
        if(searchGoods==undefined){
           console.log("暂无数据匹配！")
+          this.setData({
+            searchGoods:[]
+          })
+          console.log(this.data.searchGoods)
        }else{
          let goods=searchGoods.map((v)=>{
            v.goods_name=v.goods_name.replace(search,"<b style='color:red'>"+search+"</b>")
@@ -112,7 +116,14 @@ Page({
      });
     
    },
-
+  goodsdetail(e){
+    
+    var id = e.currentTarget.dataset.goodsid
+    console.log(id)
+    wx.navigateTo({
+      url: '../goodsDetail/goodsDetail?goodsId='+id,
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

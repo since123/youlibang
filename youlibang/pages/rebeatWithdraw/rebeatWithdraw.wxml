@@ -1,3 +1,4 @@
+<!--pages/rebeatWithdraw/rebeatWithdraw.wxml-->
 <!--pages/withdrawal/withdrawal.wxml-->
 <view class='amount'>
   <view class='cash'>

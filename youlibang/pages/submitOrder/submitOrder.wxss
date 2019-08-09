@@ -1,4 +1,5 @@
 /* pages/submitOrder/submitOrder.wxss */
+
 .detailInfo{
   width: 750rpx;
   height: 120rpx;
@@ -136,8 +137,10 @@
   float: left;
   width: 750rpx;
   height: 50rpx;
+  background: white;
   /* background-color: red; */
-  margin-top: 1%
+  margin-top: 1%;
+  
 }
 .yunfeitext{
   width:100rpx;
@@ -212,8 +215,9 @@
   
 }
 .payforWay{
+  margin-left: 16rpx;
   width:750rpx;
-  height:100rpx;
+  height:80rpx;
   /* background:red; */
   float: left;
   font-size:28rpx;
@@ -231,6 +235,8 @@
   height:100rpx;
   /* background:red; */
   float: left;
+  background: white;
+  margin-left: 8rpx;
 }
 .wexinPayfor image{
   float: left;
@@ -254,7 +260,7 @@
   float: left;
   margin-left: 5%;
   width: 670rpx;
-  height: 1rpx;
+  height: 2rpx;
   background:rgba(238,238,238,1);
 }
 .check_box .wx-checkbox-input {
@@ -309,4 +315,24 @@ transform: translate(-50%, -50%) scale(1);
 radio .wx-radio-input.wx-radio-input-checked{
   background: red!important;
   border:none;
+}
+.qianbao{
+
+  margin-bottom: 100rpx;
+  background: white;
+  margin-top: 0;
+}
+page{
+  background: #f5f7f9;
+}
+.shuru{
+  border: 2rpx solid #eeeeee;
+  height: 50rpx;
+  float: left;
+  width: 100%;
+  font-size:24rpx;
+  font-family:sans-serif;
+  color:rgba(86,103,149,1);
+  margin-left: 5%;
+  margin-top: 1%;
 }

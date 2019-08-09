@@ -113,11 +113,15 @@ label{
   -webkit-box-orient: vertical;
 }
 .informlist {
-  float:left;
+  /* float:left; */
   margin: 20rpx;
   font-size: 24rpx;
   border: 1rpx solid rgba(153,153,153,1);
   border-radius: 10rpx;
+}
+.informButton {
+  font-size: 20rpx;
+  width:30%;
 }
 .informlist text{
   color: red;

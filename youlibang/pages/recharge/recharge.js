@@ -12,20 +12,30 @@ Page({
    */
   
   data: {
-    amount:''
+    amount:'',
+    body: '充值'
   },
-
+  /**
+   * 获取输入金额
+   */
+  getAmoutValue: function(e){
+    this.setData({
+      amount:e.detail.value
+    })
+    console.log(this.data.amount)
+  },
   //充值
   recharge: function() {
     var that=this;
-    var openId=wx.getStorageSync("openId")
-    var amount,token,openId;
+    var token = wx.getStorageSync("token")
     httpReq({
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'order/orderpay?pay_amount=' + pay_amount + '&body=' + body + '&openid=' + openid}).then((res)=>{
+      url: ApiUrl.phplist + 'order/orderpay?pay_amount=' + this.data.amount + '&body=' + this.data.body + '&token=' + token,
+      // url: ApiUrl.phplist + 'order/orderpay?pay_amount=' + this.data.amount,
+      }).then((res)=>{
         console.log(res)
         if (res.data.code == '1') {
           that.setData({
@@ -38,7 +48,7 @@ Page({
           })
           setTimeout(function () {
             wx.navigateTo({
-              url: '',
+              url: '../recharge/recharge',
             })
           }, 1000)  //定时函数确保状态显示之后再返回上一页
           that.xcxPay(); // 拿到统一下单的参数后唤起微信支付页面

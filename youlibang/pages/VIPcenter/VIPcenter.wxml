@@ -6,8 +6,8 @@
   <view class='yongjin'>可提现佣金</view>
   <view class='money'>
     <label>￥</label>{{dedCommission}}</view>
-  <view class='upgradeVIP' bindtap='applyVIP'>升级会员</view>
-  <view class='tixian' bindtap='withdraw'>提现</view>
+  <view class='upgradeVIP' bindtap='applyVIP'>申请会员</view>
+  <view class='tixian' bindtap='rebeatWithdraw'>提现</view>
 </view>
 
 <view class='seconedbox'>

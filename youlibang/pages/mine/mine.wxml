@@ -58,7 +58,7 @@
     </view>
     <view class="user_three_li nav_li" bindtap='applyVIP'>
       <image class="nav_img" src="../../images/fenxiao@2x.png"></image>
-      <view class="nav_text">会员申请</view>
+      <view class="nav_text">会员中心</view>
     </view>
     <view class="user_three_li" bindtap='coupon'>
       <image class="nav_img" src="../../images/juan@2x.png"></image>

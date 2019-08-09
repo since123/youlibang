@@ -97,7 +97,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'user/userdetail?openid=' + this.data.openid,
+      url: ApiUrl.phplist + 'user/userdetail?user_id=2',
     }).then((res) => {
       console.log(res.data.lists);
       let list = res.data.lists
@@ -165,7 +165,21 @@ Page({
   //     urls: this.data.imageList
   //   })
   // },
-
+  /**
+   * 获取修改的input中的值
+   */
+  getVipNameValue: function(e) {
+    this.setData({
+      vipname: e.detail.value
+    })
+    console.log(this.data.vipname)
+  },
+  getSexValue: function(e) {
+    this.setData({
+      sex: e.detail.value
+    })
+    console.log(this.data.sex)
+  },
   /**更新保存个人资料修改（红星星部分） */
   changeAvatar: function (e) {
     //这里是上传操作
@@ -174,13 +188,16 @@ Page({
       filePath: this.data.src,//要上传文件资源的路径，此处只有一张，为数组第一项， String类型 
       name: '',//按个人情况填写，文件对应的 key,开发者在服务器端通过这个 key 可以获取到文件二进制内容，(后台接口规定的关于图片的请求参数)
       header: {
-
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
       
       formData: {
-        'user': 'test',// HTTP 请求中其他额外的 form data
+        // HTTP 请求中其他额外的 form data
+        nickname: this.data.vipname,
+        sex: this.data.sex
         //和服务器约定的token, 一般也可以放在header中
-        'session_token': wx.getStorageSync('session_token')
+        // 'session_token': wx.getStorageSync('session_token')
       },
       success: function (res) {
         const data = res.data
@@ -197,8 +214,9 @@ Page({
               'Accept': 'application/json'
             },
             method: 'POST',
-            url: ApiUrl.phplist + '',
+            url: ApiUrl.phplist + '',//真正修改操作,填写你们修改的API
           }).then((res) => {
+            console.log(res)
             if (res.data.code == 200) {
               wx.showToast({
                 title: '修改成功',

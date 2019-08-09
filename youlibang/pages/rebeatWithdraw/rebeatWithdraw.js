@@ -12,22 +12,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-    amount:'',
+    amount: '',
     someMoney: '',
     token: '',
-    describe: '余额提现'
+    describe: '返利提现'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+
   },
   /**
    * 得到后台数据
    */
-  getInform: function(){
+  getInform: function () {
     let that = this
     let token = wx.getStorageSync('token')
     that.setData({
@@ -38,7 +38,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'member/blcash?token=' + token + '&describe=' + this.data.describe + '&fee=' + this.data.someMoney,
+      url: ApiUrl.phplist + 'member/rebatecash?token=' + token + '&describe=' + this.data.describe + '&fee=' + this.data.someMoney,
     }).then((res) => {
       console.log(res)
     })
@@ -46,28 +46,28 @@ Page({
   /**
    * 得到输入金额
    */
-  getMoney: function(e) {
+  getMoney: function (e) {
     this.setData({
-      someMoney : e.detail.value
+      someMoney: e.detail.value
     })
     console.log(this.data.someMoney)
   },
   /**
    * 得到全部余额
    */
-  getAll: function() {
+  getAll: function () {
     this.setData({
-      someMoney:amount
+      someMoney: amount
     })
   },
-  withdrawal:function(){
+  withdrawal: function () {
     var status = this.data.status;
     // console.log("触发了点击事件，弹出toast")
     status = !status;
     this.setData({
       status: status
     })　　　　 //setData方法可以建立新的data属性，从而起到跟视图实时同步的效果
-    
+
   },
   toastHide: function (event) {
     // console.log("触发bindchange，隐藏toast")
@@ -83,15 +83,15 @@ Page({
     })
   },
   //手动提现
-  handsWithdraw:function(){
-    var that=this;
-    var openId=wx.getStorageSync('openId')
+  handsWithdraw: function () {
+    var that = this;
+    var openId = wx.getStorageSync('openId')
     this.setData({
       status: false
     })
   },
   //自动提现
-  allWithdraw:function(){
+  allWithdraw: function () {
 
   },
 

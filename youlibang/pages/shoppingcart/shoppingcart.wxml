@@ -1,5 +1,5 @@
 <!--pages/ShoppingCart/ShoppingCart.wxml-->
-<view wx:for="{{carts}}">
+<view wx:for="{{carts}}" class="goodsItem">
   <view class='Shopping_list'>
     <!-- wx:if 是否选中 -->
     <icon wx:if="{{item.selected}}" type="success" color="red" bindtap="selectList" data-index="{{index}}" size='40rpx' />

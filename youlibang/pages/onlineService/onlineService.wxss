@@ -144,3 +144,7 @@
   color:rgba(234,65,72,1);
   line-height:70rpx;
 }
+.body{
+  position: relative;
+  bottom: 100rpx;
+}

@@ -117,10 +117,13 @@ Page({
     if (this.data.yd == "" || this.data.wd == ""||this.data.cd==""){
       return false
     }
- 
-   
+    var productsList=this.data.productsList
+   console.log(productsList)
     //重组数据
     var obj={}
+    obj.goods_introduce = productsList.goods_introduce
+    obj.id=productsList.id
+    obj.goods_name = productsList.goods_name
     obj.yd = this.data.yd
       obj.wd=this.data.wd
       obj.cd=this.data.cd
@@ -167,7 +170,7 @@ Page({
         url: '../submitOrder/submitOrder?info='+info,
       })
     }
-     
+    
   },
   //输入数量
   bindManual(e){
@@ -261,6 +264,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    //console.log(options)
     var goodsId = options.goodsId;
     console.log(goodsId)
     httpReq({

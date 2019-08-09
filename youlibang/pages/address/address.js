@@ -116,7 +116,7 @@ Page({
       return;
     }
     address = address+addressdetail
-    console.log(address)
+    console.log(address_phone)
    //请求新增接口
     httpReq({
       header: {

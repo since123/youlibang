@@ -26,6 +26,7 @@ Page({
     //     { id: 1, title: '新西兰A2脱脂高钙儿童学生成人奶1kg...', image: '../../images/kefu@2x.png', num: 1, price: 119.00, selected: true }
     //   ]
     // });
+    console.log(this.data.carts)
    
      this.getTotalPrice()
   },
@@ -34,14 +35,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
- 
-   
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
     var that = this
     //请求接口
     httpReq({
@@ -51,69 +44,64 @@ Page({
       },
       url: "http://www.ylb.com/api/cart/getcart",
     }).then((res) => {
-      console.log(res)
+      //console.log(res)
       var dataList = res.data.lists
-      console.log(dataList)
-      //进行数据重组
-      var arr = []
-      console.log(arr)
-      for (let i = 0; i < dataList.length; i++) {
-        var obj = {}
-        obj.id = dataList[i].goods_id
-        obj.title = dataList[i].goods_name
-        obj.num = dataList[i].number
-        obj.price = 2
-        obj.selected = true
-        arr.push(obj)
-      }
-
-      console.log(arr)
-      that.setData({
-        hasList: true,
-        carts: arr
-      })
-      console.log(this.data.carts)
-      //获取本地存储
-      // wx.getStorage({
-      //   key: 'shop',
-      //   success: function (res) {
-      //     console.log(res)
-      //     var arr = res.data
-      //     var carts = that.data.carts
-      //     //循环添加
-      //     for (let i = 0; i < arr.length; i++) {
-      //       var array = arr[i] 
-      //       carts.push(array)
-      //     }
-      //     //重新赋值
-      //     that.setData({
-      //       carts
-      //     })
-      //   },
-      // })
-      //同步成功
-      try {
-        var value = wx.getStorageSync('shop')
-        if (value) {
-          var arr = value
-          var carts = this.data.carts
-          //循环添加
-          for (let i = 0; i < arr.length; i++) {
-            var array = arr[i] 
-            carts.push(array)
-          }
-          this.setData({
-            carts
-          })
+      //console.log(dataList)
+      if (dataList == undefined) {
+        console.log('购物车空空如也，去逛逛吧！')
+      } else {
+        //进行数据重组
+        var arr = []
+        //console.log(arr)
+        for (let i = 0; i < dataList.length; i++) {
+          var obj = {}
+          obj.id = dataList[i].goods_id
+          obj.title = dataList[i].goods_name
+          obj.num = dataList[i].number
+          obj.price = 2
+          obj.selected = true
+          arr.push(obj)
         }
-        //若同步失败，本地存储内没有值
-      } catch (e) {
+
+        //console.log(arr)
+        that.setData({
+          hasList: true,
+          carts: arr
+        })
+        //console.log(this.data.carts)
+        //同步成功
+        try {
+          var value = wx.getStorageSync('shop')
+          if (value) {
+            var arr = value
+            var carts = this.data.carts
+            //循环添加
+            for (let i = 0; i < arr.length; i++) {
+              var array = arr[i]
+              carts.push(array)
+            }
+            this.setData({
+              carts
+            })
+          }
+          //若同步失败，本地存储内没有值
+        } catch (e) {
           console.log(e)
+        }
+        //console.log(carts.length)
+
+        this.getTotalPrice()
+
       }
-      //console.log(carts.length)
-      
-      this.getTotalPrice()
     });
+   
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+   
   },
 
   /**
@@ -154,9 +142,17 @@ Page({
   search: function () {
     var total=this.data.totalPrice
     var carts=this.data.carts
-    console.log(carts)
+    //console.log(carts)
+   let info=carts.filter((v)=>{
+         if(v.selected==true){
+           return v
+         }
+   })
+   info=JSON.stringify(info)
+    //console.log(info)
+    wx.setStorageSync('total', total)
     wx.navigateTo({
-      url: '../submitOrder/submitOrder?totalPrice='+carts+'&total='+total,
+      url: '../submitOrder/submitOrder?info='+info,
     })
   },
   //封装的计算总价方法
@@ -182,14 +178,15 @@ Page({
   },
   //选择事件
   selectList(e) {
+    
     var that = this;
     const index = e.currentTarget.dataset.index;// 获取data- 传进来的index
-
+     console.log(index)
     let carts = that.data.carts;   // 获取购物车列表
+    console.log(carts)
     that.data.selectAllStatus = true; //默认是全选                
     let selected = carts[index].selected; // 获取当前商品的选中状态
     carts[index].selected = !selected
-
     for (let i = 0; i < carts.length; i++) {            // 改变所有商品状态
       if (!carts[i].selected) {//判断单个商品是否是选中状态
         that.data.selectAllStatus = false
@@ -200,6 +197,7 @@ Page({
       carts: carts,
       selectAllStatus: that.data.selectAllStatus
     });
+    console.log(this.data.carts)
     this.getTotalPrice();                           // 重新获取总价
  
   },

@@ -1,5 +1,4 @@
 <!--pages/myaddress/myaddress.wxml-->
-<radio-group>
 <view wx:for='{{addressList}}'  wx:for-item='item'  >
   <view class='coll'>
     <view class='coll_u'>
@@ -7,17 +6,16 @@
       <view class='coll_b'>{{item.address}}</view>
     </view>
     <view class='coll_v'>
-      <radio class='check_box' checked='{{item.state}}'></radio>
+      <checkbox class='check_box' checked='{{item.state}}' bindtap="choose" data-id="{{item.id}}"></checkbox>
       <view class='coll_f' bindtap="setDefault" data-id="{{item.id}}">设为默认</view>
       <view class='coll_L' bindtap='editAddress' >
       <image src='../../images/edit@2x.png'></image>
       <view class='coll_o' data-id="{{item.id}}" data-user_id="{{item.user_id}}" >编辑</view></view>
       <view class='coll_k' bindtap='deleteAddress'>
       <image src='../../images/delete@2x.png'></image>
-      <view class='coll_o' data-id="{{item.id}}">删除</view>
+      <view class='coll_o' data-index="{{index}}" data-id="{{item.id}}">删除</view>
     </view>
   </view>
   </view>
 </view>
-</radio-group>
 <view class='diss' bindtap='addAddress'>新增收货地址</view>

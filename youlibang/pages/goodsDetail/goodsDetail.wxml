@@ -54,7 +54,7 @@
     <view class='goodsdetailImg'><image src='../../images/2013062320262198.jpg'></image></view>
     <view class='priceDiv'>
       <view class='detailprice'><label>￥</label>{{productsList.goods_member_price}}</view>
-      <view class='types'><block wx:if="{{type_txt==''}}">请选择规格</block><block wx:else>已选<label>{{type_txt}}</label></block>
+      <view class='types'><block wx:if="{{type_txt==''}}">请选择规格</block><block wx:else>已选<label>{{yd}},{{wd}},{{cd}},{{num}}件</label></block>
 </view>
     </view>
 

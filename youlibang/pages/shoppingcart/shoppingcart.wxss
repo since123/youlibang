@@ -1,5 +1,7 @@
 /* pages/ShoppingCart/ShoppingCart.wxss */
-
+page{
+  background: #f5f7f9
+}
 
 .Shopping_list {
   display: flex;
@@ -169,4 +171,7 @@
   font: 36rpx/88rpx "";
   text-align: center;
   margin-left: 30rpx;
+}
+.goodsItem{
+  background: white
 }

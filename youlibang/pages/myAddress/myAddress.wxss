@@ -21,7 +21,7 @@
 
 .check_box .wx-checkbox-input.wx-checkbox-input-checked {
   border: none;
-  background: red;
+  background:#11AC36;
 }
 
 .check_box .wx-checkbox-input.wx-checkbox-input-checked::before {

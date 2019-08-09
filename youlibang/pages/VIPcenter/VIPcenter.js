@@ -15,9 +15,9 @@ Page({
     })
   },
   //提现
-  withdraw:function(){
+  rebeatWithdraw:function(){
     wx.navigateTo({
-      url: '../withdraw/withdraw',
+      url: '../rebeatWithdraw/rebeatWithdraw',
     })
   },
   lookdetail:function(){

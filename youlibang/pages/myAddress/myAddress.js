@@ -56,18 +56,44 @@ Page({
           user_id: 5
         })
       } else {
-
         var user_id = addressList[0].user_id
-        addressList[0].state=true
+      //  循环追加区分标识
+      for(let i=0;i<addressList.length;i++){
+          addressList[i].state=false
+          if(addressList[i].state!=false){
+            addressList[i].state=true
+          }else{
+            addressList[0].state = true
+          }
+      }
+
+       
         console.log(addressList)
         this.setData({
           addressList,
           user_id
         })
+        //存入缓存
+        wx.setStorageSync('addressList', addressList)
       }
 
     });
     
+  },
+  choose(e){
+   var addressList=this.data.addressList
+    var id = e.currentTarget.dataset.id
+    console.log(id)
+    for(let i=0;i<addressList.length;i++){
+      addressList[i].state=false
+          if(addressList[i].id==id){
+               addressList[i].state=true
+          }
+    }
+    console.log(addressList)
+    this.setData({
+      addressList
+    })
   },
   //事件处理
   //设为默认
@@ -89,7 +115,13 @@ Page({
     var address_type = address[0].address_type
     var address_id = address[0].id
     console.log(address_id,address_type)
-    //返出对应的数据
+    //将数据提交出去
+
+
+    //如果成功了
+    wx.showToast({
+      title: '修改成功！',
+    })
    
   },
   //新增地址
@@ -110,9 +142,12 @@ Page({
   },
   //删除地址
   deleteAddress: function (e) {
+    console.log(e)
    var user_id=this.data.user_id
     var address_id = e.target.dataset.id
-    console.log(user_id,address_id)
+    var index = e.target.dataset.index
+    console.log(user_id,address_id,index)
+    var that = this
     wx.showModal({
       title: '提示',
       content: '确定要删除吗？',
@@ -126,8 +161,26 @@ Page({
             },
             url: 'http://www.ylb.com/api/user/deladdress?user_id='+user_id+'&address_id='+address_id,
           }).then((res) => {
+            //返回成功或失败的标识
           console.log(res)
-            this.onShow();
+          //从缓存中取出
+          
+          console.log(that)
+          wx.getStorage({
+            key: 'addressList',
+            success: ((res)=>{
+                console.log(res)
+                var addressList=res.data
+               //执行删除
+               addressList.splice(index,1)
+               //console.log(addressList)
+             // console.log(that)
+             that.setData({
+                 addressList
+             })
+          }),
+          })
+
         });
         
         } else if (res.cancel) {
