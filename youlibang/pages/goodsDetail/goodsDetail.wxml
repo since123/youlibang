@@ -12,10 +12,10 @@
 <!-- 商品介绍 -->
 <view class='goodsjieshao'>
   <view class='price'>
-    <view class='money'><label>￥</label>{{productsList.goods_member_price}}</view>
-    <view class='money1'><label>￥</label>{{productsList.goods_price}}</view>
+    <view class='money'><label>￥</label>{{productsList.goods_price}}</view>
+    <view class='money1'><label>￥</label></view>
     <view class='superVIP'><label>超级会员</label></view>
-    <view class='yunfei'>运费:<label>{{param.yunfei}}</label>
+    <view class='yunfei'>运费:<label>{{productsList.freight}}</label>
   </view>
   </view>
   <view class='goodsdetail'>{{productsList.goods_introduce}}</view>
@@ -53,30 +53,24 @@
     <view  class='close' bindtap='quxiao' hidden="{{!status}}"><image src=''></image></view>
     <view class='goodsdetailImg'><image src='../../images/2013062320262198.jpg'></image></view>
     <view class='priceDiv'>
-      <view class='detailprice'><label>￥</label>{{productsList.goods_member_price}}</view>
-      <view class='types'><block wx:if="{{type_txt==''}}">请选择规格</block><block wx:else>已选<label>{{yd}},{{wd}},{{cd}},{{num}}件</label></block>
+      <view class='detailprice'><label>￥</label>{{productsList.goods_price}}</view>
+      <view class='types'><block wx:if="{{yd==''||wd==''}}">请选择规格</block><block wx:else>已选<label>{{yd}},{{wd}},{{num}}件</label></block>
 </view>
     </view>
 
 <view>
-<!-- 硬度 -->
+<!-- 包装 -->
         <view class='color'>{{goodsInfo[0].attr_name}}</view>
    <view class="colorfenlei" >
       <view class="list{{(index+1)==idx?'active':''}}" wx:for='{{arr1}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getValue">{{item}}
       </view>
   </view>
-  <!-- 味道 -->
+  <!-- 尺寸 -->
       <view class='color'>{{goodsInfo[1].attr_name}}</view>
    <view class="colorfenlei" >
       <view class="list{{(index+1)==idex?'active':''}}" wx:for='{{arr2}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getVal">{{item}}
       </view>
-  </view>
-  <!-- 产地 -->
-      <view class='color'>{{goodsInfo[2].attr_name}}</view>
-   <view class="colorfenlei" >
-      <view class="list{{(index+1)==sx?'active':''}}" wx:for='{{arr3}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getVa">{{item}}
-      </view>
-  </view>
+  </view>   
 </view>
     <view class='amount'>数量</view>
     <view class='stepper sum'>

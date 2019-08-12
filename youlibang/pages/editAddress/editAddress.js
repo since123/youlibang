@@ -22,12 +22,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //console.log(options);
+    console.log(options);
     var address_id=options.id
-    var user_id=options.user_id
+    var member_id=options.member_id
    this.setData({
      address_id,
-     user_id
+     member_id
    })
   },
 
@@ -80,15 +80,15 @@ Page({
    var region=this.data.region
     var addressdetail=this.data.addressdetail
     var address=region+addressdetail
-    var user_id=this.data.user_id
-    console.log(address_name)
+    var member_id=this.data.member_id
+    console.log(address_name, address_id, member_id, address_phone, address)
    //请求编辑接口
     httpReq({
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url:'http://www.ylb.com/api/user/editaddress?address_id='+address_id+'&address_phone='+address_phone+'&address='+address+'&user_id='+user_id+'&address_name='+address_name,
+      url:'http://www.ylb.com/api/user/editaddress?address_id='+address_id+'&address_phone='+address_phone+'&address='+address+'&member_id='+member_id+'&address_name='+address_name,
     }).then((res) => {
         console.log(res)
     });

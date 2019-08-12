@@ -14,6 +14,8 @@ Page({
     userName: '李开心',
     phoneNumber: '13260995055',
     adress: '广东省广州市天河区汇诚大厦365',
+    token: '',
+    orderId: '',
     order: [
       {
         goodsImg: '../../images/2012031220134655.jpg',
@@ -40,6 +42,10 @@ Page({
   onLoad: function (option) {
     // console.log("options: " + option.orderId)//7777
     let orderId = option.orderId
+    this.setData({
+      token: wx.getStorageSync('token'),
+      orderId: orderId
+    })
     // this.getOrder(orderId)
   },
   getOrder: function (orderId) {
@@ -48,14 +54,10 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + ' ',
-      data: {
-        orderId: orderId
-      },
+      url: ApiUrl.phplist + 'order/oddetail?token=' + this.data.token + '&order_sn=' + this.data.orderId,
     }).then((res) => {
-      console.log(res.data)
+      console.log(res)
     })
-    console.log("1")
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

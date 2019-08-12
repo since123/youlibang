@@ -6,11 +6,11 @@
       <view class='coll_b'>{{item.address}}</view>
     </view>
     <view class='coll_v'>
-      <checkbox class='check_box' checked='{{item.state}}' bindtap="choose" data-id="{{item.id}}"></checkbox>
+      <checkbox class='check_box' checked='{{item.state}}' bindtap="setDefault" data-id="{{item.id}}"></checkbox>
       <view class='coll_f' bindtap="setDefault" data-id="{{item.id}}">设为默认</view>
       <view class='coll_L' bindtap='editAddress' >
       <image src='../../images/edit@2x.png'></image>
-      <view class='coll_o' data-id="{{item.id}}" data-user_id="{{item.user_id}}" >编辑</view></view>
+      <view class='coll_o' data-id="{{item.id}}" data-member_id="{{item.member_id}}" >编辑</view></view>
       <view class='coll_k' bindtap='deleteAddress'>
       <image src='../../images/delete@2x.png'></image>
       <view class='coll_o' data-index="{{index}}" data-id="{{item.id}}">删除</view>

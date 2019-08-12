@@ -12,6 +12,7 @@ Page({
     
     ],
     address: '',
+    member_id:9
   },
   
 
@@ -41,82 +42,100 @@ Page({
 
     // }
     // 请求地址展示接口
+    var member_id=this.data.member_id
     httpReq({
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://www.ylb.com/api/user/getaddress',
+      url:'http://www.ylb.com/api/user/getaddress?member_id='+member_id,
     }).then((res) => {
+       console.log(res)
       var addressList = res.data.lists
       //console.log(addressList)
-      console.log(res)
+      //console.log(res)
+      var member_id = addressList[0].member_id
       if (addressList == undefined) {
         this.setData({
-          user_id: 5
+          member_id
         })
       } else {
-        var user_id = addressList[0].user_id
-      //  循环追加区分标识
-      for(let i=0;i<addressList.length;i++){
-          addressList[i].state=false
-          if(addressList[i].state!=false){
-            addressList[i].state=true
-          }else{
+        var member_id = addressList[0].member_id
+        //  循环追加区分标识
+        for (let i = 0; i < addressList.length; i++) {
+          addressList[i].state = false
+          if (addressList[i].state != false) {
+            addressList[i].state = true
+          } else {
             addressList[0].state = true
           }
-      }
+        }
 
-       
+
         console.log(addressList)
         this.setData({
           addressList,
-          user_id
+          member_id
         })
         //存入缓存
         wx.setStorageSync('addressList', addressList)
       }
 
+
     });
     
   },
-  choose(e){
-   var addressList=this.data.addressList
-    var id = e.currentTarget.dataset.id
-    console.log(id)
-    for(let i=0;i<addressList.length;i++){
-      addressList[i].state=false
-          if(addressList[i].id==id){
-               addressList[i].state=true
-          }
-    }
-    console.log(addressList)
-    this.setData({
-      addressList
-    })
-  },
+  // choose(e){
+  //  var addressList=this.data.addressList
+  //   var id = e.currentTarget.dataset.id
+  //   console.log(id)
+  //   for (let i = 0; i < addressList.length; i++) {
+  //     addressList[i].state = false
+  //     if (addressList[i].id == id) {
+  //       addressList[i].state = true
+  //     }
+  //   }
+  //   console.log(addressList)
+  //   this.setData({
+  //     addressList
+  //   })
+  // },
   //事件处理
   //设为默认
   setDefault(e){
     console.log(e)
     var id=e.target.dataset.id
-   // console.log(id)
+    var member_id=this.data.member_id
+   console.log(member_id)
     var addressList=this.data.addressList
     var address = []
     for(let i=0;i<addressList.length;i++){
+      addressList[i].state = false
         if(addressList[i].id==id){
             // console.log(addressList[i])
+          addressList[i].state = true
           address.push(addressList[i])
         }
     }
+    this.setData({
+      addressList
+    })
     //console.log(address)
     //更改数据库里面的
     address[0].address_type=1
     var address_type = address[0].address_type
     var address_id = address[0].id
-    console.log(address_id,address_type)
+    console.log(address_id,address_type,member_id)
     //将数据提交出去
-
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url:'http://www.ylb.com/api/user/defselect?member_id='+member_id+'&address_id='+address_id+'&address_type='+address_type,
+    }).then((res) => {
+      console.log(res)
+    });
 
     //如果成功了
     wx.showToast({
@@ -126,27 +145,27 @@ Page({
   },
   //新增地址
   addAddress:function(e){
-    var user_id=this.data.user_id
+    var member_id=this.data.member_id
     wx.navigateTo({
-      url: '../address/address?user_id='+user_id,
+      url: '../address/address?member_id='+member_id,
     })
   },
   //编辑收货地址
   editAddress: function (e) {
     console.log(e)
     var id=e.target.dataset.id
-    var user_id = e.target.dataset.user_id
+    var member_id = e.target.dataset.member_id
     wx.navigateTo({
-      url: '../editAddress/editAddress?id='+id+'&user_id='+user_id,
+      url: '../editAddress/editAddress?id='+id+'&member_id='+member_id,
     })
   },
   //删除地址
   deleteAddress: function (e) {
     console.log(e)
-   var user_id=this.data.user_id
+   var member_id=this.data.member_id
     var address_id = e.target.dataset.id
     var index = e.target.dataset.index
-    console.log(user_id,address_id,index)
+    console.log(member_id,address_id,index)
     var that = this
     wx.showModal({
       title: '提示',
@@ -159,27 +178,27 @@ Page({
               'Content-Type': 'application/json',
               'Accept': 'application/json'
             },
-            url: 'http://www.ylb.com/api/user/deladdress?user_id='+user_id+'&address_id='+address_id,
+            url: 'http://www.ylb.com/api/user/deladdress?member_id='+member_id+'&address_id='+address_id,
           }).then((res) => {
             //返回成功或失败的标识
           console.log(res)
           //从缓存中取出
           
           console.log(that)
-          wx.getStorage({
-            key: 'addressList',
-            success: ((res)=>{
-                console.log(res)
-                var addressList=res.data
-               //执行删除
-               addressList.splice(index,1)
-               //console.log(addressList)
-             // console.log(that)
-             that.setData({
-                 addressList
-             })
-          }),
-          })
+          //同步取缓存
+          try{
+               var value=wx.getStorageSync('addressList')
+               if(value){
+                      value.splice(index,1)
+                      that.setData({
+                        addressList:value
+                      })
+               }else{
+                 console.log('亲，没有地址了呢')
+               }
+          }catch(e){
+
+          }
 
         });
         

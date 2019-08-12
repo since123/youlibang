@@ -9,7 +9,7 @@ Page({
    */
   data: {
     index:'',
-    user_id:'',
+    member_id:'',
     linkname:'',
     region: ['广东省', '广州市', '海珠区'], // 初始值
     customItem: '全部'
@@ -49,11 +49,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var user_id=options.user_id
+    var member_id=options.member_id
     this.setData({
-      user_id
+      member_id
     })
-    console.log(user_id)
+    console.log(member_id)
       // try{
       //   var address=wx.getStorageSync('address')
       //   if(address){
@@ -92,8 +92,8 @@ Page({
     var address_phone=this.data.moblie
     var address=this.data.region
     var addressdetail=this.data.addressdetail
-     var user_id=this.data.user_id
-     console.log(user_id)
+     var member_id=this.data.member_id
+     console.log(member_id)
     if (address_name==''){
       wx.showToast({
         title: '提示',
@@ -116,14 +116,14 @@ Page({
       return;
     }
     address = address+addressdetail
-    console.log(address_phone)
+    console.log(address_phone, address_name, member_id, address)
    //请求新增接口
     httpReq({
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://www.ylb.com/api/user/addaddress?user_id='+user_id+'&address_name='+address_name+'&address_phone='+address_phone+'&address='+address,
+      url: 'http://www.ylb.com/api/user/addaddress?member_id='+member_id+'&address_name='+address_name+'&address_phone='+address_phone+'&address='+address,
     }).then((res) => {
         console.log(res)
     });

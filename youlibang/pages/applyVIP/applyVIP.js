@@ -22,7 +22,7 @@ Page({
     informHidden: true,
     pageSize: 4,
     buttonText: '会员专享超多优惠返利！',
-    token: '',
+    token: '11',
     vipRules: [
       {
         userGrade: '普通VIP',
@@ -224,7 +224,7 @@ Page({
       // url: ApiUrl.phplist + 'user/cardUpload?uploads='+ '['+'card_one=' + cardone + ',card_two=' + cardtwo + ',license=' + license +']', //里面填写你的上传图片服务器API接口的路径
       url: ApiUrl.phplist + 'user/cardUpload?uploads=' + this.data.imgList,
       filePath: this.data.imgList,//要上传文件资源的路径，此处只有一张，为数组第一项， String类型 
-      name: '',//按个人情况填写，文件对应的 key,开发者在服务器端通过这个 key 可以获取到文件二进制内容，(后台接口规定的关于图片的请求参数)
+      // name: '',//按个人情况填写，文件对应的 key,开发者在服务器端通过这个 key 可以获取到文件二进制内容，(后台接口规定的关于图片的请求参数)
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'

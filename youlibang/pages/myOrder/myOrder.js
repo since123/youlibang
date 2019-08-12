@@ -21,7 +21,9 @@ Page({
     waitPayOrder: [],
     waitSentOrder: [],
     waitReceivedOrder: [],
-    completeOrder: []
+    completeOrder: [],
+    token: '',
+    vipid: ''
   },
   /**
    * 请求数据
@@ -33,9 +35,9 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'order/getorder',
+      url: ApiUrl.phplist + 'order/getorder?token=' + this.data.token + '&member_id=' + this.data.vipid,
     }).then((res) => {
-      // console.log(res.data)
+      console.log(res.data.lists)
       let lists = res.data.lists
       // console.log(lists)
       //数据重组
@@ -45,56 +47,42 @@ Page({
       let waitReceivedOrder = []
       let completeOrder = []
       for (let m in lists) {
-        // console.log(lists)
         let ss = {}
         let goods = []
-        ss.orderId = m
-        for (let n in lists[m]) {
-          let mm = {}
-          let pay_status = ""
-          let send_status = ""
-          if (n != "pay_status") {
-            // console.log(lists[m][n])
-            // if (lists[m][n].pay_status == )
-            pay_status = lists[m][n].pay_status
-            // ss.status = 
+        ss.orderId = lists[m].order_sn
+        if (lists[m].pay_status == '0') {
+          ss.status = "待付款"
+        }
+        else if (lists[m].pay_status == '1') { 
+          ss.status = "已取消"
+        }
+        else if (lists[m].pay_status == '2') { 
+          ss.status = "待发货"
+        }
+        else if (lists[m].pay_status == '3') {
+          ss.status = "待收货"
+         }
+        else { ss.status = "已收货"}
+        for (let n in lists[m].goods) {
+           let mm = {}
+          console.log(lists[m].goods[n])
+          if (lists[m].goods[n].hasOwnProperty('goods_logo')) {
+            mm.image = lists[m].goods[n].goods_logo
           }
-          if (lists[m][n].hasOwnProperty('goods_logo')) {
-            mm.image = lists[m][n].goods_logo
+          if (lists[m].goods[n].hasOwnProperty('goods_name')) {
+            mm.title = lists[m].goods[n].goods_name
           }
-          if (lists[m][n].hasOwnProperty('goods_name')) {
-            mm.title = lists[m][n].goods_name
+          if (lists[m].goods[n].hasOwnProperty('goods_price')) {
+            mm.price = lists[m].goods[n].goods_price
           }
-          if (lists[m][n].hasOwnProperty('goods_attr_ids')){
-            mm.properties = lists[m][n].goods_attr_ids
-          }
-          if (lists[m][n].hasOwnProperty('goods_price')) {
-            mm.price = lists[m][n].goods_price
-          }
-          if (lists[m][n].hasOwnProperty('number')) {
-            mm.number = lists[m][n].number
-          }
-          if (lists[m][n].hasOwnProperty('courier_status')) {
-            send_status = lists[m][n].courier_status.send_type
-            if (pay_status == "1" && send_status == "0") {
-              ss.status = "待发货"
-            } else if (pay_status == "1" && send_status == "1") {
-              ss.status = "待收货"
-            } else if (pay_status == "1" && send_status == "2") {
-              ss.status = "已完成"
-            } else {
-              ss.status = "待付款"
-            }
-            // console.log(lists[m][n].courier_status.send_type)
-            // mm.status = lists[m][n][courier_number].send_type
+          if (lists[m].goods[n].hasOwnProperty('number')) {
+            mm.number = lists[m].goods[n].number
           }
           goods.push(mm)
           ss.goods = goods
-          // console.log(ss.status)
-          
-          // console.log(ss.goods)
         }
-        // console.log(goods)
+      
+      
         if (ss.status == "待付款") {
           waitPayOrder.push(ss)
         }
@@ -127,6 +115,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
+    let token = wx.getStorageSync('token')
+    let vipid = wx.getStorageSync('vipid')
+    this.setData({
+      token: token,
+      vipid: vipid
+    })
     this.getGoods()
     let tab = option.currtab
     this.setData({

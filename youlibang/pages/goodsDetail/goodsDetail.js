@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isxianshi:true,
     param:{},
     num:1,
     newarr:[],
@@ -272,14 +273,14 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://www.ylb.com/api/goods/getdetail',
+      url: 'http://www.ylb.com/api/goods/getdetail?goods_id='+goodsId,
     }).then((res) => {
       console.log(res)
       var productsList=res.data.lists
       this.setData({
         productsList
       })
-      var goodsInfo = productsList.goods_attr_ids
+      var goodsInfo = productsList.attr
       for(let i=0;i<goodsInfo.length;i++){
        var data= goodsInfo[i].attr_values.split(",")
         goodsInfo[i].attr_values=data
@@ -288,15 +289,13 @@ Page({
       console.log(goodsInfo)
       var arr1 = goodsInfo[0].attr_values
       var arr2 = goodsInfo[1].attr_values
-      var arr3 = goodsInfo[2].attr_values
       this.setData({
         goodsInfo,
         arr1,
         arr2,
-        arr3,
         price
       })
-      console.log(this.data.arr3)
+      console.log(this.data.arr1)
     });
   },
 
