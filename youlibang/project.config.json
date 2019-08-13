@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 4,
 			"list": [
 				{
 					"id": 0,
@@ -80,8 +80,8 @@
 				},
 				{
 					"id": 4,
-					"name": "pages/retailOrder/retailOrder",
-					"pathName": "pages/retailOrder/retailOrder",
+					"name": "pages/retail_orderdetail/retail_orderdetail",
+					"pathName": "pages/retail_orderdetail/retail_orderdetail",
 					"query": "",
 					"scene": null
 				},
@@ -94,8 +94,8 @@
 				},
 				{
 					"id": 6,
-					"name": "pages/myteam/myteam",
-					"pathName": "pages/myteam/myteam",
+					"name": "pages/recharge/recharge",
+					"pathName": "pages/recharge/recharge",
 					"query": "",
 					"scene": null
 				}

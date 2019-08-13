@@ -98,6 +98,7 @@ Page({
         let list = res.data.lists
         that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
           // logs: res.data.result,
+          userImg_url: list.avatar,
           vipid: list.member_id,
           username: list.nickname,
           userImg_url: list.avatar,

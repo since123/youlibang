@@ -10,29 +10,36 @@ Page({
    */
   data: {
    status:true,
+    txtOrderCode: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //console.log(options)
+    console.log(options)
 
     var dataList=JSON.parse(options.info)
-   //console.log(dataList)
-    this.setData({
-      dataList
-    })
-    var that=this
-   wx.getStorage({
-     key: 'total',
-     success: function(res) {
-       var total=res.data
-       that.setData({
-         total
-       })
-     },
-   })
+   console.log(dataList)
+   if(dataList[0].way=='立即购买'){
+         var total=dataList[0].num*dataList[0].price
+         this.setData({
+            total,
+            dataList
+            
+         })
+   }else if(dataList[0].way=='结算'){
+     var total=0
+         for(let i=0;i<dataList.length;i++){
+               total+=(dataList[i].num*dataList[i].price)
+         }
+  console.log(total)
+     this.setData({
+       dataList,
+       total
+     })  
+   }
+   
   },
   payway(){
      console.log("通过微信支付！")
@@ -86,7 +93,45 @@ Page({
     if(way=="微信"){
        //调取微信支付接口
        console.log("微信支付！")
-      
+      var ordercode = this.data.txtOrderCode;
+      wx.login({
+        success: function (res) {
+          if (res.code) {
+            httpReq({
+              header: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              url: 'http://www.ylb.com/api/wxpay/wx_pay',
+            }).then((res) => {
+              console.log(res.data)
+              console.log(res.data.lists)
+              console.log(res.data.lists.timeStamp)
+              wx.requestPayment({
+                timeStamp: res.data.lists.timeStamp,
+                nonceStr: res.data.lists.nonceStr,
+                package: res.data.lists.package,
+                signType: 'MD5',
+                paySign: res.data.lists.paySign,
+                success: function (res) {
+                  // success
+                  console.log(res);
+                },
+                fail: function (res) {
+                  // fail
+                  console.log(res);
+                },
+                complete: function (res) {
+                  // complete
+                  console.log(res);
+                }
+              })
+            })
+          } else {
+            console.log('获取用户登录态失败！' + res.errMsg)
+          }
+        }
+      });
 
 
     }else{
@@ -113,6 +158,11 @@ Page({
     }
    
 
+  },
+  getOrderCode: function (event) {
+    this.setData({
+      txtOrderCode: event.detail.value
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

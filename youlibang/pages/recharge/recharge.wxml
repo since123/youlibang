@@ -8,3 +8,31 @@
 </view>
 </view>
 <view class='coomit' bindtap='recharge'>充值</view>
+
+<view class="mubu" bindtap="cancelPay" hidden="{{!status}}"></view>
+<view class='footer' bindchange="toastHide" hidden="{{!status}}">
+  <view class='way'  bindtap='quxiao' hidden="{{!status}}">
+    <view class='payforWay'><label>支付方式</label></view>
+    <radio-group>
+    <view class='wexinPayfor'>
+        <image src='../../images/weixin@2x.png'></image>
+        <view class='wexintext'>微信支付</view>
+        <radio class='check_box' bindtap="payway"></radio>
+    </view>
+    <view class='li'></view>
+    <view class='wexinPayfor underLine'>
+        <image src='../../images/wallet-copy@2x.png'></image>
+        <view class='wexintext' >线下支付</view>
+        <radio class='check_box' bindtap="payWay"></radio>
+    </view>
+    </radio-group>
+    <view class='btn' bindtap="confirmPay">确认支付</view>
+  </view>
+</view>
+
+
+
+<!-- <view class="container">
+    <input type="text" bindinput="getOrderCode" style="border:1px solid #ccc;"  />
+    <button bindtap="pay">立即支付</button>
+</view> -->

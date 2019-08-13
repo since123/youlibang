@@ -26,6 +26,11 @@ Page({
     //     { id: 1, title: '新西兰A2脱脂高钙儿童学生成人奶1kg...', image: '../../images/kefu@2x.png', num: 1, price: 119.00, selected: true }
     //   ]
     // });
+  var token=wx.getStorageSync('token')
+  console.log(token)
+  this.setData({
+    token
+  })
     console.log(this.data.carts)
    
      this.getTotalPrice()
@@ -36,15 +41,16 @@ Page({
    */
   onReady: function () {
     var that = this
+    var token=this.data.token
     //请求接口
     httpReq({
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: "http://www.ylb.com/api/cart/getcart",
+      url: "http://www.ylb.com/api/cart/getcart?token="+token,
     }).then((res) => {
-      //console.log(res)
+      console.log(res)
       var dataList = res.data.lists
       //console.log(dataList)
       if (dataList == undefined) {
@@ -60,6 +66,7 @@ Page({
           obj.num = dataList[i].number
           obj.price = 2
           obj.selected = true
+          obj.way='结算'
           arr.push(obj)
         }
 
@@ -148,9 +155,9 @@ Page({
            return v
          }
    })
+   console.log(info)
    info=JSON.stringify(info)
-    //console.log(info)
-    wx.setStorageSync('total', total)
+    console.log(info)
     wx.navigateTo({
       url: '../submitOrder/submitOrder?info='+info,
     })

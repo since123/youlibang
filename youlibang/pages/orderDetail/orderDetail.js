@@ -15,48 +15,52 @@ Page({
     phoneNumber: '13260995055',
     adress: '广东省广州市天河区汇诚大厦365',
     token: '',
-    orderId: '',
-    order: [
-      {
-        goodsImg: '../../images/2012031220134655.jpg',
-        goodsdetail: '新款韩版秋装女初恋裙白色复古压褶雪纺长袖连衣裙a字中长裙',
-        types: '粉色、M',
-        num: 'X2件'
-      },{
-        goodsImg: '../../images/2012031220134655.jpg',
-        goodsdetail: '新款韩版秋装女初恋裙白色复古压褶雪纺长袖连衣裙a字中长裙',
-        types: '粉色、M',
-        num: 'X2件'
-      },
-      {
-        goodsImg: '../../images/2012031220134655.jpg',
-        goodsdetail: '新款韩版秋装女初恋裙白色复古压褶雪纺长袖连衣裙a字中长裙',
-        types: '粉色、M',
-        num: 'X2件'
-      }
-    ]
+    orderid: '',
+    orderAmount: '',
+    freightStatus: '20',
+    order: []
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
-    // console.log("options: " + option.orderId)//7777
-    let orderId = option.orderId
+    // console.log("options: " + option.orderid)//7777
+    let orderid = option.orderid
     this.setData({
       token: wx.getStorageSync('token'),
-      orderId: orderId
+      orderid: orderid
     })
-    // this.getOrder(orderId)
+    this.getOrder()
   },
-  getOrder: function (orderId) {
+  getOrder: function () {
+    let that = this
     httpReq({
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'order/oddetail?token=' + this.data.token + '&order_sn=' + this.data.orderId,
+      url: ApiUrl.phplist + 'order/oddetail?token=' + this.data.token + '&order_sn=' + this.data.orderid,
     }).then((res) => {
-      console.log(res)
+      console.log(res.data.lists.or)
+      
+      let goodsList = res.data.lists.or
+      let orderAmount = goodsList[0].order_amount
+      //console.log(orderAmount)
+      let order = []
+      for (let m in goodsList) {
+        console.log(goodsList[m])
+        let good = {}
+        good.goodsImg = goodsList[m].goods_logo,
+        good.goodsdetail = goodsList[m].goods_name,
+        good.types = goodsList[m].goods_attr_values,
+        good.num = goodsList[m].number
+        order.push(good)
+      }
+      that.setData({
+        order : order,
+        orderAmount : orderAmount
+      })
+       console.log(orderAmount)
     })
   },
   /**

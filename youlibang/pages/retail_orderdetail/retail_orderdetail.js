@@ -1,20 +1,68 @@
 // pages/retail_orderdetail/retail_orderdetail.js
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    userName: '李开心',
+    phoneNumber: '13260995055',
+    adress: '广东省广州市天河区汇诚大厦365',
+    token: '',
+    orderid: '',
+    orderAmount: '',
+    freightStatus: '20',
+    order: []
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: function (option) {
+    // console.log("options: " + option.orderId)//7777
+    let orderid = option.orderid
+    this.setData({
+      token: wx.getStorageSync('token'),
+      orderid: orderid
+    })
+    this.getOrder()
   },
+  getOrder: function () {
+    let that = this
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'order/disOrderDetail?token=' + this.data.token + '&order_sn=' + this.data.orderid,
+    }).then((res) => {
+      console.log(res)
 
+      let goodsList = res.data.lists.or
+      let orderAmount = goodsList[0].order_amount
+      //console.log(orderAmount)
+      let order = []
+      for (let m in goodsList) {
+        console.log(goodsList[m])
+        let good = {}
+        good.goodsImg = goodsList[m].goods_logo,
+          good.goodsdetail = goodsList[m].goods_name,
+          good.types = goodsList[m].goods_attr_values,
+          good.num = goodsList[m].number
+        order.push(good)
+      }
+      that.setData({
+        order: order,
+        orderAmount: orderAmount
+      })
+      console.log(orderAmount)
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -72,7 +72,7 @@ Page({
   shopcar(){
   console.log(1111)
    wx.switchTab({
-     url: '../shoppingCart/shoppingCart',
+     url: '../shoppingcart/shoppingcart',
    })
   },
   //点击查看在线客服
@@ -131,6 +131,7 @@ Page({
       obj.selected=true
       obj.num=this.data.num
       obj.price=this.data.price
+      obj.way='立即购买'
       console.log(obj)
       var array=this.data.newarr
      array.push(obj)
@@ -166,7 +167,6 @@ Page({
       })
     } else if (this.data.state == 1) {
       console.log("去到提交订单！")
-      
       wx.navigateTo({
         url: '../submitOrder/submitOrder?info='+info,
       })

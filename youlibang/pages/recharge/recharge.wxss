@@ -49,3 +49,108 @@
   color: #fff;
   text-align: center;
 }
+
+.way{
+  width: 750rpx;
+  
+  background-color: #ffffff;
+  margin-top: 3%;
+  
+}
+.wexinPayfor{
+  width:750rpx;
+  height:100rpx;
+  /* background:red; */
+  float: left;
+  background: white;
+  margin-left: 8rpx;
+}
+.wexinPayfor image{
+  float: left;
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: 3%;
+  margin-left: 3%;
+  }
+  .payforWay{
+  margin-left: 16rpx;
+  width:750rpx;
+  height:80rpx;
+  /* background:red; */
+  float: left;
+  font-size:28rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+}
+.payforWay label{
+  float: left;
+  margin-top: 4%;
+  margin-left: 3%;
+}
+.wexintext{
+  float: left;
+  width:150rpx;
+  height:26rpx;
+  font-size:28rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+  margin-top: 4%;
+  margin-left: 3%;
+}
+.check_box{
+   margin-left: 380rpx;
+   line-height: 80rpx;
+  
+}
+.check_box{
+border-radius: 50%;
+float: left;
+width: 36rpx;
+height: 36rpx;
+/* background:#EA4148; */
+margin-left:388rpx;
+margin-top: 30rpx;
+}
+
+
+
+
+.underLine{
+  margin-bottom: 100rpx;
+  background: white;
+  margin-top: 0;
+}
+.btn{
+  margin-left: 8%;
+  width:620rpx;
+  height:88rpx;
+  background:linear-gradient(-90deg,rgba(255,146,150,1),rgba(234,65,72,1));
+  border-radius:10rpx;
+  font-size:36rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  line-height:42rpx;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 3%;
+}
+.mubu{
+  width:100%;
+  height: 100%;
+  position: fixed;
+  background-color: black;
+  opacity:0.5;
+  z-index: 100;
+  bottom: 0;
+}
+.footer{
+  width: 100%;
+  background-color: #fff;
+  z-index: 9999;
+  position: fixed;
+  bottom: 0;
+}

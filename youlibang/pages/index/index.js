@@ -43,7 +43,7 @@ Page({
     var id=e.target.dataset.id
     console.log(id)
     wx.navigateTo({
-      url: '../goodsDetail/goodsDetail?id='+id,
+      url: '../goodsDetail/goodsDetail?goodsId='+id,
 
     })
   },
@@ -117,6 +117,22 @@ Page({
            col1:dataLists
          })
     })
+    //请求轮播图接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: 'http://www.ylb.com/api/Operatedata/imgList',
+    }).then((res) => {
+      console.log(res)
+      //重置banner轮播图数据
+      // this.setData({
+      //      movies:res.data.lists
+      // })
+      // console.log(this.data.movies)
+    });
+
      //处理通知栏
     var that = this;
        goodsID = options.goodsID;

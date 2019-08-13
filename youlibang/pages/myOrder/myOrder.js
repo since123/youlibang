@@ -37,9 +37,9 @@ Page({
       },
       url: ApiUrl.phplist + 'order/getorder?token=' + this.data.token + '&member_id=' + this.data.vipid,
     }).then((res) => {
-      console.log(res.data.lists)
+      // console.log(res.data.lists)
       let lists = res.data.lists
-      // console.log(lists)
+      console.log(lists)
       //数据重组
       let orders = []
       let waitPayOrder = []
@@ -49,7 +49,7 @@ Page({
       for (let m in lists) {
         let ss = {}
         let goods = []
-        ss.orderId = lists[m].order_sn
+        ss.orderid = lists[m].order_sn
         if (lists[m].pay_status == '0') {
           ss.status = "待付款"
         }
@@ -65,7 +65,7 @@ Page({
         else { ss.status = "已收货"}
         for (let n in lists[m].goods) {
            let mm = {}
-          console.log(lists[m].goods[n])
+          // console.log(lists[m].goods[n])
           if (lists[m].goods[n].hasOwnProperty('goods_logo')) {
             mm.image = lists[m].goods[n].goods_logo
           }
@@ -185,9 +185,7 @@ Page({
     switch (Number(this.data.currtab)) {
       case 0: that.allOrderShow()
         break;
-      case 1:
-        // console.log("waitPayShow")
-      that.waitPayShow()
+      case 1: that.waitPayShow()
         break;
       case 2: that.waitSentShow()
         break;
@@ -332,7 +330,7 @@ Page({
     // console.log(e.currentTarget.dataset.orderid)
     let orderid = e.currentTarget.dataset.orderid
     wx.navigateTo({
-      url: '../orderDetail/orderDetail?orderId='+ orderid
+      url: '../orderDetail/orderDetail?orderid=' + orderid
     })
   },
   /**

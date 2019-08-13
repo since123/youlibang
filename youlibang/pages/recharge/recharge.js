@@ -13,7 +13,9 @@ Page({
   
   data: {
     amount:'',
-    body: '充值'
+    body: '充值',
+    status: false,
+    way: '微信'
   },
   /**
    * 获取输入金额
@@ -24,36 +26,31 @@ Page({
     })
     console.log(this.data.amount)
   },
-  //充值
-  recharge: function() {
-    var that=this;
-    var token = wx.getStorageSync("token")
-    httpReq({
-      header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      url: ApiUrl.phplist + 'order/orderpay?pay_amount=' + this.data.amount + '&body=' + this.data.body + '&token=' + token,
-      // url: ApiUrl.phplist + 'order/orderpay?pay_amount=' + this.data.amount,
-      }).then((res)=>{
-        console.log(res)
-        if (res.data.code == '1') {
-          that.setData({
-            payParams: res.data.data // 后端从微信得到的统一下单的参数
-          })
-          wx.showToast({
-            title: '充值成功',
-            icon: "success",
-            duration: 2000, //持续的时间
-          })
-          setTimeout(function () {
-            wx.navigateTo({
-              url: '../recharge/recharge',
-            })
-          }, 1000)  //定时函数确保状态显示之后再返回上一页
-          that.xcxPay(); // 拿到统一下单的参数后唤起微信支付页面
-        }
-      })
+
+  recharge: function () {
+    var status = this.data.status;
+    // console.log("触发了点击事件，弹出toast")
+    status = !status;
+    this.setData({
+      status: status
+    })　　　　 //setData方法可以建立新的data属性，从而起到跟视图实时同步的效果
+  },
+
+  cancelPay: function () {
+    var status = this.data.status;
+    status = !status;
+    this.setData({
+      status: status
+    })
+  },
+  
+  // 通过微信充值
+  confirmPay: function() {
+    if (this.data.way == '微信') {
+      this.confirmweixinPay()
+    }else {
+      this.confirmXianxiaPay()
+    }
     // wx.request({　　
     //   url: "",
     //   method: "POST",
@@ -99,6 +96,80 @@ Page({
       // }
     // })
 
+  },
+  /**
+   * 通过微信支付
+   */
+    confirmweixinPay: function () { 
+    var that = this;
+    var token = wx.getStorageSync("token")
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'test/cszhifu?payAmount=' + this.data.amount + '&paydesc=' + this.data.body + '&token=' + token,
+      // url: ApiUrl.phplist + 'order/orderpay?pay_amount=' + this.data.amount,
+    }).then((res) => {
+      console.log(res)
+      wx.requestPayment({
+        timeStamp: res.data.code.timeStamp,
+        nonceStr: res.data.code.nonceStr,
+        package: res.data.code.package,
+        signType: 'MD5',
+        paySign: res.data.code.paySign,
+        success: function (res) {
+          // success
+          console.log(res);
+        },
+        fail: function (res) {
+          // fail
+          console.log(res);
+        },
+        complete: function (res) {
+          // complete
+          console.log(res);
+        }
+      })
+      // if (res.data.code == '1') {
+      //   that.setData({
+      //     payParams: res.data.data // 后端从微信得到的统一下单的参数
+      //   })
+      //   wx.showToast({
+      //     title: '充值成功',
+      //     icon: "success",
+      //     duration: 2000, //持续的时间
+      //   })
+      //   setTimeout(function () {
+      //     wx.navigateTo({
+      //       url: '../recharge/recharge',
+      //     })
+      //   }, 1000)  //定时函数确保状态显示之后再返回上一页
+      //   that.xcxPay(); // 拿到统一下单的参数后唤起微信支付页面
+      // }
+    })
+  },
+  /**
+   * 通过线下支付
+   */
+  confirmXianxiaPay : function() {
+    console.log('通过线下支付')
+  },
+  
+
+  payway() {
+    console.log("选择了微信支付！")
+    this.setData({
+      way: "微信"
+    })
+    console.log(this.data.way)
+  },
+  payWay() {
+    console.log("选择了线下支付！")
+    this.setData({
+      way: "线下"
+    })
+    console.log(this.data.way)
   },
   /**
    * 生命周期函数--监听页面加载

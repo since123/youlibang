@@ -1,29 +1,68 @@
 /* pages/retail_orderdetail/retail_orderdetail.wxss */
+/* pages/orderDetail/orderDetail.wxss */
+.detailInfo{
+  width: 750rpx;
+  height: 120rpx;
+  background-color: #ffffff;
+  margin-top: 3%;
+}
+.addressImg{
+  width: 35rpx;
+  height: 40rpx;
+  /* background-color: red; */
+  margin-top: 5%;
+  margin-left: 5%;
+  float: left;
+}
+.addressImg image{
+  width: 28rpx;
+  height: 35rpx;
+}
+.name_phone{
+  float: left;
+  width: 400rpx;
+  height: 40rpx;
+  /* background-color: yellow; */
+  margin-top: 3%;
+  margin-left: 3%;
+}
+.username{
+  float: left;
+  font-size:28rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+}
+.phone{
+  float: left;
+  margin-left: 3%;
+  font-size:28rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(102,102,102,1);
+}
+.address{
+  float: left;
+  font-size:28rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+  line-height:41rpx;
+  margin-top:1%;
+  margin-left: 3%;
+}
 .orderInfo{
   width: 750rpx;
-  height: 590rpx;
-  background-color: #ffffff;
   margin-top: 3%;
 }
 .Infotext{
   float: left;
-  width: 400rpx;
+  width: 700rpx;
   font-size:30rpx;
   font-family:sans-serif;
   font-weight:500;
-  color:rgba(234,65,72,1);
+  color:rgba(51,51,51,1);
   margin-left: 5%;
-  margin-top: 2%;
-}
-.time{
-  float: left;
-  width:166rpx;
-  height:22rpx;
-  font-size:28rpx;
-  font-family:sans-serif;
-  font-weight:500;
-  color:rgba(153,153,153,1);
-  margin-left: 15%;
   margin-top: 2%;
 }
 .line{
@@ -35,8 +74,9 @@
 }
 .goodsInfo{
   float: left;
-  width: 750rpx;
-  height: 160rpx;
+  background-color: #ffffff;
+  /* width: 750rpx;
+  height: 160rpx; */
   /* background-color: green; */
 }
 .goodsImg{
@@ -153,25 +193,15 @@
 .money label{
   font-size: 26rpx;
 }
-.rebate{
+.beizhu{
   float: left;
-  width:160rpx;
-  height:23rpx;
   font-size:24rpx;
   font-family:sans-serif;
   font-weight:500;
   color:rgba(86,103,149,1);
   margin-left: 5%;
   margin-top: 1%;
-}
-.rebate_money{
-  float: left;
-  width:118rpx;
-  height:23rpx;
-  font-size:26rpx;
-  font-family:sans-serif;
-  font-weight:500;
-  color:rgba(234,65,72,1);
-  margin-left: 50%;
-  margin-top: 1%;
+  /* background: red; */
+  margin-bottom: 20%;
+
 }

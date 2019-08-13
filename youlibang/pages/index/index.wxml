@@ -35,5 +35,4 @@
     <view class='price'><label>￥</label>{{item.goods_price}}</view>
     <view class='Buy'><view class='buy' bindtap='tobuy'>购买</view></view>
   </view>
-  <view wx:if="{{status}}">加载中...</view>
 </scroll-view>

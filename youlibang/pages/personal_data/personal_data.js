@@ -23,7 +23,7 @@ Page({
     idCard1:'../../images/idCard@2x.png',
     idCard2:'../../images/idCardbg@2x.png',
     businesslicense:'../../images/Business_license@2x.png',
-    openid: ''
+    token: ''
   },
 
   /**
@@ -35,29 +35,41 @@ Page({
     // this.setData({
     //   user: user
     // });
-    let app = getApp()
-    let openid = wx.getStorageSync('openid')
-    if (openid) {
-      if (app.globalData.vipid) {
-        this.setData({
-          vipid: app.globalData.vipid,
-          openid: openid
-        })
-        console.log("getVipUserInfo")
-        this.getVipUserInfo()
-      } else {
-        if (app.globalData.userInfo) {
-          this.setData({
-            userInfo: app.globalData.userInfo
-          })
+    this.setData({
+      token: wx.getStorageSync('token'),
+      userInfo: wx.getStorageSync('userInfo')
+    })
+    console.log(this.data.userInfo)
+    //验证用户
+    if (this.data.token) {
+      if (this.data.userInfo) {
+        //判断vipid并缓存
+        this.getIfVipUserInfo()
+        if (this.data.vipid == '') {
           this.getPersonalInfo()
         } else {
-          console.log("获取个人信息失败")
+          console.log('是会员')
         }
+      } else {
+        wx.showModal({
+          title: '警告通知',
+          content: '您点击了拒绝授权,将无法正常显示个人信息,在设置中确定重新获取授权',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+              wx.navigateTo({
+                url: '../../pages/set/set',
+              })
+            } else if (res.cancel) {
+              console.log('取消')
+            }
+          }
+        })
+
       }
     } else {
-      console.log("openid获取失败")
-    } 
+      console.log("token获取失败,不是小程序用户")
+    }
   },
   //获取页面数据
   getPersonalInfo() {
@@ -90,7 +102,7 @@ Page({
       break;
     }
   },
-  getVipUserInfo: function () {
+  getIfVipUserInfo: function () {
     let that = this
     httpReq({
       header: {

@@ -10,7 +10,7 @@
     <swiper-item style="overflow:auto">
       <scroll-view bindscrolltolower="bindDownLoad" scroll-y="true">
         <view>
-          <view class='listInfo' wx:for="{{allRetailOrder}}" wx:key="item.index" bindtap="retailOrderDetail">
+          <view class='listInfo' wx:for="{{allRetailOrder}}" wx:key="item.index" data-orderid="{{item.orderid}}" bindtap="retailOrderDetail">
             <view class="orderStatus">{{item.status}}</view>
             <view class="retailOrder">
               <view class="retailOrderInfo">

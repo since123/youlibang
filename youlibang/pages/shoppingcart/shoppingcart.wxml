@@ -30,3 +30,4 @@
     <view class='Settlement_right' bindtap='search'>结算</view>
   </view>
 </view>
+

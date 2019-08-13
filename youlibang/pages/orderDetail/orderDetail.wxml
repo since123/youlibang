@@ -12,7 +12,7 @@
   <view class='Infotext'>订单信息</view>
   <view class='line'></view>
   <view class='goodsInfo' wx:for="{{order}}" wx:key="item.index">
-    <view class='goodsImg'><image src='{{order.goodsImg}}'></image></view>
+    <view class='goodsImg'><image src='{{item.goodsImg}}'></image></view>
     <view class='goodsdetail'>{{item.goodsdetail}}</view>
     <view class='types_num'>
       <view class='types'>{{item.types}}</view>
@@ -22,11 +22,11 @@
   <view class='line'></view>
   <view class='yunfei'>
     <view class='yunfeitext'>运费</view>
-    <view class='mianyunfei'>免运费</view>
+    <view class='mianyunfei'>{{freightStatus}}</view>
   </view>
    <view class='heji'>
     <view class='total'>合计</view>
-    <view class='money'><label>￥</label>2800.00</view>
+    <view class='money'><label>￥</label>{{orderAmount}}</view>
   </view>
   <view class='line'></view>
   <view class='beizhu'>添加卖家备注</view>

@@ -23,46 +23,7 @@ Page({
     pageSize: 4,
     buttonText: '会员专享超多优惠返利！',
     token: '11',
-    vipRules: [
-      {
-        userGrade: '普通VIP',
-        rechargeMoney: 100,
-        preferentialInfo: ''
-      },{
-        userGrade: '入门VIP',
-        rechargeMoney: 500,
-        preferentialInfo: '限额1000名'
-      },{
-        userGrade: '初级VIP',
-        rechargeMoney: 1000,
-        preferentialInfo: '充值可得免费铺货1000元'
-      },{
-        userGrade: '中级VIP',
-        rechargeMoney: 1000,
-        preferentialInfo: '充值可得免费铺货5000元'
-      },
-      {
-        userGrade: '高级VIP',
-        rechargeMoney: 3000,
-        preferentialInfo: '充值可得免费铺货5000元'
-      },
-      {
-        userGrade: '经销级VIP',
-        rechargeMoney: 5000,
-        preferentialInfo: '充值可得免费铺货5000元'
-      },
-      {
-        userGrade: '特约经销VIP',
-        rechargeMoney: 10000,
-        preferentialInfo: '充值可得免费铺货5000元'
-      },
-      {
-        userGrade: '总经销VIP',
-        rechargeMoney: 20000,
-        preferentialInfo: '充值可得免费铺货5000元充值可得免费铺货5000元充值可得免费铺货5000元充值可得免费铺货5000元充值可得免费铺货5000元'
-      },
-
-      ]
+    vipRules: []
   },
   /**
    * 分页
@@ -96,7 +57,39 @@ Page({
         'Accept': 'application/json'
       },
     }).then((res) => {
-      console.log(res)
+      console.log(res.data.lists)
+      let VIPList = res.data.lists.act
+      let inviterID = res.data.lists.inviter_id
+      if (inviterID == 0) {
+        console.log('没有邀请id')
+      } else {
+        that.setData({
+          inputID: inviterID
+        })
+      }
+      let vipRules = []
+      for (let m in VIPList) {
+        // console.log(VIPList[m])
+        let vipInform = {}
+        let active = []
+        vipInform.userGrade = VIPList[m].lev_name,
+        vipInform.rechargeMoney = VIPList[m].level_amount
+        for (let n in VIPList[m].reward) {
+          let activeInfirm = {}
+          activeInfirm.preferentialInfo = VIPList[m].reward[n].activity_v
+          // activeInfirm.
+          active.push(activeInfirm)
+          vipInform.preferential = active
+        }
+        
+        vipRules.push(vipInform)
+        
+        that.setData({
+          vipRules: vipRules
+        })
+      }
+      console.log(vipRules)
+      this.getPage()
     })
   },
   /**
@@ -291,7 +284,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getPage()
     this.setData({
       token: wx.getStorageSync('token')
     })

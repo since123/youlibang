@@ -7,26 +7,16 @@
   </view>
   <view class='line'></view>
 
-  <!-- <view class="header_lun" >
-    <swiper class="swiper" indicator-dots="true" indecator-color="rgba(120,120,120,1)" autoplay="true" bindchange="">
-      <block wx:for="{{movies}}" wx:key="{{movies}}" wx:for-index="index">
-        <swiper-item>
-          <image src="{{item.url}}" class="slide-image" bindtap="changePath" data-id="{{item.id}}"/>
-        </swiper-item>
-      </block>
-    </swiper>
-  </view> -->
-
   <view class='vipGrade'>
     <swiper indicator-dots="true" indecator-color="rgba(120,120,120,1)" autoplay="true" bindchange="">
-      <block wx:for="{{vipRules}}" wx:key="{{item.index}}" >
+      <block wx:for="{{vipRules}}" wx:key="{{item.index}}">
       <swiper-item>
-      <view wx:for="{{vipRules[index]}}" wx:key="{{item.index}}">
-        <view bindtap="chooseGrade" data-current="{{index}}" data-rechargemoney="{{item.rechargeMoney}}">
+      <view wx:for="{{vipRules[index]}}" wx:key="{{item.index}}" wx:for-item="rules">
+        <view bindtap="chooseGrade" data-current="{{index}}" data-rechargemoney="{{rules.rechargeMoney}}">
           <view class='mindiv' style="{{index == currentIndex?'border-color:red':'border-color:gray'}}">
-              <view class='viptext'>{{item.userGrade}}</view>
-              <view class='money'><label>￥</label>{{item.rechargeMoney}}</view>
-              <view class='vipnum'>{{item.preferentialInfo}}</view>
+              <view class='viptext'>{{rules.userGrade}}</view>
+              <view class='money'><label>￥</label>{{rules.rechargeMoney}}</view>
+              <view class='vipnum' wx:for="{{rules.preferential}}" wx:key="{{item.index}}">{{item.preferentialInfo}}</view>
           </view>
         </view>
       </view>
