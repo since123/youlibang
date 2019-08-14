@@ -18,3 +18,7 @@ const formatNumber = n => {
 module.exports = {
   formatTime: formatTime
 }
+
+const formatNumber = obj => {
+  return !Number.isNaN(parseFloat(obj)) && Number.isFinite(Number(obj))
+}

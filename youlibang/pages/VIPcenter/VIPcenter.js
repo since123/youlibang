@@ -1,4 +1,10 @@
 // pages/VIPcenter/VIPcenter.js
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
@@ -7,7 +13,8 @@ Page({
   data: {
     dedCommission: 200,
     propRebate: 148,
-    unpaidRebate: 50
+    unpaidRebate: 50,
+    token: '11'
   },
   applyVIP:function(){
     wx.navigateTo({
@@ -59,8 +66,15 @@ Page({
    */
   getInfor: function() {
     let that = this
+    this.setData({
+      token: wx.getStorageSync('token')
+    })
     httpReq({
-
+      url: ApiUrl.phplist + 'member/rebate?token=' + this.data.token,
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
     }).then((res) => {
       console.log(res.data)
       //取到数据后赋值可提现佣金，已提现返利，未提现返利
@@ -70,7 +84,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.getInfor()//获取后台返回的可提现佣金，已提现返利，未提现返利
+    this.getInfor()//获取后台返回的可提现佣金，已提现返利，未提现返利
   },
 
   /**

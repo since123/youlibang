@@ -8,8 +8,8 @@
 <view class='amount_text'>当前可提现的余额：{{balance}}元，<label bindtap="getAll">全部提现</label></view>
 </view>
 <view class='coomit' bindtap='withdrawal'>提现</view>
-<view class='mubu' bindtap='quxiao' hidden="{{!status}}"></view>
+<!-- <view class='mubu' bindtap='quxiao' hidden="{{!status}}"></view>
 <view class='footer' bindchange="toastHide" hidden="{{!status}}">
   <view class='hands' bindtap='handsWithdraw'>手动提现</view>
   <view class='hands' bindtap='allWithdraw'>自动提现</view>
-</view>
+</view> -->

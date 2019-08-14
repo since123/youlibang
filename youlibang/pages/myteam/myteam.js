@@ -94,16 +94,16 @@ Page({
   getTeamInfor: function(){
     let that = this
     let app = getApp()
-    let openid = wx.getStorageSync('openid')
-    if (openid) {
+    let token = wx.getStorageSync('token')
+    if (token) {
       httpReq({
         header: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        url: ApiUrl.phplist + 'distribution/myteam?openid=' + openid + '&level=' + this.data.currentGrade,
+        url: ApiUrl.phplist + 'distribution/myteam?token=' + token + '&level=' + this.data.currentGrade,
       }).then((res) => {
-        console.log(res.data.lists)
+        console.log(res.data)
         let lists = res.data.lists
         let teamInfor = []
         for (let m in lists) {
@@ -129,7 +129,7 @@ Page({
         }
       })
     } else {
-      console.log("我的团队页面openid获取失败")
+      console.log("token")
     }
   },
   onLoad: function (options) {

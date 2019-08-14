@@ -56,7 +56,7 @@ Page({
     that.setData({
       totalMoney : total
     })
-    console.log(tihs.data.totalMoney)
+    console.log(this.data.totalMoney)
   },
   /**
    * 生命周期函数--监听页面加载

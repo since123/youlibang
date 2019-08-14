@@ -17,14 +17,14 @@ Page({
     status: false,
     way: '微信'
   },
+
   /**
    * 获取输入金额
    */
   getAmoutValue: function(e){
     this.setData({
-      amount:e.detail.value
+      amount: e.detail.value
     })
-    console.log(this.data.amount)
   },
 
   recharge: function () {
@@ -51,6 +51,7 @@ Page({
     }else {
       this.confirmXianxiaPay()
     }
+   
     // wx.request({　　
     //   url: "",
     //   method: "POST",
@@ -128,7 +129,10 @@ Page({
         },
         complete: function (res) {
           // complete
-          console.log(res);
+          that.setData({
+            status : false
+          })
+          
         }
       })
       // if (res.data.code == '1') {
@@ -175,7 +179,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    
   },
 
   /**

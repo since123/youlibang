@@ -8,15 +8,18 @@
   <view class='line'></view>
 
   <view class='vipGrade'>
-    <swiper indicator-dots="true" indecator-color="rgba(120,120,120,1)" autoplay="true" bindchange="">
-      <block wx:for="{{vipRules}}" wx:key="{{item.index}}">
+    <swiper indicator-dots="true" indecator-color="rgba(120,120,120,1)" autoplay="true" bindchange="getPageIndex">
+      <block wx:for="{{vipRules}}" wx:key="{{item.index}}" >
       <swiper-item>
       <view wx:for="{{vipRules[index]}}" wx:key="{{item.index}}" wx:for-item="rules">
-        <view bindtap="chooseGrade" data-current="{{index}}" data-rechargemoney="{{rules.rechargeMoney}}">
+        <view bindtap="chooseGrade" data-current="{{index}}">
           <view class='mindiv' style="{{index == currentIndex?'border-color:red':'border-color:gray'}}">
               <view class='viptext'>{{rules.userGrade}}</view>
               <view class='money'><label>￥</label>{{rules.rechargeMoney}}</view>
-              <view class='vipnum' wx:for="{{rules.preferential}}" wx:key="{{item.index}}">{{item.preferentialInfo}}</view>
+              <view class="preferential">
+                <text class='vipnum' wx:for="{{rules.preferential}}" wx:key="{{item.index}}">{{item.preferentialInfo}}</text>
+              </view>
+             
           </view>
         </view>
       </view>
@@ -32,25 +35,8 @@
         </view>
       </view>
   </view>
-      
-      <!-- <view class='mindiv' bindtap="chooseGrade" data-id="{{index}}">
-          <view class='viptext'>入门VIP</view>
-          <view class='money'><label>￥</label>{{introductionRecharge}}</view>
-          <view class='vipnum'>限额{{limitsNumber}}名</view>
-      </view>
-      <view class='mindiv' bindtap="chooseGrade">
-          <view class='viptext'>初级VIP</view>
-          <view class='money'><label>￥</label>{{juniorRecharge}}</view>
-          <view class='vipnum'>充值可得免费铺货{{juniorMoney}}元</view>
-      </view>
-      <view class='mindiv'>
-          <view class='viptext'>中级VIP</view>
-          <view class='money'><label>￥</label>{{middleRecharge}}</view>
-          <view class='vipnum'>充值可得免费铺货{{middleMoney}}元</view>
-      </view> -->
-  
   <view class='tuijian'>推荐ID</view>
-  <view class='inputInfo'><input type='text' bindinput="getInputValue" placeholder='请输入'>{{inputID}}</input></view>
+  <view class='inputInfo'><input type='text' bindinput="getInputValue" placeholder='请输入'>{{inviterID}}</input></view>
   <view hidden='{{ifhidden}}'>
     <view class='uploadIDCard'>上传身份证</view>
     <view class='IDCard'>

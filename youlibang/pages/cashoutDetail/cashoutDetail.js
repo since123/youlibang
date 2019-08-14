@@ -1,4 +1,10 @@
 // pages/cashoutDetail/cashoutDetail.js
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
@@ -10,25 +16,25 @@ Page({
     swipertab: [{ index: 0, name: '待审核' }, { index: 1, name: '已打款'}],
     openstatusList: 
       [
-        {
-          withdrawTime: '10月8日 00: 09: 01',
-          withdrawMoney: 200
-        },
-        {
-          withdrawTime: '10月9日 00: 09: 01',
-          withdrawMoney: 500
-        }
-      ],
-    opendetailList:
-      [
-        {
-          withdrawTime: '10月7日 00: 09: 01',
-          withdrawMoney: 100
-        },
-        {
-          withdrawTime: '10月6日 00: 09: 01',
-          withdrawMoney: 200
-        }
+    //     {
+    //       withdrawTime: '10月8日 00: 09: 01',
+    //       withdrawMoney: 200
+    //     },
+    //     {
+    //       withdrawTime: '10月9日 00: 09: 01',
+    //       withdrawMoney: 500
+    //     }
+    //   ],
+    // opendetailList:
+    //   [
+    //     {
+    //       withdrawTime: '10月7日 00: 09: 01',
+    //       withdrawMoney: 100
+    //     },
+    //     {
+    //       withdrawTime: '10月6日 00: 09: 01',
+    //       withdrawMoney: 200
+    //     }
       ]
 
   },
@@ -79,18 +85,27 @@ Page({
    */
   getWithdrawInfor: function () {
     let that = this
+    let vipid = wx.getStorageSync('vipid')
+    console.log(vipid)
+    this.setData({
+      token: wx.getStorageSync('token')
+    })
     httpReq({
-
+      url: ApiUrl.phplist + 'user/tixianlis?member_id=' + vipid,
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
     }).then((res) => {
-      //获取后台数据
-      //console.log(res.data)
+      console.log(res.data)
+      
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.getWithdrawInfor()
+    this.getWithdrawInfor()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -47,8 +47,12 @@
 			"currentL": -1,
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
-			"current": 4,
+			"current": 1,
 			"list": [
 				{
 					"id": 0,
@@ -59,8 +63,8 @@
 				},
 				{
 					"id": 1,
-					"name": "pages/applyVIP/applyVIP",
-					"pathName": "pages/applyVIP/applyVIP",
+					"name": "pages/cashoutDetail/cashoutDetail",
+					"pathName": "pages/cashoutDetail/cashoutDetail",
 					"query": "",
 					"scene": null
 				},
@@ -72,7 +76,7 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 3,
 					"name": "pages/index/index",
 					"pathName": "pages/index/index",
 					"query": "",
