@@ -234,7 +234,12 @@
   position: fixed;
   bottom: 0;
 }
-
+.goodsType::after{
+  content: "";
+   display: block;
+   line-height: 0;
+   clear: both
+}
 .goodsdetailImg {
   width: 154rpx;
   height: 154rpx;
@@ -274,30 +279,17 @@
 .detailprice label {
   font-size: 24rpx;
 }
-.close{
-  float: right;
-  width: 25rpx;
-  height: 25rpx;
-  background-color: red;
-  margin-top: 15rpx;
-  margin-right: 45rpx;
-
-}
-.close image{
-  width: 25rpx;
-  height: 25rpx;
-}
-
 .types {
-  float: left;
+  /* float: left; */
   height: 23rpx;
   font-size: 22rpx;
   font-family: sans-serif;
   font-weight: 500;
   color: rgba(153, 153, 153, 1);
   line-height: 30rpx;
-  margin-top: 12%;
+  margin-top: 20%;
   margin-left: 5%;
+  /* border: 2rpx solid red; */
 }
 
 .types label {
@@ -399,7 +391,7 @@ float: left;
 width:188rpx;
 height:52rpx;
 /* margin: 0 auto; */
-border: 1rpx solid #cccccc;
+border: 2rpx solid #cccccc;
 border-radius: 3rpx;
 margin-top: 3%;
 margin-left: 20%;
@@ -407,20 +399,10 @@ margin-left: 20%;
 
 }
 /*加号和减号*/
-.stepper text {
-float: left;
-width: 60rpx;
-height:52rpx;
-line-height: 26rpx;
-background:rgba(243,242,248,1);
-margin: 0 auto;
-text-align: center;
-/* margin-top: 10rpx; */
 
-}
 /*数值*/
 .stepper input {
-width: 60rpx;
+width: 90rpx;
 height: 26rpx;
 float: left;
 margin: 0 auto;
@@ -486,3 +468,31 @@ color: #ccc;
   margin-top: 3%;
   margin-left: 5%;
 }
+.add{
+float: right;
+ width: 48rpx;
+ height:50rpx; 
+line-height: 48rpx;   
+background:rgba(243,242,248,1);
+margin: 0 auto; 
+text-align: center;
+color: #686868;  
+}
+.reduce{
+float: left;
+width: 48rpx;
+height:50rpx;
+line-height: 48rpx;
+background:rgba(243,242,248,1);
+margin: 0 auto;
+text-align: center;
+font-size: 12rpx;
+font-weight: lighter;
+}
+.clear{
+  float: right;
+  margin-right: 40rpx;
+  margin-top: 10rpx;
+
+}
+

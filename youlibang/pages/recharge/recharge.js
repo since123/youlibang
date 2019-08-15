@@ -5,6 +5,7 @@ import {
 import {
   httpReq
 } from '../../utils/http.js';
+let util = require('../../utils/util')
 Page({
 
   /**
@@ -15,7 +16,8 @@ Page({
     amount:'',
     body: '充值',
     status: false,
-    way: '微信'
+    way: '微信',
+    ifNumber: true,
   },
 
   /**
@@ -23,11 +25,20 @@ Page({
    */
   getAmoutValue: function(e){
     this.setData({
-      amount: e.detail.value
+      amount: e.detail.value,
+      ifNumber: true
     })
   },
 
   recharge: function () {
+    if (!util.isNumber(this.data.amount) || this.data.amount <= 0) {
+      this.setData({
+        amount: this.data.amount,
+        ifNumber: false
+      })
+      console.log('不是数字')
+      return false
+    }
     var status = this.data.status;
     // console.log("触发了点击事件，弹出toast")
     status = !status;

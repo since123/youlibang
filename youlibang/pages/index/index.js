@@ -126,11 +126,11 @@ Page({
       url: 'http://www.ylb.com/api/Operatedata/imgList',
     }).then((res) => {
       console.log(res)
-      //重置banner轮播图数据
-      // this.setData({
-      //      movies:res.data.lists
-      // })
-      // console.log(this.data.movies)
+     //重置banner轮播图数据
+      this.setData({
+           movies:res.data.lists
+      })
+      console.log(this.data.movies)
     });
 
      //处理通知栏

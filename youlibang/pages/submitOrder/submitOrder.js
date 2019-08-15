@@ -18,7 +18,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-
+    var total = 0
     var dataList=JSON.parse(options.info)
    console.log(dataList)
    if(dataList[0].way=='立即购买'){
@@ -29,7 +29,7 @@ Page({
             
          })
    }else if(dataList[0].way=='结算'){
-     var total=0
+     
          for(let i=0;i<dataList.length;i++){
                total+=(dataList[i].num*dataList[i].price)
          }
@@ -39,7 +39,17 @@ Page({
        total
      })  
    }
-   
+  //  var token=wx.getStorageSync('token')
+  //  //请求后端接口，拿到openid
+  //   httpReq({
+  //     header: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json'
+  //     },
+  //     url:'',
+  //   }).then((res) => {
+      
+  //   });
   },
   payway(){
      console.log("通过微信支付！")
@@ -93,7 +103,10 @@ Page({
     if(way=="微信"){
        //调取微信支付接口
        console.log("微信支付！")
-      var ordercode = this.data.txtOrderCode;
+      var ordercode = this.data.total;
+      var token = wx.getStorageSync('token')
+      var paydesc = '商品购买'
+      console.log(ordercode, token, paydesc)
       wx.login({
         success: function (res) {
           if (res.code) {
@@ -102,17 +115,24 @@ Page({
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
               },
-              url: 'http://www.ylb.com/api/wxpay/wx_pay',
+              url: 'http://www.ylb.com/api/test/cszhifu?token=' + token + '&paydesc=' + paydesc + '&payAmount=' + ordercode,
             }).then((res) => {
-              console.log(res.data)
-              console.log(res.data.lists)
-              console.log(res.data.lists.timeStamp)
+              console.log(res)
+              // console.log(res.data)
+              // console.log(res.data.lists)
+              // console.log(res.data.lists.timeStamp)
+              console.log(res.data.code)
               wx.requestPayment({
-                timeStamp: res.data.lists.timeStamp,
-                nonceStr: res.data.lists.nonceStr,
-                package: res.data.lists.package,
+                // timeStamp: res.data.lists.timeStamp,
+                // nonceStr: res.data.lists.nonceStr,
+                // package: res.data.lists.package,
+                // signType: 'MD5',
+                // paySign: res.data.lists.paySign,
+                timeStamp: res.data.code.timeStamp,
+                nonceStr: res.data.code.nonceStr,
+                package: res.data.code.package,
                 signType: 'MD5',
-                paySign: res.data.lists.paySign,
+                paySign: res.data.code.paySign,
                 success: function (res) {
                   // success
                   console.log(res);
@@ -132,7 +152,6 @@ Page({
           }
         }
       });
-
 
     }else{
        //从本地存储中将余额拿出来
@@ -158,11 +177,6 @@ Page({
     }
    
 
-  },
-  getOrderCode: function (event) {
-    this.setData({
-      txtOrderCode: event.detail.value
-    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

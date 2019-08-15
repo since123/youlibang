@@ -70,7 +70,7 @@ Page({
   //事件处理
   //点击查看购物车
   shopcar(){
-  console.log(1111)
+  //console.log(1111)
    wx.switchTab({
      url: '../shoppingcart/shoppingcart',
    })
@@ -115,12 +115,12 @@ Page({
   confirm(){
     var that = this
     //是否选择
-    if (this.data.yd == "" || this.data.wd == ""||this.data.cd==""){
+    if (this.data.yd == "" || this.data.wd == ""||this.data.num<=0){
       return false
     }
     var productsList=this.data.productsList
    console.log(productsList)
-    //重组数据
+    //重组数据存入缓存
     var obj={}
     obj.goods_introduce = productsList.goods_introduce
     obj.id=productsList.id
@@ -155,9 +155,30 @@ Page({
     console.log(info)
     var bar=this.data.newarr
     console.log(bar)
+    var token=wx.getStorageSync('token')
+    //重组数据提交后端
+    var goods=[]
+    goods['goods_id'] = productsList.id
+    goods['goods_attr_values'] = productsList.goods_introduce
+    goods['goods_number'] = this.data.num
+    var str= '54564654uyuytuy'
+    goods=JSON.stringify(goods)
+    console.log(goods)
     //判断点击的是加入还是立即购买
     if (this.data.state == 0) {
       console.log("去到购物车！")
+      //请求加入购物车数据
+      httpReq({
+        header: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        url: 'http://www.ylb.com/api/cart/savecart?token=' + token + '&goods_id=' + productsList.id + '&goods_attr_values=' + productsList.goods_introduce + '&goods_number=' + this.data.num + '&goods_logo='+str,
+      }).then((res) => {
+          console.log(res)
+      });
+
+
       wx.setStorage({
         key: 'shop',
         data: bar,
@@ -165,6 +186,7 @@ Page({
       wx.showToast({
         title: '添加成功！',
       })
+     
     } else if (this.data.state == 1) {
       console.log("去到提交订单！")
       wx.navigateTo({
@@ -180,6 +202,15 @@ Page({
      this.setData({
        num
      })
+  },
+  changeIf(){
+     var num=this.data.num
+     if(num<=0){
+       wx.showToast({
+         title: '亲，输入有误！',
+       })
+     }
+     return false
   },
 
   previewImage: function(e) {

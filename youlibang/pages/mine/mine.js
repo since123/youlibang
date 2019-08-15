@@ -28,8 +28,6 @@ Page({
       token: wx.getStorageSync('token'),
       userInfo: wx.getStorageSync('userInfo') 
     })
-    console.log(this.data.userInfo)
-    
     //验证用户
    if (this.data.token) {
      if (this.data.userInfo) {
@@ -37,28 +35,27 @@ Page({
        this.getIfVipUserInfo()
        if (this.data.vipid == '' ) {
          this.getPersonalInfo()
-       } else {
-        console.log('是会员')
-       }
+       } 
      } else {
        wx.showModal({
          title: '警告通知',
-         content: '您点击了拒绝授权,将无法正常显示个人信息,在设置中确定重新获取授权',
+         content: '获得你的公开信息（昵称，头像，地区及性别）,在设置中确定重新获取授权',
          success: function(res){
            if (res.confirm) {
-             console.log('用户点击确定')
              wx.navigateTo({
                url: '../../pages/set/set',
              })
            } else if (res.cancel) {
-             console.log('取消')
+             wx.navigateTo({
+               url: '../../pages/mine/mine',
+             })
            }
          }
        })
       
      }
    } else {
-     console.log("token获取失败,不是小程序用户")
+     return false
    }
     //如果不是注册的会员就显示自己的微信信息,此处需要加判断
     // this.getVipUserInfo()//如果是会员时，后台返回数据，展示会员信息
@@ -140,9 +137,28 @@ Page({
   },
   //充值
   recharge:function(){
-    wx.navigateTo({
-      url: '../recharge/recharge',
-    })
+    if (Number(this.data.vipid) == 0) {
+      wx.showModal({
+        title: '警告通知',
+        content: '你还不是会员，无法充值，请进入会员申请页面选择会员等级充值会员',
+        success: function (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../applyVIP/applyVIP',
+            })
+          } else if (res.cancel){
+            wx.navigateTo({
+              url: '../mine/mine',
+            })
+          }
+        }
+      })
+    } else {
+      wx.navigateTo({
+        url: '../recharge/recharge',
+      })
+    }
+    
   },
   //提现
   withdraw: function () {

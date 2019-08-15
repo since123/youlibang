@@ -11,7 +11,7 @@
         <view class='userImg'><image src='{{item.image}}'></image></view>
         <view class='leftInfo'>
             <view class='lookdetail'>{{item.userName}}购买的订单已完成</view>
-            <view class='rebatetime'>2019-08-09</view>
+            <view class='rebatetime'>{{item.finishTime}}</view>
         </view>
         <view class='rebateMoney'><label>￥</label>{{item.income}}</view>
     </view>

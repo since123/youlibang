@@ -5,6 +5,7 @@ import {
 import {
   httpReq
 } from '../../utils/http.js';
+let util = require('../../utils/util.js')
 Page({
 
   /**
@@ -20,17 +21,17 @@ Page({
         image: '/../images/2013062320262198.jpg',
         userName: '张三',
         time: '2019-01-01',
-        personNum: 2,
+        personNum: '2',
         money: '40.00',
-        orderNum: 2
+        orderNum: '2'
       },
       {
         image: '/../images/2013062320262198.jpg',
         userName: '张三',
         time: '2019-01-01',
-        personNum: 2,
+        personNum: '2',
         money: '40.00',
-        orderNum: 2
+        orderNum: '2'
       }
     ],
     twoTeamInfor: [
@@ -38,25 +39,25 @@ Page({
         image: '/../images/2013062320262198.jpg',
         userName: '李四',
         time: '2019-01-01',
-        personNum: 2,
+        personNum: '2',
         money: '40.00',
-        orderNum: 2
+        orderNum: '2'
       },
       {
         image: '/../images/2013062320262198.jpg',
         userName: '李四',
         time: '2019-01-01',
-        personNum: 2,
+        personNum: '2',
         money: '40.00',
-        orderNum: 2
+        orderNum: '2'
       },
       {
         image: '/../images/2013062320262198.jpg',
         userName: '李四',
         time: '2019-01-01',
-        personNum: 2,
+        personNum: '2',
         money: '40.00',
-        orderNum: 2
+        orderNum: '2'
       }
     ]
   },
@@ -95,7 +96,6 @@ Page({
     let that = this
     let app = getApp()
     let token = wx.getStorageSync('token')
-    if (token) {
       httpReq({
         header: {
           'Content-Type': 'application/json',
@@ -103,34 +103,32 @@ Page({
         },
         url: ApiUrl.phplist + 'distribution/myteam?token=' + token + '&level=' + this.data.currentGrade,
       }).then((res) => {
-        console.log(res.data)
+        console.log(res.data.lists)
         let lists = res.data.lists
         let teamInfor = []
         for (let m in lists) {
           let teamMember = {}
           teamMember.image = lists[m].avatar
           teamMember.userName = lists[m].nickname
-          teamMember.time = lists[m].create_time
-          teamMember.personNum = lists[m].member_count
-          teamMember.money = lists[m].amount
-          teamMember.orderNum = lists[m].order_count
+          teamMember.time = util.formatTime(new Date(lists[m].create_time)) 
+          teamMember.personNum = Number(lists[m].member_count)
+          teamMember.money = Number(lists[m].amount)
+          teamMember.orderNum = Number(lists[m].order_count)
           console.log(lists[m].nickname)
           teamInfor.push(teamMember)
         }
         console.log(this.data.currentGrade)
-        if (this.data.currentGrade = 1) {
+        if (Number(this.data.currentGrade) == 1) {
+          console.log(this.data.currentGrade)
           that.setData({
             oneTeamInfor : teamInfor
           })
-        } else {
+        } else if (Number(this.data.currentGrade) == 2){
           that.setData({
             twoTeamInfor : teamInfor
           })
         }
       })
-    } else {
-      console.log("token")
-    }
   },
   onLoad: function (options) {
     this.getTeamInfor()

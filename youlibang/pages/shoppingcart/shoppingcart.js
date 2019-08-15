@@ -26,6 +26,7 @@ Page({
     //     { id: 1, title: '新西兰A2脱脂高钙儿童学生成人奶1kg...', image: '../../images/kefu@2x.png', num: 1, price: 119.00, selected: true }
     //   ]
     // });
+    //拿到对应的token
   var token=wx.getStorageSync('token')
   console.log(token)
   this.setData({
@@ -40,82 +41,105 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    var that = this
-    var token=this.data.token
-    //请求接口
-    httpReq({
-      header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      url: "http://www.ylb.com/api/cart/getcart?token="+token,
-    }).then((res) => {
-      console.log(res)
-      var dataList = res.data.lists
-      //console.log(dataList)
-      if (dataList == undefined) {
-        console.log('购物车空空如也，去逛逛吧！')
-      } else {
-        //进行数据重组
-        var arr = []
-        //console.log(arr)
-        for (let i = 0; i < dataList.length; i++) {
-          var obj = {}
-          obj.id = dataList[i].goods_id
-          obj.title = dataList[i].goods_name
-          obj.num = dataList[i].number
-          obj.price = 2
-          obj.selected = true
-          obj.way='结算'
-          arr.push(obj)
-        }
-
-        //console.log(arr)
-        that.setData({
-          hasList: true,
-          carts: arr
-        })
-        //console.log(this.data.carts)
-        //同步成功
-        try {
-          var value = wx.getStorageSync('shop')
-          if (value) {
-            var arr = value
-            var carts = this.data.carts
-            //循环添加
-            for (let i = 0; i < arr.length; i++) {
-              var array = arr[i]
-              carts.push(array)
-            }
-            this.setData({
-              carts
-            })
-          }
-          //若同步失败，本地存储内没有值
-        } catch (e) {
-          console.log(e)
-        }
-        //console.log(carts.length)
-
-        this.getTotalPrice()
-
-      }
-    });
+    
    
+  },  
+  toGoods(e){
+    console.log(e)
+    var goodsId=e.currentTarget.dataset.goods_id
+    wx.navigateTo({
+      url: '../goodsDetail/goodsDetail?goodsId='+goodsId,
+    })
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this
+    var token = this.data.token
+    if(this.data.carts!=''){
+          console.log(this.data.carts)
+    }else{
+      //请求接口
+      httpReq({
+        header: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        url: "http://www.ylb.com/api/cart/getcart?token=" + token,
+      }).then((res) => {
+        if (res.data.lists == undefined) {
+          console.log("没有任何商品！")
+          //     var carts=wx.getStorageSync('shop')
+          //     this.setData({
+          //       carts
+          //     })
+          //  console.log(carts)
+        } else {
+
+          console.log(res)
+          var dataList = res.data.lists
+          //console.log(dataList)
+          //进行数据重组
+          var arr = []
+          //console.log(arr)
+          for (let i = 0; i < dataList.length; i++) {
+            var obj = {}
+            obj.id = dataList[i].goods_id
+            obj.title = dataList[i].goods_name
+            obj.num = dataList[i].number
+            obj.price = 2
+            obj.selected = true
+            obj.way = '结算'
+            arr.push(obj)
+          }
+
+          //console.log(arr)
+          that.setData({
+            hasList: true,
+            carts: arr
+          })
+          //console.log(this.data.carts)
+          //同步成功
+          //   try {
+          //     var value = wx.getStorageSync('shop')
+          //     if (value) {
+          //       var arr = value
+          //       var carts = this.data.carts
+          //       //循环添加
+          //       for (let i = 0; i < arr.length; i++) {
+          //         var array = arr[i]
+          //         carts.push(array)
+          //       }
+          //       this.setData({
+          //         carts
+          //       })
+          //     }
+          //     //若同步失败，本地存储内没有值
+          //   } catch (e) {
+          //     console.log(e)
+          //   }
+
+        }
+
+        //console.log(carts.length)
+
+        this.getTotalPrice()
+
+
+      });
+    }
    
+   
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-        
+  onHide: function (e) {
+        var nickName=wx.getStorageSync('userInfo')
+        console.log(nickName.avatarUrl)
   },
 
   /**
@@ -150,6 +174,18 @@ Page({
     var total=this.data.totalPrice
     var carts=this.data.carts
     //console.log(carts)
+   var num=0
+   //判断购物车中的商品是否有被选中
+     for(let i=0;i<carts.length;i++){
+         if(carts[i].selected==false){
+             num++
+         }
+     }
+     console.log(num)
+     if(num>=carts.length){
+       console.log('请至少选择一项商品！')
+       return false
+     }
    let info=carts.filter((v)=>{
          if(v.selected==true){
            return v

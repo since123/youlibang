@@ -113,10 +113,10 @@ height: 36rpx;
 margin-left:388rpx;
 margin-top: 30rpx;
 }
-
-
-
-
+.ifNumber {
+  font-size: 25rpx;
+  color: red;
+}
 .underLine{
   margin-bottom: 100rpx;
   background: white;

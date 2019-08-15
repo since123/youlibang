@@ -6,7 +6,7 @@
   // const minute = date.getMinutes()
   // const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') 
+  return [year, month, day].map(formatNumber).join('-') 
   // + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
@@ -15,10 +15,12 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
-module.exports = {
-  formatTime: formatTime
-}
-
-const formatNumber = obj => {
+const isNumber = obj => {
   return !Number.isNaN(parseFloat(obj)) && Number.isFinite(Number(obj))
 }
+module.exports = {
+  formatTime: formatTime,
+  isNumber: isNumber
+}
+
+

@@ -6,6 +6,7 @@ import {
 import {
   httpReq
 } from '../../utils/http.js';
+let util = require('../../utils/util')
 Page({
 
   /**
@@ -15,7 +16,8 @@ Page({
     amount: '',
     someMoney: '',
     token: '',
-    describe: '余额提现'
+    describe: '余额提现',
+    ifNumber: true
   },
 
   /**
@@ -35,7 +37,8 @@ Page({
    */
   getMoney: function (e) {
     this.setData({
-      someMoney: e.detail.value
+      someMoney: e.detail.value,
+      ifNumber: true
     })
     console.log(this.data.someMoney)
   },
@@ -52,6 +55,12 @@ Page({
    */
   withdrawal: function () {
     let that = this
+    if (!util.isNumber(this.data.someMoney) || this.data.someMoney <= 0){
+      this.setData({
+        ifNumber: false
+      })
+      return false
+    }
     let token = wx.getStorageSync('token')
     that.setData({
       token: token

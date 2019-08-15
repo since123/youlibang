@@ -63,8 +63,8 @@
 				},
 				{
 					"id": 1,
-					"name": "pages/cashoutDetail/cashoutDetail",
-					"pathName": "pages/cashoutDetail/cashoutDetail",
+					"name": "pages/rebateDetail/rebateDetail",
+					"pathName": "pages/rebateDetail/rebateDetail",
 					"query": "",
 					"scene": null
 				},
@@ -98,8 +98,8 @@
 				},
 				{
 					"id": 6,
-					"name": "pages/recharge/recharge",
-					"pathName": "pages/recharge/recharge",
+					"name": "pages/withdraw/withdraw",
+					"pathName": "pages/withdraw/withdraw",
 					"query": "",
 					"scene": null
 				}

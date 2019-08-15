@@ -50,7 +50,7 @@
 <!-- 购买弹出层 -->
 <view class='mubu' bindtap='quxiao' hidden="{{!status}}"></view>
   <view class='goodsType' bindchange="toastHide" hidden="{{!status}}">
-    <view  class='close' bindtap='quxiao' hidden="{{!status}}"><image src=''></image></view>
+    <icon class="clear" type="clear"size='14' bindtap='quxiao' hidden="{{!status}}"></icon>
     <view class='goodsdetailImg'><image src='../../images/2013062320262198.jpg'></image></view>
     <view class='priceDiv'>
       <view class='detailprice'><label>￥</label>{{productsList.goods_price}}</view>
@@ -73,10 +73,10 @@
   </view>   
 </view>
     <view class='amount'>数量</view>
-    <view class='stepper sum'>
-      <text class='{{minusStatus}}' type='number' bindtap='bindMinus'>-</text>
-      <input bindinput='bindManual' value='{{num}}'></input>
-      <text bindtap='bindPlus'>+</text>
+    <view class='stepper'>
+      <text class='reduce' type='number' bindtap='bindMinus'>——</text>
+      <input bindinput='bindManual' value='{{num}}' bindblur="changeIf" ></input>
+      <text bindtap='bindPlus' class="add">+</text>
     </view>
     <view class='btn'bindtap="confirm">确定</view>
   </view>

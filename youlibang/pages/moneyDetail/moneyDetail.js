@@ -16,7 +16,6 @@ Page({
     listinfo: [],
     comeInAmount: '3524.00',
     expendAmount: '12000.00'
-    // nowDate: new Date(date.getTime())
   },
 
   /**
@@ -37,10 +36,9 @@ Page({
    */
   getMoneyDetail() {
     let that = this
+    //转换成时间戳
     let nowDate = new Date(this.data.date).getTime() / 1000
-    let openid = wx.getStorageSync('openid')
-    console.log("new Date(this.data.date).getTime(): " + nowDate)
-    console.log(openid)
+   // console.log(util.formatTime(new Date(nowDate*1000)))
     httpReq({
       header: {
         'Content-Type': 'application/json',
@@ -48,9 +46,7 @@ Page({
       },
       url: ApiUrl.phplist + 'user/flowAccount?user_id=1&time=' + nowDate,
     }).then((res) => {
-      console.log()
-      console.log(nowDate)
-      console.log(res)
+      // console.log(res)
       let lists = res.data.lists
       let listinfo = []
       let comeIn = 0
@@ -59,8 +55,7 @@ Page({
       for (let m in lists) {
         let moneylist = {}
         moneylist.text = lists[m].describe
-        moneylist.datetime = lists[m].create_time
-        
+        moneylist.datetime = util.formatTime(new Date(lists[m].create_time)) 
         if (Number(lists[m].pay_type) == 0) {
           moneylist.money = "-" + lists[m].amount
           expend += Number(lists[m].amount)

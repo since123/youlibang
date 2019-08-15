@@ -27,7 +27,7 @@ Page({
     let that = this
     let app = getApp()
     let token = wx.getStorageSync('token')
-    if (token) {
+
       httpReq({
         header: {
           'Content-Type': 'application/json',
@@ -43,19 +43,20 @@ Page({
           order.status = retailOrder[m].status
           // order.image = retailOrder[m].
           order.userName = retailOrder[m].nickname
-          order.userGrade = retailOrder[m].rebate_scale
-          order.money = retailOrder[m].no_cash
-          order.orderid = retailOrder[m].order_sn
+          
+          if (Number(retailOrder[m].rebate_scale) == 1) {
+              order.userGrade = "(一级)"
+          } else if (Number(retailOrder[m].rebate_scale) == 2) {
+              order.userGrade = "(二级)"
+          }
+          order.money = Number(retailOrder[m].no_cash)
+          order.orderid = Number(retailOrder[m].order_sn)
           allOrder.push(order)
         }
         that.setData({
           allRetailOrder : allOrder,
         })
       })
-    } else {
-      console.log("分销订单页面token获取失败")
-    }
-    
   },
 
   /** 

@@ -12,7 +12,7 @@
   <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
     <view class="container-0">
       <view class="order" wx:for="{{allOrderS}}" wx:key="{{item.orderid}}" wx:for-item="order">
-        <view class="orderNumber">{{order.orderid}}</view>
+        <view class="orderNumber">订单编号：{{order.orderid}}</view>
         <view class="orderStatus">{{order.status}}</view>
         <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow" data-orderid="{{order.orderid}}">
             <image src='{{item.image}}'></image>

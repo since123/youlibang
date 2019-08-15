@@ -62,7 +62,3 @@
 <view class='btn' bindtap="confirm">确认支付</view>
 
 
-<view class="container">
-    <input type="text" bindinput="getOrderCode" style="border:1px solid #ccc;"  />
-    <button bindtap="pay">立即支付</button>
-</view>

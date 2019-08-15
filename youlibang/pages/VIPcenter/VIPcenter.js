@@ -11,15 +11,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-    dedCommission: 200,
-    propRebate: 148,
-    unpaidRebate: 50,
+    dedCommission: '200',
+    propRebate: '148',
+    unpaidRebate: '50',
     token: '11'
   },
+  //申请会员
   applyVIP:function(){
-    wx.navigateTo({
-      url: '../applyVIP/applyVIP',
-    })
+    let vipid = wx.getStorageSync('vipid')
+    if (vipid){
+      wx.showModal({
+        title: '提示',
+        content: '您已经是会员了，无法再更改会员等级',
+      })
+    }else {
+      wx.navigateTo({
+        url: '../applyVIP/applyVIP',
+      })
+    }
   },
   //提现
   rebeatWithdraw:function(){
@@ -27,11 +36,13 @@ Page({
       url: '../rebeatWithdraw/rebeatWithdraw',
     })
   },
+  //查看返利明细
   lookdetail:function(){
     wx.navigateTo({
       url: '../rebateDetail/rebateDetail',
     })
   },
+  //推广二维码
   tuiguang:function(){
     wx.navigateTo({
       url: '../extension_QRcode/extension_QRcode',
@@ -78,6 +89,12 @@ Page({
     }).then((res) => {
       console.log(res.data)
       //取到数据后赋值可提现佣金，已提现返利，未提现返利
+      let lists = res.data.lists
+      that.setData({
+        dedCommission: Number(lists.dedCommission),
+        propRebate: Number(lists.propRebate),
+        unpaidRebate: Number(lists.unpaidRebate)
+      })
     })
   },
   /**
