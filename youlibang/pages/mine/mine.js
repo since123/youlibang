@@ -52,7 +52,6 @@ Page({
            }
          }
        })
-      
      }
    } else {
      return false
@@ -60,27 +59,6 @@ Page({
     //如果不是注册的会员就显示自己的微信信息,此处需要加判断
     // this.getVipUserInfo()//如果是会员时，后台返回数据，展示会员信息
   },
-  /**
-   * 获得会员id，判断是否为会员
-   */
-  // getVIPID() {
-  //   let that = this
-  //   httpReq({
-  //     header:{
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json'
-  //     },
-  //     url: ApiUrl.phplist + 'user/ismember?token=' + this.data.token,
-  //   }).then((res)=>{
-  //     console.log(res)
-  //    let  vipid = res.data.lists
-      
-  //     that.setData({
-  //       vipid: vipid
-  //     })
-  //     wx.setStorageSync('vipid', this.data.vipid)
-  //   })
-  // },
   /**是会员时，后台返回数据，展示会员信息 */
   getIfVipUserInfo: function() {
     let that = this
@@ -94,7 +72,6 @@ Page({
       console.log(res);
         let list = res.data.lists
         that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
-          // logs: res.data.result,
           userImg_url: list.avatar,
           vipid: list.member_id,
           username: list.nickname,
@@ -102,8 +79,6 @@ Page({
           price: list.balance
         })
         wx.setStorageSync('vipid', this.data.vipid)
-        // this.userData = res.data; //无效不能实时的渲染到页面
-        // that.setData({ userData: res.data });//和页面进行绑定可以动态的渲染到页
     })
   },
   /**
@@ -111,13 +86,9 @@ Page({
    */
   getPersonalInfo:function() {
     var that = this;
-    
     let nickName = this.data.userInfo.nickName
     let src = this.data.userInfo.avatarUrl
-    // let sex = this.data.userInfo.gender //性别 0：未知、1：男、2：女
-    //此处需要加个判断，如果是会员则vipname = nickName,先默认昵称为会员名
     //success
-    // console.log(sex)
     that.setData({
       username: nickName,
       userImg_url: src

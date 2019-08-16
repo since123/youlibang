@@ -1,0 +1,48 @@
+<!--pages/applyRefund/applyRefund.wxml-->
+<view class='orderInform'>
+  <view class="goodInform" wx:for="{{goods}}" wx:key="{{item.index}}">
+    <image class="image" src="{{item.src}}"></image>
+    <view class="inform">
+      <view class="title">{{item.title}}</view>
+      <view class="properties">{{item.properties}}</view>
+    </view>
+  </view>
+</view>
+<view class="refundInform">
+  <view class="refundReason">
+    <text class="reasomtext">退款原因</text>
+    <view class="reason" bindtap="getReason">请选择</view>
+  </view>
+  <view class="money">退款金额</view>
+  <view class="explain">退款说明</view>
+</view>
+<view class="mubu" hidden="{{status}}"></view>
+<view class="reasonDetail" hidden="{{status}}">
+  <view class="reasonCon">
+    <view class="detailTitle">退款原因</view>
+    <radio-group>
+      <view class="reasonOne">
+      <text class="reasonText">拍错/多拍/不想要</text>
+      <radio class='check_box' bindtap="refundway"></radio>
+    </view>
+    <view class="reasonTwo">
+      <text class="reasonText">协商一致退款</text>
+      <radio class='check_box' bindtap="refundway"></radio>
+    </view>
+    <view class="reasonThree">
+      <text class="reasonText">缺货</text>
+      <radio class='check_box' bindtap="refundway"></radio>
+    </view>
+    <view class="reasonFour">
+      <text class="reasonText">未按约定时间发货</text>
+      <radio class='check_box' bindtap="refundway"></radio>
+    </view>
+    <view class="reasonFive">
+      <text class="reasonText">其他</text>
+      <radio class='check_box' bindtap="refundway"></radio>
+    </view>
+    </radio-group>
+  </view>
+  <button bindtap="showDetail" class="closePage">关闭</button>
+</view>
+<view class="refundImage">33</view>

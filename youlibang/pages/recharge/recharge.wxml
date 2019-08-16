@@ -21,7 +21,7 @@
         <radio class='check_box' bindtap="payway"></radio>
     </view>
     <view class='li'></view>
-    <view class='wexinPayfor underLine'>
+    <view class='underLine'>
         <image src='../../images/wallet-copy@2x.png'></image>
         <view class='wexintext' >线下支付</view>
         <radio class='check_box' bindtap="payWay"></radio>

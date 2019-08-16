@@ -1,0 +1,86 @@
+/* pages/applyRefund/applyRefund.wxss */
+.orderInform {
+  
+}
+.goodInform {
+  border: 1rpx solid green;
+  display:flex;
+  margin: 10rpx;
+}
+.image {
+  width: 150rpx;
+  height: 150rpx;
+  margin: 20rpx;
+  border: 1rpx solid #fff;
+  border-radius: 15rpx;
+}
+.inform {
+  margin: 20rpx;
+}
+.title {
+  font-size: 30rpx;
+}
+.properties {
+  color: darkgray;
+  font-size: 25rpx;
+}
+.refundInform {
+  margin: 10rpx;
+  border: 1rpx solid green;
+  font-size: 30rpx;
+}
+.refundReason {
+  display: flex;
+  margin: 20rpx;
+}
+.reasomtext {
+  flex: 1;
+}
+.money {
+  margin: 20rpx;
+}
+.explain {
+  margin: 20rpx;
+}
+.refundImage {
+  background-color: blue;
+}
+.mubu{
+  width:100%;
+  height: 100%;
+  position: fixed;
+  background-color: black;
+  opacity:0.5;
+  z-index: 100;
+  bottom: 0;
+}
+.reasonDetail {
+  width: 100%;
+  background-color: #fff;
+  z-index: 9999;
+  position: fixed;
+  bottom: 0rpx;
+}
+.reasonCon {
+  margin: 20rpx;
+}
+.detailTitle {
+  font-size: 30rpx;
+  text-align: center;
+  height: 100rpx;
+}
+.reasonOne, .reasonTwo, .reasonThree, .reasonFour, .reasonFive  {
+  border-bottom: 1rpx solid darkgray;
+  line-height: 80rpx;
+  height: 80rpx;
+  font-size: 30rpx;
+  display: flex;
+}
+.reasonText {
+  flex: 1;
+}
+.closePage {
+  background:linear-gradient(-90deg,rgba(255,146,150,1),rgba(234,65,72,1));
+  height: 100rpx;
+  color: white;
+}

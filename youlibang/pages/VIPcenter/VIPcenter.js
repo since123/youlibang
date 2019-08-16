@@ -11,15 +11,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    dedCommission: '200',
-    propRebate: '148',
-    unpaidRebate: '50',
-    token: '11'
+    dedCommission: '0',
+    propRebate: '0',
+    unpaidRebate: '0',
+    token: '',
+    vipid: wx.getStorageSync('vipid')
   },
   //申请会员
   applyVIP:function(){
-    let vipid = wx.getStorageSync('vipid')
-    if (vipid){
+    if (this.data.vipid){
       wx.showModal({
         title: '提示',
         content: '您已经是会员了，无法再更改会员等级',
@@ -81,19 +81,19 @@ Page({
       token: wx.getStorageSync('token')
     })
     httpReq({
-      url: ApiUrl.phplist + 'member/rebate?token=' + this.data.token,
+      url: ApiUrl.phplist + 'member/rebate?token=' + this.data.token + '&member_id=' + this.data.vipid,
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
     }).then((res) => {
-      console.log(res.data)
+      console.log(res.data.lists)
       //取到数据后赋值可提现佣金，已提现返利，未提现返利
       let lists = res.data.lists
       that.setData({
-        dedCommission: Number(lists.dedCommission),
-        propRebate: Number(lists.propRebate),
-        unpaidRebate: Number(lists.unpaidRebate)
+        dedCommission: Number(lists.can_rebat),//可提现佣金
+        propRebate: Number(lists.cach_total),//已提现返利
+        unpaidRebate: Number(lists.can_rebat) + Number(lists.no_cash)//未提现返利
       })
     })
   },

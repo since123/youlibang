@@ -15,6 +15,7 @@ swiper {
   display: flex;
   justify-content: space-around;
   margin-top: 18rpx;
+  margin-bottom: 36rpx; 
 }
 
 .swiper-tab view {
@@ -24,27 +25,27 @@ swiper {
   color: #333;
   text-align: center;
 }
+
 .container-0 {
   box-sizing: border-box;
-  padding: 36rpx 0;
+  
 }
+
 .container-1 {
   box-sizing: border-box;
-  /* padding:36rpx 0;  */
-  padding: 36rpx 0;
 }
+
 .container-2 {
   box-sizing: border-box;
-  padding: 36rpx 0;
 }
 .container-3 {
   box-sizing: border-box;
-  padding: 36rpx 0;
 }
+
 .container-4 {
   box-sizing: border-box;
-  padding: 36rpx 0;
 }
+
 .orderNumber {
   float: left;
   font-size: 24rpx;
@@ -52,6 +53,7 @@ swiper {
   padding-top: 10rpx;
 
 }
+
 .orderStatus {
   float: right;
   font-size: 28rpx;
@@ -60,6 +62,7 @@ swiper {
   padding-right: 19rpx;
   color: orangered;
 }
+
 .order {
   box-sizing: border-box;
   width: 678rpx;
@@ -69,13 +72,6 @@ swiper {
   padding-bottom: 32rpx; 
   margin-bottom: 20rpx;
 }
-
-/* .order .box_f {
-  font: 24rpx/24rpx "";
-  color: #999;
-  margin-top: 29rpx;
-  margin-left: 28rpx;
-} */
 
 image {
   width: 150rpx;

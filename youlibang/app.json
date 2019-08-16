@@ -37,7 +37,8 @@
     "pages/questionDetail/questionDetail",
     "pages/searchDetail/searchDetail",
     "pages/retailOrder/retailOrder",
-    "pages/rebeatWithdraw/rebeatWithdraw"
+    "pages/rebeatWithdraw/rebeatWithdraw",
+    "pages/applyRefund/applyRefund"
   ],
   "window": {
     "backgroundTextStyle": "light",

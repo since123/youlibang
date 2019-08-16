@@ -9,36 +9,36 @@
 
 <swiper current="{{currtab}}" style="height:{{deviceH-31}}px" bindchange="onTabChange">
   <swiper-item>
-  <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
-    <view class="container-0">
-      <view class="order" wx:for="{{allOrderS}}" wx:key="{{item.orderid}}" wx:for-item="order">
-        <view class="orderNumber">订单编号：{{order.orderid}}</view>
-        <view class="orderStatus">{{order.status}}</view>
-        <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow" data-orderid="{{order.orderid}}">
-            <image src='{{item.image}}'></image>
-            <view class='orderDetail'>
-              <view class='orderTitle'>{{item.title}}</view>
-              <view class='orderStyle'>
-                <view class="orderColor">{{item.properties}}</view>
-                <!-- <view class="orderSize">{{item.size}},</view>
-                <view class="orderUnit">{{item.unit}}</view> -->
+    <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
+      <view class="container-0">
+        <view class="order" wx:for="{{allOrderS}}" wx:key="{{item.orderid}}" wx:for-item="order">
+          <view class="orderNumber">订单编号：{{order.orderid}}</view>
+          <view class="orderStatus">{{order.status}}</view>
+          <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow" data-orderid="{{order.orderid}}">
+              <image src='{{item.image}}'></image>
+              <view class='orderDetail'>
+                <view class='orderTitle'>{{item.title}}</view>
+                <view class='orderStyle'>
+                  <view class="orderColor">{{item.properties}}</view>
+                  <!-- <view class="orderSize">{{item.size}},</view>
+                  <view class="orderUnit">{{item.unit}}</view> -->
+                </view>
               </view>
-            </view>
-            <view class='orderInfor'>
-              <view class='orderPrice'>{{item.price}}</view>
-              <view class='orderNum'>{{item.number}}</view>
-            </view>
-        </view>
-        <view class='orderSumPri'>
-          共{{order.totalNumber}}件商品 合计：
-          <view class='orderPri'>{{order.totalPrice}}元</view>
-        </view>
-        <view class="orderHander">
-          <view class="orderCancel" bindtap="orderHandleOne">{{order.orderHandleOne}}</view>
-          <view class="orderConfirm" bindtap="orderHandleTwo">{{order.orderHandleTwo}}</view>
+              <view class='orderInfor'>
+                <view class='orderPrice'>{{item.price}}</view>
+                <view class='orderNum'>{{item.number}}</view>
+              </view>
+          </view>
+          <view class='orderSumPri'>
+            共{{order.totalNumber}}件商品 合计：
+            <view class='orderPri'>{{order.totalPrice}}元</view>
+          </view>
+          <view class="orderHander">
+            <view class="orderCancel" data-orderid="{{order.orderid}}" bindtap="{{order.orderMethodOne}}" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
+            <view class="orderConfirm" data-orderid="{{order.orderid}}" bindtap="{{order.orderMethosTwo}}" hidden="{{order.ifhiddentwo}}">{{order.orderHandleTwo}}</view>
+          </view>
         </view>
       </view>
-    </view>
     </scroll-view>
   </swiper-item>
   <swiper-item>
@@ -64,55 +64,55 @@
               </view>
           </view>
           <view class='orderSumPri'>
-          共{{order.totalNumber}}件商品 合计：
-          <view class='orderPri'>{{order.totalPrice}}元</view>
-        </view>
+            共{{order.totalNumber}}件商品 合计：
+            <view class='orderPri'>{{order.totalPrice}}元</view>
+          </view>
           <view class="orderHander">
-            <view class="orderCancel">取消订单</view>
-            <view class="orderConfirm">确认付款</view>
+            <view class="orderCancel" bindtap="orderHandleOne" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
+            <view class="orderConfirm" bindtap="orderHandleTwo" hidden="{{order.ifhiddentwo}}">{{order.orderHandleTwo}}</view>
           </view>
         </view>
       </view>
     </scroll-view>
   </swiper-item>
   <swiper-item>
-  <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
-    <view class="container-2">
-      <view class="order" wx:for="{{waitSentOrder}}" wx:key="{{item.orderid}}" wx:for-item="order">
+    <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
+      <view class="container-2">
+        <view class="order" wx:for="{{waitSentOrder}}" wx:key="{{item.orderid}}" wx:for-item="order">
           <view class="orderNumber">{{order.orderid}}</view>
           <view class="orderStatus">{{order.status}}</view>
           <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow">
-              <image src='{{item.image}}'></image>
-              <view class='orderDetail'>
-                <view class='orderTitle'>{{item.title}}</view>
-                <view class='orderStyle'>
-                  <view class="orderColor">{{item.properties}}</view>
-                  <!-- <view class="orderColor">{{item.color}}</view>
-                  <view class="orderSize">{{item.size}}</view>
-                  <view class="orderUnit">{{item.unit}}</view> -->
-                </view>
+            <image src='{{item.image}}'></image>
+            <view class='orderDetail'>
+              <view class='orderTitle'>{{item.title}}</view>
+              <view class='orderStyle'>
+                <view class="orderColor">{{item.properties}}</view>
+                <!-- <view class="orderColor">{{item.color}}</view>
+                <view class="orderSize">{{item.size}}</view>
+                <view class="orderUnit">{{item.unit}}</view> -->
               </view>
-              <view class='orderInfor'>
-                <view class='orderPrice'>{{item.price}}</view>
-                <view class='orderNum'>{{item.number}}</view>
-              </view>
+            </view>
+            <view class='orderInfor'>
+              <view class='orderPrice'>{{item.price}}</view>
+              <view class='orderNum'>{{item.number}}</view>
+            </view>
           </view>
           <view class='orderSumPri'>
             共{{order.totalNumber}}件商品 合计：
-          <view class='orderPri'>{{order.totalPrice}}元</view>
-        </view>
+            <view class='orderPri'>{{order.totalPrice}}元</view>
+          </view>
           <view class="orderHander">
-            <view class="orderCancel">取消订单</view>
-            <view class="urgeSent">催TA发货</view>
+            <view class="orderCancel" bindtap="orderHandleOne" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
+            <view class="orderConfirm" bindtap="orderHandleTwo" hidden="{{order.ifhiddentwo}}">{{order.orderHandleTwo}}</view>
           </view>
         </view>
-    </view>  
+      </view>  
     </scroll-view>
   </swiper-item>
   <swiper-item>
-  <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
-  <view class="container-3">
-    <view class="order" wx:for="{{waitReceivedOrder}}" wx:key="{{item.orderid}}" wx:for-item="order">
+    <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
+      <view class="container-3">
+        <view class="order" wx:for="{{waitReceivedOrder}}" wx:key="{{item.orderid}}" wx:for-item="order">
           <view class="orderNumber">{{order.orderid}}</view>
           <view class="orderStatus">{{order.status}}</view>
           <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow">
@@ -121,9 +121,6 @@
                 <view class='orderTitle'>{{item.title}}</view>
                 <view class='orderStyle'>
                   <view class="orderColor">{{item.properties}}</view>
-                  <!-- <view class="orderColor">{{item.color}}</view>
-                  <view class="orderSize">{{item.size}}</view>
-                  <view class="orderUnit">{{item.unit}}</view> -->
                 </view>
               </view>
               <view class='orderInfor'>
@@ -133,153 +130,48 @@
           </view>
           <view class='orderSumPri'>
             共{{order.totalNumber}}件商品 合计：
-          <view class='orderPri'>{{order.totalPrice}}元</view>
-        </view>
+            <view class='orderPri'>{{order.totalPrice}}元</view>
+          </view>
           <view class="orderHander">
-            <view class="applyrefund">申请退款</view>
-            <view class="confirmReceipt">确认收货</view>
+            <view class="orderCancel" bindtap="orderHandleOne" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
+            <view class="orderConfirm" bindtap="orderHandleTwo" hidden="{{order.ifhiddentwo}}">{{order.orderHandleTwo}}</view>
           </view>
         </view>
-  </view>
-  </scroll-view>
+      </view>
+    </scroll-view>
   </swiper-item>
   <swiper-item>
-  <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
-  <view class="container-4">
-    <view class="order" wx:for="{{completeOrder}}" wx:key="{{item.orderid}}" wx:for-item="order">
+    <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
+      <view class="container-4">
+        <view class="order" wx:for="{{completeOrder}}" wx:key="{{item.orderid}}" wx:for-item="order">
           <view class="orderNumber">{{order.orderid}}</view>
           <view class="orderStatus">{{order.status}}</view>
           <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow" data->
-              <image src='{{item.image}}'></image>
-              <view class='orderDetail'>
-                <view class='orderTitle'>{{item.title}}</view>
-                <view class='orderStyle'>
-                  <view class="orderColor">{{item.properties}}</view>
-                  <!-- <view class="orderColor">{{item.color}}</view>
-                  <view class="orderSize">{{item.size}}</view>
-                  <view class="orderUnit">{{item.unit}}</view> -->
-                </view>
+            <image src='{{item.image}}'></image>
+            <view class='orderDetail'>
+              <view class='orderTitle'>{{item.title}}</view>
+              <view class='orderStyle'>
+                <view class="orderColor">{{item.properties}}</view>
+                <!-- <view class="orderColor">{{item.color}}</view>
+                <view class="orderSize">{{item.size}}</view>
+                <view class="orderUnit">{{item.unit}}</view> -->
               </view>
-              <view class='orderInfor'>
-                <view class='orderPrice'>{{item.price}}</view>
-                <view class='orderNum'>{{item.number}}</view>
-              </view>
+            </view>
+            <view class='orderInfor'>
+              <view class='orderPrice'>{{item.price}}</view>
+              <view class='orderNum'>{{item.number}}</view>
+            </view>
           </view>
           <view class='orderSumPri'>
           共{{order.totalNumber}}件商品 合计：
           <view class='orderPri'>{{order.totalPrice}}元</view>
+          </view>
+          <view class="orderHander">
+            <view class="orderCancel" bindtap="orderHandleOne" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
+            <view class="orderConfirm" bindtap="orderHandleTwo" hidden="{{order.ifhiddentwo}}">{{order.orderHandleTwo}}</view>
+          </view>
         </view>
-        </view>
-  </view>
-  </scroll-view>
+      </view>
+    </scroll-view>
   </swiper-item>
 </swiper>
-<!-- <view class='box'>
-  <view class='box_f'>已取消</view>
-  <view class='box_pc'>
-    <image src='../../images/youhuiquan@2x.png'></image>
-    <view class='box_rt'>
-      <view class='box_po'>Pepe Jeans秋季新款 女士长袖系带连衣裙</view>
-      <view class='box_no'>黑色;L;件</view>
-    </view>
-    <view class='box_hoh'>
-      <view class='box_hh'>¥ 120.00</view>
-      <view class='box_hr'>X8</view>
-    </view>
-  </view>
-
-  <view class='box_pc'>
-    <image src='../../images/youhuiquan@2x.png'></image>
-    <view class='box_rt'>
-      <view class='box_po'>Pepe Jeans秋季新款 女士长袖系带连衣裙</view>
-      <view class='box_no'>黑色;L;件</view>
-    </view>
-    <view class='box_hoh'>
-      <view class='box_hh'>¥ 120.00</view>
-      <view class='box_hr'>X8</view>
-    </view>
-
-  </view>
-  <view class='vv'>
-    共2件商品 合计：
-    <view class='vc'>¥200.00</view>
-  </view>
-  <view class='yy kk'>删除订单</view>
-
-</view>
-<view class='box'>
-  <view class='box_f mou'>待发货</view>
-  <view class='box_pc'>
-    <image src='../../images/youhuiquan@2x.png'></image>
-    <view class='box_rt'>
-      <view class='box_po'>Pepe Jeans秋季新款 女士长袖系带连衣裙</view>
-      <view class='box_no'>黑色;L;件</view>
-    </view>
-    <view class='box_hoh'>
-      <view class='box_hh'>¥ 120.00</view>
-      <view class='box_hr'>X8</view>
-    </view>
-
-  </view>
-  <view class='box_pc'>
-    <image src='../../images/youhuiquan@2x.png'></image>
-    <view class='box_rt'>
-      <view class='box_po'>Pepe Jeans秋季新款 女士长袖系带连衣裙</view>
-      <view class='box_no'>黑色;L;件</view>
-    </view>
-    <view class='box_hoh'>
-      <view class='box_hh'>¥ 120.00</view>
-      <view class='box_hr'>X8</view>
-    </view>
-
-  </view>
-  <view class='vv'>
-    共2件商品 合计：
-    <view class='vc'>¥200.00</view>
-  </view>
-  <view class='oo'>
-    <view class='uu'>取消订单</view>
-    <view class='yy '>催TA发货</view>
-  </view>
-
-
-</view>
-
-<view class='box'>
-  <view class='box_f mou'>待收货</view>
-  <view class='box_pc'>
-    <image src='../../images/youhuiquan@2x.png'></image>
-    <view class='box_rt'>
-      <view class='box_po'>Pepe Jeans秋季新款 女士长袖系带连衣裙</view>
-      <view class='box_no'>黑色;L;件</view>
-    </view>
-    <view class='box_hoh'>
-      <view class='box_hh'>¥ 120.00</view>
-      <view class='box_hr'>X8</view>
-    </view>
-
-  </view>
-  <view class='box_pc'>
-    <image src='../../images/youhuiquan@2x.png'></image>
-    <view class='box_rt'>
-      <view class='box_po'>Pepe Jeans秋季新款 女士长袖系带连衣裙</view>
-      <view class='box_no'>黑色;L;件</view>
-    </view>
-    <view class='box_hoh'>
-      <view class='box_hh'>¥ 120.00</view>
-      <view class='box_hr'>X8</view>
-    </view>
-
-  </view>
-  <view class='vv'>
-    共2件商品 合计：
-    <view class='vc'>¥200.00</view>
-  </view>
-  <!-- <view class='uu'>取消订单</view> -->
-
-  <!-- <view class='oo'>
-    <view class='uu'>申请退款</view>
-    <view class='yy '>确认收货</view>
-  </view>
-
-</view> -->
