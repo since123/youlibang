@@ -209,7 +209,7 @@ Page({
     console.log(e.currentTarget.dataset.orderid)
     let orderid = e.currentTarget.dataset.orderid
     wx.navigateTo({
-      url: '../applyRefund/applyRefund',
+      url: '../applyRefund/applyRefund?orderid=' + orderid,
     })
   },
   /**

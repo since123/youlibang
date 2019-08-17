@@ -40,8 +40,8 @@
   <view hidden='{{ifhidden}}'>
     <view class='uploadIDCard'>上传身份证</view>
     <view class='IDCard'>
-        <view class='idcardImg'><image src='{{frontID}}' bindtap="changeImage" bindtap="changeFrontID"></image></view>
-        <view class='idcardImg'><image src='{{backID}}' bindtap="changeImage" bindtap="changeBackID"></image></view>
+        <view class='idcardImg'><image src='{{frontID}}' bindtap="changeFrontID"></image></view>
+        <view class='idcardImg'><image src='{{backID}}' bindtap="changeBackID"></image></view>
     </view>
     <view class='uploadIDCard'>上传营业执照</view>
     <view class='addImg'>

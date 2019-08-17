@@ -1,4 +1,10 @@
 // pages/applyRefund/applyRefund.js
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
@@ -6,6 +12,7 @@ Page({
    */
   data: {
     status: true,
+    refundImage: '',
     goods:[
       {
         src: '../../images/kefu (2).png',
@@ -15,7 +22,25 @@ Page({
         src: '../../images/headImg.png',
         title: '好看的耳机质量好的贴纸价格贵的贴纸',
         properties: '红色，L, 好看'
-      }]
+      }],
+    reasons: [
+      {
+        name: '拍错/多拍/不想要',
+        value: '1'
+      },{
+        name: '协商一致退款',
+        value: '2'
+      },{
+        name: '缺货',
+        value: '3'
+      },{
+        name: '未按约定时间发货',
+        value: '4'
+      },{
+        name: '其他',
+        value: '5'
+      },
+    ]
   },
   /**
    * 请选择
@@ -34,17 +59,58 @@ Page({
     })
   },
   /**
-   * 单选选择退货原因
+   * 选择退款原因
    */
-  refundway: function(e) {
-    console.log("选择了原因！")
+  chooseReason: function(e) {
     console.log(e)
+  },
+  /**
+   * 上传图片
+   */
+  uploadImage: function() {
+    let that = this
+    wx.chooseImage({
+      count: 6,//默认9f
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: function (res) {//// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        const tempFilePaths = res.tempFilePaths;
+        console.log(tempFilePaths)
+      },
+    })
+  },
+  /**
+   * 提交退款信息
+   */
+  submit: function() {},
+  /**
+   * 获取退款订单
+   */
+  getRefundOrider: function() {
+    console.log(orderid)
+    httpReq: ({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + '',
+    }).then((res) => {
+      console.log(res)
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let that = this
+    let orderid = options.orderid
+    if (orderid) {
+      //获取退款订单
+      // this.getRefundOrider()
+    } else {
+      console.log('没有获取到订单编号')
+    }
+    
   },
 
   /**

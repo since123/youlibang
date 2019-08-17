@@ -3,7 +3,7 @@
   
 }
 .goodInform {
-  border: 1rpx solid green;
+  background: white;
   display:flex;
   margin: 10rpx;
 }
@@ -26,7 +26,7 @@
 }
 .refundInform {
   margin: 10rpx;
-  border: 1rpx solid green;
+  background: white;
   font-size: 30rpx;
 }
 .refundReason {
@@ -43,7 +43,26 @@
   margin: 20rpx;
 }
 .refundImage {
-  background-color: blue;
+  margin: 10rpx;
+  background: white;
+}
+.uploadImage {
+  margin: 20rpx;
+}
+.imageTitle {
+  font-size: 30rpx;
+}
+.uploadImage image{
+  border: 1rpx dashed darkgray;
+  width: 150rpx;
+  height: 150rpx;
+  margin-top: 20rpx;
+}
+.submit {
+  background:linear-gradient(-90deg,rgba(255,146,150,1),rgba(234,65,72,1));
+  height: 100rpx;
+  margin: 10rpx;
+  margin-top: 90rpx;
 }
 .mubu{
   width:100%;
@@ -69,7 +88,7 @@
   text-align: center;
   height: 100rpx;
 }
-.reasonOne, .reasonTwo, .reasonThree, .reasonFour, .reasonFive  {
+.reasons  {
   border-bottom: 1rpx solid darkgray;
   line-height: 80rpx;
   height: 80rpx;

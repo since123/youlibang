@@ -63,8 +63,8 @@
 				},
 				{
 					"id": 1,
-					"name": "pages/myOrder/myOrder",
-					"pathName": "pages/myOrder/myOrder",
+					"name": "pages/applyRefund/applyRefund",
+					"pathName": "pages/applyRefund/applyRefund",
 					"query": "",
 					"scene": null
 				},

@@ -100,7 +100,7 @@ Page({
     })
   },
   /**
-   * 获取当前充值金额
+   * 获取当前充值等级
    */
   chooseGrade: function(e) {
     let current = e.currentTarget.dataset.current //当前页面某个等级的index

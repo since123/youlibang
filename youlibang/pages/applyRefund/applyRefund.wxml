@@ -20,29 +20,19 @@
 <view class="reasonDetail" hidden="{{status}}">
   <view class="reasonCon">
     <view class="detailTitle">退款原因</view>
-    <radio-group>
-      <view class="reasonOne">
-      <text class="reasonText">拍错/多拍/不想要</text>
-      <radio class='check_box' bindtap="refundway"></radio>
-    </view>
-    <view class="reasonTwo">
-      <text class="reasonText">协商一致退款</text>
-      <radio class='check_box' bindtap="refundway"></radio>
-    </view>
-    <view class="reasonThree">
-      <text class="reasonText">缺货</text>
-      <radio class='check_box' bindtap="refundway"></radio>
-    </view>
-    <view class="reasonFour">
-      <text class="reasonText">未按约定时间发货</text>
-      <radio class='check_box' bindtap="refundway"></radio>
-    </view>
-    <view class="reasonFive">
-      <text class="reasonText">其他</text>
-      <radio class='check_box' bindtap="refundway"></radio>
-    </view>
+    <radio-group bindchange="chooseReason">
+      <view class="reasons" wx:for="{{reasons}}" wx:key="{{item.index}}">
+        <text class="reasonText">{{item.name}}</text>
+        <radio class='check_box' bindtap="refundway" value="{{item.value}}"></radio>
+      </view>
     </radio-group>
   </view>
   <button bindtap="showDetail" class="closePage">关闭</button>
 </view>
-<view class="refundImage">33</view>
+<view class="refundImage">
+  <view class="uploadImage">
+    <view class="imageTitle">上传凭证（最多上传6张）</view>
+    <image src="{{refundImage}}" bindtap="uploadImage"></image>
+  </view>
+</view>
+<button class="submit" bindtap="submit"> 提交 </button>
