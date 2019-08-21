@@ -63,8 +63,8 @@
 				},
 				{
 					"id": 1,
-					"name": "pages/applyRefund/applyRefund",
-					"pathName": "pages/applyRefund/applyRefund",
+					"name": "pages/retail_orderdetail/retail_orderdetail",
+					"pathName": "pages/retail_orderdetail/retail_orderdetail",
 					"query": "",
 					"scene": null
 				},
@@ -98,8 +98,8 @@
 				},
 				{
 					"id": 6,
-					"name": "pages/withdraw/withdraw",
-					"pathName": "pages/withdraw/withdraw",
+					"name": "pages/applyVIP/applyVIP",
+					"pathName": "pages/applyVIP/applyVIP",
 					"query": "",
 					"scene": null
 				}

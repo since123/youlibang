@@ -10,7 +10,7 @@
 <view class='li'></view>
 <view class='question' bindtap="question" data-id="4">如何申请退款？</view>
 </view>
-  <view class='serviceinfo'  wx:for='{{infolist}}'>
+  <view class='serviceinfo'  wx:for='{{infolist}}' wx:key="{{item.id}}">
     <view class="{{item.states==1?'userheadImg':'serviceheadImg'}}">
     <image src='{{item.userheadImg}}'></image>
     </view>

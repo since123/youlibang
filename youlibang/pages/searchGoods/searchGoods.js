@@ -14,14 +14,20 @@ Page({
       searchGoods:[
        
 
-      ]
+      ],
+      history:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var history=wx.getStorageSync('search')
+    if(history){
+      this.setData({
+        history
+      })
+    }
   },
 
   /**
@@ -49,6 +55,13 @@ Page({
     //获取搜索关键字
     var that=this
     var search=that.data.value
+    var history=that.data.history
+    console.log(typeof history)
+    history.push(search)
+    that.setData({
+      history
+    })
+    wx.setStorageSync('search', history)
     console.log(search)
    //请求搜索接口
     httpReq({
@@ -56,7 +69,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url:'http://www.ylb.com/api/goods/goodsearch?search='+search,
+      url:'http://wx.ylbtl.cn/api/goods/goodsearch?search='+search,
     }).then((res) => {
        console.log(res)
        var searchGoods=res.data.lists
@@ -93,7 +106,7 @@ Page({
          'Content-Type': 'application/json',
          'Accept': 'application/json'
        },
-       url: 'http://www.ylb.com/api/goods/goodsearch?search=' + inputvalue,
+       url: 'http://wx.ylbtl.cn/api/goods/goodsearch?search=' + inputvalue,
      }).then((res) => {
        console.log(res)
        var searchGoods = res.data.lists

@@ -64,7 +64,7 @@
     <swiper-item style="overflow:auto">
       <scroll-view bindscrolltolower="bindDownLoad" scroll-y="true">
         <view>
-          <view class='listInfo' wx:for="{{waitReceived}}" wx:key="item.index" bindtap="retailOrderDetail">
+          <view class='listInfo' wx:for="{{waitReceivedOrder}}" wx:key="item.index" bindtap="retailOrderDetail">
             <view class="orderStatus">{{item.status}}</view>
             <view class="retailOrder">
               <view class="retailOrderInfo">

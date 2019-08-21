@@ -1,9 +1,13 @@
 <!--pages/bindphoneNum/bindphoneNum.wxml-->
-<view class='imgcontents'>
-    <view class='phoneImg'></view>
+<!--pages/updatePhone/updatePhone.wxml-->
+<form bindsubmit='formSubmit'>
+<view class='phoneinput'>
+    <input type='text' name='phone' placeholder='请输入手机号' maxlength="11" bindinput='blurPhone'></input>
 </view>
-<view class='localphonenum'>当前手机号</view>
-<view class='tel'>13789065434</view>
-<view class='tishi'>更换手机号，下次可使用新手机号验证登录。</view>
-<view class='updatephone' bindtap="updatephone">更换手机号</view>
-
+<view class='yzcodeinput'>
+    <input type='text' name='phoneCode' placeholder='请输入验证码' bindinput='code'></input>
+    <view class='line'></view>
+    <view class='sendCode' bindtap='sendCodeBtn'>{{getText2}}</view>
+</view>
+<view class='confirm'>确认</view>
+</form>

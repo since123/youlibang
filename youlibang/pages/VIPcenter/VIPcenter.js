@@ -17,18 +17,21 @@ Page({
     token: '',
     vipid: wx.getStorageSync('vipid')
   },
-  //申请会员
+  //申请会员，注释不能删，有用
   applyVIP:function(){
-    if (this.data.vipid){
-      wx.showModal({
-        title: '提示',
-        content: '您已经是会员了，无法再更改会员等级',
-      })
-    }else {
-      wx.navigateTo({
+    wx.navigateTo({
         url: '../applyVIP/applyVIP',
       })
-    }
+    // if (this.data.vipid){
+    //   wx.showModal({
+    //     title: '提示',
+    //     content: '您已经是会员了，无法再更改会员等级',
+    //   })
+    // }else {
+    //   wx.navigateTo({
+    //     url: '../applyVIP/applyVIP',
+    //   })
+    // }
   },
   //提现
   rebeatWithdraw:function(){
@@ -87,7 +90,7 @@ Page({
         'Accept': 'application/json'
       },
     }).then((res) => {
-      console.log(res.data.lists)
+      console.log(res)
       //取到数据后赋值可提现佣金，已提现返利，未提现返利
       let lists = res.data.lists
       that.setData({

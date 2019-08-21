@@ -13,5 +13,5 @@
     <view class='text'>{{item.text}}</view>
     <view class='tiems'>{{item.datetime}}</view>
   </view>
-  <view class='tips_right'>{{item.money}}</view>
+  <view class='tips_right {{item.money>0 ? "income" : ""}}'>{{item.money}}</view>
 </view>

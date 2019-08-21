@@ -62,7 +62,7 @@ Page({
    * 选择退款原因
    */
   chooseReason: function(e) {
-    console.log(e)
+    console.log(e.detail.value)
   },
   /**
    * 上传图片
@@ -82,7 +82,9 @@ Page({
   /**
    * 提交退款信息
    */
-  submit: function() {},
+  submit: function() {
+    
+  },
   /**
    * 获取退款订单
    */

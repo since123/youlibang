@@ -16,7 +16,7 @@ Page({
     amount:'',
     body: '充值',
     status: false,
-    way: '微信',
+    payway: '',
     ifNumber: true,
   },
 
@@ -55,64 +55,18 @@ Page({
     })
   },
   
-  // 通过微信充值
+  //确认支付
   confirmPay: function() {
-    if (this.data.way == '微信') {
-      this.confirmweixinPay()
+    if (this.data.payway == 'wexinPayfor') {
+      this.confirmWeixinPay()
     }else {
       this.confirmXianxiaPay()
     }
-   
-    // wx.request({　　
-    //   url: "",
-    //   method: "POST",
-    //   dataType: "json",
-    //   header: {
-    //     'content-type': 'application/x-www-form-urlencoded'
-    //   },
-    //   data: {
-    //     amount: amount, // 充值金额
-    //     token: token,
-    //     openId: openId
-    //   },
-      // success: function(res) {
-        // if (res.data.code == '1') {
-        //   that.setData({
-        //     payParams: res.data.data // 后端从微信得到的统一下单的参数
-        //   })
-        //   wx.showToast({
-        //     title: '充值成功',
-        //     icon: "success",
-        //     duration: 2000, //持续的时间
-        //   })
-        //   setTimeout(function () {
-        //     wx.navigateTo({
-        //       url: '',
-        //     })
-        //   }, 1000)  //定时函数确保状态显示之后再返回上一页
-        //   that.xcxPay(); // 拿到统一下单的参数后唤起微信支付页面
-        // }
-      // },
-      // fail:function(res){
-      //   console.log(res);
-      //   wx.showToast({
-      //     title:'充值失败',
-      //     icon:'warn',
-      //     duration:2000,//持续时间
-      //   })
-      //   setTimeout(function(){
-      //     wx.navigateTo({
-      //       url: '',
-      //     },1000)
-      //   })
-      // }
-    // })
-
   },
   /**
    * 通过微信支付
    */
-    confirmweixinPay: function () { 
+    confirmWeixinPay: function () { 
     var that = this;
     var token = wx.getStorageSync("token")
     httpReq({
@@ -172,20 +126,14 @@ Page({
   },
   
 
-  payway() {
-    console.log("选择了微信支付！")
+  payway(e) {
+    let payway = e.detail.value
     this.setData({
-      way: "微信"
+      payway: payway
     })
-    console.log(this.data.way)
+    console.log(this.data.payway)
   },
-  payWay() {
-    console.log("选择了线下支付！")
-    this.setData({
-      way: "线下"
-    })
-    console.log(this.data.way)
-  },
+  
   /**
    * 生命周期函数--监听页面加载
    */

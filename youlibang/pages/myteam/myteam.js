@@ -103,7 +103,7 @@ Page({
         },
         url: ApiUrl.phplist + 'distribution/myteam?token=' + token + '&level=' + this.data.currentGrade,
       }).then((res) => {
-        console.log(res.data.lists)
+        console.log(res.data)
         let lists = res.data.lists
         let teamInfor = []
         for (let m in lists) {

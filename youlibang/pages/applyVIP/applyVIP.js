@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    status: false,
     currentIndex: 0,//当前默认普通VIP
     currentRechargemoney: 100,//当前充值金额默认为100
     // recommendID: 0303030,
@@ -23,9 +24,11 @@ Page({
     pageSize: 4,
     pageIndex: 0,
     buttonText: '会员专享超多优惠返利！',
-    token: '11',
+    token: wx.getStorageSync('token'),
     vipRules: [],
-    grade: '1'
+    grade: '1',
+    vipid: wx.getStorageSync('vipid'),
+    payway: '',
   },
   /**
    * 分页
@@ -62,10 +65,13 @@ Page({
       let VIPList = res.data.lists.act
       let inviterID = res.data.lists.inviter_id
       if (inviterID == 0) {
+        that.setData({
+          inviterID: inviterID
+        })
         console.log('没有邀请id,可输入朋友的也可不输入')
       } else {
         that.setData({
-          inviterID: inviterID
+          ifReadyonly: readonly
         })
       }
       let vipRules = []
@@ -152,16 +158,25 @@ Page({
       sourceType: ['album', 'camera'],
       success: function (res) {//// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths;
-        console.log(tempFilePaths)
+        //console.log(tempFilePaths)
         that.setData({
           frontID: tempFilePaths[0]
         })
         // console.log(that.data.frontID)
          that.data.imgList.push(that.data.frontID)
+         wx.uploadFile({
+           url: ApiUrl.phplist + 'member/upimg?token=' + that.data.token,
+           filePath: that.data.frontID,
+           name: 'card_one',
+           header: {
+             "Content-Type": "multipart/form-data"//记得设置
+           },
+           success(res) {
+             console.log(res)
+           }
+         })
       },
-      radioChange: function (e) {
-        console.log('radio发生change事件，携带value值为：', e.detail.value)
-      },
+      
     })
   },
   /**
@@ -176,16 +191,24 @@ Page({
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths;
-        console.log(tempFilePaths)
+       // console.log(tempFilePaths)
         that.setData({
           backID: tempFilePaths[0]
         })
+        // console.log(that.data.backID)
         that.data.imgList.push(that.data.backID)
+        wx.uploadFile({
+          url: ApiUrl.phplist + 'member/upimg?token=' + that.data.token,
+          filePath: that.data.backID,
+          name: 'card_two',
+          header: {
+            "Content-Type": "multipart/form-data"//记得设置
+          },
+          success(res) {
+            console.log(res)
+          }
+        })
       },
-      radioChange: function (e) {
-        console.log('radio发生change事件，携带value值为：', e.detail.value)
-      },
-
     })
   },
   /**
@@ -200,15 +223,27 @@ Page({
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths;
-        console.log(tempFilePaths)
+       // console.log(tempFilePaths)
         that.setData({
           businessLicense: tempFilePaths[0]
         })
-        that.data.imgList.push(that.data.businessLicense)
+        // console.log(that.data.businessLicense)
+       that.data.imgList.push(that.data.businessLicense)
+        wx.uploadFile({
+          url: ApiUrl.phplist + 'member/upimg?token=' + that.data.token,
+          filePath: that.data.businessLicense,
+          name: 'license',
+          header: {
+            "Content-Type": "multipart/form-data"//记得设置
+          },
+          success(res) {
+            console.log(res)
+          }
+        })
       },
-      radioChange: function (e) {
-        console.log('radio发生change事件，携带value值为：', e.detail.value)
-      },
+      // radioChange: function (e) {
+      //   console.log('radio发生change事件，携带value值为：', e.detail.value)
+      // },
     })
   },
   /**
@@ -227,74 +262,98 @@ Page({
     } 
     console.log(this.data.inviterID)
   },
-  // applyClick: function () { 
-  // },
-  /**
-   * 上传文件
-   */
-  applyClick: function() {
-    let that = this
-    let token = wx.getStorageSync('token')
-    console.log(this.data.imgList)
-    let i = 0
-    while(i < this.data.imgList.length) {
-      wx.uploadFile({
-        // url: ApiUrl.phplist + 'user/cardUpload?uploads='+ '['+'card_one=' + cardone + ',card_two=' + cardtwo + ',license=' + license +']', //里面填写你的上传图片服务器API接口的路径
-        url: ApiUrl.phplist + 'member/applymber?need=' + that.data.imgList + '&token=' + token + '&inviterID=' + this.data.inviterID + '&grade=' + this.data.grade,
-        filePath: that.data.imgList[i],//要上传文件资源的路径，此处只有一张，为数组第一项， String类型 
-        name: 'imageInform' + i,//按个人情况填写，文件对应的 key,开发者在服务器端通过这个 key 可以获取到文件二进制内容，(后台接口规定的关于图片的请求参数)
-        header: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        success: function (res) {
-          i++
-          //const data = res.data
-          console.log(res)
-          //当调用uploadFile成功之后，再次调用后台修改的操作，这样才真正做了修改头像
-          // if (res.statusCode = 200) {
-          //   // var data = res.data
-          //   // var statusCode = res.statusCode
-          //   // console.log("返回值1" + data);
-          //   // console.log("返回值2" + statusCode)
-          //   //这里调用后台的修改操作， tempFilePaths[0],是上面uploadFile上传成功，然后赋值到修改这里。
-
-          //   this.getUpdateDate()
-          // }
-        }
-      })
-    }
-   
+ 
+  
+  applyClick: function () {
+    var status = this.data.status;
+    // console.log("触发了点击事件，弹出toast")
+    status = !status;
+    this.setData({
+      status: status
+    })　　　　 //setData方法可以建立新的data属性，从而起到跟视图实时同步的效果
   },
+
   /**
    * 修改成功，返回后台数据
    */
-  getUpdateDate() {
-    let token = wx.getStorageSync('token')
-    let currentRechargemoney = this.data.currentRechargemoney
-    let inviterID = this.data.inviterID
+  confirmWeixinPay() {
+    var that = this;
+    var token = wx.getStorageSync("token")
     httpReq({
-      url: ApiUrl.phplist + 'operatedata/actlist?token=' + token + '&currentRechargemoney=' + currentRechargemoney + '&inviterID=' + inviterID,
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      method: 'POST',
+      url: ApiUrl.phplist + 'member/applymber?token=' + that.data.token + '&level=' + that.data.grade + '&inviter=' + that.data.inviterID,
+      // url: ApiUrl.phplist + 'order/orderpay?pay_amount=' + this.data.amount,
     }).then((res) => {
       console.log(res)
-      if (res.data.code == 200) {
-        wx.showToast({
-          title: '修改成功',
-          icon: 'success',
-          duration: 2500
-        })
-        //wx.uploadFile自已有一个this，我们刚才上面定义的let that = this 把this带进来
-        that.setData({
-          src: tempFilePaths[0]//要上传文件资源的路径
-        });
-      }
+      wx.requestPayment({
+        timeStamp: res.data.lists.timeStamp,
+        nonceStr: res.data.lists.nonceStr,
+        package: res.data.lists.package,
+        signType: 'MD5',
+        paySign: res.data.lists.paySign,
+        success: function (res) {
+          // success
+          console.log(res);
+        },
+        fail: function (res) {
+          // fail
+          console.log(res);
+        },
+        complete: function (res) {
+          // complete
+          that.setData({
+            status: false
+          })
+
+        }
+      })
+      // if (res.data.code == '1') {
+      //   that.setData({
+      //     payParams: res.data.data // 后端从微信得到的统一下单的参数
+      //   })
+      //   wx.showToast({
+      //     title: '充值成功',
+      //     icon: "success",
+      //     duration: 2000, //持续的时间
+      //   })
+      //   setTimeout(function () {
+      //     wx.navigateTo({
+      //       url: '../recharge/recharge',
+      //     })
+      //   }, 1000)  //定时函数确保状态显示之后再返回上一页
+      //   that.xcxPay(); // 拿到统一下单的参数后唤起微信支付页面
+      // }
     })
   },
+//   confirmWeixinPay() {
+//     let that = this
+//      let currentRechargemoney = this.data.currentRechargemoney
+//      let inviterID = this.data.inviterID
+//      httpReq({
+//        url: ApiUrl.phplist + 'member/applymber?token=' + that.data.token + '&level=' + that.data.grade + '&inviter=' + that.data.inviterID,
+//        header: {
+//          'Content-Type': 'application/json',
+//          'Accept': 'application/json'
+//        },
+//        method: 'POST',
+//      }).then((res) => {
+//        console.log(res)
+//        if (res.data.code == 200) {
+//         wx.showToast({
+//           title: '修改成功',
+//           icon: 'success',
+//           duration: 2500
+//          })
+//          //wx.uploadFile自已有一个this，我们刚才上面定义的let that = this 把this带进来
+//         //  that.setData({
+//         //    src: tempFilePaths[0]//要上传文件资源的路径
+//         // });
+//        }
+//      })
+// },
   /**
    * 立即申请
    */
@@ -321,7 +380,29 @@ Page({
     })
     this.getinformation()
   },
-
+  //选择支付方式
+  payway(e) {
+    let payway = e.detail.value
+    this.setData({
+      payway: payway
+    })
+    console.log(this.data.payway)
+  },
+  cancelPay: function () {
+    var status = this.data.status;
+    status = !status;
+    this.setData({
+      status: status
+    })
+  },
+  //确认支付
+  confirmPay: function () {
+    if (this.data.payway == 'wexinPayfor') {
+      this.confirmWeixinPay()
+    } else {
+      this.confirmXianxiaPay()
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

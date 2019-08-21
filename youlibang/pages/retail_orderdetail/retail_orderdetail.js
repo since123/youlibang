@@ -11,13 +11,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userName: '李开心',
-    phoneNumber: '13260995055',
-    adress: '广东省广州市天河区汇诚大厦365',
+    userName: '',
+    phoneNumber: '',
+    address: '',
     token: '',
     orderid: '',
     orderAmount: '',
-    freightStatus: '20',
+    orderStatus: '',
+    freightStatus: '没有传',
+    orderRebeat: '没有传',
     order: []
   },
   /**
@@ -41,24 +43,45 @@ Page({
       },
       url: ApiUrl.phplist + 'order/disOrderDetail?token=' + this.data.token + '&order_sn=' + this.data.orderid,
     }).then((res) => {
-      console.log(res)
+      console.log(res.data.lists)
+      let addressList = res.data.lists.address_list//地址信息
+      let goodsList = res.data.lists.order_goods//订单商品信息
+      //地址内容
+      let userName = addressList.address_name
+      let phoneNumber = addressList.address_phone
+      let address = addressList.address
+      //订单内容
+      let orderAmount = goodsList[0].order_amount//订单总价格
+      let orderStatus = ''//订单状态
+      if (Number(goodsList[0].pay_status) == 0) {
+        orderStatus = '待付款'
+      } else if (Number(goodsList[0].pay_status) == 1) {
+        orderStatus = '已取消'
+      } else if (Number(goodsList[0].pay_status) == 2) {
+        orderStatus = '待发货'
+      } else if (Number(goodsList[0].pay_status) == 3) {
+        orderStatus = '待收货'
+      } else {
+        orderStatus = '已完成'
+      }
 
-      let goodsList = res.data.lists.or
-      let orderAmount = goodsList[0].order_amount
-      //console.log(orderAmount)
       let order = []
       for (let m in goodsList) {
         console.log(goodsList[m])
         let good = {}
         good.goodsImg = goodsList[m].goods_logo,
-          good.goodsdetail = goodsList[m].goods_name,
-          good.types = goodsList[m].goods_attr_values,
-          good.num = goodsList[m].number
+        good.goodsdetail = goodsList[m].goods_name,
+        good.types = goodsList[m].goods_attr_values,
+        good.num = goodsList[m].number
         order.push(good)
       }
       that.setData({
         order: order,
-        orderAmount: orderAmount
+        orderAmount: orderAmount,
+        orderStatus: orderStatus,
+        userName: userName,
+        phoneNumber: phoneNumber,
+        address: address
       })
       console.log(orderAmount)
     })

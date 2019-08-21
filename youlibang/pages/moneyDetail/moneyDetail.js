@@ -12,16 +12,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    date: "2019-08-02",
+    date: "",
     listinfo: [],
-    comeInAmount: '3524.00',
-    expendAmount: '12000.00'
+    comeInAmount: 0,
+    expendAmount: 0,
+    vipid: wx.getStorageSync('vipid'),
+    token: wx.getStorageSync('token')
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      date: util.formatTime(new Date())
+    })
     let that = this
     this.getMoneyDetail()
   },
@@ -44,9 +49,9 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'user/flowAccount?user_id=1&time=' + nowDate,
+      url: ApiUrl.phplist + 'user/flowAccount?time=' + nowDate + '&member_id=' + this.data.vipid + '&token=' + this.data.token,
     }).then((res) => {
-      // console.log(res)
+      console.log(res)
       let lists = res.data.lists
       let listinfo = []
       let comeIn = 0
@@ -54,14 +59,26 @@ Page({
       // console.log(lists.length)
       for (let m in lists) {
         let moneylist = {}
-        moneylist.text = lists[m].describe
-        moneylist.datetime = util.formatTime(new Date(lists[m].create_time)) 
+
         if (Number(lists[m].pay_type) == 0) {
-          moneylist.money = "-" + lists[m].amount
-          expend += Number(lists[m].amount)
+          moneylist.text = '提现-到微信'
+        }
+        else if (Number(lists[m].pay_type) == 1) {
+          moneylist.text = '商城消费'
+        }
+        else if (Number(lists[m].pay_type) == 2) {
+          moneylist.text = '返利'
+        }
+        else if (Number(lists[m].pay_type) == 3){
+          moneylist.text = '充值'
+        }
+        moneylist.datetime = util.formatTime(new Date(lists[m].create_time)) 
+        if (Number(lists[m].pay_type) == 0 || Number(lists[m].pay_type) == 1) {
+          moneylist.money = Number("-" + lists[m].money)
+          expend += Number(lists[m].money)
         } else {
-          moneylist.money = Number(lists[m].amount)
-          comeIn += Number(lists[m].amount)
+          moneylist.money = Number(lists[m].money)
+          comeIn += Number(lists[m].money)
         }
         listinfo.push(moneylist)
       }

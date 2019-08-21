@@ -84,7 +84,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://www.ylb.com/api/user/searchCall?questions=' + search,
+      url: 'http://wx.ylbtl.cn/api/user/searchCall?questions=' + search,
     }).then((res) => {
       console.log(res)
       var answer = res.data.msg
@@ -139,7 +139,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url:'http://www.ylb.com/api/user/searchCall?questions='+info,
+      url:'http://wx.ylbtl.cn/api/user/searchCall?questions='+info,
     }).then((res) => {
      console.log(res)
      var answer=res.data.msg

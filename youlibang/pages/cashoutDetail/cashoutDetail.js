@@ -5,6 +5,7 @@ import {
 import {
   httpReq
 } from '../../utils/http.js';
+let util = require('../../utils/util.js')
 Page({
 
   /**
@@ -86,19 +87,17 @@ Page({
   getWithdrawInfor: function () {
     let that = this
     let vipid = wx.getStorageSync('vipid')
-    console.log(vipid)
     this.setData({
       token: wx.getStorageSync('token')
     })
     httpReq({
-      url: ApiUrl.phplist + 'user/tixianlis?member_id=' + vipid,
+      url: ApiUrl.phplist + 'user/tixianlist?member_id=' + vipid,
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
     }).then((res) => {
-      console.log(res.data)
-      
+      console.log(res.data)  
     })
   },
   /**

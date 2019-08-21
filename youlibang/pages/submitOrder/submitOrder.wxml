@@ -2,16 +2,16 @@
 <view class='detailInfo'>
     <view class='addressImg'><image src='../../images/dizhi1@2x.png'></image></view>
     <view class='name_phone'>
-      <view class='username'>李开心</view>
-      <view class='phone'>13765430986</view>
+      <view class='username'>{{defAddress.address_name}}</view>
+      <view class='phone'>{{defAddress.address_phone}}</view>
     </view>
-    <view class='address'>广东省广州市天河区汇诚大厦365</view>
+    <view class='address'>{{defAddress.address}}</view>
 </view>
 <!-- 订单信息 -->
 <view class='orderInfo'>
   <view class='Infotext'>订单信息</view>
   <view class='line'></view>
-  <view class='goodsInfo' wx:for="{{dataList}}" wx:key="id">
+  <view class='goodsInfo' wx:for="{{dataList}}" wx:key="{{index}}">
     <view class='goodsImg'>
     <image src='../../images/2012031220134655.jpg'></image>
     </view>
@@ -40,7 +40,7 @@
   </view>
   <view class='line'></view>
   <view class='beizhu' wx:if="{{status}}" bindtap="describe">添加卖家备注</view>
-  <input class='shuru'bindchange="inputvalue" wx:if="{{!status}}" bindblur="finish"></input>
+  <input class='shuru'bindchange="inputvalue" wx:if="{{!status}}" bindblur="finish" maxlength="255"></input>
 </view>
 <!-- 支付方式 -->
 <view class='way'>

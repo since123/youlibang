@@ -6,18 +6,18 @@
       <view class='username'>{{userName}}</view>
       <view class='phone'>{{phoneNumber}}</view>
     </view>
-    <view class='address'>{{adress}}</view>
+    <view class='address'>{{address}}</view>
 </view>
 <!-- 订单信息 -->
 <view class='orderInfo'>
-  <view class='Infotext'>订单信息</view>
+  <view class='Infotext'>{{orderStatus}}</view>
   <view class='line'></view>
   <view class='goodsInfo' wx:for="{{order}}" wx:key="item.index">
     <view class='goodsImg'><image src='{{item.goodsImg}}'></image></view>
     <view class='goodsdetail'>{{item.goodsdetail}}</view>
     <view class='types_num'>
       <view class='types'>{{item.types}}</view>
-      <view class='num'>{{item.num}}</view>
+      <view class='num'>X{{item.num}}件</view>
     </view>
   </view>
   <view class='line'></view>
@@ -30,5 +30,9 @@
     <view class='money'><label>￥</label>{{orderAmount}}</view>
   </view>
   <view class='line'></view>
-  <view class='beizhu'>添加卖家备注</view>
+  
+  <view class="fanli">
+    <view class='rebeat'>返利</view>
+    <view class="money">{{orderRebeat}}</view>
+  </view>
 </view>

@@ -52,7 +52,6 @@
 
 .way{
   width: 750rpx;
-  
   background-color: #ffffff;
   margin-top: 3%;
   
@@ -122,6 +121,7 @@ margin-top: 30rpx;
   background: white;
   margin-top: 0;
 }
+
 .btn{
   margin-left: 8%;
   width:620rpx;

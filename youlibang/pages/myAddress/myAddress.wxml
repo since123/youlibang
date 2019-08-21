@@ -1,13 +1,13 @@
 <!--pages/myaddress/myaddress.wxml-->
-<view wx:for='{{addressList}}'  wx:for-item='item'  >
+<view wx:for='{{addressList}}'  wx:for-item='item' wx:key="{{item.id}}">
   <view class='coll'>
     <view class='coll_u'>
       <view class='coll_t'>{{item.address_name}} {{item.address_phone}}</view>
       <view class='coll_b'>{{item.address}}</view>
     </view>
     <view class='coll_v'>
-      <checkbox class='check_box' checked='{{item.state}}' bindtap="setDefault" data-id="{{item.id}}"></checkbox>
-      <view class='coll_f' bindtap="setDefault" data-id="{{item.id}}">设为默认</view>
+      <checkbox class='check_box' checked='{{item.state}}' bindtap="setDefault" data-id="{{item.id}}" data-bool="{{item.state}}"></checkbox>
+      <view class='coll_f' bindtap="setDefault" data-id="{{item.id}}" data-bool="{{item.state}}">设为默认</view>
       <view class='coll_L' bindtap='editAddress' >
       <image src='../../images/edit@2x.png'></image>
       <view class='coll_o' data-id="{{item.id}}" data-member_id="{{item.member_id}}" >编辑</view></view>

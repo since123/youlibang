@@ -14,18 +14,18 @@
 <view class='footer' bindchange="toastHide" hidden="{{!status}}">
   <view class='way'  bindtap='quxiao' hidden="{{!status}}">
     <view class='payforWay'><label>支付方式</label></view>
-    <radio-group>
-    <view class='wexinPayfor'>
-        <image src='../../images/weixin@2x.png'></image>
-        <view class='wexintext'>微信支付</view>
-        <radio class='check_box' bindtap="payway"></radio>
-    </view>
-    <view class='li'></view>
-    <view class='underLine'>
-        <image src='../../images/wallet-copy@2x.png'></image>
-        <view class='wexintext' >线下支付</view>
-        <radio class='check_box' bindtap="payWay"></radio>
-    </view>
+    <radio-group bindchange="payway">
+      <view class='wexinPayfor'>
+          <image src='../../images/weixin@2x.png'></image>
+          <view class='wexintext'>微信支付</view>
+          <radio class='check_box' value="wexinPayfor"></radio>
+      </view>
+      <view class='li'></view>
+      <view class='wexinPayfor underLine'>
+          <image src='../../images/wallet-copy@2x.png'></image>
+          <view class='wexintext'>线下支付</view>
+          <radio class='check_box' value="underLinePayfor"></radio>
+      </view>
     </radio-group>
     <view class='btn' bindtap="confirmPay">确认支付</view>
   </view>

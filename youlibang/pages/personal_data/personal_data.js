@@ -30,11 +30,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // var user = wx.getStorageSync('user');
-    // console.log(" user : " + user);
-    // this.setData({
-    //   user: user
-    // });
     this.setData({
       token: wx.getStorageSync('token'),
       userInfo: wx.getStorageSync('userInfo')
@@ -115,13 +110,13 @@ Page({
       let list = res.data.lists
       that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
         // logs: res.data.result,
-        vipid : list.user_member,
-        vipname : list.nickname,
-        bindphone : list.mobile,
-        address : list.address,
+        // vipid : list.user_member,
+        // vipname : list.nickname,
+        // bindphone : list.mobile,
+        // address : list.address,
         // src: list.user_logo,
-        price: list.balance,
-        businesslicense: list.license
+        // price: list.balance,
+        // businesslicense: list.license
       })
       //性别 0：未知、1：男、2：女
       switch (Number(list.sex)) {
@@ -141,8 +136,6 @@ Page({
           })
           break;
       }
-      // this.userData = res.data; //无效不能实时的渲染到页面
-      // that.setData({ userData: res.data });//和页面进行绑定可以动态的渲染到页
     })
   },
   /**
@@ -168,15 +161,7 @@ Page({
 
     })
   },
-  // /**预览头像 */
-  // previewImage: function (e) {
-  //   // var current = e.target.dataset.src
 
-  //   wx.previewImage({
-  //     current: e.currentTarget.id,
-  //     urls: this.data.imageList
-  //   })
-  // },
   /**
    * 获取修改的input中的值
    */
@@ -246,6 +231,9 @@ Page({
     })
   },
   bindPhoneNumber: function(e) {
+    wx.navigateTo({
+      url: '../../pages/bindphoneNum/bindphoneNum',
+    })
     var detail = e.detail;
     wx.request({
       url: '',  //解密手机号码接口

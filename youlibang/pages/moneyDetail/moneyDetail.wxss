@@ -65,3 +65,6 @@
 .tips .all {
   color: #f9728b;
 }
+.tips .income {
+  color: red;
+}

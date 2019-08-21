@@ -123,7 +123,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://www.ylb.com/api/user/addaddress?member_id='+member_id+'&address_name='+address_name+'&address_phone='+address_phone+'&address='+address,
+      url: 'http://wx.ylbtl.cn/api/user/addaddress?member_id='+member_id+'&address_name='+address_name+'&address_phone='+address_phone+'&address='+address,
     }).then((res) => {
         console.log(res)
     });

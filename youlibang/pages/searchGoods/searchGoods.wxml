@@ -4,12 +4,12 @@
     <view class='sousuo' bindtap="searchPath">搜索</view>
 </view>
 <view class='sousuoContents' >
-    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">Apple</view>
-    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">新</view>
-    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">腻子粉</view>
+    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">{{history[0]}}</view>
+    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">{{history[1]}}</view>
+    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">{{history[2]}}</view>
     <!-- 搜索结果 -->
 <view class='contents' bindscrolltolower="loadImages" wx:if="{{status}}" >
-  <view class='listInfo' wx:for="{{searchGoods}}"  data-goodsid='{{item.id}}' catchtap='goodsdetail'>
+  <view class='listInfo' wx:for="{{searchGoods}}" wx:key="{{item.id}}" data-goodsid='{{item.id}}' catchtap='goodsdetail'>
     <view class='leftImg'>
     <image src="{{item.goods_log}}"></image>
     </view>

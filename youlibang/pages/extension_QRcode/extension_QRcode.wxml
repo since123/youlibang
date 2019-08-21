@@ -2,21 +2,23 @@
 <view class=''>
 <view class='bgImg'><image src='../../images/vipbgImg@2x.png'></image></view>
 <view class='qrdiv'>
-    <view class='QRImg'><image src=''></image></view>
+    <view class='QRImg'><image src='../../images/1565941166.jpg'></image></view>
     <view class='userDiv'>
     <view class='userInfo'>
         <view class='username'>{{userName.nickName}}</view>
         <view class='vipId'>会员ID：{{vipid}}</view>
     </view>
-    <view class='userImg'><image src='../../images/2013062320262198.jpg'></image></view>
+    <view class='userImg'><image src='{{userImg}}'></image></view>
     </view>
     <view class='upload' bindtap="upload">
        <view class='uploadImg'><image src='../../images/xiazai@2x.png'></image></view>
        <view class='saveImg'>保存图片</view>
     </view>
-    <view class='upload' bindtap="upload">
+    <view class='upload'>
        <view class='uploadImg'><image src='../../images/fenxiang@2x.png'></image></view>
        <view class='saveImg'>分享朋友圈</view>
     </view>
 </view>
 </view>
+<button class="zf" open-type="share" hover-class="none">
+</button>

@@ -114,7 +114,7 @@ Page({
         if (ss.status == "已完成") {
           completeOrder.push(ss)
         }
-        completeOrder
+        //completeOrder
         orders.push(ss)
       }
       // console.log(orders)
@@ -239,6 +239,7 @@ Page({
    */
   deleteOrder: function(e) {
     let orderid = e.currentTarget.dataset.orderid
+    
     console.log('删除订单')
   },
   /**

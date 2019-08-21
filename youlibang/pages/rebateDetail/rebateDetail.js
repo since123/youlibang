@@ -13,6 +13,8 @@ Page({
    */
   data: {
     accumulatedIncome: '0',
+    token: wx.getStorageSync('token'),
+    vipid: wx.getStorageSync('vipid'),
     nameList: [
       {
         image: '/../images/2013062320262198.jpg',
@@ -55,31 +57,37 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + '',
+      url: ApiUrl.phplist + 'member/rebatelist?token=' + this.data.token + '&member_id=' + this.data.vipid,
     }).then((res) => {
       console.log(res);
       let lists = res.data.lists
-      let nameList = {}
-      for (let m in lists) {}
-      // that.setData({
-      //   image: lists.image,
-      //   userName: lists.userName,
-      //   income: Number(lists.income),
-      //   finishTime: util.formatTime(new Date(lists.finishTime)) 
-      // })
+      let nameList = []
+      for (let m in lists) {
+      let list = {}
+        //image = lists[m].image
+        list.userName = lists[m].nickname
+        list.income = Number(lists[m].no_cash)
+        list.finishTime = util.formatTime(new Date(lists[m].confirm_time))
+        nameList.push(list)
+      }
+      console.log(nameList)
+      that.setData({
+        nameList : nameList
+      })
 
       //计算累计收益
-      // let total = 0
-      // for (let i = 0; i < this.data.nameList.length; i++) {
-      //   total += Number(this.data.nameList[i].income)
-      // }
-      // this.setData({
-      //   accumulatedIncome: total
-      // })
+      let total = 0
+      for (let i = 0; i < this.data.nameList.length; i++) {
+        total += Number(this.data.nameList[i].income)
+      }
+      this.setData({
+        accumulatedIncome: total
+      })
     })
   },
   onLoad: function (options) {
     this.getAccumulatedIncome()
+    this.getInformation()
   },
 
   /**

@@ -86,7 +86,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://www.ylb.com/api/goods/index'
+      url: 'http://wx.ylbtl.cn/api/goods/index'
     }).then((res) => {
       console.log(res)
           this.setData({
@@ -107,7 +107,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://www.ylb.com/api/goods/index'
+      url: 'http://wx.ylbtl.cn/api/goods/index'
     }).then((res) => {
          console.log(res)
          //处理商品信息
@@ -123,7 +123,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://www.ylb.com/api/Operatedata/imgList',
+      url: 'http://wx.ylbtl.cn/api/Operatedata/imgList',
     }).then((res) => {
       console.log(res)
      //重置banner轮播图数据
@@ -142,7 +142,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://www.ylb.com/api/operatedata/getlist?type=1'
+      url: 'http://wx.ylbtl.cn/api/operatedata/getlist?type=1'
     }).then((res) => {
      var dataList=res.data.lists
      console.log(dataList)

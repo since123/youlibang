@@ -16,7 +16,7 @@ Page({
     allRetailOrder: [],
     waitPayOrder: [],
     waitSendOrder: [],
-    waitReceived: [],
+    waitReceivedOrder: [],
     orderid: ''
   },
 
@@ -38,9 +38,13 @@ Page({
         console.log(res.data.lists)
         let retailOrder = res.data.lists
         let allOrder = []
+        let waitPayOrder = []
+        let waitSentOrder = []
+        let waitReceivedOrder = []
+        let completeOrder = []
         for(let m in retailOrder) {
           let order = {}
-          order.status = retailOrder[m].status
+          
           // order.image = retailOrder[m].
           order.userName = retailOrder[m].nickname
           
@@ -51,10 +55,30 @@ Page({
           }
           order.money = Number(retailOrder[m].no_cash)
           order.orderid = Number(retailOrder[m].order_sn)
+          //订单状态
+          if (Number(retailOrder[m].status) == 0) {
+            order.status = '待付款'
+            waitPayOrder.push(order)
+          } else if (Number(retailOrder[m].status) == 1) {
+            order.status = '已取消'
+          } else if (Number(retailOrder[m].status) == 2) {
+            order.status = '待发货'
+            waitSendOrder.push(order)
+          } else if (Number(retailOrder[m].status) == 3) {
+            order.status = '待收货'
+            waitReceivedOrder.push(order)
+          } else {
+            order.status = '已完成'
+            completeOrder.push(order)
+          }
           allOrder.push(order)
         }
         that.setData({
           allRetailOrder : allOrder,
+          waitPayOrder: waitPayOrder,
+          waitSentOrder: waitSentOrder,
+          waitReceivedOrder: waitReceivedOrder,
+          completeOrder: completeOrder
         })
       })
   },

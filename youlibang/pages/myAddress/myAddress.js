@@ -42,47 +42,7 @@ Page({
 
     // }
     // 请求地址展示接口
-    var member_id=this.data.member_id
-    httpReq({
-      header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      url:'http://www.ylb.com/api/user/getaddress?member_id='+member_id,
-    }).then((res) => {
-       console.log(res)
-      var addressList = res.data.lists
-      //console.log(addressList)
-      //console.log(res)
-      var member_id = addressList[0].member_id
-      if (addressList == undefined) {
-        this.setData({
-          member_id
-        })
-      } else {
-        var member_id = addressList[0].member_id
-        //  循环追加区分标识
-        for (let i = 0; i < addressList.length; i++) {
-          addressList[i].state = false
-          if (addressList[i].state != false) {
-            addressList[i].state = true
-          } else {
-            addressList[0].state = true
-          }
-        }
-
-
-        console.log(addressList)
-        this.setData({
-          addressList,
-          member_id
-        })
-        //存入缓存
-        wx.setStorageSync('addressList', addressList)
-      }
-
-
-    });
+    
     
   },
   // choose(e){
@@ -132,7 +92,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url:'http://www.ylb.com/api/user/defselect?member_id='+member_id+'&address_id='+address_id+'&address_type='+address_type,
+      url:'http://wx.ylbtl.cn/api/user/defselect?member_id='+member_id+'&address_id='+address_id+'&address_type='+address_type,
     }).then((res) => {
       console.log(res)
     });
@@ -178,18 +138,19 @@ Page({
               'Content-Type': 'application/json',
               'Accept': 'application/json'
             },
-            url: 'http://www.ylb.com/api/user/deladdress?member_id='+member_id+'&address_id='+address_id,
+            url: 'http://wx.ylbtl.cn/api/user/deladdress?member_id='+member_id+'&address_id='+address_id,
           }).then((res) => {
             //返回成功或失败的标识
           console.log(res)
           //从缓存中取出
-          
           console.log(that)
           //同步取缓存
           try{
                var value=wx.getStorageSync('addressList')
                if(value){
                       value.splice(index,1)
+                      console.log(value)
+                      wx.setStorageSync('addressList', value)
                       that.setData({
                         addressList:value
                       })
@@ -216,7 +177,47 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    var member_id = this.data.member_id
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: 'http://wx.ylbtl.cn/api/user/getaddress?member_id=' + member_id,
+    }).then((res) => {
+      console.log(res)
+      var addressList = res.data.lists
+      //console.log(addressList)
+      //console.log(res)
+      var member_id = addressList[0].member_id
+      if (addressList == undefined) {
+        this.setData({
+          member_id
+        })
+      } else {
+        var member_id = addressList[0].member_id
+        //  循环追加区分标识
+        for (let i = 0; i < addressList.length; i++) {
+          addressList[i].state = false
+          if (addressList[i].state != false) {
+            addressList[i].state = true
+          } else {
+            addressList[0].state = true
+          }
+        }
+
+
+        console.log(addressList)
+        this.setData({
+          addressList,
+          member_id
+        })
+        //存入缓存
+        wx.setStorageSync('addressList', addressList)
+      }
+
+
+    });
   },
 
   /**

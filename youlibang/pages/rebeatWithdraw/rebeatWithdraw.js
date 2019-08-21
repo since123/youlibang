@@ -16,7 +16,7 @@ Page({
     amount: '',
     someMoney: '',
     token: '',
-    describe: '余额提现',
+    describe: 'fanli',
     ifNumber: true
   },
 
@@ -62,6 +62,7 @@ Page({
       return false
     }
     let token = wx.getStorageSync('token')
+    let vipid = wx.getStorageSync('vipid')
     that.setData({
       token: token
     })
@@ -70,9 +71,9 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'member/rebatecash?token=' + token + '&describe=' + this.data.describe + '&fee=' + this.data.someMoney,
+      url: ApiUrl.phplist + 'member/memberCash?token=' + token + '&describe=' + this.data.describe + '&fee=' + this.data.someMoney + '&member_id=' + vipid,
     }).then((res) => {
-      console.log(res)
+      console.log(res.data.msg)
     })
   },
   // withdrawal:function(){

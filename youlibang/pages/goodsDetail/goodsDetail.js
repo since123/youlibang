@@ -14,13 +14,6 @@ Page({
     newarr:[],
     status: false,
     is_shoucang: 0,
-    // goods_info: {
-    //   goodsId: 1,
-    //   // goods_title: "商品标题1",
-    //   // goods_price: '100',
-    //   // goods_yunfei: 0,
-    //   // content: '商品介绍详情商品介绍详情商品介绍详情商品介绍详情商品介绍详情商品介绍详情商品介绍详情'
-    // },
     goods_img: [{
         'img': 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
       },
@@ -34,37 +27,18 @@ Page({
         'img': 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
       },
     ],
-    // showDesc:'',//商品描述
-    // showprice: '',
-    // showyuanjia: '',
-    // showyunfei: '',
-    type1: [{ color: '豆绿色' }, { color: '红色' }, { color: '黄色' }, { color: '粉红色'}, { color: '奶白色'}, { color: '奶白色'}],
+    type1: [],
     idx:"",
     size:"",
     //定义选择的商品
     price:"",
-    type2: [{ size: 'M' }, { size: 'L' }, { size: 'XL' }, { size: 'XXL' }],
+    type2: [],
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
     duration: 1000,
     productsList:[
-      {
-        goodsId:0,
-        imageurl:'',
-        goodsinfo: '澳洲进口新鲜效期蓝胖子美可Maxigene犬只成人奶粉1kg', 
-        newprice:'86',
-        yuanjia:'168',
-        yunfei:'免运费'
-      },
-      {
-        goodsId:1,
-        imageurl:'',
-        goodsinfo:'hfdskahslfdjdkslajflas;jlfd',
-        newprice:'92',
-        yuanjia:'199',
-        yunfei:'10元'
-      }
+     
       ]
   },
   //事件处理
@@ -130,7 +104,7 @@ Page({
       obj.cd=this.data.cd
       obj.selected=true
       obj.num=this.data.num
-      obj.price=this.data.price
+    obj.price =productsList.goods_price
       obj.way='立即购买'
       console.log(obj)
       var array=this.data.newarr
@@ -155,15 +129,15 @@ Page({
     console.log(info)
     var bar=this.data.newarr
     console.log(bar)
-    var token=wx.getStorageSync('token')
+
+    var token=wx.getStorageSync('token') //取得token
+    var member_id=wx.getStorageSync('vipid') //取得member_id
     //重组数据提交后端
-    var goods=[]
-    goods['goods_id'] = productsList.id
-    goods['goods_attr_values'] = productsList.goods_introduce
-    goods['goods_number'] = this.data.num
-    var str= '54564654uyuytuy'
-    goods=JSON.stringify(goods)
-    console.log(goods)
+   
+  var  goods_id = productsList.id
+  var   goods_attr_values = productsList.goods_introduce
+  var   goods_number = this.data.num
+    console.log(token, member_id, goods_id, goods_attr_values, goods_number)
     //判断点击的是加入还是立即购买
     if (this.data.state == 0) {
       console.log("去到购物车！")
@@ -173,7 +147,7 @@ Page({
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        url: 'http://www.ylb.com/api/cart/savecart?token=' + token + '&goods_id=' + productsList.id + '&goods_attr_values=' + productsList.goods_introduce + '&goods_number=' + this.data.num + '&goods_logo='+str,
+        url: 'http://www.ylb.com/api/cart/savecart?token=' + token + '&goods_id=' + goods_id + '&goods_attr_values=' + goods_attr_values + '&goods_number=' + goods_number + '&member_id=' + member_id
       }).then((res) => {
           console.log(res)
       });
@@ -304,7 +278,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://www.ylb.com/api/goods/getdetail?goods_id='+goodsId,
+      url: 'http://wx.ylbtl.cn/api/goods/getdetail?goods_id='+goodsId,
     }).then((res) => {
       console.log(res)
       var productsList=res.data.lists
