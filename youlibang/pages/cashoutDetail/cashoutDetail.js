@@ -64,13 +64,14 @@ Page({
   tabSwitch: function (e) {
     let that = this
     let tab  = e.target.dataset.current
-    if (this.data.currentab === tab) {
+    if (this.data.currentab == tab) {
       return false
     } else {
       that.setData({
         currentab: tab
       })
     }
+    that.getWithdrawInfor()
     // console.log(this.data.currentab)
   },
   onTabChange: function (e) {
@@ -80,6 +81,7 @@ Page({
     that.setData({
       currentab: tab
     })
+    that.getWithdrawInfor()
   },
   /**
    * 获取后台数据
@@ -91,7 +93,7 @@ Page({
       token: wx.getStorageSync('token')
     })
     httpReq({
-      url: ApiUrl.phplist + 'user/tixianlist?member_id=' + vipid,
+      url: ApiUrl.phplist + 'user/tixianlist?member_id=' + wx.getStorageSync('vipid') + '&token=' + wx.getStorageSync('token') + '&state=' + Number(that.data.currentab+1),
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'

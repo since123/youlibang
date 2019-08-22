@@ -11,35 +11,38 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo:{},
-    token: '',
+    userInfo: wx.getStorageSync('userInfo'),
+    token: wx.getStorageSync('token'), //获取token进行验证并赋值
     username:'蜡笔小新',
     vipid:'0',
     userImg_url:'../../images/headImg.png',
-    price:'0.00'
+    price:'0.00',
+    encryptedData: wx.getStorageSync('encryptedData')
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //获取token进行验证并赋值
-    this.setData({
-      token: wx.getStorageSync('token'),
-      userInfo: wx.getStorageSync('userInfo') 
-    })
+    
+    let that = this
+    //this.isMember()
+    //console.log(wx.getStorageSync('vipid'))
     //验证用户
-   if (this.data.token) {
-     if (this.data.userInfo) {
+    if (wx.getStorageSync('token')) {
+      if (wx.getStorageSync('userInfo') != '' && wx.getStorageSync('encryptedData') != '') {
        //判断vipid并缓存
-       this.getIfVipUserInfo()
-       if (this.data.vipid == '' ) {
-         this.getPersonalInfo()
+        console.log('都授权成功')
+        console.log(wx.getStorageSync('vipid'))
+        if (Number(wx.getStorageSync('vipid')) != 0) {
+          that.getVipUserInfo()  
+        } else if (Number(wx.getStorageSync('vipid')) == 0){
+          that.getPersonalInfo()
        } 
      } else {
        wx.showModal({
          title: '警告通知',
-         content: '获得你的公开信息（昵称，头像，地区及性别）,在设置中确定重新获取授权',
+         content: '获得你的公开信息（昵称，头像，地区及性别）以及电话,在设置中确定重新获取授权',
          success: function(res){
            if (res.confirm) {
              wx.navigateTo({
@@ -54,43 +57,94 @@ Page({
        })
      }
    } else {
+     console.log('token获取失败')
      return false
    }
-    //如果不是注册的会员就显示自己的微信信息,此处需要加判断
-    // this.getVipUserInfo()//如果是会员时，后台返回数据，展示会员信息
+    
   },
-  /**是会员时，后台返回数据，展示会员信息 */
-  getIfVipUserInfo: function() {
+  
+  /**是会员时，后台返回数据，展示会员信息信息 */
+  getVipUserInfo: function() {
     let that = this
     httpReq({
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'user/getdetail?token=' + this.data.token,
+      url: ApiUrl.phplist + 'member/memberDetail?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid'),
     }).then((res) => {
       console.log(res);
-        let list = res.data.lists
-        that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
-          vipid: list.member_id,
-          username: list.nickname,
-          userImg_url: list.avatar,
-          price: list.predeposit
-        })
-        wx.setStorageSync('vipid', this.data.vipid)
+      let lists = res.data.lists
+      let inform = {}
+      inform.vipid = lists.id//会员ID
+      inform.vipname = lists.nickname//昵称
+      inform.userImg_url = lists.avatar//头像
+      inform.price = Number(lists.can_rebate) + Number(lists.no_rebate) + Number(lists.user_money)//账户余额
+      inform.usermoney = Number(lists.can_rebate) + Number(lists.user_money)//可提现全部余额
+      inform.can_rebate = Number(lists.can_rebate)//可提现返利
+      inform.mobile = lists.mobile//电话号码
+      inform.address = lists.address//地址
+      inform.inviter_id = lists.inviter_id//邀请id
+      inform.sex = lists.sex//性别
+      inform.card_one = lists.card_one//身份证正面
+      inform.card_two = lists.card_two//身份证反面
+      inform.license = lists.license//营业执照
+      wx.setStorageSync('inform', inform)
+     
+      wx.setStorageSync('inform', inform)
+      
+      that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
+        vipid: inform.vipid,
+        username: inform.vipname,
+        userImg_url: inform.userImg_url,
+        price: inform.price,
+      })
     })
   },
   /**
    * 获取页面数据（普通用户信息）
    */
   getPersonalInfo:function() {
-    var that = this;
-    let nickName = this.data.userInfo.nickName
-    let src = this.data.userInfo.avatarUrl
-    //success
-    that.setData({
-      username: nickName,
-      userImg_url: src
+    // var that = this;
+    // let nickName = this.data.userInfo.nickName
+    // let src = this.data.userInfo.avatarUrl
+    // //success
+    // that.setData({
+    //   username: nickName,
+    //   userImg_url: src
+    // })
+    let that = this
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'user/getdetail?token=' + wx.getStorageSync('token'),
+    }).then((res) => {
+      console.log(res);
+      let lists = res.data.lists
+      let inform = {}
+      inform.userid = lists.id//普通用户ID
+      inform.username = lists.nickname//昵称
+      inform.userImg_url = lists.avatar//头像
+      inform.price = Number(lists.can_rebate) + Number(lists.no_rebate) + Number(lists.user_money)//账户余额
+      inform.usermoney = Number(lists.can_rebate) + Number(lists.user_money)//可提现全部余额
+      inform.can_rebate = Number(lists.can_rebate)//可提现返利
+      inform.mobile = lists.mobile//电话号码
+      inform.address = lists.address//地址
+      inform.inviter_id = lists.inviter_id//邀请id
+      inform.sex = lists.sex//性别
+      inform.card_one = lists.card_one//身份证正面
+      inform.card_two = lists.card_two//身份证反面
+      inform.license = lists.license//营业执照
+      wx.setStorageSync('inform', inform)
+
+      that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
+        vipid: inform.userid,
+        username: inform.username,
+        userImg_url: inform.userImg_url,
+        price: inform.price,
+      })
     })
   },
   //个人资料
@@ -127,8 +181,7 @@ Page({
       wx.navigateTo({
         url: '../recharge/recharge',
       })
-    }
-    
+    }  
   },
   //提现
   withdraw: function () {

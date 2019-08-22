@@ -101,7 +101,7 @@ Page({
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        url: ApiUrl.phplist + 'distribution/myteam?token=' + token + '&level=' + this.data.currentGrade,
+        url: ApiUrl.phplist + 'distribution/myteam?token=' + token + '&level=' + this.data.currentGrade + '&member_id=' + wx.getStorageSync('vipid'),
       }).then((res) => {
         console.log(res.data)
         let lists = res.data.lists

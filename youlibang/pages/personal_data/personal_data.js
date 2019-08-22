@@ -30,114 +30,46 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.getPersonalInfo()
     this.setData({
       token: wx.getStorageSync('token'),
-      userInfo: wx.getStorageSync('userInfo')
     })
-    console.log(this.data.userInfo)
-    //验证用户
-    if (this.data.token) {
-      if (this.data.userInfo) {
-        //判断vipid并缓存
-        this.getIfVipUserInfo()
-        if (this.data.vipid == '') {
-          this.getPersonalInfo()
-        } else {
-          console.log('是会员')
-        }
-      } else {
-        wx.showModal({
-          title: '警告通知',
-          content: '您点击了拒绝授权,将无法正常显示个人信息,在设置中确定重新获取授权',
-          success: function (res) {
-            if (res.confirm) {
-              console.log('用户点击确定')
-              wx.navigateTo({
-                url: '../../pages/set/set',
-              })
-            } else if (res.cancel) {
-              console.log('取消')
-            }
-          }
-        })
-
-      }
-    } else {
-      console.log("token获取失败,不是小程序用户")
-    }
   },
   //获取页面数据
   getPersonalInfo() {
     var that = this;
-    let nickName = this.data.userInfo.nickName
-    let src = this.data.userInfo.avatarUrl
-     
-    //此处需要加个判断，如果是会员则vipname = nickName,先默认昵称为会员名
-    //success
-    that.setData({
-      vipname: nickName,
-      src : src
-    })
+    let inform = wx.getStorageSync('inform')
     //性别 0：未知、1：男、2：女
-    switch (Number(this.data.userInfo.gender )){
+    switch (Number(inform.sex)) {
       case 0:
-      that.setData({
-        sex: '未知'
-      })
-      break;
+        that.setData({
+          sex: '未知'
+        })
+        break;
       case 1:
-      that.setData({
-        sex: '男'
-      })
-      break;
+        that.setData({
+          sex: '男'
+        })
+        break;
       case 2:
-      that.setData({
-        sex: '女'
-      })
-      break;
+        that.setData({
+          sex: '女'
+        })
+        break;
     }
-  },
-  getIfVipUserInfo: function () {
-    let that = this
-    httpReq({
-      header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      url: ApiUrl.phplist + 'user/userdetail?user_id=2',
-    }).then((res) => {
-      console.log(res.data.lists);
-      let list = res.data.lists
-      that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
-        // logs: res.data.result,
-        // vipid : list.user_member,
-        // vipname : list.nickname,
-        // bindphone : list.mobile,
-        // address : list.address,
-        // src: list.user_logo,
-        // price: list.balance,
-        // businesslicense: list.license
-      })
-      //性别 0：未知、1：男、2：女
-      switch (Number(list.sex)) {
-        case 0:
-          that.setData({
-            sex: '未知'
-          })
-          break;
-        case 1:
-          that.setData({
-            sex: '男'
-          })
-          break;
-        case 2:
-          that.setData({
-            sex: '女'
-          })
-          break;
-      }
+    this.setData({
+      src : inform.userImg_url,
+      vipname : inform.username,
+      bindphone :  inform.mobile,
+      address : inform.address,
+      tuijianID : inform.inviter_d,
+      idCard1 : inform.card_one,
+      idCard2 : inform.card_two,
+      businesslicense : inform.license,
     })
+    
   },
+ 
   /**
    * 选择图像
    */

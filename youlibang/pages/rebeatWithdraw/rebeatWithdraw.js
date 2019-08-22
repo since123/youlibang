@@ -13,8 +13,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    amount: '',
-    someMoney: '',
+    amount: wx.getStorageSync('can_rebate'),
+    someMoney: '请输入提现余额',
     token: '',
     describe: 'fanli',
     ifNumber: true
@@ -36,19 +36,27 @@ Page({
    * 得到输入金额
    */
   getMoney: function (e) {
-    this.setData({
-      someMoney: e.detail.value,
-      ifNumber: true
-    })
+    if (e.detail.value) {
+      this.setData({
+        someMoney: e.detail.value,
+        ifNumber: true
+      })
+    } else {
+      this.setData({
+        someMoney: '请输入提现金额',
+      })
+    }
     console.log(this.data.someMoney)
   },
   /**
    * 得到全部余额
    */
   getAll: function () {
+    let amount = this.data.amount
     this.setData({
       someMoney: amount
     })
+    console.log(this.data.amount)
   },
   /**
    * 提现

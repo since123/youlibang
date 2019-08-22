@@ -3,11 +3,11 @@
 <view class='amount'>
   <view class='cash'>
   <view class='cash_l'>¥</view>
-  <input bindinput="getMoney" placeholder="请输入提现金额"/>
+  <input bindinput="getMoney" placeholder="{{someMoney}}"/>
   <text class="ifNumber" hidden="{{ifNumber}}">请输入正确金额</text>
 </view>
 <view class='line'></view>
-<view class='amount_text'>当前可提现的余额：{{balance}}元，<label bindtap="getAll">全部提现</label></view>
+<view class='amount_text'>当前可提现的返利：{{amount}}元，<label bindtap="getAll">全部提现</label></view>
 </view>
 <view class='coomit' bindtap='withdrawal'>提现</view>
 <!-- <view class='mubu' bindtap='quxiao' hidden="{{!status}}"></view>

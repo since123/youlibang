@@ -27,16 +27,18 @@ App({
             method: 'GET',
             url: ApiUrl.phplist + 'index/gettoken?code=' + res.code,
           }).then((res) =>{
-            if (res.data.lists.token) {
+            console.log(res.data.lists)
+            if (res.data.lists.token != '' && res.data.lists.userid != '') {
               wx.setStorageSync('token', res.data.lists.token)
+              wx.setStorageSync('userid', res.data.lists.user_id)
             } else {
-              logs.unshift('app.js登陆页面token获取失败' + res.errMsg)
-              wx.setStorageSync('logs', logs)
+              // logs.unshift('app.js登陆页面token获取失败' + res.errMsg)
+              // wx.setStorageSync('logs', logs)
             }
           })
         } else {
           logs.unshift('res.code问题： ' + res.errMsg)
-          wx.setStorageSync('logs', logs)
+          // wx.setStorageSync('logs', logs)
         }
       }
     })

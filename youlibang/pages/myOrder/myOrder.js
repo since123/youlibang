@@ -218,7 +218,11 @@ Page({
   urgeDeliver: function(e) {
     let orderid = e.currentTarget.dataset.orderid
     console.log('催他发货')
-    
+    httpReq({
+      url: ApiUrl.phplist + 'order/getorder?token=' + this.data.token + '&member_id=' + this.data.vipid + '&orderid=' + orderid
+    }).then((res) => {
+      console.log(res)
+    })
   },
   /**
    * 取消订单
@@ -226,6 +230,11 @@ Page({
   cancelOrder: function(e) {
     let orderid = e.currentTarget.dataset.orderid
     console.log('取消订单')
+    httpReq({
+      url: ApiUrl.phplist + 'order/getorder?token=' + this.data.token + '&member_id=' + this.data.vipid + '&orderid=' + orderid
+    }).then((res) => {
+      console.log(res)
+    })
   },
   /**
    * 确认付款
@@ -233,14 +242,23 @@ Page({
   confirmPay: function(e) {
     let orderid = e.currentTarget.dataset.orderid
     console.log('确认付款')
+    httpReq({
+      url: ApiUrl.phplist + 'order/goodsPay?token=' + this.data.token + '&member_id=' + this.data.vipid + '&orderid=' + orderid
+    }).then((res) => {
+      console.log(res)
+    })
   },
   /**
    * 删除订单
    */
   deleteOrder: function(e) {
     let orderid = e.currentTarget.dataset.orderid
-    
     console.log('删除订单')
+    httpReq({
+      url: ApiUrl.phplist + 'order/getorder?token=' + this.data.token + '&member_id=' + this.data.vipid + '&orderid=' + orderid
+    }).then((res) => {
+      console.log(res)
+    })
   },
   /**
    * 确认收货
