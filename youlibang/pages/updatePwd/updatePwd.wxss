@@ -87,3 +87,6 @@ input{
   align-items: center;
   display: flex;
 }
+.form {
+  display: none
+}

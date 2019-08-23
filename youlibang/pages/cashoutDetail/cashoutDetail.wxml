@@ -7,7 +7,6 @@
   </block>
 </view>
 <view class='body_contents' current="{{currentab}}" bindchange="onTabChange">
-
   <swiper current="{{currentab}}" style="height:{{deviceH-31}}px" bindchange="onTabChange">
     <swiper-item>
       <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">

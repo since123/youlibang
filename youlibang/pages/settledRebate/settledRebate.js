@@ -15,32 +15,7 @@ Page({
     accumulatedIncome: '0.00',
     token: wx.getStorageSync('token'),
     vipid: wx.getStorageSync('vipid'),
-    teamRebateList: [
-      {
-        image: '/../images/2013062320262198.jpg',
-        userName: '张三',
-        time: '2019 - 08 - 09',
-        userMoney: '0.00'
-      },
-      {
-        image: '/../images/2013062320262198.jpg',
-        userName: '李四',
-        time: '2019 - 08 - 09',
-        userMoney: '0.00'
-      },
-      {
-        image: '/../images/2013062320262198.jpg',
-        userName: '张三',
-        time: '2019 - 08 - 09',
-        userMoney: '0.00'
-      },
-      {
-        image: '/../images/2013062320262198.jpg',
-        userName: '李三',
-        time: '2019 - 08 - 09',
-        userMoney: '0.00'
-      }
-    ]
+    teamRebateList: []
   },
   /**
    * 获取后台数据
@@ -60,7 +35,7 @@ Page({
       let nameList = []
       for (let m in lists) {
         let list = {}
-        //image = lists[m].image
+        image = lists[m].avatar
         list.userName = lists[m].nickname
         list.income = Number(lists[m].no_cash)
         list.finishTime = util.formatTime(new Date(lists[m].confirm_time))

@@ -5,6 +5,19 @@
       <view class='username'>{{defAddress.address_name}}</view>
       <view class='phone'>{{defAddress.address_phone}}</view>
     </view>
+    <view class="leftArrow" catchtap="chooseAddress">></view>
+    <view class='address'>{{defAddress.address}}</view>
+</view>
+<!-- 根据地址选取距离最近的经销商 -->
+<view class='detailInfo' wx:if='{{status}}'>
+     <button catchtap="query">点击查看最近的经销商</button>
+</view>
+<view class='detailInfo' wx:if='{{!status}}'>
+    <view class='addressImg'><image src='../../images/dizhi1@2x.png'></image></view>
+    <view class='name_phone'>
+      <view class='username'>{{defAddress.address_name}}</view>
+      <view class='phone'>{{defAddress.address_phone}}</view>
+    </view>
     <view class='address'>{{defAddress.address}}</view>
 </view>
 <!-- 订单信息 -->

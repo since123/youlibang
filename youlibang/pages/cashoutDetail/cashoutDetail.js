@@ -15,52 +15,10 @@ Page({
     order:true,
     currentab: 0,
     swipertab: [{ index: 0, name: '待审核' }, { index: 1, name: '已打款'}],
-    openstatusList: 
-      [
-    //     {
-    //       withdrawTime: '10月8日 00: 09: 01',
-    //       withdrawMoney: 200
-    //     },
-    //     {
-    //       withdrawTime: '10月9日 00: 09: 01',
-    //       withdrawMoney: 500
-    //     }
-    //   ],
-    // opendetailList:
-    //   [
-    //     {
-    //       withdrawTime: '10月7日 00: 09: 01',
-    //       withdrawMoney: 100
-    //     },
-    //     {
-    //       withdrawTime: '10月6日 00: 09: 01',
-    //       withdrawMoney: 200
-    //     }
-      ]
+    openstatusList: [],
+    opendetailList: []
 
   },
-
-  // openstatus: function () {
-  //   var that = this
-  //   var order = this.data.order
-  //   if (order == true) {
-
-  //   } else {
-  //     that.setData({
-  //       order: true
-  //     })
-  //   }
-  // },
-  // opendetail: function () {
-  //   var that = this
-  //   var order = this.data.order
-  //   if (order == true) {
-  //     that.setData({
-  //       order: false
-  //     })
-  //   } else {
-  //   }
-  // },
   tabSwitch: function (e) {
     let that = this
     let tab  = e.target.dataset.current
@@ -93,13 +51,31 @@ Page({
       token: wx.getStorageSync('token')
     })
     httpReq({
-      url: ApiUrl.phplist + 'user/tixianlist?member_id=' + wx.getStorageSync('vipid') + '&token=' + wx.getStorageSync('token') + '&state=' + Number(that.data.currentab+1),
+      url: ApiUrl.phplist + 'user/tixianlist?member_id=' + wx.getStorageSync('vipid') + '&token=' + wx.getStorageSync('token') + '&state=' + (Number(that.data.currentab)+1),
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
     }).then((res) => {
-      console.log(res.data)  
+      console.log(res) 
+      let lists = res.data.lists
+      let tixianList = []
+      for (let m in lists) {
+        let ss = {}
+        ss.withdrawTime = lists[m].create_time
+        ss.withdrawMoney = lists[m].money
+        tixianList.push(ss)
+      }
+      console.log(tixianList)
+      if(Number(that.data.currentab) == 0) {
+        that.setData({
+          openstatusList: tixianList
+        })
+      } else if(Number(that.data.currentab) == 1){
+        that.setData({
+          opendetailList: tixianList
+        })
+      }
     })
   },
   /**

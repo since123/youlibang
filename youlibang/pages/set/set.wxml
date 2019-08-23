@@ -1,6 +1,12 @@
 <!--pages/set/set.wxml-->
-<button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权用户信息</button>
-<button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取用户手机号</button>
+<view class="buttonInfo">
+  <button  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权用户信息</button>
+  <view class='next'><image src='../../images/next@2x.png'></image></view>
+</view>
+<view class="buttonInfo">
+  <button  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取用户手机号</button>
+  <view class='next'><image src='../../images/next@2x.png'></image></view>
+</view>
 <view class='listInfo' bindtap='updatephone'>
     <view class='text'>更改手机号</view>
     <view class='next'><image src='../../images/next@2x.png'></image></view>

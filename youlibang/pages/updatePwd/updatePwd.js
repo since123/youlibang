@@ -1,4 +1,10 @@
 // pages/updatePwd/updatePwd.js
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
+  httpReq
+} from '../../utils/http.js';
 Page({
 
   /**
@@ -14,13 +20,17 @@ Page({
     //密码格式
     passwordValue: '',
     // ifTruePassword: false
+    formValue: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let formValue = options.formValue
+    this.setData({
+      formValue: formValue
+    })
   },
 
   /**
@@ -28,6 +38,31 @@ Page({
    */
   onReady: function () {
 
+  },
+
+  //设置密码formSubmittwo
+  formSubmitone: function () {
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'member/editpsw?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid') + '&psw=' + that.data.passwordValue,
+    }).then((res) => {
+      console.log(res)
+    })
+  },
+  //修改密码formSubmittwo
+  formSubmittwo: function () {
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'member/editpsw?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid') + '&psw=' + that.data.passwordValue,
+    }).then((res) => {
+      console.log(res)
+    })
   },
   //输入验证码
   entryCode:function(e){
@@ -105,7 +140,7 @@ Page({
   /**
    * 提交表单
    */
-  formSubmit: function() {
+  formSubmittwo: function() {
     let val = e.detail.value
     console.log('val', val)
     var phone = val.code //电话
@@ -129,13 +164,14 @@ Page({
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          url: ApiUrl.phplist + '',
+          url: ApiUrl.phplist + 'member/editpsw?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid') + '&psw=' + that.data.passwordValue,
         }).then((res) => {
           console.log(res)
         })
       }
     }
   },
+  
   /**
    * 生命周期函数--监听页面显示
    */

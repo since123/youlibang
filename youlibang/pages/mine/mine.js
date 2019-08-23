@@ -82,8 +82,8 @@ Page({
       inform.price = Number(lists.can_rebate) + Number(lists.no_rebate) + Number(lists.user_money)//账户余额
       inform.usermoney = Number(lists.can_rebate) + Number(lists.user_money)//可提现全部余额
       inform.can_rebate = Number(lists.can_rebate)//可提现返利
-      inform.mobile = lists.mobile//电话号码
-      inform.address = lists.address//地址
+      inform.mobile = lists.phone//电话号码
+      //inform.address = lists.address//地址
       inform.inviter_id = lists.inviter_id//邀请id
       inform.sex = lists.sex//性别
       inform.card_one = lists.card_one//身份证正面
@@ -91,8 +91,6 @@ Page({
       inform.license = lists.license//营业执照
       wx.setStorageSync('inform', inform)
      
-      wx.setStorageSync('inform', inform)
-      
       that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
         vipid: inform.vipid,
         username: inform.vipname,

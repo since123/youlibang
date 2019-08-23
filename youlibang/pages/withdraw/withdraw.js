@@ -13,7 +13,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    amount: wx.getStorageSync('usermoney'),
+    inform: wx.getStorageSync('inform'),
+    amount: wx.getStorageSync('inform').usermoney,
     someMoney: '请输入提现余额',
     token: '',
     describe: 'qianbao',
@@ -24,7 +25,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
   },
   /**
    * 得到后台数据
@@ -53,9 +53,9 @@ Page({
    * 得到全部余额
    */
   getAll: function() {
-    let amount = this.data.amount
+    let amount = this.data.inform.usermoney
     this.setData({
-      someMoney: amount
+      someMoney: amount,
     })
     console.log(this.data.amount)
   },

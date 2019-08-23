@@ -28,9 +28,10 @@
     </swiper>
     <view class="informlist" hidden="{{informHidden}}">
       <text>优惠明细</text>
-        <view  wx:for="{{vipRules}}" wx:key="{{item.index}}" >
-          <view  class="inform" wx:for="{{vipRules[index]}}" wx:key="{{item.index}}">
-          <text>{{item.userGrade}}充值</text>：{{item.rechargeMoney}}，优惠活动：{{item.preferentialInfo}}
+        <view  wx:for="{{vipRules}}" wx:key="{{item.index}}">
+          <view  class="inform" wx:for="{{vipRules[index]}}" wx:key="{{item.index}}"   wx:for-item="rules">
+          <text>{{rules.userGrade}}充值</text>：{{rules.rechargeMoney}}，优惠活动：
+          <text class='vipnum' wx:for="{{rules.preferential}}" wx:key="{{item.index}}">{{item.preferentialInfo}}</text>
           </view>
         </view>
       </view>
@@ -38,7 +39,7 @@
   <view class='tuijian'>推荐ID</view>
   <view class='inputInfo'><input type='text' bindinput="getInputValue" placeholder='请输入' readonly="{{ifReadyonly}}">{{inviterID}}</input></view>
   <view hidden='{{ifhidden}}'>
-    <view class='uploadIDCard'>上传身份证</view>
+    <view class='uploadIDCard'>上传身份证（第一张正面，第二张反面）</view>
     <view class='IDCard'>
         <view class='idcardImg'><image src='{{frontID}}' bindtap="changeFrontID"></image></view>
         <view class='idcardImg'><image src='{{backID}}' bindtap="changeBackID"></image></view>
@@ -51,23 +52,23 @@
   <view class='apply_now' bindtap="applyClick">立即申请</view>
 
   <view class="mubu" bindtap="cancelPay" hidden="{{!status}}"></view>
-  <view class='footer' bindchange="toastHide" hidden="{{!status}}">
-    <view class='way'  bindtap='quxiao' hidden="{{!status}}">
-      <view class='payforWay'><label>支付方式</label></view>
-      <radio-group bindchange="payway">
-        <view class='wexinPayfor'>
-            <image src='../../images/weixin@2x.png'></image>
-            <view class='wexintext'>微信支付</view>
-            <radio class='check_box'value="wexinPayfor"></radio>
-        </view>
-        <view class='li'></view>
-        <view class='wexinPayfor underLine'>
-            <image src='../../images/wallet-copy@2x.png'></image>
-            <view class='wexintext'>线下支付</view>
-            <radio class='check_box' value="underLinePayfor"></radio>
-        </view>
-      </radio-group>
-      <view class='btn' bindtap="confirmPay">确认支付</view>
-    </view>
+    <view class='footer' bindchange="toastHide" hidden="{{!status}}">
+      <view class='way'  bindtap='quxiao' hidden="{{!status}}">
+        <view class='payforWay'><label>支付方式</label></view>
+        <radio-group bindchange="payway">
+          <view class='wexinPayfor'>
+              <image src='../../images/weixin@2x.png'></image>
+              <view class='wexintext'>微信支付</view>
+              <radio class='check_box'value="wexinPayfor"></radio>
+          </view>
+          <view class='li'></view>
+          <view class='wexinPayfor underLine'>
+              <image src='../../images/wallet-copy@2x.png'></image>
+              <view class='wexintext'>线下支付</view>
+              <radio class='check_box' value="underLinePayfor"></radio>
+          </view>
+        </radio-group>
+        <view class='btn' bindtap="confirmPay">确认支付</view>
+      </view>
   </view>
 </view>

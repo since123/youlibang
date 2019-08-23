@@ -14,9 +14,9 @@ Page({
     currentIndex: 0,//当前默认普通VIP
     currentRechargemoney: 100,//当前充值金额默认为100
     // recommendID: 0303030,
-    frontID: '../../images/idCard@2x.png',
-    backID: '../../images/idCardbg@2x.png',
-    businessLicense: '../../images/Business_license@2x.png',
+    frontID: wx.getStorageSync('inform').card_one,
+    backID: wx.getStorageSync('inform').card_two,
+    businessLicense: wx.getStorageSync('inform').license,
     imgList: [],
     inviterID: '',
     ifhidden: true,
@@ -176,7 +176,6 @@ Page({
            }
          })
       },
-      
     })
   },
   /**
@@ -328,31 +327,7 @@ Page({
       // }
     })
   },
-//   confirmWeixinPay() {
-//     let that = this
-//      let currentRechargemoney = this.data.currentRechargemoney
-//      let inviterID = this.data.inviterID
-//      httpReq({
-//        url: ApiUrl.phplist + 'member/applymber?token=' + that.data.token + '&level=' + that.data.grade + '&inviter=' + that.data.inviterID,
-//        header: {
-//          'Content-Type': 'application/json',
-//          'Accept': 'application/json'
-//        },
-//        method: 'POST',
-//      }).then((res) => {
-//        console.log(res)
-//        if (res.data.code == 200) {
-//         wx.showToast({
-//           title: '修改成功',
-//           icon: 'success',
-//           duration: 2500
-//          })
-//          //wx.uploadFile自已有一个this，我们刚才上面定义的let that = this 把this带进来
-//         //  that.setData({
-//         //    src: tempFilePaths[0]//要上传文件资源的路径
-//         // });
-//        }
-//      })
+
 // },
   /**
    * 立即申请

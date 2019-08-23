@@ -15,32 +15,7 @@ Page({
     accumulatedIncome: '0',
     token: wx.getStorageSync('token'),
     vipid: wx.getStorageSync('vipid'),
-    nameList: [
-      {
-        image: '/../images/2013062320262198.jpg',
-        userName: '张三',
-        income: '10.00',
-        finishTime: '2019-08-09',
-      },
-      {
-        image: '/../images/2013062320262198.jpg',
-        userName: '张三',
-        income: '20.00',
-        finishTime: '2019-08-09',
-      },
-      {
-        image: '/../images/2013062320262198.jpg',
-        userName: '张三',
-        income: '50.00',
-        finishTime:'2019-08-09',
-      },
-      {
-        image: '/../images/2013062320262198.jpg',
-        userName: '张三',
-        income: '60.00',
-        finishTime: '2019-08-09',
-      }
-    ]
+    nameList: []
   },
   getAccumulatedIncome: function() {
     
@@ -64,7 +39,7 @@ Page({
       let nameList = []
       for (let m in lists) {
       let list = {}
-        //image = lists[m].image
+        image = lists[m].avatar
         list.userName = lists[m].nickname
         list.income = Number(lists[m].no_cash)
         list.finishTime = util.formatTime(new Date(lists[m].confirm_time))

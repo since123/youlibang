@@ -22,7 +22,10 @@ Page({
     token: '',
     vipid: '',
     ifhiddenone: true,
-    ifhiddentwo: false
+    ifhiddentwo: false,
+    status: false,
+    ifPassword: false,
+    payway: '',
   },
   /**
    * 请求数据
@@ -219,7 +222,7 @@ Page({
     let orderid = e.currentTarget.dataset.orderid
     console.log('催他发货')
     httpReq({
-      url: ApiUrl.phplist + 'order/getorder?token=' + this.data.token + '&member_id=' + this.data.vipid + '&orderid=' + orderid
+      url: ApiUrl.phplist + 'order/getorder?token=' + this.data.token + '&member_id=' + wx.getStorageSync('vipid') + '&orderid=' + orderid
     }).then((res) => {
       console.log(res)
     })
@@ -231,23 +234,60 @@ Page({
     let orderid = e.currentTarget.dataset.orderid
     console.log('取消订单')
     httpReq({
-      url: ApiUrl.phplist + 'order/getorder?token=' + this.data.token + '&member_id=' + this.data.vipid + '&orderid=' + orderid
+      url: ApiUrl.phplist + 'order/getorder?token=' + this.data.token + '&member_id=' + wx.getStorageSync('vipid') + '&orderid=' + orderid
     }).then((res) => {
       console.log(res)
     })
+  },
+  //点击确认付款弹出选择付款方式页面
+  confirmPay:function() {
+    var status = this.data.status;
+    console.log(status)
+    status = !status;
+    this.setData({
+      status: status
+    })　
   },
   /**
-   * 确认付款
+   * 确认微信付款
    */
-  confirmPay: function(e) {
-    let orderid = e.currentTarget.dataset.orderid
-    console.log('确认付款')
+  confirmWeixinPay: function(e) {
+    var that = this;
+    var token = wx.getStorageSync("token")
     httpReq({
-      url: ApiUrl.phplist + 'order/goodsPay?token=' + this.data.token + '&member_id=' + this.data.vipid + '&orderid=' + orderid
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'member/applymber?token=' + that.data.token + '&level=' + that.data.grade + '&inviter=' + that.data.inviterID,
+      // url: ApiUrl.phplist + 'order/orderpay?pay_amount=' + this.data.amount,
     }).then((res) => {
       console.log(res)
+      wx.requestPayment({
+        timeStamp: res.data.lists.timeStamp,
+        nonceStr: res.data.lists.nonceStr,
+        package: res.data.lists.package,
+        signType: 'MD5',
+        paySign: res.data.lists.paySign,
+        success: function (res) {
+          // success
+          console.log(res);
+        },
+        fail: function (res) {
+          // fail
+          console.log(res);
+        },
+        complete: function (res) {
+          // complete
+          that.setData({
+            status: false
+          })
+
+        }
+      })
     })
   },
+  
   /**
    * 删除订单
    */
@@ -255,7 +295,7 @@ Page({
     let orderid = e.currentTarget.dataset.orderid
     console.log('删除订单')
     httpReq({
-      url: ApiUrl.phplist + 'order/getorder?token=' + this.data.token + '&member_id=' + this.data.vipid + '&orderid=' + orderid
+      url: ApiUrl.phplist + 'order/delOrder?token=' + this.data.token + '&member_id=' + wx.getStorageSync('vipid') + '&order_id=' + orderid
     }).then((res) => {
       console.log(res)
     })
@@ -265,8 +305,51 @@ Page({
    */
  confirmReceipt: function(e) {
    let orderid = e.currentTarget.dataset.orderid
-   console.log('确认收货')
+   console.log('删除订单')
+   httpReq({
+     url: ApiUrl.phplist + 'order/confirmOrder?token=' + this.data.token + '&member_id=' + wx.getStorageSync('vipid') + '&order_id=' + orderid
+   }).then((res) => {
+     console.log(res)
+   })
  },
+  //控制隐藏
+  ifhidden: function () {
+    ifhidden: true
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+ 
+  //选择支付方式
+  payway(e) {
+    let payway = e.detail.value
+    if (payway == 'wexinPayfor') {
+      this.data.ifPassword = true
+    } else {
+      this.data.ifPassword = false
+    }
+    this.setData({
+      payway: payway
+    })
+    console.log(this.data.payway)
+  },
+
+  cancelPay: function () {
+    var status = this.data.status;
+    status = !status;
+    this.setData({
+      status: status
+    })
+  },
+  //确认支付
+  selectPayWay: function () {
+    console.log(this.data.payway)
+    if (this.data.payway == 'wexinPayfor') {
+      this.confirmWeixinPay()
+    } else {
+      this.confirmXianxiaPay()
+    }
+  },
   /**
    * 生命周期函数--监听页面显示
    */

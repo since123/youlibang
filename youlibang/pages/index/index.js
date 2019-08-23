@@ -38,15 +38,15 @@ Page({
   },
 
   //点击图片进行跳转
-  changePath(e) {
+  // changePath(e) {
   
-    var id=e.target.dataset.id
-    console.log(id)
-    wx.navigateTo({
-      url: '../goodsDetail/goodsDetail?goodsId='+id,
+  //   var id=e.target.dataset.id
+  //   console.log(id)
+  //   wx.navigateTo({
+  //     url: '../goodsDetail/goodsDetail?goodsId='+id,
 
-    })
-  },
+  //   })
+  // },
  
   //搜索
   search: function() {
@@ -57,11 +57,12 @@ Page({
   //购买
   tobuy: function(e) {
     var that=this;
+    console.log(e)
     var goodsId=e.currentTarget.dataset.goodsid;
     // console.log(goodsId);
     // console.log('goodsId' + goodsId);
     wx.navigateTo({
-      url: '../goodsDetail/goodsDetail?goodsId='+goodsId,
+      url: '../goodsDetail/goodsDetail?goodsId='+goodsId+'&buy=1',
     })
   },
   //商品详情
@@ -150,23 +151,6 @@ Page({
        dataList
      })
     })
-
-    // this.setData({
-    //   msgList: [{
-    //       url: "url",
-    //       title: "全员会员招募中，满1000送500，满500送200，详情咨询客服"
-    //     },
-    //     {
-    //       url: "url",
-    //       title: "交了20多年的国内漫游费将取消 你能省多少话费？"
-    //     },
-    //     {
-    //       url: "url",
-    //       title: "北大教工合唱团出国演出遇尴尬:被要求给他人伴唱"
-    //     }
-    //   ]
-    // })
-   
   },
  
 

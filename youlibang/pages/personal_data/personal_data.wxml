@@ -28,7 +28,7 @@
   <label class='rightinfo'>{{tuijianID}}</label>
 </view>
 
-  <view class='uploadIDCard'>身份证</view>
+  <view class='uploadIDCard'>身份证（第一张正面，第二张反面）</view>
   <view class='IDCard'>
       <view class='idcardImg'><image src='{{idCard1}}'></image></view>
       <view class='idcardImg'><image src='{{idCard2}}'></image></view>
@@ -37,4 +37,4 @@
   <view class='addImg'>
       <view class='imginfo'><image src='{{businesslicense}}'></image></view>
   </view>
-  <button class="perserve" bindtap="changeAvatar">保存</button>
+  <!-- <button class="perserve" bindtap="changeAvatar">保存</button> -->

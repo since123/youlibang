@@ -5,6 +5,7 @@
   height: 120rpx;
   background-color: #ffffff;
   margin-top: 3%;
+  overflow: hidden
 }
 .addressImg{
   width: 35rpx;
@@ -335,4 +336,11 @@ page{
   color:rgba(86,103,149,1);
   margin-left: 5%;
   margin-top: 1%;
+}
+.leftArrow{
+  font-size: 40rpx;
+  float: right;
+  margin-top: 30rpx;
+  margin-right: 20rpx;
+  color: #bbb;
 }

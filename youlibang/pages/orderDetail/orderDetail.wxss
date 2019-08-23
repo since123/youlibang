@@ -18,12 +18,11 @@
   height: 35rpx;
 }
 .name_phone{
-  float: left;
   width: 400rpx;
   height: 40rpx;
   /* background-color: yellow; */
   margin-top: 3%;
-  margin-left: 3%;
+  
 }
 .username{
   float: left;
@@ -31,6 +30,7 @@
   font-family:sans-serif;
   font-weight:500;
   color:rgba(51,51,51,1);
+  margin-left: 9%;
 }
 .phone{
   float: left;
@@ -48,7 +48,7 @@
   color:rgba(51,51,51,1);
   line-height:41rpx;
   margin-top:1%;
-  margin-left: 3%;
+  margin-left: 5%;
 }
 .orderInfo{
   width: 750rpx;

@@ -12,8 +12,10 @@ Page({
    */
   data: {
     modalHidden: true,
+    ifdisplay: '',
     token : wx.getStorageSync('token'),
     userid: wx.getStorageSync('userid'),
+    formValue: ''
   },
 
   /**
@@ -22,6 +24,7 @@ Page({
   onLoad: function (options) {
     this.getifAuthorize()
     this.isMember()
+    this.getformValue()
   },
   // /**
   //  *检查是否授权
@@ -55,8 +58,27 @@ Page({
     })
   },
   updatePwd:function(){
-    wx.navigateTo({
-      url: '../updatePwd/updatePwd',
+    if (this.data.formValue) {
+      wx.navigateTo({
+        url: '../updatePwd/updatePwd?formValue=' + this.data.formValue,
+      })
+    }
+  },
+  getformValue: function () {
+    let that = this
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'member/getcheck?token=' + wx.getStorageSync('token'),
+    }).then((res) => {
+      console.log(res)
+      let formValue = res.data.lists
+      that.setData({
+        formValue: formValue
+      })
+      console.log(that.data.formValue)
     })
   },
   //退出登录

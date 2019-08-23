@@ -74,6 +74,7 @@ Page({
       wd,
       idex
     })
+    
   },
   getVa(e) {
     console.log(e)
@@ -89,9 +90,10 @@ Page({
   confirm(){
     var that = this
     //是否选择
-    if (this.data.yd == "" || this.data.wd == ""||this.data.num<=0){
+    if (this.data.yd == undefined || this.data.wd == undefined||this.data.num<=0){
       return false
     }
+  console.log(this.data.yd,this.data.wd)
     var productsList=this.data.productsList
    console.log(productsList)
     //重组数据存入缓存
@@ -138,36 +140,34 @@ Page({
   var   goods_attr_values = productsList.goods_introduce
   var   goods_number = this.data.num
     console.log(token, member_id, goods_id, goods_attr_values, goods_number)
-    //判断点击的是加入还是立即购买
-    if (this.data.state == 0) {
-      console.log("去到购物车！")
-      //请求加入购物车数据
-      httpReq({
-        header: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        url: 'http://www.ylb.com/api/cart/savecart?token=' + token + '&goods_id=' + goods_id + '&goods_attr_values=' + goods_attr_values + '&goods_number=' + goods_number + '&member_id=' + member_id
-      }).then((res) => {
-          console.log(res)
-      });
+    //不论是加入购物车还是立即购买调用相同的接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: 'http://www.ylb.com/api/cart/savecart?token=' + token + '&goods_id=' + goods_id + '&goods_attr_values=' + goods_attr_values + '&goods_number=' + goods_number + '&member_id=' + member_id
+    }).then((res) => {
+      console.log(res)
+      //判断点击的是加入还是立即购买
+      if (this.data.state == 0) {
+        console.log("去到购物车！")
+        //请求加入购物车数据
+        wx.setStorage({
+          key: 'shop',
+          data: bar,
+        })
+        wx.showToast({
+          title: '添加成功！',
+        })
 
-
-      wx.setStorage({
-        key: 'shop',
-        data: bar,
-      })
-      wx.showToast({
-        title: '添加成功！',
-      })
-     
-    } else if (this.data.state == 1) {
-      console.log("去到提交订单！")
-      wx.navigateTo({
-        url: '../submitOrder/submitOrder?info='+info,
-      })
-    }
-    
+      } else if (this.data.state == 1) {
+        console.log("去到提交订单！")
+        wx.navigateTo({
+          url: '../submitOrder/submitOrder?info=' + info,
+        })
+      }
+    });
   },
   //输入数量
   bindManual(e){

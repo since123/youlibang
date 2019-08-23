@@ -84,22 +84,22 @@
 				},
 				{
 					"id": 4,
-					"name": "pages/retail_orderdetail/retail_orderdetail",
-					"pathName": "pages/retail_orderdetail/retail_orderdetail",
+					"name": "pages/cashoutDetail/cashoutDetail",
+					"pathName": "pages/cashoutDetail/cashoutDetail",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/orderDetail/orderDetail",
-					"pathName": "pages/orderDetail/orderDetail",
+					"id": 5,
+					"name": "pages/updatePwd/updatePwd",
+					"pathName": "pages/updatePwd/updatePwd",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 6,
-					"name": "pages/applyVIP/applyVIP",
-					"pathName": "pages/applyVIP/applyVIP",
+					"name": "pages/personal_data/personal_data",
+					"pathName": "pages/personal_data/personal_data",
 					"query": "",
 					"scene": null
 				}

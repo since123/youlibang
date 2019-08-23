@@ -11,9 +11,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userName: '李开心',
-    phoneNumber: '13260995055',
-    adress: '广东省广州市天河区汇诚大厦365',
+    userName: '',
+    phoneNumber: '',
+    address: '',
     token: '',
     orderid: '',
     orderAmount: '',
@@ -24,7 +24,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
-    // console.log("options: " + option.orderid)//7777
+    console.log("options: " + option.orderid)//7777
     let orderid = option.orderid
     this.setData({
       token: wx.getStorageSync('token'),
@@ -39,12 +39,14 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'order/oddetail?token=' + this.data.token + '&order_sn=' + this.data.orderid,
+      url: ApiUrl.phplist + 'order/oddetail?token=' + this.data.token + '&order_id=' + this.data.orderid,
     }).then((res) => {
-      console.log(res.data.lists.or)
-      
-      let goodsList = res.data.lists.or
+      console.log(res)
+      let goodsList = res.data.lists
       let orderAmount = goodsList[0].order_amount
+      let userName = goodsList[0].address_name
+      let phoneNumber = goodsList[0].address_phone
+      let address = goodsList[0].address
       //console.log(orderAmount)
       let order = []
       for (let m in goodsList) {
@@ -58,10 +60,13 @@ Page({
       }
       that.setData({
         order : order,
-        orderAmount : orderAmount
+        orderAmount : orderAmount,
+        userName : userName,
+        phoneNumber: phoneNumber,
+        address: address
       })
-       console.log(orderAmount)
-    })
+    }
+    )
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -26,20 +26,20 @@ Page({
   onLoad: function (options) {
     let that = this
     let app = getApp()
-    let token = wx.getStorageSync('token')
-
+    // let token =
+    console.log(wx.getStorageSync('token'))
       httpReq({
         header: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        url: ApiUrl.phplist + 'distribution/getall?token' + token,
+        url: ApiUrl.phplist + 'distribution/getall?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid'),
       }).then((res) => {
-        console.log(res.data.lists)
+        console.log(res)
         let retailOrder = res.data.lists
         let allOrder = []
         let waitPayOrder = []
-        let waitSentOrder = []
+        let waitSendOrder = []
         let waitReceivedOrder = []
         let completeOrder = []
         for(let m in retailOrder) {
@@ -76,7 +76,7 @@ Page({
         that.setData({
           allRetailOrder : allOrder,
           waitPayOrder: waitPayOrder,
-          waitSentOrder: waitSentOrder,
+          waitSendOrder: waitSendOrder,
           waitReceivedOrder: waitReceivedOrder,
           completeOrder: completeOrder
         })

@@ -13,7 +13,8 @@ Page({
     txtOrderCode: '',
     defAddress:[],
     cart_id:[],
-    address_id:''
+    address_id:'',
+    status:true
   },
 
   /**
@@ -50,16 +51,39 @@ Page({
   payway(){
      console.log("通过微信支付！")
       this.setData({
-        way:"微信"
+        way:"wxpay"
       })
 
   },
+  //查看最近的经销商
+  query(){
+    var status=this.data.status
+    status=!status
+    this.setData({
+      status
+    })
+  wx.getLocation({
+    success: function(res) {
+      console.log(res)
+      //获取到的经纬度
+      var lat = res.latitude
+      var lon = res.longitude
+      console.log(lat,lon)
+      //将获取到的经纬度提交给后端，并传值type=2
+    },
+  })
+},
   payWay(){
     console.log("通过钱包支付！")
      this.setData({
-       way:"钱包"
+       way:"qianbao"
      })
     
+  },
+  chooseAddress(){
+      wx.navigateTo({
+        url: '../myAddress/myAddress',
+      })
   },
    describe(){
       var status=this.data.status
@@ -110,7 +134,7 @@ Page({
     console.log(cart_id)
    // console.log(describe, dataList, total)
     //判断支付方式
-    if(way=="微信"){
+    if(way=="wxpay"){
        //调取微信支付接口
        console.log("微信支付！")
       httpReq({
@@ -119,43 +143,28 @@ Page({
           'Accept': 'application/json'
         },
         method:'POST',
-        data: { token, member_id, address_id, or_remark: describe, pay_type: way, cart_id:[30,31]},
-        url: 'http://wx.ylbtl.cn/api/order/goodsPay',
+        data: { token, member_id, address_id, or_remark: describe, pay_type: way, cart_id:[32,34]},
+        url: 'http://www.ylb.com/api/order/goodsPay',
       }).then((res) => {
           console.log(res)
+        var timeStamp = res.data.lists.timeStamp
+        var nonceStr = res.data.lists.nonceStr
+        var pack = res.data.lists.package
+        var paySign = res.data.lists.paySign
           //判断返回值，若为真
+        //console.log(timeStamp,nonceStr,pack,paySign)
           if(res.statusCode==200){
-            var ordercode = this.data.total;
-            var token = wx.getStorageSync('token')
-            var paydesc = '商品购买'
-            console.log(ordercode, token, paydesc)
-
             wx.login({
               success: function (res) {
+                console.log(res)
                 if (res.code) {
-                  httpReq({
-                    header: {
-                      'Content-Type': 'application/json',
-                      'Accept': 'application/json'
-                    },
-                    url: 'http://wx.ylbtl.cn/api/test/cszhifu?token=' + token + '&paydesc=' + paydesc + '&payAmount=' + ordercode,
-                  }).then((res) => {
-                    console.log(res)
-                    // console.log(res.data)
-                    // console.log(res.data.lists)
-                    // console.log(res.data.lists.timeStamp)
-                    console.log(res.data.code)
+                    //真正支付的接口
                     wx.requestPayment({
-                      // timeStamp: res.data.lists.timeStamp,
-                      // nonceStr: res.data.lists.nonceStr,
-                      // package: res.data.lists.package,
-                      // signType: 'MD5',
-                      // paySign: res.data.lists.paySign,
-                      timeStamp: res.data.code.timeStamp,
-                      nonceStr: res.data.code.nonceStr,
-                      package: res.data.code.package,
+                      timeStamp: timeStamp,
+                      nonceStr: nonceStr,
+                      package: pack,
                       signType: 'MD5',
-                      paySign: res.data.code.paySign,
+                      paySign: paySign,
                       success: function (res) {
                         // success
                         console.log(res);
@@ -169,12 +178,11 @@ Page({
                         console.log(res);
                       }
                     })
-                  })
                 } else {
                   console.log('获取用户登录态失败！' + res.errMsg)
                 }
               }
-            });
+            })
           }
       })
     }else{
@@ -206,8 +214,16 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     var token = wx.getStorageSync('token')
     var member_id = wx.getStorageSync('vipid')
+    var type=1
     //请求默认地址接口
     var that = this
     console.log(token, member_id)
@@ -216,24 +232,17 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://wx.ylbtl.cn/api/user/getSelectedAddress?token=' + token + '&member_id=' + member_id,
+      url: 'http://wx.ylbtl.cn/api/user/getSelectedAddress?token=' + token + '&member_id=' + member_id+'&type='+type,
     }).then((res) => {
       console.log(res)
       var defAddress = res.data.lists
-      var address_id=res.data.lists.id
+      var address_id = res.data.lists.id
       that.setData({
         defAddress,
         address_id
       })
-     // console.log(this.data.defAddress)
+      // console.log(this.data.defAddress)
     });
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
   },
 
   /**

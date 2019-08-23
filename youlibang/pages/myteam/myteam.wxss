@@ -83,7 +83,6 @@ border-radius:50%;
 .username{
   float: left;
   width:200rpx;
-  height:28rpx;
   font-size:30rpx;
   font-family:sans-serif;
   font-weight:500;
@@ -93,25 +92,21 @@ border-radius:50%;
 }
 .registertime{
   float: left;
-  width:257rpx;
-  height:23rpx;
   font-size:24rpx;
   font-family:sans-serif;
   font-weight:500;
   color:rgba(102,102,102,1);
-  line-height:90rpx;
+  line-height:50rpx;
   margin-left: 20rpx;
 }
 .num{
   float: left;
-  width:100rpx;
-  height:23rpx;
   font-size:24rpx;
   font-family:sans-serif;
   font-weight:500;
   color:rgba(234,65,72,1);
   line-height:90rpx;
-  margin-left: 18%;
+  margin-left: 10%;
 }
 .li{
   float: left;

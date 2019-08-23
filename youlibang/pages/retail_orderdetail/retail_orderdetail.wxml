@@ -21,10 +21,10 @@
     </view>
   </view>
   <view class='line'></view>
-  <view class='yunfei'>
+  <!-- <view class='yunfei'>
     <view class='yunfeitext'>运费</view>
     <view class='mianyunfei'>{{freightStatus}}</view>
-  </view>
+  </view> -->
    <view class='heji'>
     <view class='total'>合计</view>
     <view class='money'><label>￥</label>{{orderAmount}}</view>

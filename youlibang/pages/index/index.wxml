@@ -33,6 +33,8 @@
     <view class='leftImg'><image src="{{item.goods_log}}"></image></view>
     <view class='textInfo'>{{item.goods_name}}</view>
     <view class='price'><label>￥</label>{{item.goods_price}}</view>
-    <view class='Buy'><view class='buy' bindtap='tobuy'>购买</view></view>
+    <view class='Buy'>
+    <view class='buy' catchtap='tobuy' data-goodsid='{{item.id}}'>购买</view>
+    </view>
   </view>
 </scroll-view>

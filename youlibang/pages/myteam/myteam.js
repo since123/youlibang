@@ -14,52 +14,10 @@ Page({
   data: {
     order: true,
     currentGrade: 1,
-    oneGradeNum: 2,
-    twoGradeNum: 3,
-    oneTeamInfor: [
-      {
-        image: '/../images/2013062320262198.jpg',
-        userName: '张三',
-        time: '2019-01-01',
-        personNum: '2',
-        money: '40.00',
-        orderNum: '2'
-      },
-      {
-        image: '/../images/2013062320262198.jpg',
-        userName: '张三',
-        time: '2019-01-01',
-        personNum: '2',
-        money: '40.00',
-        orderNum: '2'
-      }
-    ],
-    twoTeamInfor: [
-      {
-        image: '/../images/2013062320262198.jpg',
-        userName: '李四',
-        time: '2019-01-01',
-        personNum: '2',
-        money: '40.00',
-        orderNum: '2'
-      },
-      {
-        image: '/../images/2013062320262198.jpg',
-        userName: '李四',
-        time: '2019-01-01',
-        personNum: '2',
-        money: '40.00',
-        orderNum: '2'
-      },
-      {
-        image: '/../images/2013062320262198.jpg',
-        userName: '李四',
-        time: '2019-01-01',
-        personNum: '2',
-        money: '40.00',
-        orderNum: '2'
-      }
-    ]
+    oneGradeNum: 0,
+    twoGradeNum: 0,
+    oneTeamInfor: [],
+    twoTeamInfor: []
   },
   openstatus: function (e) {
     var that = this
@@ -111,21 +69,20 @@ Page({
           teamMember.image = lists[m].avatar
           teamMember.userName = lists[m].nickname
           teamMember.time = util.formatTime(new Date(lists[m].create_time)) 
-          teamMember.personNum = Number(lists[m].member_count)
           teamMember.money = Number(lists[m].amount)
           teamMember.orderNum = Number(lists[m].order_count)
-          console.log(lists[m].nickname)
           teamInfor.push(teamMember)
         }
-        console.log(this.data.currentGrade)
         if (Number(this.data.currentGrade) == 1) {
           console.log(this.data.currentGrade)
           that.setData({
-            oneTeamInfor : teamInfor
+            oneTeamInfor : teamInfor,
+            oneGradeNum: teamInfor.length
           })
         } else if (Number(this.data.currentGrade) == 2){
           that.setData({
-            twoTeamInfor : teamInfor
+            twoTeamInfor : teamInfor,
+            twoGradeNum: teamInfor.length
           })
         }
       })
