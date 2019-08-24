@@ -98,8 +98,8 @@
 				},
 				{
 					"id": 6,
-					"name": "pages/personal_data/personal_data",
-					"pathName": "pages/personal_data/personal_data",
+					"name": "pages/VIPcenter/VIPcenter",
+					"pathName": "pages/VIPcenter/VIPcenter",
 					"query": "",
 					"scene": null
 				}

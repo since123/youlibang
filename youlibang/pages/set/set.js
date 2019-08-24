@@ -23,7 +23,6 @@ Page({
    */
   onLoad: function (options) {
     this.getifAuthorize()
-    this.isMember()
     this.getformValue()
   },
   // /**
@@ -64,6 +63,7 @@ Page({
       })
     }
   },
+  //判断显示修改密码哪个页面
   getformValue: function () {
     let that = this
     httpReq({
@@ -94,6 +94,7 @@ Page({
       tip: '您点击了【是】按钮！',
       buttonDisabled: !this.data.buttonDisabled
     })
+    wx.clearStorage()
   },
 
   modalBindcancel: function () {
@@ -110,96 +111,6 @@ Page({
     
   },
 
-  //点击允许获取用户信息
-  bindGetUserInfo(e) {
-    // console.log(e.detail.userInfo)
-    //点击获取userInfo并缓存
-    console.log(typeof (e.detail.userInfo))
-    wx.setStorageSync('userInfo', e.detail.userInfo)
-    let that = this
-    if (!that.ifAllInform()) {
-      wx.showModal({
-        title: '提示！',
-        content: '必须授权用户基本信息和手机号',
-      })
-    } else {
-      //this.isMember()
-      console.log('1')
-      this.saveUserInform()
-      console.log('先电话再信息')
-       //刷新上一个页面
-      var pages = getCurrentPages()
-      pages[pages.length - 2].onLoad()
-    }
-    
-  },
-  //点击允许获取手机号
-  getPhoneNumber: function (e) {
-    let that = this
-    console.log(e)
-    wx.setStorageSync('encryptedData', e.detail.encryptedData)
-    if (!that.ifAllInform()) {
-      wx.showModal({
-        title: '提示！',
-        content: '必须授权用户基本信息和手机号',
-      })
-    } else {
-      //this.isMember()
-      this.saveUserInform()
-      console.log('先信息再电话')
-      //刷新上一个页面
-      var pages = getCurrentPages()
-      pages[pages.length - 2].onLoad() 
-    }
-  },
-  //检查用户信息和手机号是否获取完整
-  ifAllInform: function(){
-    let userInfo = wx.getStorageSync('userInfo')
-    let encryptedData = wx.getStorageSync('encryptedData')
-    if (userInfo == '' || encryptedData == '') {
-      return false
-    } else {
-      return true
-    }
-  },
-  /**
-   * 将用户信息存入数据库
-   */
-  saveUserInform: function() {
-    let that = this
-    httpReq({
-      header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      url: ApiUrl.phplist + 'index/usersave?mobile=' + wx.getStorageSync('encryptedData') + '&wx_info=' + wx.getStorageSync('userInfo') + '&token=' + wx.getStorageSync('token'),
-    }).then((res) => {
-      console.log(res)
-    })
-  },
-
-  /**
-     * 是否是注册的会员
-    */
-  isMember() {
-    let that = this
-    httpReq({
-      header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      url: ApiUrl.phplist + 'user/ismember?token=' + wx.getStorageSync('token') + '&user_id=' + wx.getStorageSync('userid'),
-    }).then((res) => {
-      let vipid = res.data.lists
-      if (vipid) {
-        wx.setStorageSync('vipid', vipid)
-        console.log(vipid)
-      } else {
-        wx.setStorageSync('vipid', 0)
-        console.log('您不是会员')
-      }
-    })
-  },
   /**
    * 生命周期函数--监听页面显示
    */

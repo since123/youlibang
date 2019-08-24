@@ -79,6 +79,7 @@ Page({
    * 获取后台返回的可提现佣金，已提现返利，未提现返利
    */
   getInfor: function() {
+    console.log('1')
     let that = this
     this.setData({
       token: wx.getStorageSync('token')
@@ -104,6 +105,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('1')
     this.getInfor()//获取后台返回的可提现佣金，已提现返利，未提现返利
   },
 
@@ -154,5 +156,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
 })

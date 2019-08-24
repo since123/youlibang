@@ -310,7 +310,7 @@ margin-left:388rpx;
 margin-top: 30rpx;
 }
 .underLine{
-  margin-bottom: 100rpx;
+  margin-bottom: 40rpx;
   background: white;
   margin-top: 0;
 }

@@ -1,4 +1,9 @@
 // pages/submitOrder/submitOrder.js
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
+var qqmapsdk;
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
 import {
   httpReq
 } from '../../utils/http.js';
@@ -21,6 +26,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    qqmapsdk = new QQMapWX({
+      key: 'KXRBZ-VZARV-YUYPW-USY6I-A7FIF-3ZBT4'
+    });
     console.log(options)
     var total = 0
     var dataList=JSON.parse(options.info)
@@ -53,25 +61,45 @@ Page({
       this.setData({
         way:"wxpay"
       })
-
   },
   //查看最近的经销商
   query(){
-    var status=this.data.status
-    status=!status
-    this.setData({
-      status
-    })
-  wx.getLocation({
+   var token=wx.getStorageSync('token') //token
+  wx.chooseLocation({
     success: function(res) {
       console.log(res)
-      //获取到的经纬度
-      var lat = res.latitude
+      //将请求到的数据提交给后端
       var lon = res.longitude
-      console.log(lat,lon)
-      //将获取到的经纬度提交给后端，并传值type=2
+      var lat = res.latitude
+      httpReq({
+        header: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        url: ApiUrl.phplist + 'member/deliverAddress?token='+token+'&lon='+lon+'&lat='+lat,
+      }).then((res) => {
+       console.log(res)
+      });
     },
   })
+    //通过输入地址确定经纬度
+    // qqmapsdk.geocoder({ //获取目标地址的地图信息，把详细地址输入address即可
+    //   address: '南宁市西乡塘区秀厢大道东祥云商务酒店',
+    //   success: function (res) {    //返回的数据里面有该地址的经纬度
+    //     console.log(res)
+    //   },
+    //   fail: function (res) {
+    //     console.log(res)
+    //   },
+    //   complete: function (res) {
+    //     console.log(res)
+    //   }
+    // })
+    // var status=this.data.status
+    // status=!status
+    // this.setData({
+    //   status
+    // })
 },
   payWay(){
     console.log("通过钱包支付！")
@@ -144,7 +172,7 @@ Page({
         },
         method:'POST',
         data: { token, member_id, address_id, or_remark: describe, pay_type: way, cart_id:[32,34]},
-        url: 'http://www.ylb.com/api/order/goodsPay',
+        url: ApiUrl.phplist+'order/goodsPay',
       }).then((res) => {
           console.log(res)
         var timeStamp = res.data.lists.timeStamp
@@ -232,7 +260,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://wx.ylbtl.cn/api/user/getSelectedAddress?token=' + token + '&member_id=' + member_id+'&type='+type,
+      url: ApiUrl.phplist+'user/getSelectedAddress?token=' + token + '&member_id=' + member_id+'&type='+type,
     }).then((res) => {
       console.log(res)
       var defAddress = res.data.lists

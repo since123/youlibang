@@ -3,10 +3,10 @@
     <input class='inputInfo' type='' placeholder='请输入商品名称' bindchange="search"></input>
     <view class='sousuo' bindtap="searchPath">搜索</view>
 </view>
-<view class='sousuoContents' >
-    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">{{history[0]}}</view>
-    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">{{history[1]}}</view>
-    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">{{history[2]}}</view>
+<view class='sousuoContents' wx:for="{{history}}">
+    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}" data-text="{{item}}">{{item}}</view>
+    <!-- <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">{{history[1]}}</view>
+    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}">{{history[2]}}</view> -->
     <!-- 搜索结果 -->
 <view class='contents' bindscrolltolower="loadImages" wx:if="{{status}}" >
   <view class='listInfo' wx:for="{{searchGoods}}" wx:key="{{item.id}}" data-goodsid='{{item.id}}' catchtap='goodsdetail'>

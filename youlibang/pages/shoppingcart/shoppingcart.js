@@ -1,5 +1,8 @@
 //pages/shoppingcart/shoppingcart.js
 import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
   httpReq
 } from '../../utils/http.js';
 var goodsId=null;
@@ -50,7 +53,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: "http://www.ylb.com/api/cart/getcart?token=" + token + '&member_id=' + member_id,
+      url: ApiUrl.phplist+"cart/getcart?token=" + token + '&member_id=' + member_id,
     }).then((res) => {
       console.log(res)
       if (res.data.lists == undefined) {

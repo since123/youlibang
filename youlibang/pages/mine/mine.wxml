@@ -65,4 +65,19 @@
       <view class="nav_text">优惠券</view>
     </view>
   </view>
-</view> 
+</view>
+
+<view class="mubu" bindtap="cancelPay" hidden="{{status}}"></view>
+<view class='footer' bindchange="toastHide" hidden="{{ifUser}}">
+  <view class="buttonInfo">
+    <button  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权用户信息</button>
+    <text class='btnText'>(获得你的公开信息（昵称，头像，地区及性别)</text>
+  </view>
+</view>
+<view class='footer' bindchange="toastHide" hidden="{{ifPhone}}">
+  <view class="buttonInfo" >
+    <button  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取用户手机号</button>
+    <text class='btnText'>(发货时使用)</text>
+  </view>
+</view>
+

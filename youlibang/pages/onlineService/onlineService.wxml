@@ -2,13 +2,13 @@
 <view class="body">
 <view class='texttitle'>猜你想问</view>
 <view class='contents'>
-<view class='question' bindtap="question" data-id="1">如何修改退款，售后申请？</view>
+<view class='question' bindtap="question" data-text="{{header[0]}}">{{header[0]}}</view>
 <view class='li'></view>
-<view class='question' bindtap="question" data-id="2">收到商品有质量问题怎么解决？</view>
+<view class='question' bindtap="question" data-text="{{header[0]}}">{{header[1]}}</view>
 <view class='li'></view>
-<view class='question' bindtap="question" data-id="3">退款后钱款退到哪里？</view>
+<view class='question' bindtap="question" data-text="{{header[0]}}">{{header[2]}}</view>
 <view class='li'></view>
-<view class='question' bindtap="question" data-id="4">如何申请退款？</view>
+<view class='question' bindtap="question" data-text="{{header[0]}}">{{header[3]}}</view>
 </view>
   <view class='serviceinfo'  wx:for='{{infolist}}' wx:key="{{item.id}}">
     <view class="{{item.states==1?'userheadImg':'serviceheadImg'}}">

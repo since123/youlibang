@@ -1,5 +1,8 @@
 // pages/goodsDetail/goodsDetail.js
 import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
   httpReq
 } from '../../utils/http.js';
 Page({
@@ -146,7 +149,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://www.ylb.com/api/cart/savecart?token=' + token + '&goods_id=' + goods_id + '&goods_attr_values=' + goods_attr_values + '&goods_number=' + goods_number + '&member_id=' + member_id
+      url: ApiUrl.phplist+'cart/savecart?token=' + token + '&goods_id=' + goods_id + '&goods_attr_values=' + goods_attr_values + '&goods_number=' + goods_number + '&member_id=' + member_id
     }).then((res) => {
       console.log(res)
       //判断点击的是加入还是立即购买
@@ -278,7 +281,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://wx.ylbtl.cn/api/goods/getdetail?goods_id='+goodsId,
+      url: ApiUrl.phplist+'goods/getdetail?goods_id='+goodsId,
     }).then((res) => {
       console.log(res)
       var productsList=res.data.lists

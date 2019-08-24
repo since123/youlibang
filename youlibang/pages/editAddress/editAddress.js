@@ -1,5 +1,8 @@
 // pages/editAddress/editAddress.js
 import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
   httpReq
 } from '../../utils/http.js';
 var addressList = null;
@@ -88,7 +91,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url:'http://wx.ylbtl.cn/api/user/editaddress?address_id='+address_id+'&address_phone='+address_phone+'&address='+address+'&member_id='+member_id+'&address_name='+address_name,
+      url: ApiUrl.phplist+'user/editaddress?address_id='+address_id+'&address_phone='+address_phone+'&address='+address+'&member_id='+member_id+'&address_name='+address_name,
     }).then((res) => {
         console.log(res)
     });

@@ -29,6 +29,7 @@ Page({
     grade: '1',
     vipid: wx.getStorageSync('vipid'),
     payway: '',
+    ifxianxia: true,
   },
   /**
    * 分页
@@ -358,11 +359,19 @@ Page({
   //选择支付方式
   payway(e) {
     let payway = e.detail.value
+    let ifxianxia = this.data.ifxianxia
+    if (payway == 'underLinePayfor') {
+      ifxianxia = !ifxianxia
+      this.setData({
+        ifxianxia: ifxianxia
+      })
+    }
     this.setData({
       payway: payway
     })
     console.log(this.data.payway)
   },
+
   cancelPay: function () {
     var status = this.data.status;
     status = !status;
@@ -377,6 +386,24 @@ Page({
     } else {
       this.confirmXianxiaPay()
     }
+  },
+  //取消线下支付
+  xianxiaconfirm: function () {
+    this.setData({
+      ifxianxia: true
+    })
+  },
+  //确认看到线下支付的回执
+  xianxiacancel: function () {
+    this.setData({
+      ifxianxia: true
+    })
+  },
+  confirmXianxiaPay: function() {
+    this.setData({
+      ifxianxia: true,
+      status: false
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

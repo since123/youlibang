@@ -1,5 +1,8 @@
 // pages/onlineService/onlineService.js
 import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
   httpReq
 } from '../../utils/http.js';
 var app=getApp();
@@ -22,6 +25,12 @@ Page({
     infolist: [{userheadImg:'../../images/2012031220134655.jpg',infos:'你好，有什么需要帮助？',states:1},
       { userheadImg: '../../images/2012031220134655.jpg', infos: '你好，退款未到账', states:0}],
     allContentList: [{}, { is_ai: [] }],
+    header:[
+      '如何修改退款，售后申请？',
+      '收到商品有质量问题怎么解决？',
+      '退款后钱款退到哪里？',
+      '如何申请退款？'
+    ]
   },
 
   /**
@@ -70,9 +79,9 @@ Page({
   },
   //点击进行跳转
   question(e){
-   
+   console.log(e)
     var infolist=this.data.infolist
-    var search = e._relatedInfo.anchorTargetText
+    var search = e.currentTarget.dataset.text
     var obj={}
     obj.userheadImg = '../../images/2012031220134655.jpg'
     obj.infos = search
@@ -84,7 +93,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://wx.ylbtl.cn/api/user/searchCall?questions=' + search,
+      url: ApiUrl.phplist+'user/searchCall?questions=' + search,
     }).then((res) => {
       console.log(res)
       var answer = res.data.msg
@@ -139,7 +148,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url:'http://wx.ylbtl.cn/api/user/searchCall?questions='+info,
+      url:ApiUrl.phplist+'user/searchCall?questions='+info,
     }).then((res) => {
      console.log(res)
      var answer=res.data.msg

@@ -71,4 +71,8 @@
         <view class='btn' bindtap="confirmPay">确认支付</view>
       </view>
   </view>
+  <view hidden="{{ifxianxia}}">
+      <modal title="提示"  confirm-text="确认" cancel-text="取消"
+    bindconfirm="xianxiaconfirm" bindcancel="xianxiacancel" >您已经选择线下支付方式，联系线下工作人员即可</modal>
+  </view>
 </view>

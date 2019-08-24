@@ -1,5 +1,8 @@
 // pages/myAddress/myAddress.js
 import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
   httpReq
 } from '../../utils/http.js';
 Page({
@@ -92,15 +95,23 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url:'http://wx.ylbtl.cn/api/user/defselect?member_id='+member_id+'&address_id='+address_id+'&address_type='+address_type,
+      url:ApiUrl.phplist+'user/defselect?member_id='+member_id+'&address_id='+address_id+'&address_type='+address_type,
     }).then((res) => {
       console.log(res)
+      if(res.data.code==10000){
+        //如果成功了
+        wx.showToast({
+          title: '修改成功！',
+        })
+      }else{
+        wx.showToast({
+          title: '修改失败！！',
+        })
+      }
+    
     });
-
-    //如果成功了
-    wx.showToast({
-      title: '修改成功！',
-    })
+    
+  
    
   },
   //新增地址
@@ -138,7 +149,7 @@ Page({
               'Content-Type': 'application/json',
               'Accept': 'application/json'
             },
-            url: 'http://wx.ylbtl.cn/api/user/deladdress?member_id='+member_id+'&address_id='+address_id,
+            url: ApiUrl.phplist+'user/deladdress?member_id='+member_id+'&address_id='+address_id,
           }).then((res) => {
             //返回成功或失败的标识
           console.log(res)
@@ -183,7 +194,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://wx.ylbtl.cn/api/user/getaddress?member_id=' + member_id,
+      url: ApiUrl.phplist+'user/getaddress?member_id=' + member_id,
     }).then((res) => {
       console.log(res)
       var addressList = res.data.lists

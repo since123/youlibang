@@ -17,50 +17,45 @@ Page({
     vipid:'0',
     userImg_url:'../../images/headImg.png',
     price:'0.00',
-    encryptedData: wx.getStorageSync('encryptedData')
+    encryptedData: wx.getStorageSync('encryptedData'),
+    status: true,
+    ifUser: true,
+    ifPhone: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
     let that = this
-    //this.isMember()
-    //console.log(wx.getStorageSync('vipid'))
-    //验证用户
     if (wx.getStorageSync('token')) {
-      if (wx.getStorageSync('userInfo') != '' && wx.getStorageSync('encryptedData') != '') {
-       //判断vipid并缓存
+      //判断是否是会员
+      this.isMember()
+      console.log(wx.getStorageSync('vipid'))
+      if (wx.getStorageSync('userInfo') == '' || wx.getStorageSync('encryptedData') == '') {
+        this.setData({
+          status : false,
+          ifUser : false
+        })
+      } else {
+        this.setData({
+          status: true,
+          ifUser: true,
+          ifPhone: true,
+        })
+        //判断vipid并缓存
         console.log('都授权成功')
-        console.log(wx.getStorageSync('vipid'))
+        //获取权限成功后存储用户信息。
+        this.saveUserInform()
         if (Number(wx.getStorageSync('vipid')) != 0) {
-          that.getVipUserInfo()  
-        } else if (Number(wx.getStorageSync('vipid')) == 0){
+          that.getVipUserInfo()
+        } else if (Number(wx.getStorageSync('vipid')) == 0) {
           that.getPersonalInfo()
-       } 
-     } else {
-       wx.showModal({
-         title: '警告通知',
-         content: '获得你的公开信息（昵称，头像，地区及性别）以及电话,在设置中确定重新获取授权',
-         success: function(res){
-           if (res.confirm) {
-             wx.navigateTo({
-               url: '../../pages/set/set',
-             })
-           } else if (res.cancel) {
-             wx.navigateTo({
-               url: '../../pages/mine/mine',
-             })
-           }
-         }
-       })
-     }
-   } else {
-     console.log('token获取失败')
-     return false
-   }
-    
+        }
+      }
+    } else {
+      console.log('token获取失败')
+    }
   },
   
   /**是会员时，后台返回数据，展示会员信息信息 */
@@ -103,14 +98,6 @@ Page({
    * 获取页面数据（普通用户信息）
    */
   getPersonalInfo:function() {
-    // var that = this;
-    // let nickName = this.data.userInfo.nickName
-    // let src = this.data.userInfo.avatarUrl
-    // //success
-    // that.setData({
-    //   username: nickName,
-    //   userImg_url: src
-    // })
     let that = this
     httpReq({
       header: {
@@ -282,5 +269,56 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  bindGetUserInfo: function(e) {
+    // console.log(e.detail.userInfo)
+    //点击获取userInfo并缓存
+    wx.setStorageSync('userInfo', e.detail.userInfo)
+    this.setData({
+      ifPhone: false,
+      ifUser: true
+    })
+  },
+  getPhoneNumber: function (e) {
+    let that = this
+    wx.setStorageSync('encryptedData', e.detail.encryptedData)
+    that.onLoad()
+  },
+  /**
+   * 将用户信息存入数据库
+   */
+  saveUserInform: function () {
+    let that = this
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'index/usersave?mobile=' + wx.getStorageSync('encryptedData') + '&wx_info=' + wx.getStorageSync('userInfo') + '&token=' + wx.getStorageSync('token'),
+    }).then((res) => {
+      console.log(res)
+    })
+  },
+  /**
+       * 是否是注册的会员
+      */
+  isMember() {
+    let that = this
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'user/ismember?token=' + wx.getStorageSync('token') + '&user_id=' + wx.getStorageSync('userid'),
+    }).then((res) => {
+      let vipid = res.data.lists
+      if (vipid) {
+        wx.setStorageSync('vipid', vipid)
+        console.log(vipid)
+      } else {
+        wx.setStorageSync('vipid', 0)
+        console.log('您不是会员')
+      }
+    })
+  },
 })

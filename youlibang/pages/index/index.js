@@ -1,5 +1,8 @@
 //index.js
 //获取应用实例
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
 import { httpReq} from '../../utils/http.js';
 const app = getApp()
 var goods = null;
@@ -87,7 +90,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://wx.ylbtl.cn/api/goods/index'
+      url: ApiUrl.phplist+'goods/index'
     }).then((res) => {
       console.log(res)
           this.setData({
@@ -108,12 +111,12 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://wx.ylbtl.cn/api/goods/index'
+      url: ApiUrl.phplist+'goods/index'
     }).then((res) => {
          console.log(res)
          //处理商品信息
          var dataLists=res.data.lists
-         dataLists=dataLists.slice(0,3)
+         dataLists=dataLists.slice(0,4)
          this.setData({
            col1:dataLists
          })
@@ -124,7 +127,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://wx.ylbtl.cn/api/Operatedata/imgList',
+      url: ApiUrl.phplist+'Operatedata/imgList',
     }).then((res) => {
       console.log(res)
      //重置banner轮播图数据
@@ -143,7 +146,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: 'http://wx.ylbtl.cn/api/operatedata/getlist?type=1'
+      url: ApiUrl.phplist+'operatedata/getlist?type=1'
     }).then((res) => {
      var dataList=res.data.lists
      console.log(dataList)
@@ -155,11 +158,6 @@ Page({
  
 
   getUserInfo: function(e) {
-    // console.log(e)
-    // app.globalData.userInfo = e.detail.userInfo
-    // this.setData({
-    //   userInfo: e.detail.userInfo,
-    //   hasUserInfo: true
-    // })
+  
   }
 })

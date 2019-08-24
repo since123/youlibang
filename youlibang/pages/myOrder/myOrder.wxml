@@ -1,4 +1,4 @@
-<!--pages/myorder/myorder.wxml-->
+<!-- pages/myorder/myorder.wxml -->
 <view class="swiper-tab">
   <block wx:for="{{swipertab}}" wx:key="sptab">
     <view class="swiper-tab-list {{currtab == item.index ? 'on' : ''}}" 
@@ -68,8 +68,8 @@
             <view class='orderPri'>{{order.totalPrice}}元</view>
           </view>
           <view class="orderHander">
-            <view class="orderCancel" bindtap="orderHandleOne" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
-            <view class="orderConfirm" bindtap="orderHandleTwo" hidden="{{order.ifhiddentwo}}">{{order.orderHandleTwo}}</view>
+            <view class="orderCancel" data-orderid="{{order.orderid}}" bindtap="{{order.orderMethodOne}}" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
+            <view class="orderConfirm" data-orderid="{{order.orderid}}" bindtap="{{order.orderMethosTwo}}" hidden="{{order.ifhiddentwo}}">{{order.orderHandleTwo}}</view>
           </view>
         </view>
       </view>
@@ -102,8 +102,8 @@
             <view class='orderPri'>{{order.totalPrice}}元</view>
           </view>
           <view class="orderHander">
-            <view class="orderCancel" bindtap="orderHandleOne" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
-            <view class="orderConfirm" bindtap="orderHandleTwo" hidden="{{order.ifhiddentwo}}">{{order.orderHandleTwo}}</view>
+            <view class="orderCancel" data-orderid="{{order.orderid}}" bindtap="{{order.orderMethodOne}}" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
+            <view class="orderConfirm" data-orderid="{{order.orderid}}" bindtap="{{order.orderMethosTwo}}" hidden="{{order.ifhiddentwo}}">{{order.orderHandleTwo}}</view>
           </view>
         </view>
       </view>  
@@ -133,8 +133,8 @@
             <view class='orderPri'>{{order.totalPrice}}元</view>
           </view>
           <view class="orderHander">
-            <view class="orderCancel" bindtap="orderHandleOne" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
-            <view class="orderConfirm" bindtap="orderHandleTwo" hidden="{{order.ifhiddentwo}}">{{order.orderHandleTwo}}</view>
+            <view class="orderCancel" data-orderid="{{order.orderid}}" bindtap="{{order.orderMethodOne}}" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
+            <view class="orderConfirm" data-orderid="{{order.orderid}}" bindtap="{{order.orderMethosTwo}}" hidden="{{order.ifhiddentwo}}">{{order.orderHandleTwo}}</view>
           </view>
         </view>
       </view>
@@ -167,22 +167,22 @@
           <view class='orderPri'>{{order.totalPrice}}元</view>
           </view>
           <view class="orderHander">
-            <view class="orderCancel" bindtap="orderHandleOne" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
-            <view class="orderConfirm" bindtap="orderHandleTwo" hidden="{{order.ifhiddentwo}}">{{order.orderHandleTwo}}</view>
+            <view class="orderCancel" data-orderid="{{order.orderid}}" bindtap="{{order.orderMethodOne}}" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
+            <view class="orderConfirm" data-orderid="{{order.orderid}}" bindtap="{{order.orderMethosTwo}}" hidden="{{order.ifhiddentwo}}">{{order.orderHandleTwo}}</view>
           </view>
         </view>
       </view>
     </scroll-view>
   </swiper-item>
 </swiper>
-  <view class="mubu" bindtap="cancelPay" hidden="{{!status}}">
+  <view class="mubu" bindtap="cancelPay" hidden="{{!status}}"></view>
+  <view class="ifPassword" hidden="{{ifPassword}}">
+    <view class="textPas">请输入密码</view>
+    <input class="inputPas" bindinput="getpassword" type="password"></input>
+    <button class="buttonPas" bindtap="confirmPas">确认</button>
   </view>
-  <view class="ifPassword" hidden="{{!status}}">
-        <view hidden="{{!ifPassword}}">请输入密码</view>
-        <input></input>
-  </view>
-  <view class='footer' bindchange="toastHide" hidden="{{!status}}">
-    <view class='way'  bindtap='quxiao' hidden="{{!status}}">
+  <view class='footer' bindchange="toastHide" hidden="{{payStatus}}">
+    <view class='way'  bindtap='quxiao' hidden="{{payStatus}}">
       <view class='payforWay'><label>支付方式</label></view>
       <radio-group bindchange="payway">
         <view class='wexinPayfor'>
@@ -196,7 +196,34 @@
             <view class='wexintext'>线下支付</view>
             <radio class='check_box' value="underLinePayfor"></radio>
         </view>
+        <view class='wexinPayfor qianbaoPayfor'>
+            <image src='../../images/wallet-copy@2x.png'></image>
+            <view class='wexintext'>钱包支付</view>
+            <radio class='check_box' value="qianbaoPayfor"></radio>
+        </view>
       </radio-group>
       <view class='btn' bindtap="selectPayWay">确认支付</view>
   </view>
+  </view>
+  <view hidden="{{ifRefund}}">
+      <modal title="填写退款原因"  confirm-text="确认" cancel-text="取消"
+    bindconfirm="refundconfirm" bindcancel="refundcancel" >
+      <input class="payreason" bindinput="getReason"></input>
+    </modal>
+  </view>
+  <view hidden="{{modalHidden}}">
+      <modal title="确认删除订单？"  confirm-text="确认" cancel-text="取消"
+    bindconfirm="modalBindaconfirm" bindcancel="modalBindcancel" ></modal>
+  </view>
+  <view hidden="{{ifcancel}}">
+      <modal title="确认取消订单？"  confirm-text="确认" cancel-text="取消"
+    bindconfirm="cancelOrderconfirm" bindcancel="cancelOrdercancel" ></modal>
+  </view>
+  <view hidden="{{ifReceipt}}">
+      <modal title="确认收货？"  confirm-text="确认" cancel-text="取消"
+    bindconfirm="receiptconfirm" bindcancel="receiptcancel" ></modal>
+  </view>
+  <view hidden="{{ifxianxia}}">
+      <modal title="提示"  confirm-text="确认" cancel-text="取消"
+    bindconfirm="xianxiaconfirm" bindcancel="xianxiacancel" >您已经选择线下支付方式，后台已经生成回执，联系线下工作人员即可</modal>
   </view>

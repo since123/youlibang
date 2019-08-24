@@ -1,5 +1,8 @@
 // pages/extension_QRcode/extension_QRcode.js
 import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
   httpReq
 } from '../../utils/http.js';
 Page({
@@ -31,7 +34,7 @@ Page({
            'Content-Type': 'application/json',
            'Accept': 'application/json'
          },
-         url: 'http://www.ylb.com/api/member/qcodelist?member_id=' + member_id,
+         url: ApiUrl.phplist+'member/qcodelist?member_id=' + member_id,
        }).then((res) => {
          console.log(res)
          var imgUrl = res.data.lists

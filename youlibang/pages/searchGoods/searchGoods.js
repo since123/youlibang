@@ -1,5 +1,8 @@
 // pages/searchGoods/searchGoods.js
 import {
+  ApiUrl
+} from '../../utils/apiurl.js';
+import {
   httpReq
 } from '../../utils/http.js';
 Page({
@@ -69,7 +72,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url:'http://wx.ylbtl.cn/api/goods/goodsearch?search='+search,
+      url:ApiUrl.phplist+'goods/goodsearch?search='+search,
     }).then((res) => {
        console.log(res)
        var searchGoods=res.data.lists
@@ -96,9 +99,9 @@ Page({
   },
    //点击查找
    dianji(e){
-   
-     var inputvalue=e._relatedInfo.anchorTargetText
-     //console.log(inputvalue)
+      //console.log(e)
+     var inputvalue=e.currentTarget.dataset.text
+     console.log(inputvalue)
     //请求接口
 
      httpReq({
@@ -106,7 +109,7 @@ Page({
          'Content-Type': 'application/json',
          'Accept': 'application/json'
        },
-       url: 'http://wx.ylbtl.cn/api/goods/goodsearch?search=' + inputvalue,
+       url: ApiUrl.phplist+'goods/goodsearch?search=' + inputvalue,
      }).then((res) => {
        console.log(res)
        var searchGoods = res.data.lists
