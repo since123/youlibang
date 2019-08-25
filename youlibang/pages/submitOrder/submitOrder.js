@@ -1,6 +1,4 @@
 // pages/submitOrder/submitOrder.js
-var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
-var qqmapsdk;
 import {
   ApiUrl
 } from '../../utils/apiurl.js';
@@ -26,9 +24,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    qqmapsdk = new QQMapWX({
-      key: 'KXRBZ-VZARV-YUYPW-USY6I-A7FIF-3ZBT4'
-    });
     console.log(options)
     var total = 0
     var dataList=JSON.parse(options.info)

@@ -50,7 +50,7 @@
     </view>
   </view>
   <view class='apply_now' bindtap="applyClick">立即申请</view>
-
+</view>
   <view class="mubu" bindtap="cancelPay" hidden="{{!status}}"></view>
     <view class='footer' bindchange="toastHide" hidden="{{!status}}">
       <view class='way'  bindtap='quxiao' hidden="{{!status}}">
@@ -59,7 +59,7 @@
           <view class='wexinPayfor'>
               <image src='../../images/weixin@2x.png'></image>
               <view class='wexintext'>微信支付</view>
-              <radio class='check_box'value="wexinPayfor"></radio>
+              <radio class='check_box' value="wexinPayfor"></radio>
           </view>
           <view class='li'></view>
           <view class='wexinPayfor underLine'>
@@ -75,4 +75,4 @@
       <modal title="提示"  confirm-text="确认" cancel-text="取消"
     bindconfirm="xianxiaconfirm" bindcancel="xianxiacancel" >您已经选择线下支付方式，联系线下工作人员即可</modal>
   </view>
-</view>
+

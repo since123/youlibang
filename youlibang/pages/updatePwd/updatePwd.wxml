@@ -1,14 +1,35 @@
 <!--pages/updatePwd/updatePwd.wxml-->
-<form bindsubmit='formSubmitone' class="{{ 1 == formValue ? '' : 'form'}}">
+<form  class="{{ 1 == formValue ? '' : 'form'}}">
 <view class='yzcodeinput'>
-    <input type='text' placeholder='请设置密码' bindinput="entryPassword" name="password"></input>
+    <input type='password' placeholder='请设置密码' bindinput="entryPassword" name="password"></input>
     <view class='pwd'><image></image></view>
 </view>
+<view class='tishi'>注:密码由6~20位数字，字母(区分大小写)组成</view>
+<view class='over' bindtap="formSubmitone">完成</view>
+</form>
+
+<form  class="{{ 2 == formValue ? '' : 'form'}}">
+  <view class='yzcodeinput'>
+    <input type='password' placeholder='请输入旧密码' bindinput="entryoldPassword" name="oldpassword"></input>
+    <view class='pwd'><image></image></view>
+  </view>
+  <view class='yzcodeinput'>
+    <input type='password' placeholder='请输入新密码' bindinput="entrynewPassword" name="newpassword"></input>
+    <view class='pwd'><image></image></view>
+  </view>
 <view class='tishi'>注:密码由6~20位数字，字母(区分大小写)组成</view>
 <view class='over' bindtap="formSubmittwo">完成</view>
 </form>
 
-<form bindsubmit='formSubmittwo' class="{{2 == formValue ? '' : 'form'}}">
+<view hidden="{{createStatus}}">
+      <modal title="密码设置成功"  confirm-text="确认" cancel-text="取消"
+    bindconfirm="createconfirm"></modal>
+</view>
+<view hidden="{{editStatus}}">
+      <modal title="密码修改成功"  confirm-text="确认" cancel-text="取消"
+    bindconfirm="editconfirm"></modal>
+</view>
+<!-- <form bindsubmit='formSubmittwo' class="{{2 == formValue ? '' : 'form'}}">
 <view class='infotext'>短信验证码将发送至：132****7580</view>
 <view class='yzcodeinput'>
     <input type='text' placeholder='请输入验证码' bindinput='entryCode' name="code"></input>
@@ -21,4 +42,4 @@
 </view>
 <view class='tishi'>注:密码由6~20位数字，字母(区分大小写)组成</view>
 <view class='over'>完成</view>
-</form>
+</form> -->

@@ -301,6 +301,10 @@ margin-top: 30rpx;
   margin: auto;
   text-align: center;
 }
+.passwordFalse {
+  color: red;
+  font-size: 20rpx;
+}
 .ifPassword button{
   background-color: #F8F8F8;
   font-size: 25rpx;

@@ -28,7 +28,7 @@ Page({
     vipRules: [],
     grade: '1',
     vipid: wx.getStorageSync('vipid'),
-    payway: '',
+    payway: 'wexinPayfor',
     ifxianxia: true,
   },
   /**
@@ -265,11 +265,18 @@ Page({
  
   
   applyClick: function () {
+    let that = this
     var status = this.data.status;
+    console.log(this.data.payway)
+    if (this.data.payway == 'underLinePayfor') {
+      that.setData({
+        ifxianxia: false,
+      })
+    }
     // console.log("触发了点击事件，弹出toast")
     status = !status;
     this.setData({
-      status: status
+      status: status,
     })　　　　 //setData方法可以建立新的data属性，从而起到跟视图实时同步的效果
   },
 
@@ -359,11 +366,14 @@ Page({
   //选择支付方式
   payway(e) {
     let payway = e.detail.value
-    let ifxianxia = this.data.ifxianxia
     if (payway == 'underLinePayfor') {
-      ifxianxia = !ifxianxia
       this.setData({
-        ifxianxia: ifxianxia
+        ifxianxia: false,
+        status: false
+      })
+    } else {
+      this.setData({
+        ifxianxia: true
       })
     }
     this.setData({
@@ -383,23 +393,17 @@ Page({
   confirmPay: function () {
     if (this.data.payway == 'wexinPayfor') {
       this.confirmWeixinPay()
-    } else {
-      this.confirmXianxiaPay()
-    }
+    } 
   },
   //取消线下支付
   xianxiaconfirm: function () {
     this.setData({
-      ifxianxia: true
+      ifxianxia: true,
+      status: false
     })
   },
   //确认看到线下支付的回执
   xianxiacancel: function () {
-    this.setData({
-      ifxianxia: true
-    })
-  },
-  confirmXianxiaPay: function() {
     this.setData({
       ifxianxia: true,
       status: false

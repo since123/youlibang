@@ -15,12 +15,13 @@ Page({
     token: wx.getStorageSync('token'), //获取token进行验证并赋值
     username:'蜡笔小新',
     vipid:'0',
-    userImg_url:'../../images/headImg.png',
+    userImg_url:'',
     price:'0.00',
     encryptedData: wx.getStorageSync('encryptedData'),
     status: true,
     ifUser: true,
     ifPhone: true,
+    lineUrl: 'http://www.ylb.com'
   },
 
   /**
@@ -73,7 +74,9 @@ Page({
       let inform = {}
       inform.vipid = lists.id//会员ID
       inform.vipname = lists.nickname//昵称
-      inform.userImg_url = lists.avatar//头像
+      
+      let urlStr = lists.avatar.replace(/\\/g, '/')
+      inform.userImg_url = that.data.lineUrl + urlStr
       inform.price = Number(lists.can_rebate) + Number(lists.no_rebate) + Number(lists.user_money)//账户余额
       inform.usermoney = Number(lists.can_rebate) + Number(lists.user_money)//可提现全部余额
       inform.can_rebate = Number(lists.can_rebate)//可提现返利
@@ -81,9 +84,9 @@ Page({
       //inform.address = lists.address//地址
       inform.inviter_id = lists.inviter_id//邀请id
       inform.sex = lists.sex//性别
-      inform.card_one = lists.card_one//身份证正面
-      inform.card_two = lists.card_two//身份证反面
-      inform.license = lists.license//营业执照
+      inform.card_one = that.data.lineUrl + lists.card_one.replace(/\\/g, '/')//身份证正面
+      inform.card_two = that.data.lineUrl + lists.card_two.replace(/\\/g, '/')//身份证反面
+      inform.license = that.data.lineUrl + lists.license.replace(/\\/g, '/')//营业执照
       wx.setStorageSync('inform', inform)
      
       that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　

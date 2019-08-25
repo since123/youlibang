@@ -84,8 +84,8 @@
 				},
 				{
 					"id": 4,
-					"name": "pages/cashoutDetail/cashoutDetail",
-					"pathName": "pages/cashoutDetail/cashoutDetail",
+					"name": "pages/myOrder/myOrder",
+					"pathName": "pages/myOrder/myOrder",
 					"query": "",
 					"scene": null
 				},

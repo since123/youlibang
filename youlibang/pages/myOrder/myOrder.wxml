@@ -12,7 +12,7 @@
     <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
       <view class="container-0">
         <view class="order" wx:for="{{allOrderS}}" wx:key="{{item.orderid}}" wx:for-item="order">
-          <view class="orderNumber">订单编号：{{order.orderid}}</view>
+          <view class="orderNumber">订单编号：{{order.orderSn}}</view>
           <view class="orderStatus">{{order.status}}</view>
           <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow" data-orderid="{{order.orderid}}">
               <image src='{{item.image}}'></image>
@@ -45,7 +45,7 @@
     <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
       <view class="container-1">
         <view class="order" wx:for="{{waitPayOrder}}" wx:key="{{item.orderid}}" wx:for-item="order">
-          <view class="orderNumber">{{order.orderid}}</view>
+          <view class="orderNumber">{{order.orderSn}}</view>
           <view class="orderStatus">{{order.status}}</view>
           <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow">
               <image src='{{item.image}}'></image>
@@ -79,7 +79,7 @@
     <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
       <view class="container-2">
         <view class="order" wx:for="{{waitSentOrder}}" wx:key="{{item.orderid}}" wx:for-item="order">
-          <view class="orderNumber">{{order.orderid}}</view>
+          <view class="orderNumber">{{order.orderSn}}</view>
           <view class="orderStatus">{{order.status}}</view>
           <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow">
             <image src='{{item.image}}'></image>
@@ -113,7 +113,7 @@
     <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
       <view class="container-3">
         <view class="order" wx:for="{{waitReceivedOrder}}" wx:key="{{item.orderid}}" wx:for-item="order">
-          <view class="orderNumber">{{order.orderid}}</view>
+          <view class="orderNumber">{{order.orderSn}}</view>
           <view class="orderStatus">{{order.status}}</view>
           <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow">
               <image src='{{item.image}}'></image>
@@ -144,7 +144,7 @@
     <scroll-view class="hot-box" scroll-y="true" style="height: 100%;">
       <view class="container-4">
         <view class="order" wx:for="{{completeOrder}}" wx:key="{{item.orderid}}" wx:for-item="order">
-          <view class="orderNumber">{{order.orderid}}</view>
+          <view class="orderNumber">{{order.orderSn}}</view>
           <view class="orderStatus">{{order.status}}</view>
           <view class="orderList" wx:for="{{order.goods}}" wx:key="item.index" bindtap="orderDetailShow" data->
             <image src='{{item.image}}'></image>
@@ -179,6 +179,7 @@
   <view class="ifPassword" hidden="{{ifPassword}}">
     <view class="textPas">请输入密码</view>
     <input class="inputPas" bindinput="getpassword" type="password"></input>
+    <text class="passwordFalse" hidden="{{passwordFalse}}">密码错误请重新输入</text>
     <button class="buttonPas" bindtap="confirmPas">确认</button>
   </view>
   <view class='footer' bindchange="toastHide" hidden="{{payStatus}}">
@@ -188,18 +189,19 @@
         <view class='wexinPayfor'>
             <image src='../../images/weixin@2x.png'></image>
             <view class='wexintext'>微信支付</view>
-            <radio class='check_box' value="wexinPayfor"></radio>
+            <radio class='check_box' value="wxpay"></radio>
         </view>
         <view class='li'></view>
         <view class='wexinPayfor underLine'>
             <image src='../../images/wallet-copy@2x.png'></image>
             <view class='wexintext'>线下支付</view>
-            <radio class='check_box' value="underLinePayfor"></radio>
+            <radio class='check_box' value="xianxia"></radio>
         </view>
+           
         <view class='wexinPayfor qianbaoPayfor'>
             <image src='../../images/wallet-copy@2x.png'></image>
             <view class='wexintext'>钱包支付</view>
-            <radio class='check_box' value="qianbaoPayfor"></radio>
+            <radio class='check_box' value="qianbao"></radio>
         </view>
       </radio-group>
       <view class='btn' bindtap="selectPayWay">确认支付</view>
