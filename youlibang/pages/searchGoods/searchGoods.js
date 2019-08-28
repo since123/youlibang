@@ -18,7 +18,7 @@ Page({
        
 
       ],
-      history:[]
+      history:['不在乎','白','他']
   },
 
   /**
@@ -26,11 +26,12 @@ Page({
    */
   onLoad: function (options) {
     var history=wx.getStorageSync('search')
-    if(history){
-      this.setData({
-        history
-      })
+    if(history==''){
+       return false
     }
+    this.setData({
+      history
+    })
   },
 
   /**
@@ -123,7 +124,7 @@ Page({
          console.log(goods)
          this.setData({
            searchGoods: goods,
-           state: false,
+          //  state: false,
            status: true
          
          })

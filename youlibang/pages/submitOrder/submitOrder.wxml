@@ -73,5 +73,12 @@
   </radio-group>
 </view>
 <view class='btn' bindtap="confirm">确认支付</view>
+<view class="pwd" wx:if="{{state}}">
+  <icon class="clear" type="clear"size='14' bindtap='quxiao' hidden="{{!state}}"></icon>
+      <text class="top">请输入密码!!</text>
+      <view class="pwdyz"> 
+      <input maxlength="6"></input>
+      </view>
+</view>
 
 

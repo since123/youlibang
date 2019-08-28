@@ -35,7 +35,8 @@ Page({
       let nameList = []
       for (let m in lists) {
         let list = {}
-        image = lists[m].avatar
+        // let urlStr = lists[m].avatar.replace(/\\/g, '/')
+        // image = that.data.lineUrl + urlStr
         list.userName = lists[m].nickname
         list.income = Number(lists[m].no_cash)
         list.finishTime = util.formatTime(new Date(lists[m].confirm_time))
@@ -62,7 +63,7 @@ Page({
    */
   onLoad: function (options) {
     this.getTeamRebate()//获取后台数据
-    this.getTotalRebate()
+    //this.getTotalRebate()
   },
 
   /**

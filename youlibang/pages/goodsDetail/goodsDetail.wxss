@@ -45,7 +45,7 @@
   line-height: 36rpx;
   font-size: 36rpx;
   margin-top: 3%;
-  margin-left: 5%;
+  margin-left: 25%;
 }
 
 .money label {
@@ -394,8 +394,8 @@ height:52rpx;
 border: 2rpx solid #cccccc;
 border-radius: 3rpx;
 margin-top: 3%;
-margin-left: 20%;
 /* background-color: green; */
+position: relative;
 
 }
 /*加号和减号*/
@@ -404,8 +404,7 @@ margin-left: 20%;
 .stepper input {
 width: 90rpx;
 height: 26rpx;
-float: left;
-margin: 0 auto;
+/* float: left; */
 text-align: center;
 font-size: 24rpx;
 border-left: 1rpx solid #cccccc;
@@ -469,8 +468,10 @@ color: #ccc;
   margin-left: 5%;
 }
 .add{
-float: right;
- width: 48rpx;
+position: absolute;
+top:0;
+right: 0;
+ width: 50rpx;
  height:50rpx; 
 line-height: 48rpx;   
 background:rgba(243,242,248,1);
@@ -484,7 +485,6 @@ width: 48rpx;
 height:50rpx;
 line-height: 48rpx;
 background:rgba(243,242,248,1);
-margin: 0 auto;
 text-align: center;
 font-size: 12rpx;
 font-weight: lighter;

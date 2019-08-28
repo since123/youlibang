@@ -1,0 +1,4 @@
+<!--pages/location/location.wxml-->
+<button bindtap="currentsite">
+获取当前地址!
+</button>

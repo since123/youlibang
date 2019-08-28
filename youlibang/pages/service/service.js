@@ -22,6 +22,7 @@ Page({
       url: '../customerService/customerService',
     })
   },
+
   pay: function () {
     var ordercode = this.data.txtOrderCode;
     wx.login({

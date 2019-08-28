@@ -18,7 +18,8 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.7.1",
@@ -47,12 +48,8 @@
 			"currentL": -1,
 			"list": []
 		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
 		"miniprogram": {
-			"current": 1,
+			"current": 9,
 			"list": [
 				{
 					"id": 0,
@@ -63,20 +60,20 @@
 				},
 				{
 					"id": 1,
-					"name": "pages/retail_orderdetail/retail_orderdetail",
-					"pathName": "pages/retail_orderdetail/retail_orderdetail",
+					"name": "pages/applyVIP/applyVIP",
+					"pathName": "pages/applyVIP/applyVIP",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 2,
-					"name": "pages/applyRefund/applyRefund",
-					"pathName": "pages/applyRefund/applyRefund",
+					"name": "pages/personal_data/personal_data",
+					"pathName": "pages/personal_data/personal_data",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": 3,
+					"id": -1,
 					"name": "pages/index/index",
 					"pathName": "pages/index/index",
 					"query": "",
@@ -84,23 +81,43 @@
 				},
 				{
 					"id": 4,
-					"name": "pages/myOrder/myOrder",
-					"pathName": "pages/myOrder/myOrder",
+					"name": "pages/retailOrder/retailOrder",
+					"pathName": "pages/retailOrder/retailOrder",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": 5,
-					"name": "pages/updatePwd/updatePwd",
-					"pathName": "pages/updatePwd/updatePwd",
+					"id": -1,
+					"name": "pages/orderDetail/orderDetail",
+					"pathName": "pages/orderDetail/orderDetail",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 6,
-					"name": "pages/VIPcenter/VIPcenter",
-					"pathName": "pages/VIPcenter/VIPcenter",
+					"name": "pages/upgradeVIP/upgradeVIP",
+					"pathName": "pages/upgradeVIP/upgradeVIP",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/shoppingcart/shoppingcart",
+					"pathName": "pages/shoppingcart/shoppingcart",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/test/test",
+					"pathName": "pages/test/test",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/submitOrder/submitOrder",
+					"pathName": "pages/submitOrder/submitOrder",
 					"scene": null
 				}
 			]

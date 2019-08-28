@@ -31,13 +31,13 @@
 <view class='footer'>
   <view class='kefu' bindtap="tokefu">
     <view class='Img'>
-      <image src='../../images/kefu (2).png'></image>
+      <image src='../../images/smallKefu.png'></image>
     </view>
     <view class='texts'>客服</view>
   </view>
   <view class='kefu' bindtap="shopcar">
     <view class='Img'>
-      <image src='../../images/shoppCart (1)@2x.png'></image>
+      <image src='../../images/smallShopCart.png'></image>
     </view>
     <view class='texts'>购物车</view>
   </view>
@@ -62,13 +62,13 @@
 <!-- 包装 -->
         <view class='color'>{{goodsInfo[0].attr_name}}</view>
    <view class="colorfenlei" >
-      <view class="list{{(index+1)==idx?'active':''}}" wx:for='{{arr1}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getValue">{{item}}
+      <view class="list{{(index+1)==idx?'active':''}}" wx:for='{{arr1}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getValue" data-text="{{item}}">{{item}}
       </view>
   </view>
   <!-- 尺寸 -->
       <view class='color'>{{goodsInfo[1].attr_name}}</view>
    <view class="colorfenlei" >
-      <view class="list{{(index+1)==idex?'active':''}}" wx:for='{{arr2}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getVal">{{item}}
+      <view class="list{{(index+1)==idex?'active':''}}" wx:for='{{arr2}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getVal" data-text="{{item}}">{{item}}
       </view>
   </view>   
 </view>

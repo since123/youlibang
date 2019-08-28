@@ -62,7 +62,7 @@ Page({
   getValue(e) {
     console.log(e)
     var idx = e.currentTarget.dataset.index+1
-    var yd = e._relatedInfo.anchorTargetText
+    var yd = e.currentTarget.dataset.text
     this.setData({
       yd,
       idx
@@ -72,7 +72,7 @@ Page({
   getVal(e){
     console.log(e)
     var idex = e.currentTarget.dataset.index + 1
-    var wd = e._relatedInfo.anchorTargetText
+    var wd = e.currentTarget.dataset.text
     this.setData({
       wd,
       idex
@@ -93,7 +93,7 @@ Page({
   confirm(){
     var that = this
     //是否选择
-    if (this.data.yd == undefined || this.data.wd == undefined||this.data.num<=0){
+    if (this.data.num<=0){
       return false
     }
   console.log(this.data.yd,this.data.wd)
@@ -130,8 +130,7 @@ Page({
      console.log(arr)
     var data=arr
     console.log(data)
-    var info = JSON.stringify(data)
-    console.log(info)
+   // console.log(info)
     var bar=this.data.newarr
     console.log(bar)
 
@@ -165,7 +164,9 @@ Page({
         })
 
       } else if (this.data.state == 1) {
-        console.log("去到提交订单！")
+        data[0].cart_id = res.data.lists
+        var info = JSON.stringify(data)
+        console.log(info)
         wx.navigateTo({
           url: '../submitOrder/submitOrder?info=' + info,
         })
@@ -289,21 +290,24 @@ Page({
         productsList
       })
       var goodsInfo = productsList.attr
-      for(let i=0;i<goodsInfo.length;i++){
-       var data= goodsInfo[i].attr_values.split(",")
-        goodsInfo[i].attr_values=data
+      if(goodsInfo!=''){
+        for (let i = 0; i < goodsInfo.length; i++) {
+          var data = goodsInfo[i].attr_values.split(",")
+          goodsInfo[i].attr_values = data
+        }
+        var price = productsList.goods_price
+        console.log(goodsInfo)
+        var arr1 = goodsInfo[0].attr_values
+        var arr2 = goodsInfo[1].attr_values
+        this.setData({
+          goodsInfo,
+          arr1,
+          arr2,
+          price
+        })
+        console.log(this.data.arr1)
       }
-      var price = productsList.goods_price
-      console.log(goodsInfo)
-      var arr1 = goodsInfo[0].attr_values
-      var arr2 = goodsInfo[1].attr_values
-      this.setData({
-        goodsInfo,
-        arr1,
-        arr2,
-        price
-      })
-      console.log(this.data.arr1)
+     
     });
   },
 

@@ -1,8 +1,8 @@
 <!--pages/set/set.wxml-->
-  <view class='listInfo' bindtap='updatephone'>
+  <!-- <view class='listInfo' bindtap='updatephone'>
       <view class='text'>更改手机号</view>
       <view class='next'><image src='../../images/next@2x.png'></image></view>
-  </view>
+  </view> -->
   <view class='listInfo' bindtap='updatePwd'>
       <view class='text'>设置密码</view>
       <view class='next'><image src='../../images/next@2x.png'></image></view>

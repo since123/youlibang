@@ -27,6 +27,7 @@ App({
             method: 'GET',
             url: ApiUrl.phplist + 'index/gettoken?code=' + res.code,
           }).then((res) =>{
+            console.log(res)
             console.log(res.data.lists)
             if (res.data.lists.token != '' && res.data.lists.userid != '') {
               wx.setStorageSync('token', res.data.lists.token)

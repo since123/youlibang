@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
     "pages/mine/mine",
     "pages/shoppingcart/shoppingcart",
     "pages/service/service",
@@ -11,7 +10,6 @@
     "pages/orderDetail/orderDetail",
     "pages/submitOrder/submitOrder",
     "pages/searchGoods/searchGoods",
-    "pages/upgradeVIP/upgradeVIP",
     "pages/VIPcenter/VIPcenter",
     "pages/rebateDetail/rebateDetail",
     "pages/extension_QRcode/extension_QRcode",
@@ -33,12 +31,9 @@
     "pages/withdraw/withdraw",
     "pages/myOrder/myOrder",
     "pages/editAddress/editAddress",
-    "pages/test/test",
-    "pages/questionDetail/questionDetail",
-    "pages/searchDetail/searchDetail",
     "pages/retailOrder/retailOrder",
     "pages/rebeatWithdraw/rebeatWithdraw",
-    "pages/applyRefund/applyRefund"
+    "pages/location/location"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -79,7 +74,7 @@
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "请点击确定"
+      "desc": "你的信息将用于小程序位置接口的效果展示"
     }
   },
   "sitemapLocation": "sitemap.json"

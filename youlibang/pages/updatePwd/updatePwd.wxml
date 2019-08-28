@@ -22,12 +22,12 @@
 </form>
 
 <view hidden="{{createStatus}}">
-      <modal title="密码设置成功"  confirm-text="确认" cancel-text="取消"
-    bindconfirm="createconfirm"></modal>
+      <modal title="{{passwordMrssage}}"  confirm-text="确认" cancel-text="取消"
+    bindconfirm="createconfirm" bindcancel="createcancel"></modal>
 </view>
 <view hidden="{{editStatus}}">
       <modal title="密码修改成功"  confirm-text="确认" cancel-text="取消"
-    bindconfirm="editconfirm"></modal>
+    bindconfirm="editconfirm" bindcancel="editcancel"></modal>
 </view>
 <!-- <form bindsubmit='formSubmittwo' class="{{2 == formValue ? '' : 'form'}}">
 <view class='infotext'>短信验证码将发送至：132****7580</view>

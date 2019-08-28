@@ -75,7 +75,7 @@ Page({
           obj.price = dataList[i].goods_price
           obj.selected = true
           obj.way = '结算'
-          obj.cart_id = dataList[i].cate_id
+          obj.cart_id = dataList[i].id
           arr.push(obj)
         }
     

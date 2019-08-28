@@ -8,7 +8,7 @@
     <view class='right'>支出 ¥{{expendAmount}}</view>
   </view>
 </view>
-<view class='tips' wx:for='{{listinfo}}' wx:for-item='item'>
+<view class='tips' wx:for='{{listinfo}}' wx:for-item='item' wx:key="{{item.index}}">
   <view class='tips_left'>
     <view class='text'>{{item.text}}</view>
     <view class='tiems'>{{item.datetime}}</view>

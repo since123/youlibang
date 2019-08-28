@@ -14,11 +14,13 @@ Page({
    */
   data: {
     inform: wx.getStorageSync('inform'),
-    amount: wx.getStorageSync('inform').usermoney,
+    amount: wx.getStorageSync('inform').usermoney ? wx.getStorageSync('inform').usermoney : 0,
     someMoney: '请输入提现余额',
     token: '',
     describe: 'qianbao',
     ifNumber: true,
+    ifError: true,
+    errorMessage: '服务器错误'
   },
 
   /**
@@ -81,10 +83,25 @@ Page({
       },
       url: ApiUrl.phplist + 'member/memberCash?token=' + token + '&describe=' + this.data.describe + '&fee=' + this.data.someMoney + '&member_id=' + vipid,
     }).then((res) => {
-      console.log(res)
+      let errorMessage = res.data.msg;
+      if (errorMessage != '') {
+        that.setData({
+          ifError: false,
+          errorMessage: errorMessage
+        })
+      }
     })
   },
- 
+  errorconfirm: function () {
+    this.setData({
+      ifError: true,
+    })
+  },
+  errorcancel: function () {
+    this.setData({
+      ifError: true,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

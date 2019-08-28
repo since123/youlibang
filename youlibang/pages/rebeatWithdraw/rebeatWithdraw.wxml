@@ -10,8 +10,6 @@
 <view class='amount_text'>当前可提现的返利：{{amount}}元，<label bindtap="getAll">全部提现</label></view>
 </view>
 <view class='coomit' bindtap='withdrawal'>提现</view>
-<!-- <view class='mubu' bindtap='quxiao' hidden="{{!status}}"></view>
-<view class='footer' bindchange="toastHide" hidden="{{!status}}">
-  <view class='hands' bindtap='handsWithdraw'>手动提现</view>
-  <view class='hands' bindtap='allWithdraw'>自动提现</view>
-</view> -->
+<view hidden="{{ifError}}" confirm-text="确认" cancel-text="取消" >
+      <modal title="提示" bindconfirm="errorconfirm" bindcancel="errorcancel">{{errorMessage}}</modal>
+  </view>

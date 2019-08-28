@@ -24,7 +24,9 @@ Page({
     oldpassword: '',
     newpassword: '',
     createStatus: true,
-    editStatus: true
+    editStatus: true,
+    passwordMrssage: '',
+    editpasswordMrssage: ''
   },
 
   /**
@@ -71,11 +73,19 @@ Page({
         url: ApiUrl.phplist + 'member/createPsw?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid') + '&psw=' + that.data.passwordValue,
       }).then((res) => {
         console.log(res)
-        let passwordStatus = res.data.lists
-        if (Number(passwordStatus)) {
+        let passwordStatus = res.data.code
+        let passwordMrssage = res.data.msg
+        if (Number(passwordStatus) == 10001) {
           that.setData({
             passwordValue: '',
-            createStatus: false
+            createStatus: false,
+            passwordMrssage: '密码设置失败，服务器错误'
+          })
+        } else if (Number(passwordStatus) == 10000){
+          that.setData({
+            passwordValue: '',
+            createStatus: false,
+            passwordMrssage: '密码设置成功'
           })
         }
       })
@@ -83,6 +93,11 @@ Page({
   },
   //成功设置密码之后弹窗
   createconfirm: function() {
+    this.setData({
+      createStatus: true
+    })
+  }, 
+  createcancel: function() {
     this.setData({
       createStatus: true
     })
@@ -218,11 +233,19 @@ Page({
         url: ApiUrl.phplist + 'member/editpsw?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid') + '&psw_old=' + that.data.oldpassword + '&psw_new=' + that.data.newpassword,
       }).then((res) => {
         console.log(res)
-        let passwordStatus = res.data.lists
-        if (Number(passwordStatus)) {
+        let passwordStatus = res.data.code
+        let editpasswordMrssage = res.data.msg
+        if (Number(passwordStatus) == 10001) {
           that.setData({
             passwordValue: '',
-            editStatus: false
+            editStatus: false,
+            editpasswordMrssage: '密码修改失败，服务器错误'
+          })
+        } else if (Number(passwordStatus) == 10000) {
+          that.setData({
+            passwordValue: '',
+            editStatus: false,
+            editpasswordMrssage: '密码修改成功'
           })
         }
       })
@@ -230,6 +253,11 @@ Page({
   },
   //成功修改密码之后弹窗
   editconfirm: function() {
+    this.setData({
+      editStatus: true,
+    })
+  },
+  editcancel: function () {
     this.setData({
       editStatus: true,
     })

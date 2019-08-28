@@ -15,7 +15,8 @@ Page({
     accumulatedIncome: '0',
     token: wx.getStorageSync('token'),
     vipid: wx.getStorageSync('vipid'),
-    nameList: []
+    nameList: [],
+    lineUrl: 'https://wx.ylbtl.cn'
   },
   getAccumulatedIncome: function() {
     
@@ -39,7 +40,8 @@ Page({
       let nameList = []
       for (let m in lists) {
       let list = {}
-        image = lists[m].avatar
+        // let urlStr = lists[m].avatar.replace(/\\/g, '/')
+        // image = that.data.lineUrl + urlStr
         list.userName = lists[m].nickname
         list.income = Number(lists[m].no_cash)
         list.finishTime = util.formatTime(new Date(lists[m].confirm_time))

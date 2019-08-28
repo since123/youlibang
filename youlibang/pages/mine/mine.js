@@ -21,17 +21,18 @@ Page({
     status: true,
     ifUser: true,
     ifPhone: true,
-    lineUrl: 'http://www.ylb.com'
+    lineUrl: 'https://wx.ylbtl.cn'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getifAuthorize()
     let that = this
     if (wx.getStorageSync('token')) {
       //判断是否是会员
-      this.isMember()
+      that.isMember()
       console.log(wx.getStorageSync('vipid'))
       if (wx.getStorageSync('userInfo') == '' || wx.getStorageSync('encryptedData') == '') {
         this.setData({
@@ -88,7 +89,7 @@ Page({
       inform.card_two = that.data.lineUrl + lists.card_two.replace(/\\/g, '/')//身份证反面
       inform.license = that.data.lineUrl + lists.license.replace(/\\/g, '/')//营业执照
       wx.setStorageSync('inform', inform)
-     
+      console.log(wx.getStorageSync('inform'))
       that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
         vipid: inform.vipid,
         username: inform.vipname,
@@ -128,7 +129,7 @@ Page({
       wx.setStorageSync('inform', inform)
 
       that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
-        vipid: inform.userid,
+        vipid: 0,
         username: inform.username,
         userImg_url: inform.userImg_url,
         price: inform.price,
@@ -227,6 +228,31 @@ Page({
       url: '../coupon/coupon',
     })
   },
+  // /**
+  //  *检查是否授权
+  //  */
+  getifAuthorize: function () {
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          // console.log(res.authSetting['scope.userInfo'])
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+          wx.getUserInfo({
+            success: res => {
+              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+              // 所以此处加入 callback 以防止这种情况
+              if (this.userInfoReadyCallback) {
+                this.userInfoReadyCallback(res)
+              }
+            },
+            fail: function (res) { }
+          })
+        } else {
+        }
+      },
+      fail: function (res) { }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -274,7 +300,7 @@ Page({
 
   },
   bindGetUserInfo: function(e) {
-    // console.log(e.detail.userInfo)
+    console.log(e.detail.userInfo)
     //点击获取userInfo并缓存
     wx.setStorageSync('userInfo', e.detail.userInfo)
     this.setData({
@@ -292,12 +318,18 @@ Page({
    */
   saveUserInform: function () {
     let that = this
+    let userInfo = wx.getStorageSync('userInfo')
+    let nickname = userInfo.nickName
+    let gender = userInfo.gender
+    let language = userInfo.language
+    let city = userInfo.city
+    let country = userInfo.country
     httpReq({
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'index/usersave?mobile=' + wx.getStorageSync('encryptedData') + '&wx_info=' + wx.getStorageSync('userInfo') + '&token=' + wx.getStorageSync('token'),
+      url: ApiUrl.phplist + 'index/usersave?mobile=' + wx.getStorageSync('encryptedData') + '&nikcname='  + nickname + '&gender=' + gender + '&language=' + language + '&city=' + city + '&country=' + country  + '&token=' + wx.getStorageSync('token'),
     }).then((res) => {
       console.log(res)
     })
@@ -317,7 +349,7 @@ Page({
       let vipid = res.data.lists
       if (vipid) {
         wx.setStorageSync('vipid', vipid)
-        console.log(vipid)
+        console.log('您是会员')
       } else {
         wx.setStorageSync('vipid', 0)
         console.log('您不是会员')

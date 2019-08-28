@@ -75,4 +75,8 @@
       <modal title="提示"  confirm-text="确认" cancel-text="取消"
     bindconfirm="xianxiaconfirm" bindcancel="xianxiacancel" >您已经选择线下支付方式，联系线下工作人员即可</modal>
   </view>
+  <view hidden="{{ifError}}" confirm-text="确认" cancel-text="取消" >
+      <modal title="提示" bindconfirm="errorconfirm" bindcancel="errorcancel">{{errorMessage}}</modal>
+  </view>
+  
 

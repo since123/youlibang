@@ -280,7 +280,7 @@ margin-top: 30rpx;
 
 .ifPassword{
   width: 60%;
-  height: 200rpx;
+  height: 250rpx;
   background: #fff;
   position: fixed;
   z-index: 9999;
@@ -302,8 +302,14 @@ margin-top: 30rpx;
   text-align: center;
 }
 .passwordFalse {
+  display: block;
+  width: 80%;
   color: red;
   font-size: 20rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin: auto;
+  text-align: center;
 }
 .ifPassword button{
   background-color: #F8F8F8;

@@ -30,6 +30,8 @@ Page({
     vipid: wx.getStorageSync('vipid'),
     payway: 'wexinPayfor',
     ifxianxia: true,
+    ifError: true,
+    errorMessage: ''
   },
   /**
    * 分页
@@ -294,7 +296,13 @@ Page({
       url: ApiUrl.phplist + 'member/applymber?token=' + that.data.token + '&level=' + that.data.grade + '&inviter=' + that.data.inviterID,
       // url: ApiUrl.phplist + 'order/orderpay?pay_amount=' + this.data.amount,
     }).then((res) => {
-      console.log(res)
+      let errorMessage =  res.data.msg;
+      if (errorMessage != '') {
+        that.setData({
+          ifError: false,
+          errorMessage: errorMessage
+        })
+      }
       wx.requestPayment({
         timeStamp: res.data.lists.timeStamp,
         nonceStr: res.data.lists.nonceStr,
@@ -314,42 +322,23 @@ Page({
           that.setData({
             status: false
           })
-
         }
       })
-      // if (res.data.code == '1') {
-      //   that.setData({
-      //     payParams: res.data.data // 后端从微信得到的统一下单的参数
-      //   })
-      //   wx.showToast({
-      //     title: '充值成功',
-      //     icon: "success",
-      //     duration: 2000, //持续的时间
-      //   })
-      //   setTimeout(function () {
-      //     wx.navigateTo({
-      //       url: '../recharge/recharge',
-      //     })
-      //   }, 1000)  //定时函数确保状态显示之后再返回上一页
-      //   that.xcxPay(); // 拿到统一下单的参数后唤起微信支付页面
-      // }
+    })
+  },
+  errorconfirm: function() {
+    this.setData({
+      ifError: true,
+      status: false
+    })
+  },
+  errorcancel: function () {
+    this.setData({
+      ifError: true,
+      status: false
     })
   },
 
-// },
-  /**
-   * 立即申请
-   */
-//   applyClick:function() {
-//     判断是否有推荐id，
-//     if (金额小于10000) {
-//       不上传三张图片，只是调用支付借口，
-      
-//     }
-//     else {
-// 上传图片，调用支付接口
-//     }
-//   },
   //控制隐藏
   ifhidden: function() {
     ifhidden: true
@@ -386,7 +375,7 @@ Page({
     var status = this.data.status;
     status = !status;
     this.setData({
-      status: status
+      status: status,
     })
   },
   //确认支付

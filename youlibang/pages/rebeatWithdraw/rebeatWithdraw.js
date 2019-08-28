@@ -14,11 +14,13 @@ Page({
    */
   data: {
     inform: wx.getStorageSync('inform'),
-    amount: wx.getStorageSync('inform').usermoney,
+    amount: wx.getStorageSync('inform').can_rebate ? wx.getStorageSync('inform').can_rebate : 0,
     someMoney: '请输入提现余额',
     token: '',
     describe: 'fanli',
-    ifNumber: true
+    ifNumber: true,
+    ifError: true,
+    errorMessage: ''
   },
 
   /**
@@ -82,43 +84,25 @@ Page({
       },
       url: ApiUrl.phplist + 'member/memberCash?token=' + token + '&describe=' + this.data.describe + '&fee=' + this.data.someMoney + '&member_id=' + vipid,
     }).then((res) => {
-      console.log(res.data.msg)
+      let errorMessage = res.data.msg;
+      if (errorMessage != '') {
+        that.setData({
+          ifError: false,
+          errorMessage: errorMessage
+        })
+      }
     })
   },
-  // withdrawal:function(){
-  // var status = this.data.status;
-  // // console.log("触发了点击事件，弹出toast")
-  // status = !status;
-  // this.setData({
-  //   status: status
-  // })　　　　 //setData方法可以建立新的data属性，从而起到跟视图实时同步的效果
-
-  // },
-  // toastHide: function (event) {
-  //   // console.log("触发bindchange，隐藏toast")
-  //   status = true
-  //   this.setData({
-  //     status: status
-  //   })
-  // },
-  // quxiao: function () {
-  //   // console.log(1);
-  //   this.setData({
-  //     status: false
-  //   })
-  // },
-  //手动提现
-  // handsWithdraw:function(){
-  //   var that=this;
-  //   var openId=wx.getStorageSync('openId')
-  //   this.setData({
-  //     status: false
-  //   })
-  // },
-  //自动提现
-  // allWithdraw:function(){
-
-  // },
+  errorconfirm: function () {
+    this.setData({
+      ifError: true,
+    })
+  },
+  errorcancel: function () {
+    this.setData({
+      ifError: true,
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

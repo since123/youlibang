@@ -464,15 +464,15 @@ Page({
   //选择支付方式
   payway(e) {
     let payway = e.detail.value
-    let ifxianxia = this.data.ifxianxia
     if (payway == 'qianbao') {
       this.setData({
         ifPassword: false
       })
     } else if (payway == 'xianxia'){
       this.setData({
-        ifxianxia: ifxianxia,
-        ifPassword: true
+        ifxianxia: false,
+        ifPassword: true,
+        payStatus: true
       })
     } else if (payway == 'wxpay'){
       ifPassword: true
@@ -561,34 +561,29 @@ Page({
   },
   //线下付款
   confirmXianxiaPay: function() {
-    console.log(that.data.payway)
     this.setData({
-      ifxianxia: false
-    })
-    let that = this
-    httpReq({
-      header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      url: ApiUrl.phplist + 'member/confirmPsw?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid') + '&psw' + password + '&order_id=' + that.data.orderid + '&pay_type=' + that.data.payway,
-    }).then((res) => {
-      console.log(res)
-    })
-  },
-  //取消线下支付
-  xianxiaconfirm: function() {
-    this.setData({
-      ifxianxia: true
-    })
-  },
-  //确认看到线下支付的回执
-  xianxiacancel: function() {
-    this.setData({
-      ifxianxia: true
+      ifxianxia: false,
+      payStatus: true,
+      status: false
     })
   },
 
+  //取消线下支付
+  xianxiacancel: function () {
+    this.setData({
+      ifxianxia: true,
+      payStatus: true,
+      status: false
+    })
+  },
+  //确认看到线下支付的回执
+  xianxiaconfirm: function () {
+    this.setData({
+      ifxianxia: true,
+      payStatus: true,
+      status: false
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

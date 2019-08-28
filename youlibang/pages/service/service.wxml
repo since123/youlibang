@@ -7,7 +7,3 @@
     <image src='../../images/bohao@2x.png'></image>
     <view class='text'>人工客服</view>
 </view>
-<view class="container">
-    <input type="text" bindinput="getOrderCode" style="border:1px solid #ccc;"  />
-    <button bindtap="pay">立即支付</button>
-</view>

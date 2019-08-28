@@ -1,4 +1,6 @@
 // pages/submitOrder/submitOrder.js
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
+var qqmapsdk;
 import {
   ApiUrl
 } from '../../utils/apiurl.js';
@@ -17,13 +19,16 @@ Page({
     defAddress:[],
     cart_id:[],
     address_id:'',
-    status:true
+    state:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    qqmapsdk = new QQMapWX({
+      key: 'KXRBZ-VZARV-YUYPW-USY6I-A7FIF-3ZBT4'
+    });
     console.log(options)
     var total = 0
     var dataList=JSON.parse(options.info)
@@ -57,6 +62,14 @@ Page({
         way:"wxpay"
       })
   },
+  //密码栏点击关闭
+  quxiao(){
+     var state=this.data.state
+     state=!state
+     this.setData({
+       state
+     })
+  },
   //查看最近的经销商
   query(){
    var token=wx.getStorageSync('token') //token
@@ -66,12 +79,13 @@ Page({
       //将请求到的数据提交给后端
       var lon = res.longitude
       var lat = res.latitude
+      var member_id=wx.getStorageSync('vipid')
       httpReq({
         header: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        url: ApiUrl.phplist + 'member/deliverAddress?token='+token+'&lon='+lon+'&lat='+lat,
+        url: ApiUrl.phplist + 'member/deliverAddress?token='+token+'&lon='+lon+'&lat='+lat+'&member_id='+member_id,
       }).then((res) => {
        console.log(res)
       });
@@ -154,7 +168,7 @@ Page({
     if(describe==undefined){
       describe=''
     }
-    console.log(cart_id)
+    console.log(token)
    // console.log(describe, dataList, total)
     //判断支付方式
     if(way=="wxpay"){
@@ -166,10 +180,10 @@ Page({
           'Accept': 'application/json'
         },
         method:'POST',
-        data: { token, member_id, address_id, or_remark: describe, pay_type: way, cart_id:[32,34]},
-        url: ApiUrl.phplist+'order/goodsPay',
+        data: { token, member_id, address_id, or_remark: describe, pay_type: way, cart_id},
+        url: ApiUrl.phplist+'order/goodsPay',      //线上
+        // url:'http://www.ylb.com/api/order/goodsPay'   //线下
       }).then((res) => {
-          console.log(res)
         var timeStamp = res.data.lists.timeStamp
         var nonceStr = res.data.lists.nonceStr
         var pack = res.data.lists.package
@@ -190,7 +204,7 @@ Page({
                       paySign: paySign,
                       success: function (res) {
                         // success
-                        console.log(res);
+                        
                       },
                       fail: function (res) {
                         // fail
@@ -209,6 +223,11 @@ Page({
           }
       })
     }else{
+      var state=this.data.state
+      state=!state
+      this.setData({
+        state
+      })
        //从本地存储中将余额拿出来
       //采用钱包余额支付
       try {

@@ -91,6 +91,7 @@ Page({
         'Accept': 'application/json'
       },
       url: ApiUrl.phplist+'goods/index'
+      // url:'http://www.ylb.com/api/goods/index'
     }).then((res) => {
       console.log(res)
           this.setData({
