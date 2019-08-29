@@ -283,7 +283,7 @@ Page({
   },
 
   /**
-   * 修改成功，返回后台数据
+   * 微信付款成功，返回后台数据
    */
   confirmWeixinPay() {
     var that = this;
@@ -326,7 +326,7 @@ Page({
       })
     })
   },
-  errorconfirm: function() {
+  errorconfirm: function () {
     this.setData({
       ifError: true,
       status: false

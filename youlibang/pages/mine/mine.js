@@ -18,6 +18,7 @@ Page({
     userImg_url:'',
     price:'0.00',
     encryptedData: wx.getStorageSync('encryptedData'),
+    iv: wx.getStorageSync('iv'),
     status: true,
     ifUser: true,
     ifPhone: true,
@@ -49,6 +50,7 @@ Page({
         console.log('都授权成功')
         //获取权限成功后存储用户信息。
         this.saveUserInform()
+        this.savePhonenum()
         if (Number(wx.getStorageSync('vipid')) != 0) {
           that.getVipUserInfo()
         } else if (Number(wx.getStorageSync('vipid')) == 0) {
@@ -78,12 +80,15 @@ Page({
       
       let urlStr = lists.avatar.replace(/\\/g, '/')
       inform.userImg_url = that.data.lineUrl + urlStr
-      inform.price = Number(lists.can_rebate) + Number(lists.no_rebate) + Number(lists.user_money)//账户余额
-      inform.usermoney = Number(lists.can_rebate) + Number(lists.user_money)//可提现全部余额
-      inform.can_rebate = Number(lists.can_rebate)//可提现返利
+      let price = Number(lists.can_rebate) + Number(lists.no_rebate) + Number(lists.user_money)
+      inform.price = !price ? 0 : price
+      let usermoney = Number(lists.can_rebate) + Number(lists.user_money)//可提现全部余额
+      inform.usermoney = !usermoney ? 0 : usermoney
+      let can_rebate = Number(lists.can_rebate)//可提现返利
+      inform.can_rebate = !can_rebate ? 0 : can_rebate
       inform.mobile = lists.phone//电话号码
-      //inform.address = lists.address//地址
-      inform.inviter_id = lists.inviter_id//邀请id
+      inform.address = lists.address//地址
+      inform.inviter_id = !lists.inviter_id ? 0 : lists.inviter_id//邀请id
       inform.sex = lists.sex//性别
       inform.card_one = that.data.lineUrl + lists.card_one.replace(/\\/g, '/')//身份证正面
       inform.card_two = that.data.lineUrl + lists.card_two.replace(/\\/g, '/')//身份证反面
@@ -115,17 +120,18 @@ Page({
       let inform = {}
       inform.userid = lists.id//普通用户ID
       inform.username = lists.nickname//昵称
-      inform.userImg_url = lists.avatar//头像
-      inform.price = Number(lists.can_rebate) + Number(lists.no_rebate) + Number(lists.user_money)//账户余额
-      inform.usermoney = Number(lists.can_rebate) + Number(lists.user_money)//可提现全部余额
-      inform.can_rebate = Number(lists.can_rebate)//可提现返利
+      let urlStr = lists.avatar.replace(/\\/g, '/')
+      inform.userImg_url = that.data.lineUrl + urlStr//头像
+      let price = Number(lists.can_rebate) + Number(lists.no_rebate) + Number(lists.user_money)//账户余额
+      inform.price = !price ? 0 : price
+      let usermoney = Number(lists.can_rebate) + Number(lists.user_money)//可提现全部余额
+      inform.usermoney = !usermoney ? 0 : usermoney
+      let can_rebate = Number(lists.can_rebate)//可提现返利
+      inform.can_rebate = !can_rebate ? 0 : can_rebate
       inform.mobile = lists.mobile//电话号码
       inform.address = lists.address//地址
-      inform.inviter_id = lists.inviter_id//邀请id
+      inform.inviter_id = !lists.inviter_id ? 0 : lists.inviter_id //邀请id
       inform.sex = lists.sex//性别
-      inform.card_one = lists.card_one//身份证正面
-      inform.card_two = lists.card_two//身份证反面
-      inform.license = lists.license//营业执照
       wx.setStorageSync('inform', inform)
 
       that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
@@ -309,8 +315,10 @@ Page({
     })
   },
   getPhoneNumber: function (e) {
+    console.log(e)
     let that = this
     wx.setStorageSync('encryptedData', e.detail.encryptedData)
+    wx.setStorageSync('iv', e.detail.iv)
     that.onLoad()
   },
   /**
@@ -329,7 +337,19 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'index/usersave?mobile=' + wx.getStorageSync('encryptedData') + '&nikcname='  + nickname + '&gender=' + gender + '&language=' + language + '&city=' + city + '&country=' + country  + '&token=' + wx.getStorageSync('token'),
+      url: ApiUrl.phplist + 'index/usersave?nikcname='  + nickname + '&gender=' + gender + '&language=' + language + '&city=' + city + '&country=' + country  + '&token=' + wx.getStorageSync('token'),
+    }).then((res) => {
+      console.log(res)
+    })
+  },
+  //存手机号
+  savePhonenum() {
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'index/getPhone?encryptedData=' + wx.getStorageSync('encryptedData') + '&iv=' + wx.getStorageSync('iv') +  '&token=' + wx.getStorageSync('token'),
     }).then((res) => {
       console.log(res)
     })

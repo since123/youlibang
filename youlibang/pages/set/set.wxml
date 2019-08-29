@@ -10,5 +10,5 @@
   <view class='Logout' bindtap='logout'>退出登录</view>
   <view>
     <modal title="提示" hidden="{{modalHidden}}" confirm-text="是" cancel-text="否"
-  bindconfirm="modalBindaconfirm" bindcancel="modalBindcancel" >确定要退出？</modal>
+  bindconfirm="modalBindaconfirm" bindcancel="modalBindcancel" >确定退出？退出登陆后点击右上角回到微信</modal>
   </view>

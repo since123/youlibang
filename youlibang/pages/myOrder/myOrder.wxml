@@ -183,7 +183,7 @@
     <button class="buttonPas" bindtap="confirmPas">确认</button>
   </view>
   <view class='footer' bindchange="toastHide" hidden="{{payStatus}}">
-    <view class='way'  bindtap='quxiao' hidden="{{payStatus}}">
+    <view class='way'  hidden="{{payStatus}}">
       <view class='payforWay'><label>支付方式</label></view>
       <radio-group bindchange="payway">
         <view class='wexinPayfor'>

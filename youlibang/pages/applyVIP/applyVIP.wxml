@@ -53,7 +53,7 @@
 </view>
   <view class="mubu" bindtap="cancelPay" hidden="{{!status}}"></view>
     <view class='footer' bindchange="toastHide" hidden="{{!status}}">
-      <view class='way'  bindtap='quxiao' hidden="{{!status}}">
+      <view class='way'  hidden="{{!status}}">
         <view class='payforWay'><label>支付方式</label></view>
         <radio-group bindchange="payway">
           <view class='wexinPayfor'>
