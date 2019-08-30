@@ -48,9 +48,6 @@ Page({
         })
         //判断vipid并缓存
         console.log('都授权成功')
-        //获取权限成功后存储用户信息。
-        this.saveUserInform()
-        this.savePhonenum()
         if (Number(wx.getStorageSync('vipid')) != 0) {
           that.getVipUserInfo()
         } else if (Number(wx.getStorageSync('vipid')) == 0) {
@@ -65,6 +62,7 @@ Page({
   /**是会员时，后台返回数据，展示会员信息信息 */
   getVipUserInfo: function() {
     let that = this
+    let wxavatar = wx.getStorageSync('userInfo').avatarUrl
     httpReq({
       header: {
         'Content-Type': 'application/json',
@@ -77,22 +75,45 @@ Page({
       let inform = {}
       inform.vipid = lists.id//会员ID
       inform.vipname = lists.nickname//昵称
-      
-      let urlStr = lists.avatar.replace(/\\/g, '/')
-      inform.userImg_url = that.data.lineUrl + urlStr
+      if (lists.avatar == null) {
+        inform.userImg_url = wxavatar
+      } else {
+        if (lists.avatar != wxavatar) {
+          inform.userImg_url = that.data.lineUrl + lists.avatar.replace(/\\/g, '/')
+          console.log(inform.userImg_url)
+        }else{
+          inform.userImg_url = lists.avatar//头像
+        }
+      }
+      //inform.userImg_url = that.data.lineUrl + urlStr
       let price = Number(lists.can_rebate) + Number(lists.no_rebate) + Number(lists.user_money)
+      console.log(price)
       inform.price = !price ? 0 : price
+      console.log(Number(lists.can_rebate) + Number(lists.user_money))
       let usermoney = Number(lists.can_rebate) + Number(lists.user_money)//可提现全部余额
+      console.log(usermoney)
       inform.usermoney = !usermoney ? 0 : usermoney
+      console.log(inform.usermoney)
       let can_rebate = Number(lists.can_rebate)//可提现返利
       inform.can_rebate = !can_rebate ? 0 : can_rebate
       inform.mobile = lists.phone//电话号码
-      inform.address = lists.address//地址
       inform.inviter_id = !lists.inviter_id ? 0 : lists.inviter_id//邀请id
       inform.sex = lists.sex//性别
-      inform.card_one = that.data.lineUrl + lists.card_one.replace(/\\/g, '/')//身份证正面
-      inform.card_two = that.data.lineUrl + lists.card_two.replace(/\\/g, '/')//身份证反面
-      inform.license = that.data.lineUrl + lists.license.replace(/\\/g, '/')//营业执照
+      if (lists.card_one == null) {
+        inform.card_one = ''
+      }else {
+        inform.card_one = that.data.lineUrl + lists.card_one.replace(/\\/g, '/')//身份证正面
+      }
+      if (lists.card_two == null){
+        inform.card_two = ''
+      }else {
+        inform.card_two = that.data.lineUrl + lists.card_two.replace(/\\/g, '/')//身份证反面
+      }
+      if (lists.license == null){
+        inform.license == ''
+      }else{
+        inform.license = that.data.lineUrl + lists.license.replace(/\\/g, '/')//营业执照
+      }
       wx.setStorageSync('inform', inform)
       console.log(wx.getStorageSync('inform'))
       that.setData({ //如果在sucess直接写this就变成了wx.request()的this了.必须为getdata函数的this,不然无法重置调用函数 　　　　
@@ -108,6 +129,7 @@ Page({
    */
   getPersonalInfo:function() {
     let that = this
+    let wxavatar = wx.getStorageSync('userInfo').avatarUrl
     httpReq({
       header: {
         'Content-Type': 'application/json',
@@ -120,16 +142,26 @@ Page({
       let inform = {}
       inform.userid = lists.id//普通用户ID
       inform.username = lists.nickname//昵称
-      let urlStr = lists.avatar.replace(/\\/g, '/')
-      inform.userImg_url = that.data.lineUrl + urlStr//头像
-      let price = Number(lists.can_rebate) + Number(lists.no_rebate) + Number(lists.user_money)//账户余额
-      inform.price = !price ? 0 : price
-      let usermoney = Number(lists.can_rebate) + Number(lists.user_money)//可提现全部余额
-      inform.usermoney = !usermoney ? 0 : usermoney
-      let can_rebate = Number(lists.can_rebate)//可提现返利
-      inform.can_rebate = !can_rebate ? 0 : can_rebate
+      
+      if (lists.avatar == null) {
+        inform.userImg_url = wxavatar
+      } else {
+        if (lists.avatar != wxavatar) {
+          inform.userImg_url = that.data.lineUrl + lists.avatar.replace(/\\/g, '/')
+          console.log(inform.userImg_url)
+        } else {
+          inform.userImg_url = lists.avatar//头像
+        }
+      }
+      // inform.userImg_url = that.data.lineUrl + urlStr//头像
+      //let price = Number(lists.can_rebate) + Number(lists.no_rebate) + Number(lists.user_money)//账户余额
+      //inform.price = !price ? 0 : price
+      //let usermoney = Number(lists.can_rebate) + Number(lists.user_money)//可提现全部余额
+      //inform.usermoney = !usermoney ? 0 : usermoney
+      //let can_rebate = Number(lists.can_rebate)//可提现返利
+      //inform.can_rebate = !can_rebate ? 0 : can_rebate
       inform.mobile = lists.mobile//电话号码
-      inform.address = lists.address//地址
+      console.log(inform.wxaddress)
       inform.inviter_id = !lists.inviter_id ? 0 : lists.inviter_id //邀请id
       inform.sex = lists.sex//性别
       wx.setStorageSync('inform', inform)
@@ -138,7 +170,6 @@ Page({
         vipid: 0,
         username: inform.username,
         userImg_url: inform.userImg_url,
-        price: inform.price,
       })
     })
   },
@@ -307,8 +338,13 @@ Page({
   },
   bindGetUserInfo: function(e) {
     console.log(e.detail.userInfo)
+    if (e.detail.userInfo == undefined) {
+      return;
+    }
     //点击获取userInfo并缓存
     wx.setStorageSync('userInfo', e.detail.userInfo)
+    //存储用户信息。
+    this.saveUserInform()
     this.setData({
       ifPhone: false,
       ifUser: true
@@ -317,8 +353,15 @@ Page({
   getPhoneNumber: function (e) {
     console.log(e)
     let that = this
+    //用户取消手机授权直接返回
+    if (e.detail.iv == undefined && e.detail.encryptedData == undefined) {
+      return;
+    }
+
     wx.setStorageSync('encryptedData', e.detail.encryptedData)
     wx.setStorageSync('iv', e.detail.iv)
+    //存储电话
+    this.savePhonenum()
     that.onLoad()
   },
   /**
@@ -327,7 +370,9 @@ Page({
   saveUserInform: function () {
     let that = this
     let userInfo = wx.getStorageSync('userInfo')
+    let avatar = userInfo.avatarUrl
     let nickname = userInfo.nickName
+    console.log(nickname)
     let gender = userInfo.gender
     let language = userInfo.language
     let city = userInfo.city
@@ -337,19 +382,39 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'index/usersave?nikcname='  + nickname + '&gender=' + gender + '&language=' + language + '&city=' + city + '&country=' + country  + '&token=' + wx.getStorageSync('token'),
+      method: 'POST',
+      data: {
+        avatar: avatar,
+        nickname: nickname,
+        gender: gender,
+        language: language,
+        city: city,
+        country: country,
+        token: wx.getStorageSync('token'),
+      },
+      url: ApiUrl.phplist + 'index/usersave',
     }).then((res) => {
       console.log(res)
     })
   },
   //存手机号
   savePhonenum() {
+    console.log(wx.getStorageSync('token'))
+    console.log(wx.getStorageSync('encryptedData'))
+    console.log(wx.getStorageSync('iv'))
     httpReq({
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'index/getPhone?encryptedData=' + wx.getStorageSync('encryptedData') + '&iv=' + wx.getStorageSync('iv') +  '&token=' + wx.getStorageSync('token'),
+      method: "POST",
+      data: {
+        encryptedData: wx.getStorageSync('encryptedData'),
+        iv: wx.getStorageSync('iv'),
+        token: wx.getStorageSync('token')
+      },
+      url: ApiUrl.phplist + 'index/getPhone',
+      // url: ApiUrl.phplist + 'index/getPhone?encryptedData=' + 'no8yU8PAgWhUVTVJF7jZGspc7h8Hpo9J3NgGF2QZMxqLB4EkP3Z29cY3lcQp0tJGtkaO5+k3OG5t0AISLR/lm02zAw6P+PCuJOHRQu35ODDevIPZTt1xzXk+izOmybYgjv1QirQuqSRsQ7kG+V39SYO1bY+At2kFDmM+DxazWzhU2nFFq34hibjVcP7MPW+ZlNsZckxrAqjmuoOxPJ+a1Q==' + '&iv=' + 'VSB1NPZ/OR+3wsnhjzEnQA==' + '&token=' + 'ffcf7f06d93c41d5f9ce11389ad0052f1da617c8',
     }).then((res) => {
       console.log(res)
     })

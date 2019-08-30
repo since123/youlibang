@@ -55,7 +55,7 @@ Page({
    * 得到全部余额
    */
   getAll: function() {
-    let amount = this.data.inform.usermoney
+    let amount = this.data.amount
     this.setData({
       someMoney: amount,
     })
@@ -69,7 +69,6 @@ Page({
     let vipid = wx.getStorageSync('vipid')
     if (!util.isNumber(this.data.someMoney) || this.data.someMoney <=0) {
       that.setData({ifNumber:false})
-      console.log('不是数字')
       return false
     }
     let token = wx.getStorageSync('token')

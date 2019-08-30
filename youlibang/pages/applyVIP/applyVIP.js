@@ -31,7 +31,8 @@ Page({
     payway: 'wexinPayfor',
     ifxianxia: true,
     ifError: true,
-    errorMessage: ''
+    errorMessage: '',
+    ifReadyonly: ''
   },
   /**
    * 分页
@@ -65,16 +66,18 @@ Page({
         'Accept': 'application/json'
       },
     }).then((res) => {
+      console.log(res)
       let VIPList = res.data.lists.act
       let inviterID = res.data.lists.inviter_id
-      if (inviterID == 0) {
+      if (inviterID) {
         that.setData({
-          inviterID: inviterID
-        })
-        console.log('没有邀请id,可输入朋友的也可不输入')
-      } else {
-        that.setData({
+          inviterID: inviterID,
           ifReadyonly: readonly
+        })
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: '没有邀请id,可输入朋友的也可不输入',
         })
       }
       let vipRules = []
@@ -83,7 +86,8 @@ Page({
         let vipInform = {}
         let active = []
         vipInform.userGrade = VIPList[m].lev_name
-        vipInform.rechargeMoney = parseInt(VIPList[m].level_amount) 
+        vipInform.rechargeMoney = parseFloat(VIPList[m].level_amount)
+        vipInform.viplevel = VIPList[m].m_level
         for (let n in VIPList[m].reward) {
           let activeInfirm = {}
           activeInfirm.preferentialInfo = VIPList[m].reward[n].activity_v
@@ -113,10 +117,9 @@ Page({
    */
   chooseGrade: function(e) {
     let current = e.currentTarget.dataset.current //当前页面某个等级的index
-    let pageIndex = this.data.pageIndex //当前页面的index
-    let size = this.data.pageSize //每页数据量
-    let grade = size * pageIndex + 1 + current //等级
-    console.log(grade)
+    let grade = e.currentTarget.dataset.viplevel //等级
+    console.log(e)
+    console.log(e.currentTarget.dataset.viplevel)
     this.setData({
       currentIndex: current,
       grade: grade
@@ -296,6 +299,7 @@ Page({
       url: ApiUrl.phplist + 'member/applymber?token=' + that.data.token + '&level=' + that.data.grade + '&inviter=' + that.data.inviterID,
       // url: ApiUrl.phplist + 'order/orderpay?pay_amount=' + this.data.amount,
     }).then((res) => {
+      console.log(res)
       let errorMessage =  res.data.msg;
       if (errorMessage != '') {
         that.setData({

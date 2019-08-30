@@ -92,13 +92,20 @@ Page({
       },
     }).then((res) => {
       console.log(res)
-      //取到数据后赋值可提现佣金，已提现返利，未提现返利
-      let lists = res.data.lists
-      that.setData({
-        dedCommission: Number(lists.can_rebat),//可提现佣金
-        propRebate: Number(lists.cach_total),//已提现返利
-        unpaidRebate: Number(lists.can_rebat) + Number(lists.no_cash)//未提现返利
-      })
+      if (res.data.code == 10001) {
+        wx.showModal({
+          title: '提示',
+          content: res.data.msg,
+        })
+      } else {
+        //取到数据后赋值可提现佣金，已提现返利，未提现返利
+        let lists = res.data.lists
+        that.setData({
+          dedCommission: Number(lists.can_rebat),//可提现佣金
+          propRebate: Number(lists.cach_total),//已提现返利
+          unpaidRebate: Number(lists.can_rebat) + Number(lists.no_cash)//未提现返利
+        })
+      }
     })
   },
   /**

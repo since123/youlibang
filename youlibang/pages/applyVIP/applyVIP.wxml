@@ -12,7 +12,7 @@
       <block wx:for="{{vipRules}}" wx:key="{{item.index}}" >
       <swiper-item>
       <view wx:for="{{vipRules[index]}}" wx:key="{{item.index}}" wx:for-item="rules">
-        <view bindtap="chooseGrade" data-current="{{index}}">
+        <view bindtap="chooseGrade" data-current="{{index}}" data-viplevel="{{rules.viplevel}}">
           <view class='mindiv' style="{{index == currentIndex?'border-color:red':'border-color:gray'}}">
               <view class='viptext'>{{rules.userGrade}}</view>
               <view class='money'><label>￥</label>{{rules.rechargeMoney}}</view>

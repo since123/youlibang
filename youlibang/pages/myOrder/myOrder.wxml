@@ -179,7 +179,6 @@
   <view class="ifPassword" hidden="{{ifPassword}}">
     <view class="textPas">请输入密码</view>
     <input class="inputPas" bindinput="getpassword" type="password"></input>
-    <text class="passwordFalse" hidden="{{passwordFalse}}">密码错误请重新输入</text>
     <button class="buttonPas" bindtap="confirmPas">确认</button>
   </view>
   <view class='footer' bindchange="toastHide" hidden="{{payStatus}}">

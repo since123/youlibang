@@ -13,7 +13,7 @@ Page({
   data: {
     vipid: '',
     src: '',
-    vipname:'',
+    name:'',
     bindphone:'',
     sex:'',
     address:'',
@@ -38,9 +38,10 @@ Page({
   getPersonalInfo() {
     var that = this;
     let inform = wx.getStorageSync('inform')
-    console.log(inform)
+    let sex = wx.getStorageSync('userInfo').gender
+    console.log(sex)
     //性别 0：未知、1：男、2：女
-    switch (Number(inform.sex)) {
+    switch (Number(sex)) {
       case 0:
         that.setData({
           sex: '未知'
@@ -61,25 +62,25 @@ Page({
     if (inform.vipid) {
       that.setData({
         src: inform.userImg_url,
-        vipname: inform.vipname,
+        name: inform.vipname,
         bindphone: inform.mobile,
-        //address: inform.address,
+        address: wx.getStorageSync('userInfo').country + wx.getStorageSync('userInfo').province,
         tuijianID: Number(inform.inviter_id),
         idCard1: inform.card_one,
         idCard2: inform.card_two,
         businesslicense: inform.license,
       })
-    } else if (inform.userid) {
+    } else {
       //普通用户信息
       that.setData({
         src: inform.userImg_url,
-        vipname: inform.username,
+        name: inform.username,
         bindphone: inform.mobile,
-        address: inform.address,
+        address: wx.getStorageSync('userInfo').country + wx.getStorageSync('userInfo').province,
         tuijianID: Number(inform.inviter_id),
-        idCard1: inform.card_one,
-        idCard2: inform.card_two,
-        businesslicense: inform.license,
+        // idCard1: inform.card_one,
+        // idCard2: inform.card_two,
+        // businesslicense: inform.license,
       })
     }
   },
@@ -99,7 +100,6 @@ Page({
         that.setData({
           src: tempFilePaths[0]
         })
-        // console.log(that.data.frontID)
         wx.uploadFile({
           url: ApiUrl.phplist + 'member/avaup?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid'),
           filePath: that.data.src,
@@ -120,9 +120,9 @@ Page({
    */
   getVipNameValue: function(e) {
     this.setData({
-      vipname: e.detail.value
+      name: e.detail.value
     })
-    console.log(this.data.vipname)
+    console.log(this.data.name)
   },
   getSexValue: function(e) {
     this.setData({

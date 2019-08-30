@@ -74,16 +74,16 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'test/cszhifu?payAmount=' + this.data.amount + '&paydesc=' + this.data.body + '&token=' + token,
+      url: ApiUrl.phplist + 'order/memberPay?pay_amount=' + this.data.amount + '&body=' + this.data.body + '&token=' + token + '&member_id=' + wx.getStorageSync('vipid') ,
       // url: ApiUrl.phplist + 'order/orderpay?pay_amount=' + this.data.amount,
     }).then((res) => {
       console.log(res)
       wx.requestPayment({
-        timeStamp: res.data.code.timeStamp,
-        nonceStr: res.data.code.nonceStr,
-        package: res.data.code.package,
+        timeStamp: res.data.lists.timeStamp,
+        nonceStr: res.data.lists.nonceStr,
+        package: res.data.lists.package,
         signType: 'MD5',
-        paySign: res.data.code.paySign,
+        paySign: res.data.lists.paySign,
         success: function (res) {
           // success
           console.log(res);
@@ -100,32 +100,20 @@ Page({
           
         }
       })
-      // if (res.data.code == '1') {
-      //   that.setData({
-      //     payParams: res.data.data // 后端从微信得到的统一下单的参数
-      //   })
-      //   wx.showToast({
-      //     title: '充值成功',
-      //     icon: "success",
-      //     duration: 2000, //持续的时间
-      //   })
-      //   setTimeout(function () {
-      //     wx.navigateTo({
-      //       url: '../recharge/recharge',
-      //     })
-      //   }, 1000)  //定时函数确保状态显示之后再返回上一页
-      //   that.xcxPay(); // 拿到统一下单的参数后唤起微信支付页面
-      // }
     })
   },
   /**
    * 通过线下支付
    */
   confirmXianxiaPay : function() {
-    console.log('通过线下支付')
+    wx.showModal({
+      title: '提示',
+      content: '线下联系工作人员完成线下支付',
+    })
+    this.setData({
+      status: false
+    })
   },
-  
-
   payway(e) {
     let payway = e.detail.value
     this.setData({

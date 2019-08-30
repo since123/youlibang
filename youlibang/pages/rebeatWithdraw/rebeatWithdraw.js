@@ -55,7 +55,7 @@ Page({
    * 得到全部余额
    */
   getAll: function () {
-    let amount = this.data.inform.usermoney
+    let amount = this.data.amount
     this.setData({
       someMoney: amount,
     })

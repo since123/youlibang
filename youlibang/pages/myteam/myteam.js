@@ -59,9 +59,9 @@ Page({
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        url: ApiUrl.phplist + 'distribution/myteam?token=' + token + '&level=' + this.data.currentGrade + '&member_id=' + wx.getStorageSync('vipid'),
+        url: ApiUrl.phplist + 'distribution/myteam?token=' + token + '&level=' + that.data.currentGrade + '&member_id=' + wx.getStorageSync('vipid'),
       }).then((res) => {
-        console.log(res.data)
+        console.log(res)
         let lists = res.data.lists
         let teamInfor = []
         for (let m in lists) {

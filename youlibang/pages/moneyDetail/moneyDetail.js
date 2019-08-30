@@ -42,14 +42,19 @@ Page({
   getMoneyDetail() {
     let that = this
     //转换成时间戳
-    let nowDate = new Date(this.data.date).getTime() / 1000
-   // console.log(util.formatTime(new Date(nowDate*1000)))
+    let date = new Date(new Date().toLocaleDateString()).getTime()
+    console.log(date)
+    let nowDate = date / 1000
+    console.log(nowDate)
+    console.log(that.data.vipid)
+    console.log(that.data.token)
+    console.log(util.formatTime(new Date(nowDate*1000)))
     httpReq({
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'user/flowAccount?time=' + nowDate + '&member_id=' + this.data.vipid + '&token=' + this.data.token,
+      url: ApiUrl.phplist + 'user/flowAccount?time=' + nowDate + '&member_id=' + that.data.vipid + '&token=' + that.data.token,
     }).then((res) => {
       console.log(res)
       let lists = res.data.lists
@@ -72,7 +77,8 @@ Page({
         else if (Number(lists[m].pay_type) == 3){
           moneylist.text = '充值'
         }
-        moneylist.datetime = util.formatTime(new Date(lists[m].create_time)) 
+        moneylist.datetime = util.formatTime(new Date(lists[m].create_time))
+        console.log(lists[m].create_time) 
         if (Number(lists[m].pay_type) == 0 || Number(lists[m].pay_type) == 1) {
           moneylist.money = Number("-" + lists[m].money)
           expend += Number(lists[m].money)

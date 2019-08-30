@@ -35,7 +35,6 @@ Page({
     ifRefund: true,
     refundremark: '',
     ifReceipt: true,
-    passwordFalse: true,
   },
   /**
    * 请求数据
@@ -75,8 +74,9 @@ Page({
         }
         else if (lists[m].pay_status == '1') { 
           ss.status = "已取消"
-          ss.ifhiddenone = true,
-          ss.ifhiddentwo = true
+          ss.orderHandleTwo = '删除订单'
+          ss.ifhiddenone = true
+          ss.orderMethosTwo = 'deleteOrder'
         }
         else if (lists[m].pay_status == '2') { 
           ss.status = "待发货"
@@ -227,7 +227,7 @@ Page({
       orderid: orderid
     })
     console.log(this.data.ifRefund)
-    console.log('退款订单')
+    //console.log('退款订单')
   },
   //填写退款原因
   getReason: function(e) {
@@ -250,13 +250,16 @@ Page({
       },
       url: ApiUrl.phplist + 'order/tuikuan?token=' + this.data.token + '&member_id=' + wx.getStorageSync('vipid') + '&order_id=' + this.data.orderid + '&or_remark=' + this.data.refundremark,
     }).then((res) => {
-      console.log(res)
+      //console.log(res)
       let status = res.data.lists
       if (status) {
         that.onLoad()
-        console.log('1')
+      }else{
+        wx.showModal({
+          title: '内部错误',
+          content: '接口数据错误',
+        })
       }
-
     })
     
   },
@@ -276,7 +279,7 @@ Page({
       orderid: orderid
     })
     console.log(this.data.ifcancel)
-    console.log('删除订单')
+    //console.log('删除订单')
 
   },
   //确认取消
@@ -298,6 +301,11 @@ Page({
       if (status) {
         that.onLoad()
         console.log('1')
+      }else{
+        wx.showModal({
+          title: '内部错误',
+          content: '接口数据错误',
+        })
       }
     })
   },
@@ -334,7 +342,7 @@ Page({
       url: ApiUrl.phplist + 'order/orderpay?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid') + '&pay_type=' + that.data.payway + '&order_id=' + that.data.orderid,
       // url: ApiUrl.phplist + 'order/orderpay?pay_amount=' + this.data.amount,
     }).then((res) => {
-      console.log(res)
+      //console.log(res)
       wx.requestPayment({
         timeStamp: res.data.lists.timeStamp,
         nonceStr: res.data.lists.nonceStr,
@@ -350,8 +358,10 @@ Page({
           })
         },
         fail: function (res) {
-          // fail
-          console.log(res);
+          wx.showModal({
+            title: '内部错误',
+            content: '接口数据错误',
+          })
         },
         complete: function (res) {
           // complete
@@ -375,7 +385,7 @@ Page({
       orderid: orderid
     })
     console.log(this.data.modalHidden)
-    console.log('删除订单')
+    //console.log('删除订单')
     
   },
   //确认删除
@@ -396,9 +406,13 @@ Page({
       let status = res.data.lists
       if (status){
         that.onLoad()
-        console.log('1')
+        //console.log('1')
+      }else{
+        wx.showModal({
+          title: '内部错误',
+          content: '接口数据错误',
+        })
       }
-     
     })
    
   },
@@ -418,7 +432,7 @@ Page({
      orderid: orderid
    })
    console.log(this.data.ifReceipt)
-   console.log('确认收货')
+   //console.log('确认收货')
  },
  //确认收货
   receiptconfirm: function() {
@@ -442,8 +456,12 @@ Page({
       if (status) {
         that.onLoad()
         console.log('1')
+      } else {
+        wx.showModal({
+          title: '内部错误',
+          content: '接口数据错误',
+        })
       }
-
     })
 
   },
@@ -463,13 +481,14 @@ Page({
   //ifxianxia: true
   //选择支付方式
   payway(e) {
+    let that = this
     let payway = e.detail.value
     if (payway == 'qianbao') {
-      this.setData({
-        ifPassword: false
+      that.setData({
+        ifPassword: false,
       })
     } else if (payway == 'xianxia'){
-      this.setData({
+      that.setData({
         ifxianxia: false,
         ifPassword: true,
         payStatus: true
@@ -480,7 +499,7 @@ Page({
     this.setData({
       payway: payway
     })
-    console.log(this.data.payway)
+    console.log(that.data.payway)
   },
 
   cancelPay: function () {
@@ -520,7 +539,17 @@ Page({
       url: ApiUrl.phplist + 'order/orderpay?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid') + '&pay_type=' + that.data.payway + '&order_id=' + that.data.orderid,
     }).then((res) =>{
       console.log(res)
-      
+      if (res.data.code == 10001) {
+        wx.showModal({
+          title: '提示',
+          content: res.data.msg,
+        })
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: '支付成功',
+        })
+      }
     })
   },
   //获得输入的密码
@@ -528,7 +557,6 @@ Page({
     let password = e.detail.value
     this.setData({
       password: password,
-      passwordFalse: true
     })
   },
   //确认密码
@@ -551,11 +579,16 @@ Page({
         that.setData({
           ifPassword: true
         })
+        wx.showModal({
+          title: '提示！',
+          content: '密码正确',
+        })
       } else {
       // 密码错误
-        that.setData({
-          passwordFalse: false
-        })
+       wx.showModal({
+         title: '提示！',
+         content: '密码错误',
+       })
       }
     })
   },
