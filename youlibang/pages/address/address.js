@@ -15,7 +15,8 @@ Page({
     member_id:'',
     linkname:'',
     region: ['广东省', '广州市', '海珠区'], // 初始值
-    customItem: '全部'
+    customItem: '全部',
+    addressdetail:""
   },
   //获取输入的联系人姓名
   linkname(e){
@@ -42,10 +43,14 @@ Page({
   //获取输入的详细地址
   addressdetail(e){
     var addressdetail = e.detail.value
+    console.log(typeof addressdetail)
+    //过滤空格
+    addressdetail = addressdetail.replace(/ /g, '')
+   
     this.setData({
       addressdetail
     })
-    //console.log(this.data)
+    console.log(this.data.addressdetail)
   },
 
   /**
@@ -96,26 +101,36 @@ Page({
     var address=this.data.region
     var addressdetail=this.data.addressdetail
      var member_id=this.data.member_id
+     console.log(addressdetail)
+     if(addressdetail==""){
+       wx.showModal({
+         title: '亲',
+         content: '请填写详细地址！',
+       })
+       return false
+     }
      console.log(member_id)
     if (address_name==''){
-      wx.showToast({
-        title: '提示',
-        content:'请填写联系人姓名',
-        showCancel:false
+      wx.showModal({
+        title: '亲',
+        content: '请填写收货人！',
       })
       return
     }
     if (address_phone==''){
-      wxx.showToast({
-        title:'提示',
-        content: '请填写联系人电话',
-        showCancel: false
+      
+      wx.showModal({
+        title: '亲',
+        content: '请填写正确的手机号！',
       })
       return
     }
     //验证手机号
     if (!(/^1[3456789]\d{9}$/.test(this.data.moblie))) {
-      wx.showToast({ title: '手机格式有误，请重新输入' });
+      wx.showModal({
+        title: '亲',
+        content: '手机号格式有误！',
+      })
       return;
     }
     address = address+addressdetail
@@ -130,12 +145,9 @@ Page({
     }).then((res) => {
         console.log(res)
     });
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../myAddress/myAddress',
-    })
-
-
-    
+    })   
   },
 
   /**

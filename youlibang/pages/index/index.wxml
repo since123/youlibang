@@ -30,7 +30,7 @@
 <!-- 列表信息 -->
 <scroll-view class='contents'>
   <view class='listInfo' wx:for='{{col1}}' wx:for-item='item' data-goodsid='{{item.id}}' catchtap='goodsdetail' wx:key="{{item.id}}">
-    <view class='leftImg'><image src="{{item.goods_log}}"></image></view>
+    <view class='leftImg'><image src="{{item.goods_logo}}"></image></view>
     <view class='textInfo'>{{item.goods_name}}</view>
     <view class='price'><label>￥</label>{{item.goods_price}}</view>
     <view class='Buy'>
@@ -38,3 +38,9 @@
     </view>
   </view>
 </scroll-view>
+<view class='last' bindtap="last">
+上一页
+</view>
+<view class='next' bindtap="next" >
+下一页
+</view>

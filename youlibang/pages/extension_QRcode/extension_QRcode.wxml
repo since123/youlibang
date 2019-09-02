@@ -2,7 +2,7 @@
 <view class=''>
 <view class='bgImg'><image src='../../images/vipbgImg@2x.png'></image></view>
 <view class='qrdiv'>
-    <view class='QRImg'><image src='../../images/1565941166.jpg'></image></view>
+    <view class='QRImg'><image src='{{imgUrl}}'></image></view>
     <view class='userDiv'>
     <view class='userInfo'>
         <view class='username'>{{userName.nickName}}</view>
@@ -10,15 +10,15 @@
     </view>
     <view class='userImg'><image src='{{userImg}}'></image></view>
     </view>
-    <view class='upload' bindtap="upload">
+    <view class='upload' bindtap="upload" data-text="保存图片">
        <view class='uploadImg'><image src='../../images/xiazai@2x.png'></image></view>
        <view class='saveImg'>保存图片</view>
     </view>
     <view class='upload'>
        <view class='uploadImg'><image src='../../images/fenxiang@2x.png'></image></view>
-       <view class='saveImg'>分享朋友圈</view>
+     <button class="zf" open-type="share" hover-class="none">
+分享朋友圈
+</button>
     </view>
 </view>
 </view>
-<button class="zf" open-type="share" hover-class="none">
-</button>

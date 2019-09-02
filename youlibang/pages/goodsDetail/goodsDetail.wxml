@@ -4,7 +4,7 @@
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" class="banner" duration="{{duration}}" circular="{{duration}}">
     <block wx:for="{{goods_img}}" wx:key="goods_info">
       <swiper-item>
-        <image src="{{imghref}}{{item.img}}" class="slide-image" mode="aspectFill" data-src='{{imghref}}{{item.img}}' bindtap="previewImage" />
+        <image src="{{item.pics}}" class="slide-image" mode="aspectFill" data-src='{{item.pics}}' bindtap="previewImage" />
       </swiper-item>
     </block>
   </swiper>
@@ -13,12 +13,12 @@
 <view class='goodsjieshao'>
   <view class='price'>
     <view class='money'><label>￥</label>{{productsList.goods_price}}</view>
-    <view class='money1'><label>￥</label></view>
+    <view class='money1'><label>￥</label>20.00</view>
     <view class='superVIP'><label>超级会员</label></view>
     <view class='yunfei'>运费:<label>{{productsList.freight}}</label>
   </view>
   </view>
-  <view class='goodsdetail'>{{productsList.goods_introduce}}</view>
+  <view class='goodsdetail'>{{productsList.goods_name}}</view>
 </view>
 <view class="zhong_title">
   <view class="zhong_title_text">
@@ -62,13 +62,13 @@
 <!-- 包装 -->
         <view class='color'>{{goodsInfo[0].attr_name}}</view>
    <view class="colorfenlei" >
-      <view class="list{{(index+1)==idx?'active':''}}" wx:for='{{arr1}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getValue" data-text="{{item}}">{{item}}
+      <view class="list{{(index+1)==idx?'active':''}}" wx:for='{{arr1}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getValue" data-text="{{goodsInfo[0].attr_name}}:{{item}}">{{item}}
       </view>
   </view>
   <!-- 尺寸 -->
       <view class='color'>{{goodsInfo[1].attr_name}}</view>
    <view class="colorfenlei" >
-      <view class="list{{(index+1)==idex?'active':''}}" wx:for='{{arr2}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getVal" data-text="{{item}}">{{item}}
+      <view class="list{{(index+1)==idex?'active':''}}" wx:for='{{arr2}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getVal" data-text="{{goodsInfo[1].attr_name}}:{{item}}">{{item}}
       </view>
   </view>   
 </view>

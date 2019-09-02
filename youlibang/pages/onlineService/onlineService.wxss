@@ -126,7 +126,7 @@
 .inputInfo{
   float: left;
   width:580rpx;
-  height:60rpx;
+  height:70rpx;
   border:1rpx solid rgba(217,217,217,1);
   border-radius:30rpx;
   font-size:24rpx;

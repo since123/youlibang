@@ -28,19 +28,17 @@ App({
             url: ApiUrl.phplist + 'index/gettoken?code=' + res.code,
           }).then((res) =>{
             console.log(res)
-            console.log(res.data.lists.token)
+            console.log(res.data.lists)
             if (res.data.lists.token != '' && res.data.lists.userid != '') {
               wx.setStorageSync('token', res.data.lists.token)
               wx.setStorageSync('userid', res.data.lists.user_id)
             } else {
-              wx.showModal({
-                title: '内部错误',
-                content: 'token获取失败',
-              })
+              // logs.unshift('app.js登陆页面token获取失败' + res.errMsg)
+              // wx.setStorageSync('logs', logs)
             }
           })
         } else {
-          // logs.unshift('res.code问题： ' + res.errMsg)
+          logs.unshift('res.code问题： ' + res.errMsg)
           // wx.setStorageSync('logs', logs)
         }
       }

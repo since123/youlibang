@@ -22,14 +22,12 @@ Page({
     time:'',
     is_send:'',
     num:0,
-    infolist: [{userheadImg:'../../images/2012031220134655.jpg',infos:'你好，有什么需要帮助？',states:1},
-      { userheadImg: '../../images/2012031220134655.jpg', infos: '你好，退款未到账', states:0}],
-    allContentList: [{}, { is_ai: [] }],
+    infolist: [],
     header:[
-      '如何修改退款，售后申请？',
-      '收到商品有质量问题怎么解决？',
-      '退款后钱款退到哪里？',
-      '如何申请退款？'
+      // '如何修改退款，售后申请？',
+      // '收到商品有质量问题怎么解决？',
+      // '退款后钱款退到哪里？',
+      // '如何申请退款？'
     ]
   },
 
@@ -47,7 +45,7 @@ Page({
           login: true
         })
     }
-
+     
     // wx.request({
     //   url: '', //仅为示例，并非真实的接口地址
     //   data: {
@@ -62,6 +60,22 @@ Page({
     //     console.log(res.data)
     //   }
     // })
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist +'user/getCall',
+    }).then((res) => {
+      console.log(res)
+      var header=res.data.lists
+      for(let i=0;i<header.length;i++){
+        header[i].site=false
+      }
+      this.setData({
+        header
+      })
+    });
   },
 
   /**
@@ -79,37 +93,17 @@ Page({
   },
   //点击进行跳转
   question(e){
-   console.log(e)
-    var infolist=this.data.infolist
-    var search = e.currentTarget.dataset.text
-    var obj={}
+     var index=e.currentTarget.dataset.index
+    var header=this.data.header
+     
+    var obj = {}
     obj.userheadImg = '../../images/2012031220134655.jpg'
-    obj.infos = search
-    obj.states = 1
+    obj.infos = header[index].answer
+    obj.states = 0
+    var infolist = this.data.infolist
     infolist.push(obj)
-    //请求客服接口
-    httpReq({
-      header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      url: ApiUrl.phplist+'user/searchCall?questions=' + search,
-    }).then((res) => {
-      console.log(res)
-      var answer = res.data.msg
-      //console.log(answer)
-      var obj = {}
-      obj.userheadImg = '../../images/2012031220134655.jpg'
-      obj.infos = answer
-      obj.states = 0
-      var infolist = this.data.infolist
-      infolist.push(obj)
-      this.setData({
-        infolist
-      })
-    })
     this.setData({
-      inputvalue: ''
+      infolist
     })
 
   },
@@ -124,7 +118,7 @@ Page({
     }
     var datamsg=this.data.infolist
     var object={}
-    object.userheadImg = '../../images/2012031220134655.jpg'
+    object.userheadImg = wx.getStorageSync('userInfo').avatarUrl
     object.infos = info
     object.states = 1
    datamsg.push(object)

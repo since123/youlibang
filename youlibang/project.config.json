@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 9,
+			"current": 10,
 			"list": [
 				{
 					"id": 0,
@@ -118,6 +118,13 @@
 					"id": -1,
 					"name": "pages/submitOrder/submitOrder",
 					"pathName": "pages/submitOrder/submitOrder",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/extension_QRcode/extension_QRcode",
+					"pathName": "pages/extension_QRcode/extension_QRcode",
 					"scene": null
 				}
 			]

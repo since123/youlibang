@@ -11,7 +11,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgUrl:"https://upload.jianshu.io/users/upload_avatars/18823564/81844685-46af-4cc8-8720-becb9080905d?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"
+    imgUrl:"",
+    url:'https://wx.ylbtl.cn/'
   },
 
   /**
@@ -21,9 +22,11 @@ Page({
     console.log(this.data.imgUrl)
      var userName=wx.getStorageSync('userInfo')
      var member_id=wx.getStorageSync('vipid')
+     var qcode=wx.getStorageSync('qcode')
      this.setData({
        userName,
-       vipid:member_id
+       vipid:member_id,
+       imgUrl:qcode
      })
      console.log(this.data.userName,this.data.vipid)
      //若二维码不存在，则请求对应的接口
@@ -35,15 +38,33 @@ Page({
            'Accept': 'application/json'
          },
          url: ApiUrl.phplist+'member/qcodelist?member_id=' + member_id,
+        //  url:"https://wx.ylbtl.cn/api/member/qcodelist?member_id=" + member_id
        }).then((res) => {
-         console.log(res)
-         var imgUrl = res.data.lists
-         console.log(imgUrl)
-         imgUrl = imgUrl.replace(/\\/g, "/") //正则替换
-         console.log(imgUrl)
-        //  this.setData({
-        //    imgUrl
-        //  })
+         //console.log(res)
+         if (res.statusCode==500){
+          wx.showModal({
+            title: '不可重复请求',
+            content: '二维码已经生成',
+          })
+          return false
+         }else{
+           var imgUrl = res.data.lists
+           console.log(imgUrl)
+           imgUrl = imgUrl.replace(/\\/g, "/") //正则替换
+           var index = imgUrl.lastIndexOf("u")
+           console.log(index)
+           var img = imgUrl.substr(index)
+           console.log(img)
+           var url=this.data.url
+           imgUrl=url+img
+           console.log(imgUrl)
+           wx.setStorageSync('qcode', imgUrl)
+         this.setData({
+           imgUrl
+         })
+
+       }
+        
        });
        var userImg = wx.getStorageSync('userInfo').avatarUrl
        //console.log(userImg)
@@ -63,7 +84,7 @@ Page({
   //事件处理
   upload(e){
     
-    var way = e._relatedInfo.anchorTargetText
+    var way = e.currentTarget.dataset.text
     console.log(way)
       let that = this
       //若二维码未加载完毕，加个动画提高用户体验

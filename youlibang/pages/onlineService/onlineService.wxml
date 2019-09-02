@@ -1,14 +1,17 @@
 <!--pages/onlineService/onlineService.wxml-->
 <view class="body">
-<view class='texttitle'>猜你想问</view>
+   <view class='texttitle'>猜你想问</view>
 <view class='contents'>
-<view class='question' bindtap="question" data-text="{{header[0]}}">{{header[0]}}</view>
+    <view class='question' wx:for="{{header}}" bindtap="question" data-index="{{index}}">
+    <text>{{item.questions}}</text>
+  
+    <view class='li'></view>
+    </view>
+     <!-- <view class='question' bindtap="question" data-text="{{header[0]}}">{{header[1]}}</view>
 <view class='li'></view>
-<view class='question' bindtap="question" data-text="{{header[0]}}">{{header[1]}}</view>
+    <view class='question' bindtap="question" data-text="{{header[0]}}">{{header[2]}}</view>
 <view class='li'></view>
-<view class='question' bindtap="question" data-text="{{header[0]}}">{{header[2]}}</view>
-<view class='li'></view>
-<view class='question' bindtap="question" data-text="{{header[0]}}">{{header[3]}}</view>
+     <view class='question' bindtap="question" data-text="{{header[0]}}">{{header[3]}}</view> -->
 </view>
   <view class='serviceinfo'  wx:for='{{infolist}}' wx:key="{{item.id}}">
     <view class="{{item.states==1?'userheadImg':'serviceheadImg'}}">

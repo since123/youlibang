@@ -1,5 +1,7 @@
 /* pages/submitOrder/submitOrder.wxss */
-
+.body{
+  position: relative
+}
 .detailInfo{
   width: 750rpx;
   height: 120rpx;
@@ -345,18 +347,18 @@ page{
   color: #bbb;
 }
 .pwd{
-  background:#ccc;
-  width: 50%;
-  height: 300rpx;
+  background:white;
+  width: 100%;
+  height: 500rpx;
   margin: 0 auto;
   position: absolute;
-  top: 75%;
   left: 50%;
+  bottom: 0;
   transform: translateX(-50%);
   text-align: center;
   font-size: 20rpx;
   font-weight: bold;
-  opacity: .7;
+ border-top: 2rpx solid #ccc
 }
 .pwdyz{
   width: 70%;
@@ -365,6 +367,7 @@ page{
   margin: 0 auto;
    margin-top: 70rpx;
 }
+
 .clear{
   color: white;
   float: right;
@@ -373,4 +376,20 @@ page{
 .top{
   margin-top: 50rpx;
   display: inline-block
+}
+.confirmPWD{
+  margin-left: 8%;
+  width:620rpx;
+  height:88rpx;
+  background:linear-gradient(-90deg,rgba(255,146,150,1),rgba(234,65,72,1));
+  border-radius:10rpx;
+  font-size:36rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  line-height:42rpx;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 15%;
 }

@@ -1,11 +1,11 @@
 <!--pages/editAddress/editAddress.wxml-->
 <view class='name'>
   <view class='name_r'>收货人</view>
-  <input class="input" type='text' name='consignee'  placeholder="请输入名字" maxlength="15" value="{{consignee}}" bindinput="listenerReciverInput"/>
+  <input class="input" type='text' name='consignee'  placeholder="请输入名字" maxlength="15" value="{{linkname}}" bindinput="listenerReciverInput"/>
 </view>
 <view class='name'>
   <view class='name_r'>手机号码</view>
-  <input class="input" type='text'  placeholder="请输入手机号" maxlength="11" value="{{mobile}}" bindinput="listenerPhoneInput"/>
+  <input class="input" type='text'  placeholder="请输入手机号" maxlength="11" value="{{moblie}}" bindinput="listenerPhoneInput"/>
 </view>
 <view class='name'>
   <view class='name_r'>联系地址</view>
@@ -16,6 +16,6 @@
 </view>
 <view class='name'>
   <view class='name_r'>详细地址</view>
-  <input class="input" type='text' name='detailAddress' placeholder="请输入详细地址" maxlength="60" value="{{address}}" bindinput="listenerAddressInput"/>
+  <input class="input" type='text' name='detailAddress' placeholder="请输入详细地址" maxlength="60" value="{{addressdetail}}" bindinput="listenerAddressInput"/>
 </view>
 <view class='roll' bindtap='saveBtn'>保存</view>

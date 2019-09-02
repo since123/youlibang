@@ -31,7 +31,8 @@ Page({
         id:1
       
       }
-    ]
+    ],
+    page:0
   },
   
 
@@ -41,15 +42,97 @@ Page({
   },
 
   //点击图片进行跳转
-  // changePath(e) {
+  changePath(e) {
   
-  //   var id=e.target.dataset.id
-  //   console.log(id)
-  //   wx.navigateTo({
-  //     url: '../goodsDetail/goodsDetail?goodsId='+id,
+    var id=e.target.dataset.id
+    console.log(id)
+    wx.navigateTo({
+      url: '../goodsDetail/goodsDetail?goodsId='+id,
 
-  //   })
-  // },
+    })
+  },
+  //上一页
+  last(){
+     var page=this.data.page
+     page<=0?0:page--
+     console.log(page)
+     //请求接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      method: "POST",
+      data: { limit: page },
+      url: ApiUrl.phplist + 'goods/index'
+    }).then((res) => {
+      console.log(res)
+      if(res.data.lists==undefined){
+           wx.showModal({
+             title: '亲',
+             content: '没有数据哦！',
+           })
+           return false
+      }
+      wx.showModal({
+        title: '亲',
+        content: '已经到首页了呢！',
+      })
+      //console.log(ApiUrl.url)
+      //处理商品信息
+      var dataLists = res.data.lists
+      //  dataLists=dataLists.slice(0,(dataLists.length)/2)
+      for (let i = 0; i < dataLists.length; i++) {
+        dataLists[i].goods_logo = ApiUrl.url + dataLists[i].goods_logo
+      }
+      //var url = 'https://wx.ylbtl.cn/uploads/logo/20190830/781eb22b64de81ae53ca26e4bc64c45f.jpg'
+      this.setData({
+        col1: dataLists,
+        page
+      })
+
+    })
+  },
+  //下一页
+  next(){
+    var page=this.data.page
+    //page判断条件
+    page++
+    console.log(page)
+    //请求接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      method: "POST",
+      data: { limit: page },
+      url: ApiUrl.phplist + 'goods/index'
+    }).then((res) => {
+      console.log(res)
+      //console.log(ApiUrl.url)
+      //处理商品信息
+      if(res.data.lists==undefined){
+         wx.showModal({
+           title: '亲',
+           content: '已经到尾页了呢',
+         })
+        return false
+      }
+      var dataLists = res.data.lists
+      //  dataLists=dataLists.slice(0,(dataLists.length)/2)
+      for (let i = 0; i < dataLists.length; i++) {
+        dataLists[i].goods_logo = ApiUrl.url + dataLists[i].goods_logo
+      }
+      //var url = 'https://wx.ylbtl.cn/uploads/logo/20190830/781eb22b64de81ae53ca26e4bc64c45f.jpg'
+      this.setData({
+        col1: dataLists,
+        page
+      })
+     console.log(this.data.page)
+    })
+
+  },
  
   //搜索
   search: function() {
@@ -78,86 +161,75 @@ Page({
       url: '../goodsDetail/goodsDetail?goodsId='+goodsId,
     })
   },
-  //上拉加载
-  onReachBottom(){
-    var that=this
-   //重新请求接口
-   if(that.data.state!=true){
-        return false
-   }
-    httpReq({
-      header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      url: ApiUrl.phplist+'goods/index'
-      // url:'http://www.ylb.com/api/goods/index'
-    }).then((res) => {
-      console.log(res)
-          this.setData({
-            status:false,
-            state:false
-          })
-      //处理商品信息
-      var dataLists = res.data.lists
-      this.setData({
-        col1: dataLists
-      })
-    })
-  },
   onLoad: function(options) {
-   //请求接口
-    httpReq({
-      header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      url: ApiUrl.phplist+'goods/index'
-    }).then((res) => {
-         console.log(res)
-         //处理商品信息
-         var dataLists=res.data.lists
-         dataLists=dataLists.slice(0,4)
-         this.setData({
-           col1:dataLists
-         })
-    })
-    //请求轮播图接口
-    httpReq({
-      header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      url: ApiUrl.phplist+'Operatedata/imgList',
-    }).then((res) => {
-      console.log(res)
-     //重置banner轮播图数据
-      this.setData({
-           movies:res.data.lists
-      })
-      console.log(this.data.movies)
-    });
-
-     //处理通知栏
-    var that = this;
-       goodsID = options.goodsID;
-    //请求接口
-    httpReq({
-      header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      url: ApiUrl.phplist+'operatedata/getlist?type=1'
-    }).then((res) => {
-     var dataList=res.data.lists
-     console.log(dataList)
-     this.setData({
-       dataList
-     })
-    })
+   
   },
  
+   onShow:function(){
+     var page = this.data.page
+     //请求接口
+     httpReq({
+       header: {
+         'Content-Type': 'application/json',
+         'Accept': 'application/json'
+       },
+       method: "POST",
+       data: { limit: page },
+       url: ApiUrl.phplist + 'goods/index'
+     }).then((res) => {
+       console.log(res)
+       //console.log(ApiUrl.url)
+       //处理商品信息
+       var dataLists = res.data.lists
+       //  dataLists=dataLists.slice(0,(dataLists.length)/2)
+       for (let i = 0; i < dataLists.length; i++) {
+         dataLists[i].goods_logo = ApiUrl.url + dataLists[i].goods_logo
+       }
+       //var url = 'https://wx.ylbtl.cn/uploads/logo/20190830/781eb22b64de81ae53ca26e4bc64c45f.jpg'
+       this.setData({
+         col1: dataLists
+       })
 
+     })
+     //请求轮播图接口
+     httpReq({
+       header: {
+         'Content-Type': 'application/json',
+         'Accept': 'application/json'
+       },
+       url: ApiUrl.phplist + 'Operatedata/imgList',
+     }).then((res) => {
+       console.log(res)
+       //重置banner轮播图数据
+       var dataLists = res.data.lists
+       //  dataLists=dataLists.slice(0,(dataLists.length)/2)
+       console.log(dataLists)
+       for (let i = 0; i < dataLists.length; i++) {
+         dataLists[i].url = ApiUrl.url + dataLists[i].url
+       }
+       this.setData({
+         movies: dataLists
+       })
+       console.log(this.data.movies)
+     });
+
+     //处理通知栏
+     var that = this;
+     //请求接口
+     httpReq({
+       header: {
+         'Content-Type': 'application/json',
+         'Accept': 'application/json'
+       },
+       url: ApiUrl.phplist + 'operatedata/getlist?type=1'
+     }).then((res) => {
+       var dataList = res.data.lists
+       console.log(dataList)
+       this.setData({
+         dataList
+       })
+     })
+   },
   getUserInfo: function(e) {
   
   }

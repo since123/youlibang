@@ -1,0 +1,11 @@
+<!--pages/userAddress/userAddress.wxml-->
+<view class='vipinfo'>
+  <view class='infotext'>地址</view>
+  <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+    <view class='rightinfo'>{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
+  </picker>
+</view>
+<view class='vipinfo'>
+  <view class='infotext'>详细地址(必填)</view>
+  <input class='rightinfo' bindinput="getAddress" bindblur="getFullAddress" value="{{address}}"></input>
+</view>

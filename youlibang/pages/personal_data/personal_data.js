@@ -5,6 +5,9 @@ import {
 import {
   httpReq
 } from '../../utils/http.js';
+// var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
+// var qqmapsdk;
+
 Page({
 
   /**
@@ -16,13 +19,15 @@ Page({
     name:'',
     bindphone:'',
     sex:'',
-    address:'',
     wechat:'',
     tuijianID:'',
     idCard1:'',
     idCard2:'',
     businesslicense:'',
-    token: ''
+    token: '',
+    region: ['湖北省', '武汉市', '洪山区'],
+    customItem: '全部',
+    address: '',
   },
 
   /**
@@ -30,10 +35,15 @@ Page({
    */
   onLoad: function(options) {
     this.getPersonalInfo()
-    this.setData({
-      token: wx.getStorageSync('token'),
+ 
+  },
+//修改地址
+  getUserAddress() {
+    wx.navigateTo({
+      url: '../userAddress/userAddress',
     })
   },
+  
   //获取页面数据
   getPersonalInfo() {
     var that = this;
@@ -64,7 +74,7 @@ Page({
         src: inform.userImg_url,
         name: inform.vipname,
         bindphone: inform.mobile,
-        address: wx.getStorageSync('userInfo').country + wx.getStorageSync('userInfo').province,
+        address: wx.getStorageSync('fullAddress') == '' ? inform.address : wx.getStorageSync('fullAddress'),
         tuijianID: Number(inform.inviter_id),
         idCard1: inform.card_one,
         idCard2: inform.card_two,
@@ -76,7 +86,7 @@ Page({
         src: inform.userImg_url,
         name: inform.username,
         bindphone: inform.mobile,
-        address: wx.getStorageSync('userInfo').country + wx.getStorageSync('userInfo').province,
+        address: wx.getStorageSync('fullAddress') == '' ? inform.address : wx.getStorageSync('fullAddress'),
         tuijianID: Number(inform.inviter_id),
         // idCard1: inform.card_one,
         // idCard2: inform.card_two,
@@ -118,18 +128,19 @@ Page({
   /**
    * 获取修改的input中的值
    */
-  getVipNameValue: function(e) {
-    this.setData({
-      name: e.detail.value
-    })
-    console.log(this.data.name)
-  },
-  getSexValue: function(e) {
-    this.setData({
-      sex: e.detail.value
-    })
-    console.log(this.data.sex)
-  },
+  // getVipNameValue: function(e) {
+  //   this.setData({
+  //     name: e.detail.value
+  //   })
+  //   console.log(this.data.name)
+  // },
+  // getSexValue: function(e) {
+  //   this.setData({
+  //     sex: e.detail.value
+  //   })
+  //   console.log(this.data.sex)
+  // },
+  
   /**更新保存个人资料修改（红星星部分） */
   // changeAvatar: function (e) {
   //   //这里是上传操作
@@ -158,25 +169,26 @@ Page({
   //     })   
   // },
 
-  bindPhoneNumber: function(e) {
-    wx.navigateTo({
-      url: '../../pages/bindphoneNum/bindphoneNum',
-    })
-    var detail = e.detail;
-    wx.request({
-      url: '',  //解密手机号码接口
-      data: {
-        // "appid": ,
-        // "session_key": wx.getStorageSync('session_key'),
-        // "encryptedData": detail.encryptedData,
-        // "iv": detail.iv
-      },
-      success: function (res) {
-        console.log(res.data.phoneNumber);
-        wx.setStorageSync("phonenumber", res.data.phoneNumber);
-      }
-    })
-  },
+  // bindPhoneNumber: function(e) {
+  //   console.log(e)
+  //   wx.navigateTo({
+  //     url: '../../pages/bindphoneNum/bindphoneNum',
+  //   })
+  //   var detail = e.detail;
+  //   wx.request({
+  //     url: '',  //解密手机号码接口
+  //     data: {
+  //       // "appid": ,
+  //       // "session_key": wx.getStorageSync('session_key'),
+  //       // "encryptedData": detail.encryptedData,
+  //       // "iv": detail.iv
+  //     },
+  //     success: function (res) {
+  //       console.log(res.data.phoneNumber);
+  //       wx.setStorageSync("phonenumber", res.data.phoneNumber);
+  //     }
+  //   })
+  // },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -188,7 +200,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.onLoad()
   },
 
   /**

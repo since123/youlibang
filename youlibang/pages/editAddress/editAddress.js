@@ -28,9 +28,19 @@ Page({
     console.log(options);
     var address_id=options.id
     var member_id=options.member_id
+    var address=JSON.parse(options.address)
+    console.log(address)
+    var linkname = address.address_name  //收货人
+    var moblie = address.address_phone   //手机
+    var region = address.address   //联系地址
+    var address=region.split(',')
+    console.log(linkname,moblie,address)
    this.setData({
      address_id,
-     member_id
+     member_id,
+     linkname,
+     moblie,
+     region:address
    })
   },
 

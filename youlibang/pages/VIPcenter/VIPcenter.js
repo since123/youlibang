@@ -85,7 +85,7 @@ Page({
       token: wx.getStorageSync('token')
     })
     httpReq({
-      url: ApiUrl.phplist + 'member/rebate?token=' + this.data.token + '&member_id=' + this.data.vipid,
+      url: ApiUrl.phplist + 'member/rebate?token=' + this.data.token + '&member_id=' +wx.getStorageSync('vipid'),
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'

@@ -17,18 +17,7 @@ Page({
     newarr:[],
     status: false,
     is_shoucang: 0,
-    goods_img: [{
-        'img': 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-      },
-      {
-        'img': 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-      },
-      {
-        'img': 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-      },
-      {
-        'img': 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-      },
+    goods_img: [
     ],
     type1: [],
     idx:"",
@@ -42,7 +31,10 @@ Page({
     duration: 1000,
     productsList:[
      
-      ]
+      ],
+      arr1:[],
+      arr2:[],
+      arr3:[]
   },
   //事件处理
   //点击查看购物车
@@ -63,9 +55,10 @@ Page({
     console.log(e)
     var idx = e.currentTarget.dataset.index+1
     var yd = e.currentTarget.dataset.text
+
     this.setData({
       yd,
-      idx
+      idx,
     })
  
   },
@@ -73,19 +66,22 @@ Page({
     console.log(e)
     var idex = e.currentTarget.dataset.index + 1
     var wd = e.currentTarget.dataset.text
+
     this.setData({
       wd,
-      idex
+      idex,
     })
     
   },
   getVa(e) {
     console.log(e)
     var sx = e.currentTarget.dataset.index + 1
-    var cd = e._relatedInfo.anchorTargetText
+    var cd = e.currentTarget.dataset.text
+   
     this.setData({
       cd,
-      sx
+      sx,
+    
     })
   },
  
@@ -93,10 +89,27 @@ Page({
   confirm(){
     var that = this
     //是否选择
+    if(this.data.arr1!=""){
+       if(this.data.yd==undefined){
+         return false
+          console.log(this.data.yd)
+       }
+    }
+    if (this.data.arr2!= "") {
+      if (this.data.wd == undefined) {
+        return false
+        console.log(this.data.wd)
+      }
+    }
+    if (this.data.arr3!= "") {
+      if (this.data.cd == undefined) {
+        return false
+        console.log(this.data.cd)
+      }
+    }
     if (this.data.num<=0){
       return false
     }
-  console.log(this.data.yd,this.data.wd)
     var productsList=this.data.productsList
    console.log(productsList)
     //重组数据存入缓存
@@ -136,21 +149,29 @@ Page({
 
     var token=wx.getStorageSync('token') //取得token
     var member_id=wx.getStorageSync('vipid') //取得member_id
+    var user_id=wx.getStorageSync('userid')
     //重组数据提交后端
    
   var  goods_id = productsList.id
   var   goods_attr_values = productsList.goods_introduce
   var   goods_number = this.data.num
     console.log(token, member_id, goods_id, goods_attr_values, goods_number)
+    console.log(this.data.yd)
     //不论是加入购物车还是立即购买调用相同的接口
     httpReq({
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist+'cart/savecart?token=' + token + '&goods_id=' + goods_id + '&goods_attr_values=' + goods_attr_values + '&goods_number=' + goods_number + '&member_id=' + member_id
+      method:"POST",
+      data: { token, goods_id, goods_attr_values: goods_attr_values+this.data.yd, goods_number, member_id, user_id},
+      url: ApiUrl.phplist+'cart/savecart'
     }).then((res) => {
       console.log(res)
+      if (res.statusCode!=500){
+        wx.setStorageSync('vipid', res.data.lists.member_id)
+      }
+     
       //判断点击的是加入还是立即购买
       if (this.data.state == 0) {
         console.log("去到购物车！")
@@ -164,7 +185,16 @@ Page({
         })
 
       } else if (this.data.state == 1) {
-        data[0].cart_id = res.data.lists
+        if(wx.getStorageSync('vipid')==0){
+          wx.showModal({
+            title: '亲，非常抱歉呢',
+            content: '请先成为会员再进行购买！',
+          })
+          return false
+        }
+        data[0].cart_id = res.data.lists.cart_id
+        data[0].member_id = res.data.lists.member_id
+        console.log(data)
         var info = JSON.stringify(data)
         console.log(info)
         wx.navigateTo({
@@ -192,12 +222,13 @@ Page({
   },
 
   previewImage: function(e) {
+    console.log(e)
     var current = e.target.dataset.src;
-    var href = this.data.imghref;
     var goodsimg = this.data.goods_img;
+    console.log(goodsimg)
     var imglist = [];
     for (var i = 0; i < goodsimg.length; i++) {
-      imglist[i] = href + goodsimg[i].img
+      imglist[i] = goodsimg[i].pics
     }
     wx.previewImage({
       current: current, // 当前显示图片的http链接  
@@ -285,9 +316,22 @@ Page({
       url: ApiUrl.phplist+'goods/getdetail?goods_id='+goodsId,
     }).then((res) => {
       console.log(res)
+      if(res.data.code!=10000){
+        wx.showModal({
+          title: '亲，非常抱歉呢',
+          content: '没有该商品的信息',
+        })
+       
+        return false
+      }
       var productsList=res.data.lists
+      var goods_img = productsList.good_imgs
+      for(let i=0;i<goods_img.length;i++){
+        goods_img[i].pics=ApiUrl.url+goods_img[i].pics
+      }
       this.setData({
-        productsList
+        productsList,
+        goods_img
       })
       var goodsInfo = productsList.attr
       if(goodsInfo!=''){
@@ -297,12 +341,30 @@ Page({
         }
         var price = productsList.goods_price
         console.log(goodsInfo)
-        var arr1 = goodsInfo[0].attr_values
-        var arr2 = goodsInfo[1].attr_values
+        if (goodsInfo[0].attr_values!=undefined){
+          var arr1 = goodsInfo[0].attr_values
+          this.setData({
+            arr1,
+            goodsInfo
+          })
+        }
+        if (goodsInfo[1].attr_values!=undefined){
+          var arr2 = goodsInfo[1].attr_values
+          this.setData({
+            arr2,
+            goodsInfo
+          })
+        }
+        if (goodsInfo[2].attr_values != undefined) {
+          var arr3 = goodsInfo[2].attr_values
+          this.setData({
+            arr3,
+            goodsInfo
+          })
+        }
+         
         this.setData({
           goodsInfo,
-          arr1,
-          arr2,
           price
         })
         console.log(this.data.arr1)
@@ -376,4 +438,5 @@ Page({
   onShareAppMessage: function() {
 
   }
+  
 })

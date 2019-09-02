@@ -15,7 +15,6 @@ Page({
     
     ],
     address: '',
-    member_id:9
   },
   
 
@@ -23,6 +22,58 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var member_id = wx.getStorageSync('vipid')
+    console.log(member_id)
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'user/getaddress?member_id=' + member_id,
+    }).then((res) => {
+      console.log(res)
+      var addressList = res.data.lists
+      //console.log(addressList)
+      //console.log(res)
+
+      if (addressList == undefined) {
+        this.setData({
+          member_id
+        })
+      } else {
+        var member_id = wx.getStorageSync('vipid')
+        //  循环追加区分标识
+        if(wx.getStorageSync('index')!=undefined){
+             for(let i=0;i<addressList.length;i++){
+                     addressList[i].state=false
+                     if(addressList[i].id==wx.getStorageSync('index')){
+                       addressList[i].state=true
+                     }
+             }
+        }else{
+           
+          for (let i = 0; i < addressList.length; i++) {
+            addressList[i].state = false
+            if (addressList[i].state != false) {
+              addressList[i].state = true
+            } 
+          }
+
+        }
+        
+
+
+        console.log(addressList)
+        this.setData({
+          addressList,
+          member_id
+        })
+        //存入缓存
+        wx.setStorageSync('addressList', addressList)
+      }
+
+
+    });
     // var arr = wx.getStorageSync('addressList') || [];
     // console.info("缓存数据：" + arr);
     // // 更新数据  
@@ -68,7 +119,7 @@ Page({
   setDefault(e){
     console.log(e)
     var id=e.target.dataset.id
-    var member_id=this.data.member_id
+    var member_id=wx.getStorageSync('vipid')
    console.log(member_id)
     var addressList=this.data.addressList
     var address = []
@@ -83,6 +134,9 @@ Page({
     this.setData({
       addressList
     })
+  
+    //存入本地存储
+    wx.setStorageSync('index', id)
     //console.log(address)
     //更改数据库里面的
     address[0].address_type=1
@@ -116,7 +170,7 @@ Page({
   },
   //新增地址
   addAddress:function(e){
-    var member_id=this.data.member_id
+    var member_id = wx.getStorageSync('vipid')
     wx.navigateTo({
       url: '../address/address?member_id='+member_id,
     })
@@ -125,15 +179,22 @@ Page({
   editAddress: function (e) {
     console.log(e)
     var id=e.target.dataset.id
-    var member_id = e.target.dataset.member_id
+    var member_id = wx.getStorageSync('vipid')
+    var address=this.data.addressList.filter((v)=>{
+             if(id==v.id){
+              return v
+             }
+    })
+    console.log(address)
+    address=JSON.stringify(address[0])
     wx.navigateTo({
-      url: '../editAddress/editAddress?id='+id+'&member_id='+member_id,
+      url: '../editAddress/editAddress?id='+id+'&member_id='+member_id+'&address='+address,
     })
   },
   //删除地址
   deleteAddress: function (e) {
     console.log(e)
-   var member_id=this.data.member_id
+    var member_id = wx.getStorageSync('vipid')
     var address_id = e.target.dataset.id
     var index = e.target.dataset.index
     console.log(member_id,address_id,index)
@@ -188,54 +249,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    var member_id = this.data.member_id
-    httpReq({
-      header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      url: ApiUrl.phplist+'user/getaddress?member_id=' + member_id,
-    }).then((res) => {
-      console.log(res)
-      var addressList = res.data.lists
-      //console.log(addressList)
-      //console.log(res)
-      var member_id = addressList[0].member_id
-      if (addressList == undefined) {
-        this.setData({
-          member_id
-        })
-      } else {
-        var member_id = addressList[0].member_id
-        //  循环追加区分标识
-        for (let i = 0; i < addressList.length; i++) {
-          addressList[i].state = false
-          if (addressList[i].state != false) {
-            addressList[i].state = true
-          } else {
-            addressList[0].state = true
-          }
-        }
-
-
-        console.log(addressList)
-        this.setData({
-          addressList,
-          member_id
-        })
-        //存入缓存
-        wx.setStorageSync('addressList', addressList)
-      }
-
-
-    });
+  
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   
+    
   },
 
   /**

@@ -1,0 +1,35 @@
+/* pages/userAddress/userAddress.wxss */
+.vipinfo{
+  margin-top: 1px;
+  width: 100%;
+  height: 102rpx;
+  background-color: #ffffff;
+  box-shadow:0rpx 1rpx 0rpx 0rpx rgba(230,230,230,1);
+  overflow: hidden;
+}
+.infotext{
+  width: 30%;
+  /* background-color: green; */
+  float: left;
+  font-size:30rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+  line-height:90rpx;
+  margin-top: 9rpx;
+  margin-left: 38rpx;
+}
+.rightinfo{
+  width: 60%;
+  height: 100%;
+  float: left;
+  margin-top: 7rpx;
+  /* margin-left: 10%; */
+  /* background-color: red; */
+  font-size:30rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(153,153,153,1);
+  line-height:90rpx;
+  text-align: right;
+}

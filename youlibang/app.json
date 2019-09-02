@@ -33,7 +33,8 @@
     "pages/editAddress/editAddress",
     "pages/retailOrder/retailOrder",
     "pages/rebeatWithdraw/rebeatWithdraw",
-    "pages/location/location"
+    "pages/location/location",
+    "pages/userAddress/userAddress"
   ],
   "window": {
     "backgroundTextStyle": "light",

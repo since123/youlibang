@@ -57,7 +57,10 @@ Page({
     }).then((res) => {
       console.log(res)
       if (res.data.lists == undefined) {
-        console.log("没有任何商品！")
+        wx.showModal({
+          title: '亲',
+          content: '购物车空空如也呢！',
+        })
 
       } else {
 
@@ -154,7 +157,10 @@ Page({
      }
      console.log(num)
      if(num>=carts.length){
-       console.log('请至少选择一项商品！')
+      wx.showModal({
+        title: '亲',
+        content: '请至少选择一项商品！',
+      })
        return false
      }
    let info=carts.filter((v)=>{

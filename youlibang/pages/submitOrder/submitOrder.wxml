@@ -1,4 +1,5 @@
 <!--pages/submitOrder/submitOrder.wxml-->
+<view class="body">
 <view class='detailInfo'>
     <view class='addressImg'><image src='../../images/dizhi1@2x.png'></image></view>
     <view class='name_phone'>
@@ -9,17 +10,11 @@
     <view class='address'>{{defAddress.address}}</view>
 </view>
 <!-- 根据地址选取距离最近的经销商 -->
-<view class='detailInfo' wx:if='{{status}}'>
-     <button catchtap="query">点击查看最近的经销商</button>
-</view>
-<view class='detailInfo' wx:if='{{!status}}'>
-    <view class='addressImg'><image src='../../images/dizhi1@2x.png'></image></view>
-    <view class='name_phone'>
-      <view class='username'>{{defAddress.address_name}}</view>
-      <view class='phone'>{{defAddress.address_phone}}</view>
+    <picker bindchange="pickChange" value="{{index}}" range="{{datalist}}" range-key="{{'nickname'}}">
+    <view>
+        当前选择的经销商：{{datalist[index].name}}
     </view>
-    <view class='address'>{{defAddress.address}}</view>
-</view>
+  </picker>
 <!-- 订单信息 -->
 <view class='orderInfo'>
   <view class='Infotext'>订单信息</view>
@@ -28,9 +23,9 @@
     <view class='goodsImg'>
     <image src='../../images/2012031220134655.jpg'></image>
     </view>
-    <view class='goodsdetail'>跳楼大甩卖！买到就是赚到！</view>
+    <view class='goodsdetail'>{{item.title}}</view>
     <view class='types_num'>
-      <view class='types'>粉色、M</view>
+      <view class='types'>{{item.yd}}</view>
       <view class='num'>X{{item.num}}件</view>
     </view>
   </view>
@@ -73,12 +68,15 @@
   </radio-group>
 </view>
 <view class='btn' bindtap="confirm">确认支付</view>
+<!-- 输入密码框 -->
 <view class="pwd" wx:if="{{state}}">
   <icon class="clear" type="clear"size='14' bindtap='quxiao' hidden="{{!state}}"></icon>
       <text class="top">请输入密码!!</text>
       <view class="pwdyz"> 
-      <input maxlength="6"></input>
+      <input maxlength="20" type="password" bindinput="queren"></input>
       </view>
+      <view class="confirmPWD" bindtap="confirmPwd">确认</view>
 </view>
+</view>  
 
 

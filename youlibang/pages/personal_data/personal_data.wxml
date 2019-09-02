@@ -4,25 +4,25 @@
   <view class='rightImg'><image mode="{{item.mode}}" src="{{src}}" bindtap="changeImage"></image></view>
 </view>
 <view class='vipinfo'>
-  <view class='infotext'>姓名</view>
+  <view class='infotext'>会员名</view>
   <input class='rightinfo' bindinput="getVipNameValue" name="vipname" value="{{name}}"></input>
 </view>
 <view class='vipinfo'>
-  <view class='infotext' bindtap="bindPhoneNumber">绑定手机号码</view>
+  <view class='infotext' bindtap="bindPhoneNumber">手机号码</view>
   <label class='rightinfo'>{{bindphone}}</label>
 </view>
 <view class='vipinfo'>
   <view class='infotext'>性别</view>
   <input class='rightinfo' bindinput="getSexValue" name="sex" value="{{sex}}"></input>
 </view>
-<view class='vipinfo'>
-  <view class='infotext'>地址</view>
+<view class='vipinfo' bindtap='getUserAddress'>
+  <view class='infotext'>绑定地址</view>
   <input class='rightinfo' value="{{address}}"></input>
 </view>
-<view class='vipinfo'>
+<!-- <view class='vipinfo'>
   <view class='infotext'>微信号</view>
   <label class='rightinfo'>{{wechat}}</label>
-</view>
+</view> -->
 <view class='vipinfo'>
   <view class='infotext'>推荐ID</view>
   <label class='rightinfo'>{{tuijianID}}</label>
