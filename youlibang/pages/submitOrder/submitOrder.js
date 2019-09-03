@@ -71,6 +71,42 @@ Page({
    
  console.log(this.data.cart_id)
 
+
+    var token = wx.getStorageSync('token')
+    var member_id = wx.getStorageSync('vipid')
+    var type = 1
+    //请求默认地址接口
+    var that = this
+    console.log(token, member_id)
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'user/getSelectedAddress?token=' + token + '&member_id=' + member_id + '&type=' + type,
+    }).then((res) => {
+      console.log(res)
+      var defAddress = res.data.lists
+      console.log(defAddress)
+      if (defAddress == undefined) {
+        wx.showModal({
+          title: '亲',
+          content: '你还没有添加地址呢',
+        })
+        return false
+      } else {
+        var address_id = res.data.lists.id
+        that.setData({
+          defAddress,
+          address_id
+        })
+        wx.setStorageSync('defAddress', defAddress)
+        console.log(this.data.defAddress)
+      }
+
+      // console.log(this.data.defAddress)
+    })
+   
     qqmapsdk = new QQMapWX({
       key: 'KXRBZ-VZARV-YUYPW-USY6I-A7FIF-3ZBT4'
     })
@@ -135,40 +171,6 @@ Page({
     });
 
 
-    var token = wx.getStorageSync('token')
-    var member_id = wx.getStorageSync('vipid')
-    var type = 1
-    //请求默认地址接口
-    var that = this
-    console.log(token, member_id)
-    httpReq({
-      header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      url: ApiUrl.phplist + 'user/getSelectedAddress?token=' + token + '&member_id=' + member_id + '&type=' + type,
-    }).then((res) => {
-      console.log(res)
-      var defAddress = res.data.lists
-      console.log(defAddress)
-      if (defAddress == undefined) {
-        wx.showModal({
-          title: '亲',
-          content: '你还没有添加地址呢',
-        })
-        return false
-      } else {
-        var address_id = res.data.lists.id
-        that.setData({
-          defAddress,
-          address_id
-        })
-        wx.setStorageSync('defAddress', defAddress)
-        console.log(this.data.defAddress)
-      }
-
-      // console.log(this.data.defAddress)
-    });
 },
   payway(){
      console.log("通过微信支付！")
@@ -504,7 +506,7 @@ qqmapsdk.geocoder({ //获取目标地址的地图信息，把详细地址输入a
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'member/deliverAddress?token=' + token + '&lon=' + lon + '&lat=' + lat + '&member_id=' + member_id,
+      url: ApiUrl.phplist + 'member/deliverAddress?token=' + token + '&lon=' + lon + '&lat=' + lat + '&member_id=' + member_id+'&address='+wx.getStorageSync('defAddress').address,
     }).then((res) => {
       console.log(res)
       if (res.data.msg == "操作成功") {
@@ -565,10 +567,9 @@ qqmapsdk.geocoder({ //获取目标地址的地图信息，把详细地址输入a
       var defAddress = res.data.lists
       console.log(defAddress)
       if (defAddress == undefined) {
-        wx.showModal({
-          title: '亲',
-          content: '你还没有添加地址呢',
-        })
+          this.setData({
+            defAddress:""
+          })
         return false
       } else {
         var address_id = res.data.lists.id

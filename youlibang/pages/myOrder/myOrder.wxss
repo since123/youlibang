@@ -98,14 +98,11 @@ image {
 }
 
 .orderDetail .orderStyle {
-  width: 103rpx;
-  height: 24rpx;
   font: 24rpx/24rpx '';
   color: #999;
   margin-top: 17rpx;
   display: flex;
   flex-direction: row;
-
 }
 
 .orderInfor {

@@ -25,13 +25,13 @@
                 </view>
               </view>
               <view class='orderInfor'>
-                <view class='orderPrice'>{{item.price}}</view>
-                <view class='orderNum'>{{item.number}}</view>
+                <view class='orderPrice'>￥{{item.price}}</view>
+                <view class='orderNum'>x{{item.number}}</view>
               </view>
           </view>
           <view class='orderSumPri'>
             共{{order.totalNumber}}件商品 合计：
-            <view class='orderPri'>{{order.totalPrice}}元</view>
+            <view class='orderPri'>￥{{order.totalPrice}}元</view>
           </view>
           <view class="orderHander">
             <view class="orderCancel" data-orderid="{{order.orderid}}" bindtap="{{order.orderMethodOne}}" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
@@ -59,13 +59,13 @@
                 </view>
               </view>
               <view class='orderInfor'>
-                <view class='orderPrice'>{{item.price}}</view>
-                <view class='orderNum'>{{item.number}}</view>
+                <view class='orderPrice'>￥{{item.price}}</view>
+                <view class='orderNum'>x{{item.number}}</view>
               </view>
           </view>
           <view class='orderSumPri'>
             共{{order.totalNumber}}件商品 合计：
-            <view class='orderPri'>{{order.totalPrice}}元</view>
+            <view class='orderPri'>￥{{order.totalPrice}}元</view>
           </view>
           <view class="orderHander">
             <view class="orderCancel" data-orderid="{{order.orderid}}" bindtap="{{order.orderMethodOne}}" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
@@ -93,13 +93,13 @@
               </view>
             </view>
             <view class='orderInfor'>
-              <view class='orderPrice'>{{item.price}}</view>
-              <view class='orderNum'>{{item.number}}</view>
+              <view class='orderPrice'>￥{{item.price}}</view>
+              <view class='orderNum'>x{{item.number}}</view>
             </view>
           </view>
           <view class='orderSumPri'>
             共{{order.totalNumber}}件商品 合计：
-            <view class='orderPri'>{{order.totalPrice}}元</view>
+            <view class='orderPri'>￥{{order.totalPrice}}元</view>
           </view>
           <view class="orderHander">
             <view class="orderCancel" data-orderid="{{order.orderid}}" bindtap="{{order.orderMethodOne}}" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
@@ -124,13 +124,13 @@
                 </view>
               </view>
               <view class='orderInfor'>
-                <view class='orderPrice'>{{item.price}}</view>
-                <view class='orderNum'>{{item.number}}</view>
+                <view class='orderPrice'>￥{{item.price}}</view>
+                <view class='orderNum'>x{{item.number}}</view>
               </view>
           </view>
           <view class='orderSumPri'>
             共{{order.totalNumber}}件商品 合计：
-            <view class='orderPri'>{{order.totalPrice}}元</view>
+            <view class='orderPri'>￥{{order.totalPrice}}元</view>
           </view>
           <view class="orderHander">
             <view class="orderCancel" data-orderid="{{order.orderid}}" bindtap="{{order.orderMethodOne}}" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>
@@ -158,13 +158,13 @@
               </view>
             </view>
             <view class='orderInfor'>
-              <view class='orderPrice'>{{item.price}}</view>
-              <view class='orderNum'>{{item.number}}</view>
+              <view class='orderPrice'>￥{{item.price}}</view>
+              <view class='orderNum'>x{{item.number}}</view>
             </view>
           </view>
           <view class='orderSumPri'>
           共{{order.totalNumber}}件商品 合计：
-          <view class='orderPri'>{{order.totalPrice}}元</view>
+          <view class='orderPri'>￥{{order.totalPrice}}元</view>
           </view>
           <view class="orderHander">
             <view class="orderCancel" data-orderid="{{order.orderid}}" bindtap="{{order.orderMethodOne}}" hidden="{{order.ifhiddenone}}">{{order.orderHandleOne}}</view>

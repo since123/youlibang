@@ -36,7 +36,7 @@
         </view>
       </view>
   </view>
-  <view class='tuijian'>推荐ID</view>
+  <view class='tuijian'>推荐ID(没有邀请id时,可输入朋友的也可不输入)</view>
   <view class='inputInfo'><input type='text' bindinput="getInputValue" placeholder='请输入' readonly="{{ifReadyonly}}">{{inviterID}}</input></view>
   <view hidden='{{ifhidden}}'>
     <view class='uploadIDCard'>上传身份证（第一张正面，第二张反面）</view>

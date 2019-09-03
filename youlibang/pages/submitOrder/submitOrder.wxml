@@ -1,57 +1,53 @@
 <!--pages/submitOrder/submitOrder.wxml-->
 <view class="body">
-<view class='detailInfo'>
-    <view class='addressImg'><image src='../../images/dizhi1@2x.png'></image></view>
-    <view class='name_phone'>
+<!-- 顶部默认地址 -->
+  <view class="detailInfo">
+     <view class="addressImg">
+     <image src="../../images/dizhi1@2x.png"></image>
+     </view>
+     <view class="name_phone">
       <view class='username'>{{defAddress.address_name}}</view>
       <view class='phone'>{{defAddress.address_phone}}</view>
-    </view>
-    <view class="leftArrow" catchtap="chooseAddress">></view>
-    <view class='address'>{{defAddress.address}}</view>
-</view>
-<!-- 根据地址选取距离最近的经销商 -->
+     </view>
+      <view class="leftArrow" catchtap="chooseAddress">></view>
+      <view class='address'>{{defAddress.address}}</view>
+  </view>
+  <!-- 根据地址选取距离最近的经销商 -->
     <picker bindchange="pickChange" value="{{index}}" range="{{datalist}}" range-key="{{'nickname'}}">
-    <view>
+    <view class="dealer">
         当前选择的经销商：{{datalist[index].name}}
     </view>
   </picker>
 <!-- 订单信息 -->
-<view class='orderInfo'>
-  <view class='Infotext'>订单信息</view>
-  <view class='line'></view>
-  <view class='goodsInfo' wx:for="{{dataList}}" wx:key="{{index}}">
-    <view class='goodsImg'>
-    <image src='../../images/2012031220134655.jpg'></image>
-    </view>
-    <view class='goodsdetail'>{{item.title}}</view>
-    <view class='types_num'>
-      <view class='types'>{{item.yd}}</view>
-      <view class='num'>X{{item.num}}件</view>
-    </view>
-  </view>
-  <!-- <view class='goodsInfo'>
-    <view class='goodsImg'><image src='../../images/2012031220134655.jpg'></image></view>
-    <view class='goodsdetail'>新款韩版秋装女初恋裙白色复古压褶雪纺长袖连衣裙a字中长裙</view>
-    <view class='types_num'>
-      <view class='types'>毛衣+连衣裙,均码</view>
-      <view class='num'>X2件</view>
-    </view>
-  </view> -->
-  <view class='line'></view>
-  <view class='yunfei'>
+   <view class="orderInfo">
+     <view class='Infotext'>订单信息</view>
+      <view class='line'></view>
+      <view class='goodsInfo' wx:for="{{dataList}}" wx:key="{{index}}">
+           <view class='goodsImg'>
+              <image src='{{item.img}}'></image>
+           </view>
+            <view class='goodsdetail'>{{item.title}}</view>
+        <view class='types_num'>
+           <view class='types'>{{item.yd}}</view>
+           <view class='num'>X{{item.num}}件</view>
+         </view>
+      </view>
+      <view class='yunfei'>
+      <view class='line'></view>
     <view class='yunfeitext'>运费</view>
     <view class='mianyunfei'>免运费</view>
   </view>
-   <view class='heji'>
+  <view class='heji'>
     <view class='total'>合计</view>
     <view class='money'><label>￥</label>{{total}}</view>
-  </view>
-  <view class='line'></view>
-  <view class='beizhu' wx:if="{{status}}" bindtap="describe">添加卖家备注</view>
+   </view>
+    <view class='line'></view>
+    <view class='beizhu' wx:if="{{status}}" bindtap="describe">添加卖家备注</view>
   <input class='shuru'bindchange="inputvalue" wx:if="{{!status}}" bindblur="finish" maxlength="255"></input>
-</view>
-<!-- 支付方式 -->
-<view class='way'>
+  </view>
+  <!-- 支付 -->
+  <view class="fenge"></view>
+  <view class='way'>
   <view class='payforWay'><label>支付方式</label></view>
   <radio-group>
   <view class='wexinPayfor'>
@@ -77,6 +73,5 @@
       </view>
       <view class="confirmPWD" bindtap="confirmPwd">确认</view>
 </view>
-</view>  
 
-
+</view>

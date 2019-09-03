@@ -17,7 +17,6 @@ Page({
     frontID: wx.getStorageSync('inform').card_one,
     backID: wx.getStorageSync('inform').card_two,
     businessLicense: wx.getStorageSync('inform').license,
-    imgList: [],
     inviterID: '',
     ifhidden: true,
     informHidden: true,
@@ -74,12 +73,7 @@ Page({
           inviterID: inviterID,
           ifReadyonly: readonly
         })
-      } else {
-        wx.showModal({
-          title: '提示',
-          content: '没有邀请id,可输入朋友的也可不输入',
-        })
-      }
+      } 
       let vipRules = []
       for (let m in VIPList) {
         // console.log(VIPList[m])
@@ -168,8 +162,6 @@ Page({
         that.setData({
           frontID: tempFilePaths[0]
         })
-        // console.log(that.data.frontID)
-         that.data.imgList.push(that.data.frontID)
          wx.uploadFile({
            url: ApiUrl.phplist + 'member/upimg?token=' + that.data.token,
            filePath: that.data.frontID,
@@ -178,7 +170,9 @@ Page({
              "Content-Type": "multipart/form-data"//记得设置
            },
            success(res) {
-             console.log(res)
+             wx.setStorageSync('frontID', that.data.frontID)
+             console.log(that.data.frontID)
+             console.log('上传成功')
            }
          })
       },
@@ -201,7 +195,6 @@ Page({
           backID: tempFilePaths[0]
         })
         // console.log(that.data.backID)
-        that.data.imgList.push(that.data.backID)
         wx.uploadFile({
           url: ApiUrl.phplist + 'member/upimg?token=' + that.data.token,
           filePath: that.data.backID,
@@ -210,7 +203,8 @@ Page({
             "Content-Type": "multipart/form-data"//记得设置
           },
           success(res) {
-            console.log(res)
+            wx.setStorageSync('backID', that.data.backID)
+            console.log('上传成功')
           }
         })
       },
@@ -233,7 +227,6 @@ Page({
           businessLicense: tempFilePaths[0]
         })
         // console.log(that.data.businessLicense)
-       that.data.imgList.push(that.data.businessLicense)
         wx.uploadFile({
           url: ApiUrl.phplist + 'member/upimg?token=' + that.data.token,
           filePath: that.data.businessLicense,
@@ -242,7 +235,8 @@ Page({
             "Content-Type": "multipart/form-data"//记得设置
           },
           success(res) {
-            console.log(res)
+            wx.setStorageSync('businessLicense', that.data.businessLicense)
+            console.log('上传成功')
           }
         })
       },
@@ -413,7 +407,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      frontID: wx.getStorageSync('frontID') == '' ? wx.getStorageSync('inform').card_one : wx.getStorageSync('frontID'),
+      backID: wx.getStorageSync('backID') == '' ? wx.getStorageSync('inform').card_two : wx.getStorageSync('backID'),
+      businessLicense: wx.getStorageSync('businessLicense') == '' ? wx.getStorageSync('inform').license : wx.getStorageSync('businessLicense'),
+    })
   },
 
   /**

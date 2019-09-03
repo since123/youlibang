@@ -1,16 +1,18 @@
 // pages/customerService/customerService.js
 var serviceid;
 var serviceTel;
+import {
+  ApiUrl
+} from '../../utils/apiurl.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    infolist: [
-      { serviceid:0, serviceTel: '020-23787989', kefuNum: '客服003'},
-      { serviceid:1, serviceTel: '020-22324349', kefuNum: '客服005'}
-      ],
+    infolist: ApiUrl.phone
+     
+    ,
     // frame: [{
     //   "tel": "15674902565"
     // }],

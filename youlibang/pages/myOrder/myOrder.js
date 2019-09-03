@@ -35,6 +35,7 @@ Page({
     ifRefund: true,
     refundremark: '',
     ifReceipt: true,
+    lineUrl: 'https://wx.ylbtl.cn'
   },
   /**
    * 请求数据
@@ -101,10 +102,13 @@ Page({
            let mm = {}
           // console.log(lists[m].goods[n])
           if (lists[m].goods[n].hasOwnProperty('goods_logo')) {
-            mm.image = lists[m].goods[n].goods_logo
+            mm.image = that.data.lineUrl + lists[m].goods[n].goods_logo
           }
           if (lists[m].goods[n].hasOwnProperty('goods_name')) {
             mm.title = lists[m].goods[n].goods_name
+          } 
+          if (lists[m].goods[n].hasOwnProperty('goods_attr_values')) {
+            mm.properties = lists[m].goods[n].goods_attr_values
           }
           if (lists[m].goods[n].hasOwnProperty('goods_price')) {
             mm.price = lists[m].goods[n].goods_price

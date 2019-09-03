@@ -18,7 +18,8 @@ Page({
     orderid: '',
     orderAmount: '',
     freightStatus: '20',
-    order: []
+    order: [],
+    lineUrl: 'https://wx.ylbtl.cn'
   },
   /**
    * 生命周期函数--监听页面加载
@@ -52,7 +53,7 @@ Page({
       for (let m in goodsList) {
         console.log(goodsList[m])
         let good = {}
-        good.goodsImg = goodsList[m].goods_logo,
+        good.goodsImg = that.data.lineUrl + goodsList[m].goods_logo,
         good.goodsdetail = goodsList[m].goods_name,
         good.types = goodsList[m].goods_attr_values,
         good.num = goodsList[m].number

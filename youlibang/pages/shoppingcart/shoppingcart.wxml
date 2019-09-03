@@ -5,7 +5,7 @@
     <icon wx:if="{{item.selected}}" type="success" color="red" bindtap="selectList" data-index="{{index}}" size='40rpx' />
     <icon wx:else type="circle" bindtap="selectList" data-index="{{index}}" size='40rpx' />
     
-      <image src="{{item.image}}" bindtap="toGoods" data-goods_Id='{{item.id}}'></image>
+      <image src="{{item.img}}" bindtap="toGoods" data-goods_Id='{{item.id}}'></image>
    
     <view class='explain'>
       <text class='explain_top'>{{item.title}}</text>

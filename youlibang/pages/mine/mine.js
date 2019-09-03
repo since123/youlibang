@@ -101,6 +101,14 @@ Page({
       inform.can_rebate = !can_rebate ? 0 : can_rebate
       inform.mobile = lists.phone//电话号码
       inform.address = lists.address
+      if (lists.address == '') {
+        if (Number(lists.level) >= 6) {
+          wx.showModal({
+            title: '提示',
+            content: '请进入个人资料页面绑定您实体店地址！（点用户头像进入）',
+          })
+        }
+      }
       inform.inviter_id = !lists.inviter_id ? 0 : lists.inviter_id//邀请id
       inform.sex = lists.sex//性别
       if (lists.card_one == null) {

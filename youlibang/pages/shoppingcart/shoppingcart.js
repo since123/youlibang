@@ -57,6 +57,9 @@ Page({
     }).then((res) => {
       console.log(res)
       if (res.data.lists == undefined) {
+         that.setData({
+           cart:""
+         })
         wx.showModal({
           title: '亲',
           content: '购物车空空如也呢！',
@@ -79,9 +82,11 @@ Page({
           obj.selected = true
           obj.way = '结算'
           obj.cart_id = dataList[i].id
+          obj.img = ApiUrl.url+dataList[i].goods_logo
+          // obj.yd = dataList[i].goods_attr_values
           arr.push(obj)
         }
-    
+         
         console.log(arr)
         that.setData({
           hasList: true,

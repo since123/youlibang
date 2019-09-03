@@ -13,10 +13,12 @@
   <view class='line'></view>
   <view class='goodsInfo' wx:for="{{order}}" wx:key="item.index">
     <view class='goodsImg'><image src='{{item.goodsImg}}'></image></view>
-    <view class='goodsdetail'>{{item.goodsdetail}}</view>
-    <view class='types_num'>
-      <view class='types'>{{item.types}}</view>
-      <view class='num'>{{item.num}}</view>
+    <view class="goodsInfo-right">
+      <view class='goodsdetail'>{{item.goodsdetail}}</view>
+      <view class='types_num'>
+        <view class='types'>{{item.types}}</view>
+        <view class='num'>x{{item.num}}件</view>
+      </view>
     </view>
   </view>
   <view class='line'></view>

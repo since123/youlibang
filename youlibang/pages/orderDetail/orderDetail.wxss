@@ -55,8 +55,6 @@
   margin-top: 3%;
 }
 .Infotext{
-  float: left;
-  width: 700rpx;
   font-size:30rpx;
   font-family:sans-serif;
   font-weight:500;
@@ -65,35 +63,29 @@
   margin-top: 2%;
 }
 .line{
-  float: right;
-  width:706rpx;
   height:2rpx;
   background:rgba(230,230,230,1);
-  margin-top: 2%;
 }
 .goodsInfo{
-  float: left;
+  display: flex;
+  width: 100%;
+  flex-wrap: no-wrap;
   background-color: #ffffff;
-  /* width: 750rpx;
-  height: 160rpx; */
-  /* background-color: green; */
+}
+.goodsInfo-right {
+  flex: 1;
+  display: flex;
+  flex-flow: row wrap;
+  align-content:space-around;
 }
 .goodsImg{
-  float: left;
-  width: 116rpx;
-  height: 116rpx;
-  /* background-color: green; */
-  margin-top: 4%;
-  margin-left: 5%;
+  margin: 20rpx 20rpx;
 }
 .goodsImg image{
   width: 116rpx;
   height: 116rpx;
 }
 .goodsdetail{
-  float: left;
-  width:503rpx;
-  height:59rpx;
   font-size:28rpx;
   font-family:sans-serif;
   font-weight:500;
@@ -103,33 +95,23 @@
   margin-left: 3%;
 }
 .types_num{
-  float: left;
-  width: 500rpx;
-  height: 50rpx;
-  /* background-color: yellow; */
-  margin-left: 3%;
-  margin-top: 1%;
+  display: flex;
 }
 .types{
-  width: 200rpx;
-  float: left;
+  flex: 1;
   font-size:24rpx;
   font-family:sans-serif;
   font-weight:500;
   color:rgba(153,153,153,1);
   margin-top: 4%;
-  /* margin-left: 3%; */
-  /* background-color: red; */
 }
 .num{
- /* background-color: red; */
-  float: right;
   font-size:24rpx;
   font-family:sans-serif;
   font-weight:500;
   color:rgba(102,102,102,1);
   margin-top: 4%;
-  /* margin-left: 65%; */
+  margin-right: 4%;
 }
 .yunfei{
   float: left;

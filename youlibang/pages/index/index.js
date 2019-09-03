@@ -162,7 +162,29 @@ Page({
     })
   },
   onLoad: function(options) {
-   
+    var that = this;
+    //请求接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'operatedata/getlist?type=1'
+    }).then((res) => {
+      console.log(res)
+      if (res.data.lists == undefined) {
+        wx.showModal({
+          title: '亲',
+          content: res.data.msg,
+        })
+        return false
+      }
+      var dataList = res.data.lists
+      console.log(dataList)
+      this.setData({
+        dataList
+      })
+    })
   },
  
    onShow:function(){
@@ -214,21 +236,7 @@ Page({
      });
 
      //处理通知栏
-     var that = this;
-     //请求接口
-     httpReq({
-       header: {
-         'Content-Type': 'application/json',
-         'Accept': 'application/json'
-       },
-       url: ApiUrl.phplist + 'operatedata/getlist?type=1'
-     }).then((res) => {
-       var dataList = res.data.lists
-       console.log(dataList)
-       this.setData({
-         dataList
-       })
-     })
+  
    },
   getUserInfo: function(e) {
   
