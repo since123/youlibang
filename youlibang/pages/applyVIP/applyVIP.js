@@ -152,98 +152,121 @@ Page({
    */
   changeFrontID: function() {
     let that = this
-    wx.chooseImage({
-      count: 1,//默认9f
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {//// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths;
-        //console.log(tempFilePaths)
-        that.setData({
-          frontID: tempFilePaths[0]
-        })
-         wx.uploadFile({
-           url: ApiUrl.phplist + 'member/upimg?token=' + that.data.token,
-           filePath: that.data.frontID,
-           name: 'card_one',
-           header: {
-             "Content-Type": "multipart/form-data"//记得设置
-           },
-           success(res) {
-             wx.setStorageSync('frontID', that.data.frontID)
-             console.log(that.data.frontID)
-             console.log('上传成功')
-           }
-         })
-      },
-    })
+    if (wx.getStorageSync('vipid')) {
+      wx.showModal({
+        title: '提示',
+        content: '你已经是会员了',
+      })
+      return false
+    } else {
+      wx.chooseImage({
+        count: 1,//默认9f
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        success: function (res) {//// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+          const tempFilePaths = res.tempFilePaths;
+          //console.log(tempFilePaths)
+          that.setData({
+            frontID: tempFilePaths[0]
+          })
+          wx.uploadFile({
+            url: ApiUrl.phplist + 'member/upimg?token=' + that.data.token,
+            filePath: that.data.frontID,
+            name: 'card_one',
+            header: {
+              "Content-Type": "multipart/form-data"//记得设置
+            },
+            success(res) {
+              wx.setStorageSync('frontID', that.data.frontID)
+              console.log(that.data.frontID)
+              console.log('上传成功')
+            }
+          })
+        },
+      })
+    }
   },
   /**
    * 获取身份证国徽页
    */
   changeBackID: function() {
     let that = this
-    wx.chooseImage({
-      count: 1,//默认9f
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths;
-       // console.log(tempFilePaths)
-        that.setData({
-          backID: tempFilePaths[0]
-        })
-        // console.log(that.data.backID)
-        wx.uploadFile({
-          url: ApiUrl.phplist + 'member/upimg?token=' + that.data.token,
-          filePath: that.data.backID,
-          name: 'card_two',
-          header: {
-            "Content-Type": "multipart/form-data"//记得设置
-          },
-          success(res) {
-            wx.setStorageSync('backID', that.data.backID)
-            console.log('上传成功')
-          }
-        })
-      },
-    })
+    if (wx.getStorageSync('vipid')) {
+      wx.showModal({
+        title: '提示',
+        content: '你已经是会员了',
+      })
+      return false
+    } else {
+      wx.chooseImage({
+        count: 1,//默认9f
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        success: function (res) {
+          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+          const tempFilePaths = res.tempFilePaths;
+          // console.log(tempFilePaths)
+          that.setData({
+            backID: tempFilePaths[0]
+          })
+          // console.log(that.data.backID)
+          wx.uploadFile({
+            url: ApiUrl.phplist + 'member/upimg?token=' + that.data.token,
+            filePath: that.data.backID,
+            name: 'card_two',
+            header: {
+              "Content-Type": "multipart/form-data"//记得设置
+            },
+            success(res) {
+              wx.setStorageSync('backID', that.data.backID)
+              console.log('上传成功')
+            }
+          })
+        },
+      })
+    }
+   
   },
   /**
    * 获取营业执照页
    */
   changeBusinessLicense: function() {
     let that = this
-    wx.chooseImage({
-      count: 1,//默认9f
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths;
-       // console.log(tempFilePaths)
-        that.setData({
-          businessLicense: tempFilePaths[0]
-        })
-        // console.log(that.data.businessLicense)
-        wx.uploadFile({
-          url: ApiUrl.phplist + 'member/upimg?token=' + that.data.token,
-          filePath: that.data.businessLicense,
-          name: 'license',
-          header: {
-            "Content-Type": "multipart/form-data"//记得设置
-          },
-          success(res) {
-            wx.setStorageSync('businessLicense', that.data.businessLicense)
-            console.log('上传成功')
-          }
-        })
-      },
-      // radioChange: function (e) {
-      //   console.log('radio发生change事件，携带value值为：', e.detail.value)
-      // },
-    })
+    if (wx.getStorageSync('vipid')) {
+      wx.showModal({
+        title: '提示',
+        content: '你已经是会员了',
+      })
+      return false
+    } else {
+      wx.chooseImage({
+        count: 1,//默认9f
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        success: function (res) {
+          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+          const tempFilePaths = res.tempFilePaths;
+          // console.log(tempFilePaths)
+          that.setData({
+            businessLicense: tempFilePaths[0]
+          })
+          // console.log(that.data.businessLicense)
+          wx.uploadFile({
+            url: ApiUrl.phplist + 'member/upimg?token=' + that.data.token,
+            filePath: that.data.businessLicense,
+            name: 'license',
+            header: {
+              "Content-Type": "multipart/form-data"//记得设置
+            },
+            success(res) {
+              wx.setStorageSync('businessLicense', that.data.businessLicense)
+              console.log('上传成功')
+            }
+          })
+        },
+      })
+    }
+   
   },
   /**
    * 获取输入框的内容
@@ -407,13 +430,29 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-      frontID: wx.getStorageSync('frontID') == '' ? wx.getStorageSync('inform').card_one : wx.getStorageSync('frontID'),
-      backID: wx.getStorageSync('backID') == '' ? wx.getStorageSync('inform').card_two : wx.getStorageSync('backID'),
-      businessLicense: wx.getStorageSync('businessLicense') == '' ? wx.getStorageSync('inform').license : wx.getStorageSync('businessLicense'),
+    this.showPicture()
+  },
+  //成为会员操作成功之后显示三张图片
+  showPicture: function() {
+    let that = this
+    let frontID = wx.getStorageSync('frontID') ? wx.getStorageSync('frontID') : ''
+    let backID = wx.getStorageSync('backID') ? wx.getStorageSync('backID') : ''
+    let businessLicense = wx.getStorageSync('businessLicense') ? wx.getStorageSync('businessLicense') : ''
+    let inform_frontID = wx.getStorageSync('inform').card_one
+    let inform_backID = wx.getStorageSync('inform').card_two
+    let inform_businessLicense = wx.getStorageSync('inform').license
+    // console.log(frontID)
+    // console.log(backID)
+    // console.log(businessLicense)
+    // console.log(inform_frontID)
+    // console.log(inform_backID)
+    // console.log(inform_businessLicense)
+    that.setData({
+      frontID: frontID == '' ? inform_frontID : frontID,
+      backID: backID == '' ? inform_backID : backID,
+      businessLicense: businessLicense == '' ? inform_businessLicense : businessLicense,
     })
   },
-
   /**
    * 生命周期函数--监听页面隐藏
    */

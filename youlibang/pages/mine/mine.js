@@ -22,7 +22,9 @@ Page({
     status: true,
     ifUser: true,
     ifPhone: true,
-    lineUrl: 'https://wx.ylbtl.cn'
+    // lineUrl: 'https://wx.ylbtl.cn',
+    lineUrl: ApiUrl.url
+    
   },
 
   /**
@@ -91,7 +93,7 @@ Page({
       //inform.userImg_url = that.data.lineUrl + urlStr
       let price = Number(lists.can_rebate) + Number(lists.no_rebate) + Number(lists.user_money)
       //console.log(price)
-      inform.price = !price ? 0 : price
+      inform.price = !price ? 0 : price//账户余额
       //console.log(Number(lists.can_rebate) + Number(lists.user_money))
       let usermoney = Number(lists.can_rebate) + Number(lists.user_money)//可提现全部余额
       //console.log(usermoney)
@@ -365,7 +367,6 @@ Page({
     })
   },
   getPhoneNumber: function (e) {
-    console.log(e)
     let that = this
     //用户取消手机授权直接返回
     if (e.detail.iv == undefined && e.detail.encryptedData == undefined) {
@@ -375,8 +376,9 @@ Page({
     wx.setStorageSync('encryptedData', e.detail.encryptedData)
     wx.setStorageSync('iv', e.detail.iv)
     //存储电话
-    this.savePhonenum()
-    that.onLoad()
+    this.savePhonenum().then(()=>{
+      that.onLoad()
+    })
   },
   /**
    * 将用户信息存入数据库
@@ -413,10 +415,10 @@ Page({
   },
   //存手机号
   savePhonenum() {
-    console.log(wx.getStorageSync('token'))
-    console.log(wx.getStorageSync('encryptedData'))
-    console.log(wx.getStorageSync('iv'))
-    httpReq({
+    // console.log(wx.getStorageSync('token'))
+    // console.log(wx.getStorageSync('encryptedData'))
+    // console.log(wx.getStorageSync('iv'))
+    return httpReq({
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -457,4 +459,14 @@ Page({
       }
     })
   },
+  cancelPay() {
+    this.setData({
+      status: true,
+      ifUser: true,
+      ifPhone: true
+    })
+    wx.switchTab({
+      url: '../index/index',
+    }) 
+  }
 })

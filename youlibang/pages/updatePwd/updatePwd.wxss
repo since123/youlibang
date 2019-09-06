@@ -50,16 +50,13 @@ input{
   line-height:70rpx;
 }
 .pwd{
-  float: left;
-  width: 28rpx;
-  height: 20rpx;
-  background-color: red;
-  margin-top:38rpx;
+  float: left; 
+  margin-top: 30rpx;
   margin-left: 120rpx;
 }
 .pwd image{
-  width: 28rpx;
-  height: 20rpx;
+  width: 38rpx;
+  height: 38rpx;
 }
 .tishi{
   float: left;

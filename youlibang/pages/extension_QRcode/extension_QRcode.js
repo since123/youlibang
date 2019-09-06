@@ -42,10 +42,7 @@ Page({
        }).then((res) => {
          //console.log(res)
          if (res.statusCode==500){
-          wx.showModal({
-            title: '不可重复请求',
-            content: '二维码已经生成',
-          })
+          
           return false
          }else{
            var imgUrl = res.data.lists

@@ -3,20 +3,7 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
-    movies: [
-      {
-        url: '/image/run01.jpg',
-        link: ''
-      },
-      {
-        url: '/image/run02.jpg',
-        link: ''
-      },
-      {
-        url: '/image/run03.jpg',
-        link: ''
-      }
-    ]
+    logs: []
   },
   onLoad: function () {
     this.setData({

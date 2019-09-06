@@ -16,7 +16,7 @@ Page({
     token: wx.getStorageSync('token'),
     vipid: wx.getStorageSync('vipid'),
     nameList: [],
-    lineUrl: 'https://wx.ylbtl.cn'
+    lineUrl: ApiUrl.url
   },
   getAccumulatedIncome: function() {
     

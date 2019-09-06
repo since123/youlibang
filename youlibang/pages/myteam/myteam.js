@@ -68,7 +68,9 @@ Page({
           let teamMember = {}
           teamMember.image = lists[m].avatar
           teamMember.userName = lists[m].nickname
-          teamMember.time = util.formatTime(new Date(lists[m].create_time)) 
+          teamMember.time = util.formatTime(new Date(lists[m].create_time))
+          console.log(lists[m].create_time)
+          // console.log(util.formatTime(lists[m].create_time))
           teamMember.money = Number(lists[m].amount)
           teamMember.orderNum = Number(lists[m].order_count)
           teamInfor.push(teamMember)

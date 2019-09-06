@@ -1,6 +1,6 @@
 
 function httpReq(params = {}){
-  let url = params.url || 'https://wx.ylbtl.cn/';
+  let url = params.url || 'https://www.znwlwh.com/';
   // let url = params.url || 'http://www.ylb.com/';
   let data = params.data || '';
   let header = params.header || {};

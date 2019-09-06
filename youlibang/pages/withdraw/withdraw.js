@@ -56,10 +56,11 @@ Page({
    */
   getAll: function() {
     let amount = this.data.amount
+    console.log(this.data.someMoney)
     this.setData({
       someMoney: amount,
     })
-    console.log(this.data.amount)
+    console.log(this.data.someMoney)
   },
   /**
    * 提现
@@ -82,6 +83,7 @@ Page({
       },
       url: ApiUrl.phplist + 'member/memberCash?token=' + token + '&describe=' + this.data.describe + '&fee=' + this.data.someMoney + '&member_id=' + vipid,
     }).then((res) => {
+      console.log(res)
       let errorMessage = res.data.msg;
       if (errorMessage != '') {
         that.setData({

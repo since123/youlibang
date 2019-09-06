@@ -16,7 +16,7 @@ Page({
     token: wx.getStorageSync('token'),
     vipid: wx.getStorageSync('vipid'),
     teamRebateList: [],
-    lineUrl: 'https://wx.ylbtl.cn'
+    lineUrl: ApiUrl.url
   },
   /**
    * 获取后台数据
@@ -29,7 +29,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'member/rebatelist?token=' + this.data.token + '&member_id=' + this.data.vipid + '&status=2' ,
+      url: ApiUrl.phplist + 'member/rebatelist?token=' + that.data.token + '&member_id=' + that.data.vipid + '&status=2' ,
     }).then((res) => {
       console.log(res);
       if (res.data.code == 10001) {

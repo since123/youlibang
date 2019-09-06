@@ -5,7 +5,7 @@
 </view>
 <view class='vipinfo'>
   <view class='infotext'>会员名</view>
-  <input class='rightinfo' bindinput="getVipNameValue" name="vipname" value="{{name}}"></input>
+  <label class='rightinfo'>{{name}}</label>
 </view>
 <view class='vipinfo'>
   <view class='infotext' bindtap="bindPhoneNumber">手机号码</view>
@@ -13,7 +13,7 @@
 </view>
 <view class='vipinfo'>
   <view class='infotext'>性别</view>
-  <input class='rightinfo' bindinput="getSexValue" name="sex" value="{{sex}}"></input>
+  <label class='rightinfo'>{{sex}}</label>
 </view>
 <view class='vipinfo' bindtap='getUserAddress'>
   <view class='infotext'>绑定地址</view>

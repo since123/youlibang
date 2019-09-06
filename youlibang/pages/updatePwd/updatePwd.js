@@ -26,7 +26,10 @@ Page({
     createStatus: true,
     editStatus: true,
     passwordMrssage: '',
-    editpasswordMrssage: ''
+    editpasswordMrssage: '',
+    ifShowpassword: 'password',
+    ifShowoldpassword: 'password',
+    ifShownewpassword: 'password',
   },
 
   /**
@@ -55,6 +58,19 @@ Page({
     that.setData({
       passwordValue: passwordValue
     })
+  },
+  //是否显示密码
+  showPassword: function() {
+    let ifShowpassword = this.data.ifShowpassword
+    if (ifShowpassword == 'password'){
+      this.setData({
+        ifShowpassword: 'text'
+      })
+    } else {
+      this.setData({
+        ifShowpassword: 'password'
+      })
+    }
   },
   //设置密码formSubmitone
   formSubmitone: function () {
@@ -85,7 +101,7 @@ Page({
           that.setData({
             passwordValue: '',
             createStatus: false,
-            passwordMrssage: '密码设置成功'
+            passwordMrssage: '密码设置成功',
           })
         }
       })
@@ -208,6 +224,19 @@ Page({
     })
     console.log(this.data.oldpassword)
   },
+  //是否显示密码
+  showoldpassword: function () {
+    let ifShowoldpassword = this.data.ifShowoldpassword
+    if (ifShowoldpassword == 'password') {
+      this.setData({
+        ifShowoldpassword: 'text'
+      })
+    } else {
+      this.setData({
+        ifShowoldpassword: 'password'
+      })
+    }
+  },
   //输入新密码
   entrynewPassword: function(e) {
     let newpassword = e.detail.value
@@ -215,6 +244,19 @@ Page({
       newpassword: newpassword
     })
     console.log(this.data.newpassword)
+  },
+  //是否显示密码
+  shownewpassword: function () {
+    let ifShownewpassword = this.data.ifShownewpassword
+    if (ifShownewpassword == 'password') {
+      this.setData({
+        ifShownewpassword: 'text'
+      })
+    } else {
+      this.setData({
+        ifShownewpassword: 'password'
+      })
+    }
   },
   //修改密码formSubmittwo
   formSubmittwo: function () {

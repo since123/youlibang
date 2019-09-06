@@ -35,7 +35,7 @@ Page({
     ifRefund: true,
     refundremark: '',
     ifReceipt: true,
-    lineUrl: 'https://wx.ylbtl.cn'
+    lineUrl: ApiUrl.url
   },
   /**
    * 请求数据
@@ -355,7 +355,6 @@ Page({
         paySign: res.data.lists.paySign,
         success: function (res) {
           that.onLoad()
-          console.log('1')
           that.setData({
             status: false,
             payStatus: true
@@ -467,7 +466,6 @@ Page({
         })
       }
     })
-
   },
   //取消收货
   receiptcancel: function () {
@@ -493,9 +491,9 @@ Page({
       })
     } else if (payway == 'xianxia'){
       that.setData({
-        ifxianxia: false,
+        // ifxianxia: false,
         ifPassword: true,
-        payStatus: true
+        // payStatus: true
       })
     } else if (payway == 'wxpay'){
       ifPassword: true
@@ -534,7 +532,10 @@ Page({
   confirmQianbaoPay: function() {
     let that = this
     console.log(that.data.payway)
-    
+    console.log(that.data.payway)
+    console.log(wx.getStorageSync('token'))
+    console.log(wx.getStorageSync('vipid'))
+    console.log(that.data.orderid)
     httpReq({
       header: {
         'Content-Type': 'application/json',
@@ -553,6 +554,7 @@ Page({
           title: '提示',
           content: '支付成功',
         })
+        that.onLoad()
       }
     })
   },
@@ -598,10 +600,32 @@ Page({
   },
   //线下付款
   confirmXianxiaPay: function() {
-    this.setData({
-      ifxianxia: false,
-      payStatus: true,
-      status: false
+    let that = this
+    console.log(that.data.payway)
+    console.log(wx.getStorageSync('token'))
+    console.log(wx.getStorageSync('vipid'))
+    console.log(that.data.orderid)
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'order/orderpay?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid') + '&pay_type=' + that.data.payway + '&order_id=' + that.data.orderid,
+    }).then((res)=>{
+      console.log(res)
+      if (res.data.code == 10001) {
+        wx.showModal({
+          title: '提示',
+          content: res.data.msg,
+        })
+      } else {
+        that.setData({
+        ifxianxia: false,
+        payStatus: true,
+        status: false
+       })
+        that.onLoad()
+      }
     })
   },
 

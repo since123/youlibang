@@ -13,24 +13,7 @@ Page({
     state:true,
     images: [],
     col1: [],
-    movies: [{
-        url: '/images/2012031220134655.jpg',
-        link: '',
-        id:0
-        
-      },
-      {
-        url: '/images/2013062320262198.jpg',
-        link: '',
-        id:0
-        
-      },
-      {
-        url: '/images/82bOOOPICcb.jpg',
-        link: '',
-        id:1
-      
-      }
+    movies: [
     ],
     page:0
   },
@@ -69,13 +52,13 @@ Page({
       console.log(res)
       if(res.data.lists==undefined){
            wx.showModal({
-             title: '亲',
+             title: '提示',
              content: '没有数据哦！',
            })
            return false
       }
       wx.showModal({
-        title: '亲',
+        title: '提示',
         content: '已经到首页了呢！',
       })
       //console.log(ApiUrl.url)
@@ -114,7 +97,7 @@ Page({
       //处理商品信息
       if(res.data.lists==undefined){
          wx.showModal({
-           title: '亲',
+           title: '提示',
            content: '已经到尾页了呢',
          })
         return false
@@ -173,10 +156,7 @@ Page({
     }).then((res) => {
       console.log(res)
       if (res.data.lists == undefined) {
-        wx.showModal({
-          title: '亲',
-          content: res.data.msg,
-        })
+       
         return false
       }
       var dataList = res.data.lists
@@ -184,6 +164,7 @@ Page({
       this.setData({
         dataList
       })
+      console.log(dataList)
     })
   },
  

@@ -1,8 +1,8 @@
 <!--pages/updatePwd/updatePwd.wxml-->
 <form  class="{{ 1 == formValue ? '' : 'form'}}">
 <view class='yzcodeinput'>
-    <input type='password' placeholder='请设置密码' bindinput="entryPassword" name="password"></input>
-    <view class='pwd'><image></image></view>
+    <input type='{{ifShowpassword}}' placeholder='请设置密码' bindinput="entryPassword" name="password"></input>
+    <view class='pwd' bindtap="showPassword"><image src="../../images/passwordshow.png"></image></view>
 </view>
 <view class='tishi'>注:密码由6~20位数字，字母(区分大小写)组成</view>
 <view class='over' bindtap="formSubmitone">完成</view>
@@ -10,12 +10,12 @@
 
 <form  class="{{ 2 == formValue ? '' : 'form'}}">
   <view class='yzcodeinput'>
-    <input type='password' placeholder='请输入旧密码' bindinput="entryoldPassword" name="oldpassword"></input>
-    <view class='pwd'><image></image></view>
+    <input type='{{ifShowoldpassword}}' placeholder='请输入旧密码' bindinput="entryoldPassword" name="oldpassword"></input>
+    <view class='pwd' bindtap="showoldpassword"><image src="../../images/passwordshow.png"></image></view>
   </view>
   <view class='yzcodeinput'>
-    <input type='password' placeholder='请输入新密码' bindinput="entrynewPassword" name="newpassword"></input>
-    <view class='pwd'><image></image></view>
+    <input type='{{ifShownewpassword}}' placeholder='请输入新密码' bindinput="entrynewPassword" name="newpassword"></input>
+    <view class='pwd' bindtap="shownewpassword"><image src="../../images/passwordshow.png"></image></view>
   </view>
 <view class='tishi'>注:密码由6~20位数字，字母(区分大小写)组成</view>
 <view class='over' bindtap="formSubmittwo">完成</view>

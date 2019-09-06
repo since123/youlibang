@@ -18,20 +18,32 @@ Page({
        
 
       ],
-      history:['不在乎','白','他']
+      history:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var history=wx.getStorageSync('search')
-    if(history==''){
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'operatedata/getlist?type=2'
+    }).then((res) => {
+     console.log(res)
+     if(res.data.lists==undefined){
        return false
-    }
-    this.setData({
-      history
-    })
+     }else{
+       this.setData({
+             history:res.data.lists
+       })
+     }
+    
+    });
+
+
   },
 
   /**
@@ -116,6 +128,9 @@ Page({
        var searchGoods = res.data.lists
        if (searchGoods == undefined) {
          console.log("暂无数据匹配！")
+         this.setData({
+           searchGoods: []
+         })
        } else {
          let goods = searchGoods.map((v) => {
            v.goods_name = v.goods_name.replace(inputvalue, "<b style='color:red'>" + inputvalue + "</b>")

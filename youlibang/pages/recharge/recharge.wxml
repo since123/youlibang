@@ -24,7 +24,7 @@
       <view class='wexinPayfor underLine'>
           <image src='../../images/wallet-copy@2x.png'></image>
           <view class='wexintext'>线下支付</view>
-          <radio class='check_box' value="underLinePayfor"></radio>
+          <radio class='check_box' value="xianxia"></radio>
       </view>
     </radio-group>
     <view class='btn' bindtap="confirmPay">确认支付</view>

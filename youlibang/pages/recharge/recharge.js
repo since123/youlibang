@@ -106,12 +106,31 @@ Page({
    * 通过线下支付
    */
   confirmXianxiaPay : function() {
-    wx.showModal({
-      title: '提示',
-      content: '线下联系工作人员完成线下支付',
-    })
-    this.setData({
-      status: false
+    let that = this
+    console.log(that.data.payway)
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'order/orderpay?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid') + '&pay_type=' + that.data.payway,
+    }).then((res) => {
+      console.log(res)
+      if (res.data.code == 10001) {
+        wx.showModal({
+          title: '提示',
+          content: res.data.msg,
+        })
+      } else {
+        wx.showModal({
+        title: '提示',
+        content: '线下联系工作人员完成线下支付',
+      })
+      this.setData({
+        status: false
+      })
+        that.onLoad()
+      }
     })
   },
   payway(e) {

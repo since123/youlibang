@@ -4,9 +4,7 @@
     <view class='sousuo' bindtap="searchPath">搜索</view>
 </view>
 <view class='sousuoContents'>
-    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}" data-text="{{history[0]}}">{{history[0]}}</view>
-    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}" data-text="{{history[1]}}">{{history[1]}}</view>
-    <view class='biaoqian' bindtap="dianji" wx:if="{{state}}" data-text="{{history[2]}}">{{history[2]}}</view>
+    <view class='biaoqian' wx:for="{{history}}" wx wx:for-item="items" wx:key="items" bindtap="dianji" wx:if="{{state}}" data-text="{{items.text}}">{{items.text}}</view>
     <!-- 搜索结果 -->
 <view class='contents' bindscrolltolower="loadImages" wx:if="{{status}}" >
   <view class='listInfo' wx:for="{{searchGoods}}" wx:key="{{item.id}}" data-goodsid='{{item.id}}' catchtap='goodsdetail'>

@@ -32,7 +32,8 @@
     "pages/myOrder/myOrder",
     "pages/editAddress/editAddress",
     "pages/retailOrder/retailOrder",
-    "pages/rebeatWithdraw/rebeatWithdraw"
+    "pages/rebeatWithdraw/rebeatWithdraw",
+    "pages/userAddress/userAddress"
   ],
   "window": {
     "backgroundTextStyle": "light",

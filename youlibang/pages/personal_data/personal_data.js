@@ -25,8 +25,6 @@ Page({
     idCard2:'',
     businesslicense:'',
     token: '',
-    region: ['湖北省', '武汉市', '洪山区'],
-    customItem: '全部',
     address: '',
   },
 

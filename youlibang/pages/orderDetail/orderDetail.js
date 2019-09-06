@@ -19,7 +19,7 @@ Page({
     orderAmount: '',
     freightStatus: '20',
     order: [],
-    lineUrl: 'https://wx.ylbtl.cn'
+    lineUrl: ApiUrl.url
   },
   /**
    * 生命周期函数--监听页面加载
