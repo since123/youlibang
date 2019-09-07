@@ -16,8 +16,8 @@ Page({
     listinfo: [],
     comeInAmount: 0,
     expendAmount: 0,
-    vipid: wx.getStorageSync('vipid'),
-    token: wx.getStorageSync('token')
+    vipid: '',
+    token: ''
   },
 
   /**
@@ -54,7 +54,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'user/flowAccount?time=' + nowDate + '&member_id=' + that.data.vipid + '&token=' + that.data.token,
+      url: ApiUrl.phplist + 'user/flowAccount?time=' + nowDate + '&member_id=' + wx.getStorageSync('vipid')+ '&token=' + wx.getStorageSync('token'),
     }).then((res) => {
       console.log(res)
       let lists = res.data.lists

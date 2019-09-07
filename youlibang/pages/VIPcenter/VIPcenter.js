@@ -15,7 +15,7 @@ Page({
     propRebate: '0',
     unpaidRebate: '0',
     token: '',
-    vipid: wx.getStorageSync('vipid')
+    vipid: ''
   },
   //申请会员，注释不能删，有用
   applyVIP:function(){
@@ -82,10 +82,11 @@ Page({
     console.log('1')
     let that = this
     this.setData({
-      token: wx.getStorageSync('token')
+      token: wx.getStorageSync('token'),
+      vipid: wx.getStorageSync('vipid')
     })
     httpReq({
-      url: ApiUrl.phplist + 'member/rebate?token=' + this.data.token + '&member_id=' +wx.getStorageSync('vipid'),
+      url: ApiUrl.phplist + 'member/rebate?token=' + this.data.token + '&member_id=' + this.data.vipid,
       header: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'

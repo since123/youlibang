@@ -32,6 +32,22 @@ Page({
     console.log(this.data.carts)
    
      this.getTotalPrice()
+    // if(wx.getStorageSync('userInfo')==""){
+    //     wx.showModal({
+    //       title: '提示',
+    //       content: '请完成相关授权！',
+    //     success(res) {
+    //       if (res.confirm) {
+    //         console.log('用户点击确定')
+    //         wx.switchTab({
+    //           url: '../mine/mine',
+    //         })
+    //       } else if (res.cancel) {
+    //         console.log('用户点击取消')
+    //       }
+    //     }
+    //   })
+    // }
   },
 
   /**
@@ -61,10 +77,16 @@ Page({
            cart:""
          })
         wx.showModal({
-          title: '亲',
-          content: '购物车空空如也呢！',
+          title: '提示',
+          content: "购物车是空的！",
+          success(res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
         })
-
       } else {
 
         console.log(res)

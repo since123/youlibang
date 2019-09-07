@@ -37,7 +37,7 @@ Page({
     console.log(options)
     if(options.info==undefined){
       wx.showModal({
-        title: '亲',
+        title: '提示',
         content: '您没有选择任何订单，不允许进行操作！',
       })
       return false
@@ -90,7 +90,7 @@ Page({
       console.log(defAddress)
       if (defAddress == undefined) {
         wx.showModal({
-          title: '亲',
+          title: '提示',
           content: '你还没有添加地址呢',
         })
         return false
@@ -107,68 +107,68 @@ Page({
       // console.log(this.data.defAddress)
     })
    
-    qqmapsdk = new QQMapWX({
-      key: 'KXRBZ-VZARV-YUYPW-USY6I-A7FIF-3ZBT4'
-    })
-    var that = this
-    var address = this.data.defAddress
-    console.log(address)
-    var token = wx.getStorageSync('token')
-    var member_id = wx.getStorageSync('vipid')
-    qqmapsdk.geocoder({ //获取目标地址的地图信息，把详细地址输入address即可
-      address: wx.getStorageSync('defAddress').address,
-      success: function (res) {    //返回的数据里面有该地址的经纬度
-        console.log(res.result.location.lat)
-        var lat = res.result.location.lat
-        var lon = res.result.location.lng
-        //请求接口
-        httpReq({
-          header: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          url: ApiUrl.phplist + 'member/deliverAddress?token=' + token + '&lon=' + lon + '&lat=' + lat + '&member_id=' + member_id,
-        }).then((res) => {
-          console.log(res)
-          if (res.data.msg == "操作成功") {
-            httpReq({
-              header: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-              },
-              method: "POST",
-              data: { token, lon, lat, member_id },
-              url: ApiUrl.phplist + 'member/getDistance',
-            }).then((res) => {
-              console.log(res)
-              var datalist = res.data.lists
+    // qqmapsdk = new QQMapWX({
+    //   key: 'KXRBZ-VZARV-YUYPW-USY6I-A7FIF-3ZBT4'
+    // })
+    // var that = this
+    // var address = this.data.defAddress
+    // console.log(address)
+    // var token = wx.getStorageSync('token')
+    // var member_id = wx.getStorageSync('vipid')
+    // qqmapsdk.geocoder({ //获取目标地址的地图信息，把详细地址输入address即可
+    //   address: wx.getStorageSync('defAddress').address,
+    //   success: function (res) {    //返回的数据里面有该地址的经纬度
+    //     console.log(res.result.location.lat)
+    //     var lat = res.result.location.lat
+    //     var lon = res.result.location.lng
+    //     //请求接口
+    //     httpReq({
+    //       header: {
+    //         'Content-Type': 'application/json',
+    //         'Accept': 'application/json'
+    //       },
+    //       url: ApiUrl.phplist + 'member/deliverAddress?token=' + token + '&lon=' + lon + '&lat=' + lat + '&member_id=' + member_id,
+    //     }).then((res) => {
+    //       console.log(res)
+    //       if (res.data.msg == "操作成功") {
+    //         httpReq({
+    //           header: {
+    //             'Content-Type': 'application/json',
+    //             'Accept': 'application/json'
+    //           },
+    //           method: "POST",
+    //           data: { token, lon, lat, member_id },
+    //           url: ApiUrl.phplist + 'member/getDistance',
+    //         }).then((res) => {
+    //           console.log(res)
+    //           var datalist = res.data.lists
 
-              var arr = []
-              for (let i = 0; i < datalist.length; i++) {
-                var obj = {}
-                obj.nickname = datalist[i].distance + ',' + datalist[i].nickname
-                obj.id = datalist[i].id
-                obj.name = datalist[i].nickname
-                arr.push(obj)
-              }
-              console.log(arr)
+    //           var arr = []
+    //           for (let i = 0; i < datalist.length; i++) {
+    //             var obj = {}
+    //             obj.nickname = datalist[i].distance + ',' + datalist[i].nickname
+    //             obj.id = datalist[i].id
+    //             obj.name = datalist[i].nickname
+    //             arr.push(obj)
+    //           }
+    //           console.log(arr)
 
-              that.setData({
-                datalist: arr
-              })
-              console.log(that.data.datalist)
-            });
+    //           that.setData({
+    //             datalist: arr
+    //           })
+    //           console.log(that.data.datalist)
+    //         });
 
-          }
-        });
-      },
-      fail: function (res) {
-        console.log("接口调用失败返回的回调")
-      },
-      complete: function (res) {
-        console.log("接口调用结束的回调函数（调用成功、失败都会执行）")
-      }
-    });
+    //       }
+    //     });
+    //   },
+    //   fail: function (res) {
+    //     console.log("接口调用失败返回的回调")
+    //   },
+    //   complete: function (res) {
+    //     console.log("接口调用结束的回调函数（调用成功、失败都会执行）")
+    //   }
+    // });
 
 
 },
@@ -256,7 +256,7 @@ queren(e){
   },
   chooseAddress(){
       wx.navigateTo({
-        url: '../myAddress/myAddress',
+        url: '../myAddress/myAddress?type=1',
       })
   },
    describe(){
@@ -306,8 +306,8 @@ queren(e){
     password = password.replace(/ /g, '')
     if(password==""){
       wx.showModal({
-        title: '亲',
-        content: '您还没有输入密码！',
+        title: '提示',
+        content: '请有输入密码！',
       })
       return false
     }
@@ -466,12 +466,28 @@ queren(e){
   pickChange: function (e) {
     console.log(this.data.datalist)
     console.log(e)
+    var that=this
+    if (this.data.datalist==""){
+      wx.showModal({
+        title: '提示',
+        content: '附近没有经销商，请重新选择！',
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+      return false
+    }else{
+      var id = this.data.datalist[e.detail.value].id
+      this.setData({
+        index: e.detail.value,
+        id
+      })
+    }
    
-    var id = this.data.datalist[e.detail.value].id
-    this.setData({
-      index: e.detail.value,
-      id
-    })
    
     //将经销商的id传给后端
   },
@@ -488,6 +504,7 @@ queren(e){
   onShow: function () {
     qqmapsdk = new QQMapWX({
     key: 'KXRBZ-VZARV-YUYPW-USY6I-A7FIF-3ZBT4'
+      // key:"fUTYRyEHz0nj0pmd7cz6gqBxbERz3BUy"
   })
 var that = this
 var address = this.data.defAddress
@@ -542,6 +559,7 @@ qqmapsdk.geocoder({ //获取目标地址的地图信息，把详细地址输入a
     });
   },
   fail: function (res) {
+    console.log(res)
     console.log("接口调用失败返回的回调")
   },
   complete: function (res) {

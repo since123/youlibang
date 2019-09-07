@@ -28,7 +28,7 @@
            </view>
             <view class='goodsdetail'>{{item.title}}</view>
         <view class='types_num'>
-           <view class='types'>{{item.yd}}</view>
+           <view class='types'>{{item.yd}};{{item.wd}};{{item.cd}}</view>
            <view class='num'>X{{item.num}}件</view>
          </view>
       </view>

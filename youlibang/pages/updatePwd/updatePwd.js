@@ -81,30 +81,40 @@ Page({
           showCancel: false,
         })
     } else {
-      httpReq({
-        header: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        url: ApiUrl.phplist + 'member/createPsw?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid') + '&psw=' + that.data.passwordValue,
-      }).then((res) => {
-        console.log(res)
-        let passwordStatus = res.data.code
-        let passwordMrssage = res.data.msg
-        if (Number(passwordStatus) == 10001) {
-          that.setData({
-            passwordValue: '',
-            createStatus: false,
-            passwordMrssage: '密码设置失败，服务器错误'
-          })
-        } else if (Number(passwordStatus) == 10000){
-          that.setData({
-            passwordValue: '',
-            createStatus: false,
-            passwordMrssage: '密码设置成功',
-          })
-        }
-      })
+      if (wx.getStorageSync('loginStatus') == false) {
+        wx.showModal({
+          title: '提示！',
+          content: '请先登录',
+        })
+        return false
+      } else {
+        httpReq({
+          header: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          url: ApiUrl.phplist + 'member/createPsw?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid') + '&psw=' + that.data.passwordValue,
+        }).then((res) => {
+          console.log(res)
+          let passwordStatus = res.data.code
+          let passwordMrssage = res.data.msg
+          if (Number(passwordStatus) == 10001) {
+            that.setData({
+              passwordValue: '',
+              createStatus: false,
+              passwordMrssage: '密码设置失败，服务器错误'
+            })
+          } else if (Number(passwordStatus) == 10000) {
+            that.setData({
+              passwordValue: '',
+              createStatus: false,
+              passwordMrssage: '密码设置成功',
+            })
+          }
+        })
+      }
+
+      
     }
   },
   //成功设置密码之后弹窗

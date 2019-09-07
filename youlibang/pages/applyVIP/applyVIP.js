@@ -288,18 +288,26 @@ Page({
   
   applyClick: function () {
     let that = this
-    var status = this.data.status;
-    console.log(this.data.payway)
-    if (this.data.payway == 'underLinePayfor') {
-      that.setData({
-        ifxianxia: false,
+    if (wx.getStorageSync('loginStatus') == false) {
+      wx.showModal({
+        title: '提示！',
+        content: '请先登录',
       })
-    }
-    // console.log("触发了点击事件，弹出toast")
-    status = !status;
-    this.setData({
-      status: status,
-    })　　　　 //setData方法可以建立新的data属性，从而起到跟视图实时同步的效果
+      return false
+    } else {
+      var status = that.data.status;
+      console.log(that.data.payway)
+      if (that.data.payway == 'underLinePayfor') {
+        that.setData({
+          ifxianxia: false,
+        })
+      }
+      // console.log("触发了点击事件，弹出toast")
+      status = !status;
+      that.setData({
+        status: status,
+      })　　
+    }　　 //setData方法可以建立新的data属性，从而起到跟视图实时同步的效果
   },
 
   /**

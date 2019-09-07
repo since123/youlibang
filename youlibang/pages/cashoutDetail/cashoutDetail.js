@@ -17,7 +17,6 @@ Page({
     swipertab: [{ index: 0, name: '待审核' }, { index: 1, name: '已打款'}],
     openstatusList: [],
     opendetailList: []
-
   },
   tabSwitch: function (e) {
     let that = this

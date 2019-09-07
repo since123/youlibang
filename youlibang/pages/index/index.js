@@ -57,11 +57,7 @@ Page({
            })
            return false
       }
-      wx.showModal({
-        title: '提示',
-        content: '已经到首页了呢！',
-      })
-      //console.log(ApiUrl.url)
+      
       //处理商品信息
       var dataLists = res.data.lists
       //  dataLists=dataLists.slice(0,(dataLists.length)/2)

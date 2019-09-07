@@ -3,6 +3,7 @@
   <view class='bgImg'><image src='../../images/bgImg.png'></image></view>
   <view class='headImg' bindtap='userinfo'><image src='{{userImg_url}}'></image></view>
   <view class='username'>{{username}}</view>
+  <view class="loginstatus" bindtap="getLogin">{{loginText}}</view>
   <view class='set' bindtap='setbtn'><image src='../../images/set@2x.png'></image></view>
   <view class='vip'><image src='../../images/vip@2x.png'></image><label>vip会员</label></view>
   <view class='vipid'>ID:{{vipid}}</view>
@@ -70,9 +71,9 @@
 <view class="mubu"  hidden="{{status}}"></view>
 <view class='footer' bindchange="toastHide" hidden="{{ifUser}}">
   <view class="buttonInfo">
-    <button  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信一键登陆</button>
-    <button bindtap="cancelPay">取消</button>
-    <text class='btnText'>(获得你的公开信息（昵称，头像，地区及性别)</text>
+    <button  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">点击登陆账户</button>
+    <button bindtap="cancelPay">暂不登录</button>
+    <text class='btnText'>您还未登录！</text>
   </view>
 </view>
 <view class='footer' bindchange="toastHide" hidden="{{ifPhone}}">

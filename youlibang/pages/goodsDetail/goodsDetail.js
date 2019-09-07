@@ -121,6 +121,7 @@ Page({
       obj.wd=this.data.wd
       obj.cd=this.data.cd
       obj.selected=true
+    obj.img = ApiUrl.url+productsList.goods_logo
       obj.num=this.data.num
     obj.price =productsList.goods_price
       obj.way='立即购买'
@@ -341,21 +342,26 @@ Page({
         }
         var price = productsList.goods_price
         console.log(goodsInfo)
-        if (goodsInfo[0].attr_values!=undefined){
+        this.setData({
+          goodsInfo,
+          price
+        })
+      
+        if (goodsInfo.length>0){
           var arr1 = goodsInfo[0].attr_values
           this.setData({
             arr1,
             goodsInfo
           })
         }
-        if (goodsInfo[1].attr_values!=undefined){
+        if (goodsInfo.length>1){
           var arr2 = goodsInfo[1].attr_values
           this.setData({
             arr2,
             goodsInfo
           })
         }
-        if (goodsInfo[2].attr_values != undefined) {
+        if (goodsInfo.length>2) {
           var arr3 = goodsInfo[2].attr_values
           this.setData({
             arr3,
@@ -363,10 +369,6 @@ Page({
           })
         }
          
-        this.setData({
-          goodsInfo,
-          price
-        })
         console.log(this.data.arr1)
       }
      

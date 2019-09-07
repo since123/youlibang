@@ -10,7 +10,6 @@
 }
 .contents{
   width: 670rpx;
-  height: 360rpx;
   background-color: #ffffff;
   border-radius:10rpx;
   margin-left: 5%;
@@ -29,7 +28,7 @@
 }
 .li{
   /* float: left; */
-  width: 670rpx;
+  /* width: 670rpx; */
   height: 1rpx;
   background:rgba(230,230,230,1);
 }

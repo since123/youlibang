@@ -12,18 +12,20 @@ Page({
    */
   data: {
     userInfo: wx.getStorageSync('userInfo'),
-    token: wx.getStorageSync('token'), //获取token进行验证并赋值
+    token: '', //获取token进行验证并赋值
     username:'蜡笔小新',
     vipid:0,
     userImg_url:'',
     price:'0.00',
-    encryptedData: wx.getStorageSync('encryptedData'),
-    iv: wx.getStorageSync('iv'),
+    encryptedData: '',
+    iv: '',
     status: true,
     ifUser: true,
     ifPhone: true,
     // lineUrl: 'https://wx.ylbtl.cn',
-    lineUrl: ApiUrl.url
+    lineUrl: ApiUrl.url,
+    loginText: '点击登录',
+    loginStatus: false
     
   },
 
@@ -34,34 +36,58 @@ Page({
     console.log('我的页面刷新')
     this.getifAuthorize()
     let that = this
-    if (wx.getStorageSync('token')) {
-      //判断是否是会员
-      that.isMember().then(() => {
-        console.log(wx.getStorageSync('vipid'))
-        if (wx.getStorageSync('userInfo') == '' || wx.getStorageSync('encryptedData') == '') {
-          this.setData({
-            status: false,
-            ifUser: false
-          })
-        } else {
-          this.setData({
-            status: true,
-            ifUser: true,
-            ifPhone: true,
-          })
-          //判断vipid并缓存
-          console.log('都授权成功')
+
+    if (wx.getStorageSync('token')){
+      if (wx.getStorageSync('userInfo') == '' || wx.getStorageSync('encryptedData') == '') {
+        that.setData({
+          loginText: '点击登录',
+          loginStatus: false
+        })
+        wx.setStorageSync('loginStatus', that.data.loginStatus)
+        return false
+      } else {
+        that.setData({
+          loginText: '您已登录',
+          loginStatus: true
+        })
+        wx.setStorageSync('loginStatus',that.data.loginStatus)
+        that.isMember().then(() => {
+          console.log(wx.getStorageSync('vipid'))
           if (Number(wx.getStorageSync('vipid')) != 0) {
             that.getVipUserInfo()
           } else if (Number(wx.getStorageSync('vipid')) == 0) {
             that.getPersonalInfo()
           }
-        }
-      })
-      
-    } else {
+        })
+      }
+    }else {
       console.log('token获取失败')
     }
+
+    // if (wx.getStorageSync('token')) {
+    //   //判断是否是会员
+    //   that.isMember().then(() => {
+    //     console.log(wx.getStorageSync('vipid'))
+    //     if (wx.getStorageSync('userInfo') == '' || wx.getStorageSync('encryptedData') == '') {
+    //       // this.setData({
+    //       //   status: false,
+    //       //   ifUser: false
+    //       // })
+    //     } else {
+    //       this.setData({
+    //         status: true,
+    //         ifUser: true,
+    //         ifPhone: true,
+    //       })
+    //       //判断vipid并缓存
+    //       console.log('都授权成功')
+          
+    //     }
+    //   })
+      
+    // } else {
+      
+    // }
   },
   
   /**是会员时，后台返回数据，展示会员信息信息 */
@@ -352,6 +378,19 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //打开弹幕，获取登录页面
+  getLogin: function() {
+    if(wx.getStorageSync('loginStatus') == true) {
+      return false
+    }
+    else {
+      this.setData({
+        status: false,
+        ifUser: false
+      })
+    }
+  },
+  //
   bindGetUserInfo: function(e) {
     console.log(e.detail.userInfo)
     if (e.detail.userInfo == undefined) {
@@ -377,6 +416,11 @@ Page({
     wx.setStorageSync('iv', e.detail.iv)
     //存储电话
     this.savePhonenum().then(()=>{
+      this.setData({
+        status: true,
+        ifUser: true,
+        ifPhone: true,
+      })
       that.onLoad()
     })
   },

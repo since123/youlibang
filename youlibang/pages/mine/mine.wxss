@@ -33,6 +33,16 @@ line-height:70rpx;
 margin-top: 10%;
 margin-left: 25%;
 }
+.loginstatus {
+  position: absolute;
+  float: left;
+  font-size:25rpx;
+  font-family:sans-serif;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  margin-top: 20%;
+  margin-left: 25%;
+}
 .set{
   position: absolute;
   float: left;
@@ -300,6 +310,7 @@ line-height:70rpx;
   margin: 10rpx;
 }
 .btnText {
+  float: right;
   font-size: 25rpx;
   margin: 5px;
 }

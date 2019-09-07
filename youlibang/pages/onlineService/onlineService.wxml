@@ -1,26 +1,24 @@
 <!--pages/onlineService/onlineService.wxml-->
-<view class="body">
-   <view class='texttitle'>猜你想问</view>
-<view class='contents'>
-    <view class='question' wx:for="{{header}}" bindtap="question" data-index="{{index}}">
+<view>
+<view class="texttitle">猜你想问</view>
+<view class='contents' >
+ <view class='question' wx:for="{{header}}" wx:key="{{item.id}}" bindtap="question" data-index="{{index}}">
     <text>{{item.questions}}</text>
   
     <view class='li'></view>
-    </view>
-     <!-- <view class='question' bindtap="question" data-text="{{header[0]}}">{{header[1]}}</view>
-<view class='li'></view>
-    <view class='question' bindtap="question" data-text="{{header[0]}}">{{header[2]}}</view>
-<view class='li'></view>
-     <view class='question' bindtap="question" data-text="{{header[0]}}">{{header[3]}}</view> -->
+ </view>
 </view>
+<!-- 头像选择框 -->
   <view class='serviceinfo'  wx:for='{{infolist}}' wx:key="{{item.id}}">
     <view class="{{item.states==1?'userheadImg':'serviceheadImg'}}">
     <image src='{{item.userheadImg}}'></image>
     </view>
     <view class="{{item.states==1?'infos':'info'}}">{{item.infos}}</view>
   </view>
-</view>
-<view class='footer'>
+
+  <!-- 底部输入框 -->
+   <view class='footer'>
     <input class='inputInfo' bindchange='bindkeyinput' value='{{inputvalue}}'  placeholder='在这里输入你想知道的问题...'></input>
     <text class='user_input_text' bindtap='sendto'>发送</text>
+  </view>
 </view>
