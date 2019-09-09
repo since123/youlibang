@@ -13,27 +13,35 @@ Page({
    */
   data: {
     date: "",
+    changedate: '',
     listinfo: [],
     comeInAmount: 0,
     expendAmount: 0,
     vipid: '',
-    token: ''
+    token: '',
+    timestamp: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let that = this
     this.setData({
       date: util.formatTime(new Date())
     })
-    let that = this
+    console.log(new Date())//Mon Sep 09 2019 14:29:11 GMT+0800 (中国标准时间)
+    console.log(this.data.date)//2019-09-09
+    console.log(new Date(new Date().toLocaleDateString()).getTime())
+    console.log(new Date(new Date(this.data.date).toLocaleDateString()).getTime())
     this.getMoneyDetail()
   },
   changeDate:function(e){
     this.setData({ 
       date: e.detail.value,
+      changedate: e.detail.value
     });
+    console.log(this.data.date)
     this.getMoneyDetail()
   },
   /**
@@ -42,13 +50,14 @@ Page({
   getMoneyDetail() {
     let that = this
     //转换成时间戳
-    let date = new Date(new Date().toLocaleDateString()).getTime()
-    console.log(date)
-    let nowDate = date / 1000
-    console.log(nowDate)
-    console.log(that.data.vipid)
-    console.log(that.data.token)
-    console.log(util.formatTime(new Date(nowDate*1000)))
+    let truedate = that.data.changedate == '' ? that.data.date : that.data.changedate
+    let datestamp = new Date(new Date(truedate).toLocaleDateString()).getTime()
+    console.log(datestamp)
+    let nowDate = datestamp / 1000
+    // console.log(nowDate)
+    // console.log(wx.getStorageSync('vipid'))
+    // console.log(wx.getStorageSync('token'))
+    // console.log(util.formatTime(new Date(nowDate*1000)))
     httpReq({
       header: {
         'Content-Type': 'application/json',
@@ -57,42 +66,57 @@ Page({
       url: ApiUrl.phplist + 'user/flowAccount?time=' + nowDate + '&member_id=' + wx.getStorageSync('vipid')+ '&token=' + wx.getStorageSync('token'),
     }).then((res) => {
       console.log(res)
-      let lists = res.data.lists
-      let listinfo = []
-      let comeIn = 0
-      let expend = 0
-      // console.log(lists.length)
-      for (let m in lists) {
-        let moneylist = {}
+      if (res.data.code == '10001') {
+        wx.showModal({
+          title: '提示',
+          content: res.data.msg,
+        })
+        that.setData({
+          listinfo: [],
+          comeInAmount: 0,
+          expendAmount: 0
+        })
+      } else{
+        let folow = res.data.lists.folow
+        let tixian = res.data.lists.tixian
+        let lists = folow.concat(tixian)
+        console.log(lists)
+        let listinfo = []
+        let comeIn = 0
+        let expend = 0
+        for (let m in lists) {
+          let moneylist = {}
 
-        if (Number(lists[m].pay_type) == 0) {
-          moneylist.text = '提现-到微信'
+          if (Number(lists[m].pay_type) == 0) {
+            moneylist.text = '提现-到微信'
+          }
+          else if (Number(lists[m].pay_type) == 1) {
+            moneylist.text = '商城消费'
+          }
+          else if (Number(lists[m].pay_type) == 2) {
+            moneylist.text = '返利'
+          }
+          else if (Number(lists[m].pay_type) == 3) {
+            moneylist.text = '充值'
+          }
+          moneylist.datetime = util.formatTime(new Date(lists[m].create_time))
+          console.log(lists[m].create_time)
+          if (Number(lists[m].pay_type) == 0 || Number(lists[m].pay_type) == 1) {
+            moneylist.money = "-" + Number(lists[m].amount)
+            expend += Number(lists[m].amount)
+          } else {
+            moneylist.money = "+" + Number(lists[m].amount)
+            console.log(moneylist.money)
+            comeIn += Number(lists[m].amount)
+          }
+          listinfo.push(moneylist)
         }
-        else if (Number(lists[m].pay_type) == 1) {
-          moneylist.text = '商城消费'
-        }
-        else if (Number(lists[m].pay_type) == 2) {
-          moneylist.text = '返利'
-        }
-        else if (Number(lists[m].pay_type) == 3){
-          moneylist.text = '充值'
-        }
-        moneylist.datetime = util.formatTime(new Date(lists[m].create_time))
-        console.log(lists[m].create_time) 
-        if (Number(lists[m].pay_type) == 0 || Number(lists[m].pay_type) == 1) {
-          moneylist.money = Number("-" + lists[m].money)
-          expend += Number(lists[m].money)
-        } else {
-          moneylist.money = Number(lists[m].money)
-          comeIn += Number(lists[m].money)
-        }
-        listinfo.push(moneylist)
+        that.setData({
+          listinfo: listinfo,
+          comeInAmount: comeIn,
+          expendAmount: expend
+        })
       }
-      that.setData({
-        listinfo : listinfo,
-        comeInAmount : comeIn,
-        expendAmount: expend
-      })
     })
   },
   /**
