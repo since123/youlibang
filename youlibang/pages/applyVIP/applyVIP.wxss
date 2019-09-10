@@ -68,6 +68,10 @@
   margin-top: 35rpx;
   margin-left: 20rpx;
 }
+.selectLevel {
+  border: 1px solid red;
+  background:#f8e1e1;
+}
 .viptext{
   float: left;
   width:150rpx;

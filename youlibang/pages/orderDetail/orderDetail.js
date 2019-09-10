@@ -40,7 +40,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'order/oddetail?token=' + this.data.token + '&order_id=' + this.data.orderid,
+      url: ApiUrl.phplist + 'order/oddetail?token=' + that.data.token + '&order_id=' + that.data.orderid,
     }).then((res) => {
       console.log(res)
       let goodsList = res.data.lists

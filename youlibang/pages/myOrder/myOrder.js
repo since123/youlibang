@@ -135,8 +135,7 @@ Page({
         //completeOrder
         orders.push(ss)
       }
-      // console.log(orders)
-      // console.log(that)
+      //console.log(orders)
       that.setData({
         allOrderS: orders,
         waitPayOrder: waitPayOrder,
@@ -144,6 +143,7 @@ Page({
         waitReceivedOrder: waitReceivedOrder,
         completeOrder: completeOrder
       })
+      console.log(that.data.waitPayOrder)
     })
   },
   /**
@@ -215,7 +215,7 @@ Page({
    * 订单详情
    */
   orderDetailShow: function(e) {
-    //console.log(e.currentTarget.dataset.orderid)
+    console.log(e.currentTarget.dataset.orderid)
     let orderid = e.currentTarget.dataset.orderid
     wx.navigateTo({
       url: '../orderDetail/orderDetail?orderid=' + orderid

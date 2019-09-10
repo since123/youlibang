@@ -15,18 +15,25 @@ Page({
     token: '', //获取token进行验证并赋值
     username:'蜡笔小新',
     vipid:0,
-    userImg_url:'',
+    userImg_url:'../../images/headImg.png',
     price:'0.00',
     encryptedData: '',
     iv: '',
     status: true,
     ifUser: true,
     ifPhone: true,
-    // lineUrl: 'https://wx.ylbtl.cn',
     lineUrl: ApiUrl.url,
     loginText: '点击登录',
-    loginStatus: false
-    
+    vipPageText: '申请会员', 
+    loginStatus: false,
+    waitPayNumber:2,
+    ifwaitPayNumber: true,
+    waitSentNumber: 2,
+    ifwaitSentNumber: false,
+    waitReceivedNumber: 2,
+    ifwaitReceivedNumber: true,
+    completedNumber: 2,
+    ifcompletedNumber: false,
   },
 
   /**
@@ -294,11 +301,17 @@ Page({
       url: '../myAddress/myAddress',
     })
   },
-  //会员申请
+  //会员申请或者会员中心
   applyVIP:function(){
-    wx.navigateTo({
-      url: '../VIPcenter/VIPcenter',
-    })
+    if (wx.getStorageSync('vipid')) {
+      wx.navigateTo({
+        url: '../VIPcenter/VIPcenter',
+      })
+    } else {
+      wx.navigateTo({
+        url: '../applyVIP/applyVIP',
+      })
+    }
   },
   //优惠卷
   coupon:function(){
@@ -496,9 +509,15 @@ Page({
       console.log(vipid)
       if (vipid) {
         wx.setStorageSync('vipid', vipid)
+        that.setData({
+          vipPageText: '会员中心'
+        })
         console.log('您是会员')
       } else {
         wx.setStorageSync('vipid', 0)
+        that.setData({
+          vipPageText: '会员申请'
+        })
         console.log('您不是会员')
       }
     })
@@ -510,7 +529,7 @@ Page({
       ifPhone: true
     })
     wx.switchTab({
-      url: '../index/index',
+      url: '../mine/mine',
     }) 
   }
 })

@@ -13,13 +13,12 @@
       <swiper-item>
       <view wx:for="{{vipRules[index]}}" wx:key="{{item.index}}" wx:for-item="rules">
         <view bindtap="chooseGrade" data-current="{{index}}" data-viplevel="{{rules.viplevel}}">
-          <view class='mindiv' style="{{index == currentIndex?'border-color:red':'border-color:gray'}}">
+          <view class="mindiv '{{index == currentIndex?'selectLevel':''}}' ">
               <view class='viptext'>{{rules.userGrade}}</view>
               <view class='money'><label>￥</label>{{rules.rechargeMoney}}</view>
               <view class="preferential">
                 <text class='vipnum' wx:for="{{rules.preferential}}" wx:key="{{item.index}}">{{item.preferentialInfo}}</text>
               </view>
-             
           </view>
         </view>
       </view>

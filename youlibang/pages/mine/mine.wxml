@@ -31,19 +31,31 @@
   <view class='line'></view>
   <view class="user_three">
     <view class="user_three_li nav_li" bindtap='waitPay'>
-      <image class="nav_img" src="../../images/qianbao@2x.png"></image>
+      <view class="image_Number">
+        <image class="nav_img" src="../../images/qianbao@2x.png"></image>
+        <view hidden="{{ifwaitPayNumber}}" class="orderNumber">{{waitPayNumber}}</view>
+      </view>
       <view class="nav_text">待付款</view>
     </view>
     <view class="user_three_li nav_li" bindtap='waitSent'>
-      <image class="nav_img" src="../../images/fahuo@2x.png"></image>
+      <view class="image_Number">
+        <image class="nav_img" src="../../images/fahuo@2x.png"></image>
+        <view hidden="{{ifwaitSentNumber}}" class="orderNumber">{{waitSentNumber}}</view>
+      </view>
       <view class="nav_text">待发货</view>
     </view>
     <view class="user_three_li" bindtap='waitReceived'>
-      <image class="nav_img" src="../../images/shouhuo@2x.png"></image>
+      <view class="image_Number">
+        <image class="nav_img" src="../../images/shouhuo@2x.png"></image>
+        <view hidden="{{ifwaitReceivedNumber}}" class="orderNumber">{{waitReceivedNumber}}</view>
+      </view>
       <view class="nav_text">待收货</view>
     </view>
      <view class="user_three_li" bindtap='completed'>
-      <image class="nav_img" src="../../images/tuihuo@2x.png"></image>
+      <view class="image_Number">
+        <image class="nav_img" src="../../images/tuihuo@2x.png"></image>
+        <view hidden="{{ifcompletedNumber}}" class="orderNumber">{{completedNumber}}</view>
+      </view>
       <view class="nav_text">已完成</view>
     </view>
   </view>
@@ -59,7 +71,7 @@
     </view>
     <view class="user_three_li nav_li" bindtap='applyVIP'>
       <image class="nav_img" src="../../images/fenxiao@2x.png"></image>
-      <view class="nav_text">会员中心</view>
+      <view class="nav_text">{{vipPageText}}</view>
     </view>
     <view class="user_three_li" bindtap='coupon'>
       <image class="nav_img" src="../../images/juan@2x.png"></image>
