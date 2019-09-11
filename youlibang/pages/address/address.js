@@ -104,7 +104,7 @@ Page({
      console.log(addressdetail)
      if(addressdetail==""){
        wx.showModal({
-         title: '亲',
+         title: '提示',
          content: '请填写详细地址！',
        })
        return false
@@ -112,7 +112,7 @@ Page({
      console.log(member_id)
     if (address_name==''){
       wx.showModal({
-        title: '亲',
+        title: '提示',
         content: '请填写收货人！',
       })
       return
@@ -120,7 +120,7 @@ Page({
     if (address_phone==''){
       
       wx.showModal({
-        title: '亲',
+        title: '提示',
         content: '请填写正确的手机号！',
       })
       return
@@ -128,7 +128,7 @@ Page({
     //验证手机号
     if (!(/^1[3456789]\d{9}$/.test(this.data.moblie))) {
       wx.showModal({
-        title: '亲',
+        title: '提示',
         content: '手机号格式有误！',
       })
       return;

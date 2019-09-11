@@ -118,13 +118,15 @@
   margin-top: 1%;
 }
 .types{
-  width: 200rpx;
+  width: 300rpx;
+  height: 35rpx;
   float: left;
   font-size:24rpx;
   font-family:sans-serif;
   font-weight:500;
   color:rgba(153,153,153,1);
   margin-top: 4%;
+  overflow: hidden;
   /* margin-left: 3%; */
   /* background-color: red; */
 }

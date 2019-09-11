@@ -6,7 +6,7 @@
 </view>
 <!-- 轮播图 -->
 <view class="header_lun" >
-  <swiper class="swiper" indicator-dots="true" indecator-color="rgba(120,120,120,1)" autoplay="true" bindchange="">
+  <swiper class="swiper" indicator-dots="true" indecator-color="rgba(120,120,120,1)" autoplay="true" bindchange="" circular="true">
     <block wx:for="{{movies}}" wx:key="{{movies}}" wx:for-index="index">
       <swiper-item>
         <image src="{{item.url}}" class="slide-image" bindtap="changePath" data-id="{{item.id}}"/>
@@ -38,9 +38,3 @@
     </view>
   </view>
 </scroll-view>
-<view class='last' bindtap="last">
-上一页
-</view>
-<view class='next' bindtap="next" >
-下一页
-</view>

@@ -25,6 +25,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(wx.getStorageSync('history')!=""){
+      this.setData({
+        history: wx.getStorageSync('history')
+      })
+      return false
+    }
     httpReq({
       header: {
         'Content-Type': 'application/json',
@@ -72,13 +78,11 @@ Page({
     var that=this
     var search=that.data.value
     var history=that.data.history
-    console.log(typeof history)
-    history.push(search)
-    that.setData({
-      history
+    var str=history.filter((v)=>{
+      if(v.text==search){
+        return v
+      }
     })
-    wx.setStorageSync('search', history)
-    console.log(search)
    //请求搜索接口
     httpReq({
       header: {
@@ -90,14 +94,18 @@ Page({
        console.log(res)
        var searchGoods=res.data.lists
        if(searchGoods==undefined){
-          console.log("暂无数据匹配！")
+         wx.showModal({
+           title: '提示',
+           content: '无数据匹配！',
+         })
           this.setData({
             searchGoods:[]
           })
           console.log(this.data.searchGoods)
        }else{
          let goods=searchGoods.map((v)=>{
-           v.goods_name=v.goods_name.replace(search,"<b style='color:red'>"+search+"</b>")
+           v.goods_name=v.goods_name.replace(search,"<b style='color:red'>"+search+"</b>")    
+           v.goods_logo = ApiUrl.url + v.goods_logo
            return v
          })
          console.log(goods)
@@ -105,6 +113,16 @@ Page({
            searchGoods:goods,
            status: true,
          })
+         if(str.length==0){
+           var obj={}
+           obj.text=search
+           history.push(obj)
+           console.log(history)
+           this.setData({
+             history
+           })
+           wx.setStorageSync('history', history)
+         }
        }
        
     });
@@ -127,15 +145,20 @@ Page({
        console.log(res)
        var searchGoods = res.data.lists
        if (searchGoods == undefined) {
-         console.log("暂无数据匹配！")
+        // wx.showModal({
+        //   title: '提示',
+        //   content: '没有数据！',
+        // })
          this.setData({
            searchGoods: []
          })
        } else {
          let goods = searchGoods.map((v) => {
            v.goods_name = v.goods_name.replace(inputvalue, "<b style='color:red'>" + inputvalue + "</b>")
+           v.goods_logo = ApiUrl.url+v.goods_logo
            return v
          })
+         
          console.log(goods)
          this.setData({
            searchGoods: goods,

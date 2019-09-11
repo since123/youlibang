@@ -41,8 +41,9 @@ page{
 .explain {
   /* float: left; */
   width: 424rpx;
-  height: 218rpx;
+  height: 108rpx;
   margin-left: 30rpx;
+  line-height: 108rpx;
 }
 
 .explain .explain_top {
@@ -62,25 +63,27 @@ page{
   float: left;
   width: 125rpx;
   height: 36rpx;
-  font: 24rpx/36rpx "";
-  color: #ea4148;
+  font: 700 30rpx/36rpx "";
+  color: #ed6982;
+  font-weight:600;
 }
 
 .explain_bottom .Key {
   float: right;
-  width: 147rpx;
+  width: 150rpx;
   height: 36rpx;
   border-radius: 5rpx;
-  border: 1rpx solid #cccbd1;
+  border: 1rpx solid #eaeaec;
 }
 
 .Key .Key_reduce {
   float: left;
   width: 35rpx;
   height: 36rpx;
-  background: #cccbd1;
+  background: #f4f3f8;
   font: 36rpx/36rpx "";
   text-align: center;
+  color: #e3e2e7;
 }
 
 .Key .number {
@@ -96,9 +99,10 @@ page{
   float: right;
   width: 36rpx;
   height: 36rpx;
-  background: #cccbd1;
+ background: #f4f3f8;
   font: 36rpx/36rpx "";
   text-align: center;
+  color: #8e8d92;
   border-radius: 2rpx;
 }
 
@@ -108,6 +112,7 @@ page{
   display: flex;
   /* justify-content:space-between; */
   flex-direction: row;
+  background: white;
   /* margin-top: 400rpx; */
   position: fixed;
   left: 0;
@@ -171,6 +176,7 @@ page{
   font: 36rpx/88rpx "";
   text-align: center;
   margin-left: 30rpx;
+  color: white;
 }
 .goodsItem{
   background: white

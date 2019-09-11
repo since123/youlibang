@@ -56,8 +56,8 @@
   float: left;
   width: 98rpx;
   height: 30rpx;
-  background: rgba(255, 101, 17, 1);
-  opacity: 0.1;
+  background: #ffefe7;
+  opacity: 0.5;
   border-radius: 2rpx;
   font-size: 22rpx;
   font-family: sans-serif;
@@ -67,7 +67,7 @@
 
 .superVIP label {
   /* color: #FF9130; */
-  color: rgba(255, 145, 48, 1);
+  color: #ff9e4c;
 }
 
 .money1 {
@@ -228,7 +228,7 @@
 
 .goodsType {
   width: 750rpx;
-  height: 700rpx;
+  /* height: 700rpx; */
   background-color: #ffffff;
   z-index: 9999;
   position: fixed;
@@ -370,7 +370,11 @@
   margin-top: 3%;
   margin-left: 5%;
 }
-
+.father{
+  margin-bottom: 200rpx;
+  border: 2rpx solid white;
+  overflow: hidden;
+}
 .amount {
   float: left;
   /* background-color: red; */
@@ -382,7 +386,7 @@
   color: rgba(51, 51, 51, 1);
   line-height: 30rpx;
   margin-left: 10%;
-  margin-top: 5%;
+  margin-top: 10%;
 }
 
 /*主容器*/
@@ -391,9 +395,10 @@ float: left;
 width:188rpx;
 height:52rpx;
 /* margin: 0 auto; */
-border: 2rpx solid #cccccc;
+/* border: 2rpx solid #cccccc; */
 border-radius: 3rpx;
-margin-top: 3%;
+margin-left: 10%;
+margin-top: 8%;
 /* background-color: green; */
 position: relative;
 
@@ -403,12 +408,11 @@ position: relative;
 /*数值*/
 .stepper input {
 width: 90rpx;
-height: 26rpx;
 /* float: left; */
 text-align: center;
 font-size: 24rpx;
-border-left: 1rpx solid #cccccc;
-border-right: 1rpx solid #cccccc;
+border-top: 1rpx solid #cccccc;
+border-bottom: 1rpx solid #cccccc;
 }
 /*普通样式*/
 .stepper .normal {
@@ -434,7 +438,7 @@ color: #ccc;
   display: flex;
 }
 .listactive{
-  background: red;
+  background:#ea4148;
   float: left;
   width: 112rpx;
   height: 44rpx;
@@ -442,7 +446,7 @@ color: #ccc;
   font-size: 24rpx;
   font-family: sans-serif;
   font-weight: 500;
-  color: rgba(51, 51, 51, 1);
+  color: white;
   line-height: 30rpx;
   justify-content: center;
   align-items: center;
@@ -472,22 +476,24 @@ position: absolute;
 top:0;
 right: 0;
  width: 50rpx;
- height:50rpx; 
-line-height: 48rpx;   
+ height:1.4rem;
+line-height: 1.4rem;   
 background:rgba(243,242,248,1);
 margin: 0 auto; 
 text-align: center;
 color: #686868;  
+border: 1rpx solid #ccc;
 }
 .reduce{
 float: left;
 width: 48rpx;
-height:50rpx;
-line-height: 48rpx;
+height:1.4rem;
+line-height: 1.4rem;
 background:rgba(243,242,248,1);
 text-align: center;
 font-size: 12rpx;
 font-weight: lighter;
+border: 1rpx solid #ccc;
 }
 .clear{
   float: right;

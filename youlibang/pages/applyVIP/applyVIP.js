@@ -31,7 +31,8 @@ Page({
     ifxianxia: true,
     ifError: true,
     errorMessage: '',
-    ifReadyonly: ''
+    ifReadyonly: '',
+    autoplay: false,
   },
   /**
    * 分页

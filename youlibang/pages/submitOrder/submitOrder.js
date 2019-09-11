@@ -43,7 +43,8 @@ Page({
       return false
     }else{
       var total = 0
-      var dataList = JSON.parse(options.info)
+      var dataList = decodeURIComponent(options.info)
+      dataList = JSON.parse(dataList)
       console.log(dataList)
       if (dataList[0].way == '立即购买') {
         var total = dataList[0].num * dataList[0].price

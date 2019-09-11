@@ -8,7 +8,7 @@
   <view class='line'></view>
 
   <view class='vipGrade'>
-    <swiper indicator-dots="true" indecator-color="rgba(120,120,120,1)" autoplay="true" bindchange="getPageIndex">
+    <swiper  indicator-dots="true" indecator-color="rgba(120,120,120,1)" autoplay="{{autoplay}}" bindchange="getPageIndex">
       <block wx:for="{{vipRules}}" wx:key="{{item.index}}" >
       <swiper-item>
       <view wx:for="{{vipRules[index]}}" wx:key="{{item.index}}" wx:for-item="rules">

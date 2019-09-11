@@ -28,7 +28,7 @@
            </view>
             <view class='goodsdetail'>{{item.title}}</view>
         <view class='types_num'>
-           <view class='types'>{{item.yd}};{{item.wd}};{{item.cd}}</view>
+           <view class='types'>{{item.yd}}{{item.wd}}{{item.cd}}</view>
            <view class='num'>X{{item.num}}件</view>
          </view>
       </view>
@@ -67,7 +67,7 @@
 <!-- 输入密码框 -->
 <view class="pwd" wx:if="{{state}}">
   <icon class="clear" type="clear"size='14' bindtap='quxiao' hidden="{{!state}}"></icon>
-      <text class="top">请输入密码!!</text>
+      <text class="top">请输入支付密码</text>
       <view class="pwdyz"> 
       <input maxlength="20" type="password" bindinput="queren"></input>
       </view>

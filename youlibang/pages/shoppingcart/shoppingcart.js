@@ -76,17 +76,6 @@ Page({
          that.setData({
            cart:""
          })
-        wx.showModal({
-          title: '提示',
-          content: "购物车是空的！",
-          success(res) {
-            if (res.confirm) {
-              console.log('用户点击确定')
-            } else if (res.cancel) {
-              console.log('用户点击取消')
-            }
-          }
-        })
       } else {
 
         console.log(res)
@@ -105,7 +94,7 @@ Page({
           obj.way = '结算'
           obj.cart_id = dataList[i].id
           obj.img = ApiUrl.url+dataList[i].goods_logo
-          // obj.yd = dataList[i].goods_attr_values
+          obj.yd = dataList[i].goods_attr_values
           arr.push(obj)
         }
          
@@ -197,6 +186,7 @@ Page({
    })
    console.log(info)
    info=JSON.stringify(info)
+   info= encodeURIComponent(info)
     console.log(info)
     wx.navigateTo({
       url: '../submitOrder/submitOrder?info='+info,

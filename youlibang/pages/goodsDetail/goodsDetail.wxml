@@ -26,6 +26,7 @@
   </view>
 </view>
 <view class='Imgdetail'>
+{{productsList.goods_introduce}}
 </view>
 <!-- 底部 -->
 <view class='footer'>
@@ -51,10 +52,10 @@
 <view class='mubu' bindtap='quxiao' hidden="{{!status}}"></view>
   <view class='goodsType' bindchange="toastHide" hidden="{{!status}}">
     <icon class="clear" type="clear"size='14' bindtap='quxiao' hidden="{{!status}}"></icon>
-    <view class='goodsdetailImg'><image src='../../images/2013062320262198.jpg'></image></view>
+    <view class='goodsdetailImg'><image src='{{productsList.goods_logo}}'></image></view>
     <view class='priceDiv'>
       <view class='detailprice'><label>￥</label>{{productsList.goods_price}}</view>
-      <view class='types'><block wx:if="{{yd==''||wd==''}}">请选择规格</block><block wx:else>已选<label>{{yd}},{{wd}},{{num}}件</label></block>
+      <view class='types'><block wx:if="{{yd==''||wd==''||cd==''}}">请选择规格</block><block wx:else>已选<label>{{yd}}{{wd}}{{cd}}{{num}}件</label></block>
 </view>
     </view>
 
@@ -62,21 +63,23 @@
 <!-- 包装 -->
         <view class='color'>{{goodsInfo[0].attr_name}}</view>
    <view class="colorfenlei" >
-      <view class="list{{(index+1)==idx?'active':''}}" wx:for='{{arr1}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getValue" data-text="{{goodsInfo[0].attr_name}}:{{item}}">{{item}}
+      <view class="list{{(index+1)==idx?'active':''}}" wx:for='{{arr1}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getValue" data-text="{{item}}">{{item}}
       </view>
   </view>
   <!-- 尺寸 -->
       <view class='color'>{{goodsInfo[1].attr_name}}</view>
    <view class="colorfenlei" >
-      <view class="list{{(index+1)==idex?'active':''}}" wx:for='{{arr2}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getVal" data-text="{{goodsInfo[1].attr_name}}:{{item}}">{{item}}
+      <view class="list{{(index+1)==idex?'active':''}}" wx:for='{{arr2}}'  wx:key="keyItem" wx:for-item="item" data-index="{{index}}" bindtap="getVal" data-text="{{item}}">{{item}}
       </view>
   </view>   
 </view>
+<view class="father">
     <view class='amount'>数量</view>
     <view class='stepper'>
       <text class='reduce' type='number' bindtap='bindMinus'>——</text>
       <input bindinput='bindManual' value='{{num}}' bindblur="changeIf" ></input>
       <text bindtap='bindPlus' class="add">+</text>
     </view>
+</view>
     <view class='btn'bindtap="confirm">确定</view>
   </view>

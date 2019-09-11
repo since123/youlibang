@@ -19,15 +19,15 @@
       </view>
     </view>
   </view>
-  <view class='Settlement'>
+</view>
+<view class='Settlement'>
     <view class='Settlement_left'>
       <!-- wx:if 是否全选显示不同图标 -->
       <icon wx:if="{{selectAllStatus}}" type="success" color='red' bindtap="selectAll" size='40rpx' />
       <icon wx:else type="circle" color="#e6e6e6" bindtap="selectAll" size='40rpx' />
       <text class='total'>全选</text>
     </view>
-    <text class='Settlement_Middle'>合计:{{totalPrice}}</text>
+    <text class='Settlement_Middle'>合计:￥{{totalPrice}}</text>
     <view class='Settlement_right' bindtap='search'>结算</view>
   </view>
-</view>
 

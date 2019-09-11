@@ -11,15 +11,15 @@
 		"newFeature": true,
 		"coverView": true,
 		"autoAudits": false,
-		"uglifyFileName": true,
 		"checkInvalidKey": true,
-		"checkSiteMap": true,
+		"checkSiteMap": false,
 		"uploadWithSourceMap": true,
 		"babelSetting": {
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.7.1",
@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 12,
 			"list": [
 				{
 					"id": 0,
@@ -101,9 +101,9 @@
 					"scene": null
 				},
 				{
-					"id": 7,
-					"name": "pages/mine/mine",
-					"pathName": "pages/mine/mine",
+					"id": -1,
+					"name": "pages/shoppingcart/shoppingcart",
+					"pathName": "pages/shoppingcart/shoppingcart",
 					"query": "",
 					"scene": null
 				},
@@ -126,6 +126,19 @@
 					"name": "pages/extension_QRcode/extension_QRcode",
 					"pathName": "pages/extension_QRcode/extension_QRcode",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/searchGoods/searchGoods",
+					"pathName": "pages/searchGoods/searchGoods",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/shoppingcart/shoppingcart",
+					"pathName": "pages/shoppingcart/shoppingcart",
 					"scene": null
 				}
 			]

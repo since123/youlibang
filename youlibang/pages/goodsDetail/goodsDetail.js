@@ -55,7 +55,7 @@ Page({
     console.log(e)
     var idx = e.currentTarget.dataset.index+1
     var yd = e.currentTarget.dataset.text
-
+   
     this.setData({
       yd,
       idx,
@@ -66,7 +66,7 @@ Page({
     console.log(e)
     var idex = e.currentTarget.dataset.index + 1
     var wd = e.currentTarget.dataset.text
-
+    wd = '、' + wd
     this.setData({
       wd,
       idex,
@@ -77,7 +77,7 @@ Page({
     console.log(e)
     var sx = e.currentTarget.dataset.index + 1
     var cd = e.currentTarget.dataset.text
-   
+    cd = '、' + cd
     this.setData({
       cd,
       sx,
@@ -91,20 +91,30 @@ Page({
     //是否选择
     if(this.data.arr1!=""){
        if(this.data.yd==undefined){
+        
+         wx.showModal({
+           title: '提示',
+           content: '请先选择规格！',
+         })
          return false
-          console.log(this.data.yd)
        }
     }
     if (this.data.arr2!= "") {
       if (this.data.wd == undefined) {
+        wx.showModal({
+          title: '提示',
+          content: '请先选择规格！',
+        })
         return false
-        console.log(this.data.wd)
       }
     }
     if (this.data.arr3!= "") {
       if (this.data.cd == undefined) {
+        wx.showModal({
+          title: '提示',
+          content: '请先选择规格！',
+        })
         return false
-        console.log(this.data.cd)
       }
     }
     if (this.data.num<=0){
@@ -116,12 +126,13 @@ Page({
     var obj={}
     obj.goods_introduce = productsList.goods_introduce
     obj.id=productsList.id
-    obj.goods_name = productsList.goods_name
+    obj.title = productsList.goods_name
     obj.yd = this.data.yd
       obj.wd=this.data.wd
       obj.cd=this.data.cd
       obj.selected=true
-    obj.img = ApiUrl.url+productsList.goods_logo
+    obj.img = productsList.goods_logo
+    // obj.img = ApiUrl.url+productsList.goods_logo
       obj.num=this.data.num
     obj.price =productsList.goods_price
       obj.way='立即购买'
@@ -196,7 +207,8 @@ Page({
         data[0].cart_id = res.data.lists.cart_id
         data[0].member_id = res.data.lists.member_id
         console.log(data)
-        var info = JSON.stringify(data)
+       var info = JSON.stringify(data)
+        info = encodeURIComponent(info)
         console.log(info)
         wx.navigateTo({
           url: '../submitOrder/submitOrder?info=' + info,
@@ -319,13 +331,14 @@ Page({
       console.log(res)
       if(res.data.code!=10000){
         wx.showModal({
-          title: '亲，非常抱歉呢',
+          title: '提示',
           content: '没有该商品的信息',
         })
        
         return false
       }
       var productsList=res.data.lists
+      productsList.goods_logo = ApiUrl.url + productsList.goods_logo
       var goods_img = productsList.good_imgs
       for(let i=0;i<goods_img.length;i++){
         goods_img[i].pics=ApiUrl.url+goods_img[i].pics
@@ -386,23 +399,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    //获取本地存储
-    var that = this
-    wx.getStorage({
-      
-      key: 'shop',
-      success: function (res) {
-        console.log(res)
-        var datalist = res.data
-        console.log(datalist)
-        that.setData({
-          newarr: datalist
-        })
-        console.log(that.data.newarr)
-      }, fail: function (res) {
-        console.log(res)
-      }
-    })
+  
   
   },
 

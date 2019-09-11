@@ -60,8 +60,7 @@ Page({
           }
 
         }
-        
-
+       
 
         console.log(addressList)
         this.setData({
@@ -70,6 +69,19 @@ Page({
         })
         //存入缓存
         wx.setStorageSync('addressList', addressList)
+        var str=addressList.filter((v)=>{
+            if(v.state==false){
+              return v
+            }
+        })
+        if (str.length==addressList.length) {
+          wx.showModal({
+            title: '提示',
+            content: '您还没选择收货地址！',
+          })
+          return false
+        }
+
       }
 
 

@@ -13,7 +13,8 @@ Page({
   data: {
     modalHidden: true,
     ifdisplay: '',
-    token : '',
+    token : wx.getStorageSync('token'),
+    userid: wx.getStorageSync('userid'),
     formValue: ''
   },
 
@@ -57,26 +58,16 @@ Page({
   },
   //退出登录
   logout:function(){
-    if (wx.getStorageSync('loginStatus') == false) {
-      wx.showModal({
-        title: '提示！',
-        content: '请先登录',
-      })
-      return false
-    } else {
-      this.setData({
-        modalHidden: !this.data.modalHidden
-      })
-    }
+    this.setData({
+      modalHidden: !this.data.modalHidden
+    })
   },
   modalBindaconfirm: function () {
-    let that = this
-   
-    that.setData({
-      modalHidden: !that.data.modalHidden,
-      show: !that.data.show,
+    this.setData({
+      modalHidden: !this.data.modalHidden,
+      show: !this.data.show,
       tip: '您点击了【是】按钮！',
-      buttonDisabled: !that.data.buttonDisabled
+      buttonDisabled: !this.data.buttonDisabled
     })
     wx.clearStorage()
   },
