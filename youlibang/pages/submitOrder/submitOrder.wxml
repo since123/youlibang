@@ -9,7 +9,7 @@
       <view class='username'>{{defAddress.address_name}}</view>
       <view class='phone'>{{defAddress.address_phone}}</view>
      </view>
-      <view class="leftArrow" catchtap="chooseAddress">></view>
+      <view class="right-arrow" catchtap="chooseAddress"></view>
       <view class='address'>{{defAddress.address}}</view>
   </view>
   <!-- 根据地址选取距离最近的经销商 -->

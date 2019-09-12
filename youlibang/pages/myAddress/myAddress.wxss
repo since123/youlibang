@@ -55,6 +55,7 @@ image {
   font: 32rpx/32rpx "";
   margin-top: 28rpx;
   margin-left: 31rpx;
+ 
 }
 
 .coll .coll_b {
@@ -62,6 +63,10 @@ image {
   margin-left: 31rpx;
   margin-top: 19rpx;
   color: #666;
+   /* display:-webkit-box;
+-webkit-box-origin:vertical; 
+ -webkit-line-clamp:2;             
+  overflow:hidden;        */
 }
 
 .coll_v {

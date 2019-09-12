@@ -592,6 +592,8 @@ qqmapsdk.geocoder({ //获取目标地址的地图信息，把详细地址输入a
         return false
       } else {
         var address_id = res.data.lists.id
+     console.log(defAddress)
+     defAddress.address=defAddress.address.replace("*","")
         that.setData({
           defAddress,
           address_id

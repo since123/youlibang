@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 12,
 			"list": [
 				{
 					"id": 0,
@@ -95,8 +95,8 @@
 				},
 				{
 					"id": 6,
-					"name": "pages/myteam/myteam",
-					"pathName": "pages/myteam/myteam",
+					"name": "pages/upgradeVIP/upgradeVIP",
+					"pathName": "pages/upgradeVIP/upgradeVIP",
 					"query": "",
 					"scene": null
 				},
@@ -139,7 +139,6 @@
 					"id": -1,
 					"name": "pages/shoppingcart/shoppingcart",
 					"pathName": "pages/shoppingcart/shoppingcart",
-					"query": "",
 					"scene": null
 				}
 			]

@@ -100,7 +100,7 @@ page{
   width: 36rpx;
   height: 36rpx;
  background: #f4f3f8;
-  font: 36rpx/36rpx "";
+  font: 36rpx/32rpx "";
   text-align: center;
   color: #8e8d92;
   border-radius: 2rpx;

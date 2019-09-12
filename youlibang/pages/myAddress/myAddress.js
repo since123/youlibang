@@ -63,6 +63,7 @@ Page({
        
 
         console.log(addressList)
+        
         this.setData({
           addressList,
           member_id

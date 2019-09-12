@@ -55,7 +55,7 @@
     <view class='goodsdetailImg'><image src='{{productsList.goods_logo}}'></image></view>
     <view class='priceDiv'>
       <view class='detailprice'><label>￥</label>{{productsList.goods_price}}</view>
-      <view class='types'><block wx:if="{{yd==''||wd==''||cd==''}}">请选择规格</block><block wx:else>已选<label>{{yd}}{{wd}}{{cd}}{{num}}件</label></block>
+      <view class='types'><block wx:if="{{zt}}">请选择规格</block><block wx:else>已选<label>{{yd}}{{wd}}{{cd}}{{num}}件</label></block>
 </view>
     </view>
 

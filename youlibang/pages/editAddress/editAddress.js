@@ -34,13 +34,17 @@ Page({
     var moblie = address.address_phone   //手机
     var region = address.address   //联系地址
     var address=region.split(',')
-    console.log(linkname,moblie,address)
+     var  addressdetail=address[2].split("*")
+     address[2]=addressdetail[0]
+     addressdetail=addressdetail[1]
+    console.log(linkname,moblie,address,addressdetail)
    this.setData({
      address_id,
      member_id,
      linkname,
      moblie,
-     region:address
+     region:address,
+     addressdetail
    })
   },
 

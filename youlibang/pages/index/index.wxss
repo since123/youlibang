@@ -25,7 +25,8 @@ height: 30rpx;
 }
 
 .header_lun {
-   border: 2rpx solid white; 
+   /* padding: 20rpx; */
+  border: 2rpx solid white; 
   width: 670rpx;
   height: 300rpx;
   justify-content: center;
@@ -33,7 +34,7 @@ height: 30rpx;
   margin: 20rpx auto 0;
   border-radius: 10rpx;
   overflow: hidden;
-  /* background-color: red */
+ /* background-color: red */
 }
 
 .swiper, .swiper image {

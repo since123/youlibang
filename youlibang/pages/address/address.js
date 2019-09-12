@@ -133,7 +133,7 @@ Page({
       })
       return;
     }
-    address = address+addressdetail
+    // address = address+addressdetail
     console.log(address_phone, address_name, member_id, address)
    //请求新增接口
     httpReq({
@@ -141,7 +141,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist+'user/addaddress?member_id='+member_id+'&address_name='+address_name+'&address_phone='+address_phone+'&address='+address,
+      url: ApiUrl.phplist+'user/addaddress?member_id='+member_id+'&address_name='+address_name+'&address_phone='+address_phone+'&address='+address+'*'+addressdetail,
     }).then((res) => {
         console.log(res)
     });

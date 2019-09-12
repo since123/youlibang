@@ -34,7 +34,11 @@ Page({
       ],
       arr1:[],
       arr2:[],
-      arr3:[]
+      arr3:[],
+      zt:true
+      // yd:"",
+      // wd:"",
+      // cd:""
   },
   //事件处理
   //点击查看购物车
@@ -59,6 +63,7 @@ Page({
     this.setData({
       yd,
       idx,
+      zt:false
     })
  
   },
@@ -70,6 +75,7 @@ Page({
     this.setData({
       wd,
       idex,
+      zt:false
     })
     
   },
@@ -81,7 +87,7 @@ Page({
     this.setData({
       cd,
       sx,
-    
+      zt:false
     })
   },
  
@@ -318,6 +324,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(this.data.yd,this.data.wd,this.data.cd)
     //console.log(options)
     var goodsId = options.goodsId;
     console.log(goodsId)
