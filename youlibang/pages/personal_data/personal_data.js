@@ -126,46 +126,39 @@ Page({
   /**
    * 获取修改的input中的值
    */
-  // getVipNameValue: function(e) {
-  //   this.setData({
-  //     name: e.detail.value
-  //   })
-  //   console.log(this.data.name)
-  // },
-  // getSexValue: function(e) {
-  //   this.setData({
-  //     sex: e.detail.value
-  //   })
-  //   console.log(this.data.sex)
-  // },
+  getVipNameValue: function(e) {
+    this.setData({
+      name: e.detail.value
+    })
+    console.log(this.data.name)
+  },
+  getSexValue: function(e) {
+    this.setData({
+      sex: e.detail.value
+    })
+    console.log(this.data.sex)
+  },
   
   /**更新保存个人资料修改（红星星部分） */
-  // changeAvatar: function (e) {
-  //   //这里是上传操作
-  //   //当调用uploadFile成功之后，再次调用后台修改的操作，这样才真正做了修改头像
-  //   //这里调用后台的修改操作， tempFilePaths[0],是上面uploadFile上传成功，然后赋值到修改这里。
-  //     httpReq({
-  //       header: {
-  //         'Content-Type': 'application/json',
-  //         'Accept': 'application/json'
-  //       },
-  //       method: 'POST',
-  //       url: ApiUrl.phplist + '',//真正修改操作,填写你们修改的API
-  //     }).then((res) => {
-  //       console.log(res)
-  //       if (res.data.code == 200) {
-  //         wx.showToast({
-  //           title: '修改成功',
-  //           icon: 'success',
-  //           duration: 2500
-  //         })
-  //         //wx.uploadFile自已有一个this，我们刚才上面定义的let that = this 把this带进来
-  //         that.setData({
-  //           src: tempFilePaths[0]//要上传文件资源的路径
-  //         });
-  //       }
-  //     })   
-  // },
+  changeAvatar: function (e) {
+    //这里是上传操作
+    //当调用uploadFile成功之后，再次调用后台修改的操作，这样才真正做了修改头像
+    //这里调用后台的修改操作， tempFilePaths[0],是上面uploadFile上传成功，然后赋值到修改这里。
+      httpReq({
+        header: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        method: 'POST',
+        data: {
+          nickname: name,
+          sex: gender
+        },
+        url: ApiUrl.phplist + '',//修改接口,填写你们修改的API
+      }).then((res) => {
+        console.log(res)
+      })   
+  },
 
   // bindPhoneNumber: function(e) {
   //   console.log(e)

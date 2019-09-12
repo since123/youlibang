@@ -17,7 +17,8 @@ Page({
     oneGradeNum: 0,
     twoGradeNum: 0,
     oneTeamInfor: [],
-    twoTeamInfor: []
+    twoTeamInfor: [],
+    lineUrl: ApiUrl.url,
   },
   openstatus: function (e) {
     var that = this
@@ -62,16 +63,29 @@ Page({
         url: ApiUrl.phplist + 'distribution/myteam?token=' + token + '&level=' + that.data.currentGrade + '&member_id=' + wx.getStorageSync('vipid'),
       }).then((res) => {
         console.log(res)
-        let lists = res.data.lists
+        let oneGradeNum = res.data.lists.first_level_count
+        let twoGradeNum = res.data.lists.second_level_count
+        that.setData({
+          oneGradeNum,
+          twoGradeNum
+        })
+        let lists = res.data.lists.detail
         let teamInfor = []
         for (let m in lists) {
+          //console.log(lists[n)
           let teamMember = {}
+          if (lists[m].avatar == null) {
+            teamMember.image = null
+          } else {
+            teamMember.image = that.data.lineUrl + lists[m].avatar.replace(/\\/g, '/')  
+          }
           teamMember.image = lists[m].avatar
           teamMember.userName = lists[m].nickname
           teamMember.time = util.formatTime(new Date(lists[m].create_time))
           console.log(lists[m].create_time)
           // console.log(util.formatTime(lists[m].create_time))
           teamMember.money = Number(lists[m].amount)
+          teamMember.personNum = Number(lists[m].member_count)
           teamMember.orderNum = Number(lists[m].order_count)
           teamInfor.push(teamMember)
         }
@@ -79,12 +93,10 @@ Page({
           console.log(this.data.currentGrade)
           that.setData({
             oneTeamInfor : teamInfor,
-            oneGradeNum: teamInfor.length
           })
         } else if (Number(this.data.currentGrade) == 2){
           that.setData({
             twoTeamInfor : teamInfor,
-            twoGradeNum: teamInfor.length
           })
         }
       })

@@ -1,7 +1,7 @@
 <!--pages/myteam/myteam.wxml-->
 <view class='top'>
-    <view  class="{{order?'statustop1':'statustop'}}" bindtap='openstatus'>一级({{oneGradeNum}})</view>
-    <view  class="{{order?'statustop':'statustop1'}}" bindtap='opendetail'>二级({{twoGradeNum}})</view>
+    <view  class="{{order?'statustop1':'statustop'}}" bindtap='openstatus'>一级  ({{oneGradeNum}})</view>
+    <view  class="{{order?'statustop':'statustop1'}}" bindtap='opendetail'>二级  ({{twoGradeNum}})</view>
 </view>
 <view class='body_contents'>
 <block wx:for="{{oneTeamInfor}}" wx:key="{{item.index}}">

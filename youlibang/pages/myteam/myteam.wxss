@@ -106,7 +106,7 @@ border-radius:50%;
   font-weight:500;
   color:rgba(234,65,72,1);
   line-height:90rpx;
-  margin-left: 10%;
+  margin-left: 17%;
 }
 .li{
   float: left;
@@ -128,13 +128,11 @@ border-radius:50%;
   line-height:80rpx;
 }
 .orderNum{
-  float: left;
-  width:120rpx;
-  height:26rpx;
+  float: right;
   font-size:28rpx;
   font-family:sans-serif;
   font-weight:500;
   color:rgba(51,51,51,1);
   line-height:80rpx;
-  margin-left: 50%;
+  margin-right: 7%;
 }

@@ -3,7 +3,9 @@
   color: red;
   border-bottom:2px solid red;
 }
-
+.fontcol {
+  color: gainsboro;
+}
 swiper {
   height: auto;
 }
@@ -11,7 +13,7 @@ swiper {
 .swiper-tab {
   width: 750rpx;
   height: 80rpx;
-  background: #f5f7f9;
+  background:#fff;
   display: flex;
   justify-content: space-around;
   margin-top: 18rpx;
@@ -22,7 +24,6 @@ swiper {
   width: 90rpx;
   height: 80rpx;
   font: 30rpx/76rpx "";
-  color: #333;
   text-align: center;
 }
 
@@ -49,8 +50,8 @@ swiper {
 .orderNumber {
   float: left;
   font-size: 24rpx;
-  padding-left: 20rpx;
-  padding-top: 10rpx;
+  padding-left: 3%;
+  padding-top: 3%;
 
 }
 
@@ -58,15 +59,15 @@ swiper {
   float: right;
   font-size: 28rpx;
   padding-left: 20rpx;
-  padding-top: 10rpx;
-  padding-right: 19rpx;
+  padding-top: 3%;
+  padding-right: 6%;
   color: orangered;
 }
 
 .order {
   box-sizing: border-box;
   width: 678rpx;
-  background: #e6e6e6;
+  background: #fff;
   margin: 0 auto;
   border-radius: 20rpx;
   padding-bottom: 32rpx; 
@@ -76,14 +77,15 @@ swiper {
 image {
   width: 150rpx;
   height: 150rpx;
+  border-radius: 10rpx;
 }
 
 .order .orderList {
   clear: both;
   display: flex;
   flex-direction: row;
-  padding-top: 32rpx;
-  padding-left: 20rpx;
+  padding-top: 5%;
+  padding-left: 3%;
 }
 
 .orderDetail {
@@ -107,20 +109,23 @@ image {
 
 .orderInfor {
   margin-left: 116rpx;
+  
 }
 
-.orderInfor .orderPrice {
-  width: 98rpx;
+.orderPrice {
+  display: flex;
   height: 19rpx;
   font-size: 24rpx;
+  justify-content:flex-end;
 }
 
-.orderInfor .orderNum {
-  width: 30rpx;
+.orderNum {
+  display: flex;
   height: 19rpx;
   font-size: 24rpx;
   color: #999;
   margin-top: 26rpx;
+  justify-content: flex-end;
 }
 
 .orderSumPri {
@@ -139,8 +144,9 @@ image {
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding-left: 379rpx;
-  padding-top: 10rpx;
+  justify-content: flex-end;
+  padding-right: 20rpx;
+  padding-top: 20rpx;
 }
 
 .kk {

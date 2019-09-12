@@ -38,10 +38,7 @@ Page({
       }).then(res => {
         console.log(res);
         if (res.data.code == 10001) {
-          wx.showModal({
-            title: "提示",
-            content: res.data.msg
-          });
+          return false
         } else {
           let lists = res.data.lists;
           let nameList = [];

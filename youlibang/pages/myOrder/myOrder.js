@@ -283,7 +283,7 @@ Page({
       orderid: orderid
     })
     console.log(this.data.ifcancel)
-    //console.log('删除订单')
+    //console.log('取消订单')
 
   },
   //确认取消
@@ -298,7 +298,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'order/delOrder?token=' + this.data.token + '&member_id=' + wx.getStorageSync('vipid') + '&order_id=' + this.data.orderid
+      url: ApiUrl.phplist + 'order/cancelOrder?token=' + this.data.token + '&member_id=' + wx.getStorageSync('vipid') + '&order_id=' + this.data.orderid
     }).then((res) => {
       console.log(res)
       let status = res.data.lists

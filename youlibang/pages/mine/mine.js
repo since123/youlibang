@@ -26,14 +26,14 @@ Page({
     loginText: '点击登录',
     vipPageText: '申请会员', 
     loginStatus: false,
-    waitPayNumber:2,
+    waitPayNumber:0,
     ifwaitPayNumber: true,
-    waitSentNumber: 2,
-    ifwaitSentNumber: false,
-    waitReceivedNumber: 2,
+    waitSentNumber: 0,
+    ifwaitSentNumber: true,
+    waitReceivedNumber: 0,
     ifwaitReceivedNumber: true,
-    completedNumber: 2,
-    ifcompletedNumber: false,
+    completedNumber: 0,
+    ifcompletedNumber: true,
   },
 
   /**
@@ -110,6 +110,26 @@ Page({
     }).then((res) => {
       console.log(res);
       let lists = res.data.lists
+      let orderStatus = res.data.lists.order
+      console.log(orderStatus)
+      let waitPayNumber = orderStatus[0]
+      let waitSentNumber = orderStatus[2]
+      let waitReceivedNumber = orderStatus[3]
+      let completedNumber = orderStatus[4]
+      let ifwaitPayNumber = !waitPayNumber ? true : false
+      let ifwaitSentNumber = !waitSentNumber ? true : false
+      let ifwaitReceivedNumber = !waitReceivedNumber ? true : false
+      let ifcompletedNumber = !completedNumber ? true : false
+      that.setData({
+        waitPayNumber,
+        waitSentNumber,
+        waitReceivedNumber,
+        completedNumber,
+        ifwaitPayNumber,
+        ifwaitSentNumber,
+        ifwaitReceivedNumber,
+        ifcompletedNumber
+      })
       let inform = {}
       inform.vipid = lists.id//会员ID
       inform.vipname = lists.nickname//昵称
@@ -200,7 +220,6 @@ Page({
           inform.userImg_url = lists.avatar//头像
         }
       }
-      // inform.userImg_url = that.data.lineUrl + urlStr//头像
       //let price = Number(lists.can_rebate) + Number(lists.no_rebate) + Number(lists.user_money)//账户余额
       //inform.price = !price ? 0 : price
       //let usermoney = Number(lists.can_rebate) + Number(lists.user_money)//可提现全部余额
