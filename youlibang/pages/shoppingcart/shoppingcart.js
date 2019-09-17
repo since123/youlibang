@@ -71,10 +71,10 @@ Page({
       },
       url: ApiUrl.phplist+"cart/getcart?token=" + token + '&member_id=' + member_id,
     }).then((res) => {
-      console.log(res)
+      console.log(res.data.lists)
       if (res.data.lists == undefined) {
          that.setData({
-           cart:""
+           carts:""
          })
       } else {
 

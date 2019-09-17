@@ -68,6 +68,67 @@ Page({
      })
    // console.log(this.data.value)
   },
+  //失焦事件
+  lose(){
+    //如果没输入
+    if (this.data.value == "") {
+      return false
+    }
+    //获取搜索关键字
+    var that = this
+    var search = that.data.value
+    var history = that.data.history
+    var str = history.filter((v) => {
+      if (v.text == search) {
+        return v
+      }
+    })
+    //请求搜索接口
+    httpReq({
+      header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      url: ApiUrl.phplist + 'goods/goodsearch?search=' + search,
+    }).then((res) => {
+      console.log(res)
+      var searchGoods = res.data.lists
+      if (searchGoods == undefined) {
+        wx.showModal({
+          title: '提示',
+          content: res.data.msg,
+        })
+        this.setData({
+          searchGoods: []
+        })
+        console.log(this.data.searchGoods)
+      } else {
+        let goods = searchGoods.map((v) => {
+          v.goods_name = v.goods_name.replace(search, "<b style='color:red'>" + search + "</b>")
+          v.goods_logo = ApiUrl.url + v.goods_logo
+          return v
+        })
+        console.log(goods)
+        this.setData({
+          searchGoods: goods,
+          status: true,
+        })
+        if (str.length == 0) {
+          var obj = {}
+          obj.text = search
+          history.push(obj)
+          console.log(history)
+          this.setData({
+            history
+          })
+          wx.setStorageSync('history', history)
+        }
+      }
+
+    });
+
+  },
+
   //点击跳转搜索详情
   searchPath(){
     //如果没输入
@@ -96,7 +157,7 @@ Page({
        if(searchGoods==undefined){
          wx.showModal({
            title: '提示',
-           content: '无数据匹配！',
+           content: res.data.msg,
          })
           this.setData({
             searchGoods:[]

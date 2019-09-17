@@ -114,7 +114,7 @@ Page({
       //   {
       //     orderId: '001',
       //     status: '待付款',
-      //     orders:
+      //     goods:
       //       [
       //         {
       //           index: '0',
@@ -140,7 +140,7 @@ Page({
       //   {
       //     orderId: '002',
       //     status: '待收货',
-      //     orders: [{
+      //     goods: [{
       //       index: '0',
       //       image: '/images/2012031220134655.jpg',
       //       title: 'Pepe Jeans秋冬新款女士长袖连衣裙',
@@ -159,9 +159,9 @@ Page({
   //     let sumNumber = 0
   //     let orderHandleOne = ''
   //     let orderHandleTwo = ''
-  //     for (let j = 0; j < this.data.allOrderS[i].orders.length; j++) {
-  //       let goodsPrice = parseFloat(this.data.allOrderS[i].orders[j].price)
-  //       let goodsNumber = parseFloat(this.data.allOrderS[i].orders[j].number)
+  //     for (let j = 0; j < this.data.allOrderS[i].goods.length; j++) {
+  //       let goodsPrice = parseFloat(this.data.allOrderS[i].goods[j].price)
+  //       let goodsNumber = parseFloat(this.data.allOrderS[i].goods[j].number)
   //       sumPrice += goodsPrice * goodsNumber
   //       sumNumber += goodsNumber
   //     }

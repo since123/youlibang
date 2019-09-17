@@ -43,6 +43,9 @@
   line-height:36rpx;
   margin-top: 5%;
   margin-left: 3%;
+  /* position: absolute;
+  right: 40rpx;
+  z-index: 1000; */
 }
 .sousuoContents{
   width: 750rpx;

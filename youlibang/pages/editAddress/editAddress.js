@@ -33,11 +33,20 @@ Page({
     var linkname = address.address_name  //收货人
     var moblie = address.address_phone   //手机
     var region = address.address   //联系地址
-    var address=region.split(',')
-     var  addressdetail=address[2].split("*")
-     address[2]=addressdetail[0]
-     addressdetail=addressdetail[1]
-    console.log(linkname,moblie,address,addressdetail)
+        console.log(region)
+    var index = region.lastIndexOf(",")+1
+    console.log(index)
+    var addressdetail=region.substr(index)
+    console.log(addressdetail)
+       address=region.substring(0,(index-1))
+       address=address.split(",")
+    console.log(address)
+    //  address=region.split(',')
+    //  var  addressdetail=address[2].split("*")
+    //  address[2]=addressdetail[0]
+    //  addressdetail=addressdetail[1]
+    // console.log(linkname,moblie,address,addressdetail)
+
    this.setData({
      address_id,
      member_id,
@@ -96,7 +105,7 @@ Page({
     var address_phone = this.data.moblie
    var region=this.data.region
     var addressdetail=this.data.addressdetail
-    var address=region+addressdetail
+    var address=region+'*'+addressdetail
     var member_id=this.data.member_id
     console.log(address_name, address_id, member_id, address_phone, address)
    //请求编辑接口
@@ -151,7 +160,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    // wx.reLaunch({
+    //   url: '../mine/mine'
+    // })
   },
 
   /**

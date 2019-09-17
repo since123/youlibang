@@ -2,7 +2,7 @@
 <view class='search'>
 <view class="inputB">
 <image src='../../images/search@2x.png'></image>
-    <input class='inputInfo' type='' placeholder='请输入商品名称' bindchange="search"></input>
+    <input class='inputInfo' type='' placeholder='请输入商品名称' bindchange="search" bindblur="lose"></input>
     </view>
     <view class='sousuo' bindtap="searchPath">搜索</view>
 </view>

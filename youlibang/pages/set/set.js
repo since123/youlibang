@@ -63,13 +63,23 @@ Page({
     })
   },
   modalBindaconfirm: function () {
-    this.setData({
-      modalHidden: !this.data.modalHidden,
-      show: !this.data.show,
-      tip: '您点击了【是】按钮！',
-      buttonDisabled: !this.data.buttonDisabled
-    })
-    wx.clearStorage()
+    let that = this
+    if (wx.getStorageSync('loginStatus') == false) {
+      wx.showModal({
+        title: '提示！',
+        content: '请先登录',
+      })
+      return false
+    } else {
+      that.setData({
+        modalHidden: !this.data.modalHidden,
+        show: !this.data.show,
+        tip: '您点击了【是】按钮！',
+        buttonDisabled: !this.data.buttonDisabled
+      })
+      wx.setStorageSync("encryptedData", "")
+      wx.setStorageSync("userInfo", "")
+    }
   },
 
   modalBindcancel: function () {

@@ -141,7 +141,7 @@ Page({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist+'user/addaddress?member_id='+member_id+'&address_name='+address_name+'&address_phone='+address_phone+'&address='+address+'*'+addressdetail,
+      url: ApiUrl.phplist+'user/addaddress?member_id='+member_id+'&address_name='+address_name+'&address_phone='+address_phone+'&address='+address+','+addressdetail,
     }).then((res) => {
         console.log(res)
     });

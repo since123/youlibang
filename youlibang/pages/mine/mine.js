@@ -48,7 +48,22 @@ Page({
       if (wx.getStorageSync('userInfo') == '' || wx.getStorageSync('encryptedData') == '') {
         that.setData({
           loginText: '点击登录',
-          loginStatus: false
+          loginStatus: false,
+          username: '蜡笔小新',
+          vipid: 0,
+          userImg_url: '../../images/headImg.png',
+          price: '0.00',
+          loginText: '点击登录',
+          vipPageText: '申请会员',
+          loginStatus: false,
+          waitPayNumber: 0,
+          ifwaitPayNumber: true,
+          waitSentNumber: 0,
+          ifwaitSentNumber: true,
+          waitReceivedNumber: 0,
+          ifwaitReceivedNumber: true,
+          completedNumber: 0,
+          ifcompletedNumber: true,
         })
         wx.setStorageSync('loginStatus', that.data.loginStatus)
         return false

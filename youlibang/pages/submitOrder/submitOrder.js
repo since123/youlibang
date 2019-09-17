@@ -1,6 +1,7 @@
 // pages/submitOrder/submitOrder.js
-var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
+const app = getApp()
 import {
   ApiUrl
 } from '../../utils/apiurl.js';
@@ -14,6 +15,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showPayPwdInput: false,  //是否展示密码输入层
+    pwdVal: '',  //输入的密码
+    payFocus: true, //文本框焦点
    status:true,
     txtOrderCode: '',
     defAddress:[],
@@ -32,7 +36,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+    // this.showInputLayer();
 
     console.log(options)
     if(options.info==undefined){
@@ -173,20 +177,44 @@ Page({
 
 
 },
+  // 显示支付密码输入层
+  showInputLayer: function () {
+    this.setData({ showPayPwdInput: true, payFocus: true });
+  },
+  hidePayLayer: function () {
+
+    var val = this.data.pwdVal;
+
+    this.setData({ showPayPwdInput: false, payFocus: false, pwdVal: '' })
+    // wx.navigateTo({
+    //   url: '../myOrder/myOrder?currtab=1',
+    // })
+
+  },
+  /**
+  * 获取焦点
+  */
+  getFocus: function () {
+    this.setData({ payFocus: true });
+  },
   payway(){
      console.log("通过微信支付！")
       this.setData({
         way:"wxpay"
       })
   },
-  //密码栏点击关闭
-  quxiao(){
-     var state=this.data.state
-     state=!state
-     this.setData({
-       state
-     })
+  /**
+  * 输入密码监听
+  */
+  inputPwd: function (e) {
+    console.log(e)
+    this.setData({ pwdVal: e.detail.value });
+     console.log(this.data.pwdVal)
+    if (e.detail.value.length >= 6) {
+      this.setData({ showPayPwdInput: false, payFocus: false})
+    }
   },
+
   //查看最近的经销商
 //   query(){
 //    var token=wx.getStorageSync('token') //token
@@ -241,13 +269,7 @@ Page({
 //     //   status
 //     // })
 // },
-queren(e){
-   console.log(e)
-  var password = e.detail.value
-  this.setData({
-    password
-  })
-},
+
   payWay(){
     console.log("通过钱包支付！")
      this.setData({
@@ -282,6 +304,11 @@ queren(e){
      }
      
    },
+   catch(){
+     wx.navigateTo({
+       url: '../myOrder/myOrder?currtab=1',
+     })
+   },
    //获取输入框内容
    inputvalue(e){
        //console.log(e)
@@ -295,7 +322,8 @@ queren(e){
    },
    //钱包支付
   confirmPwd(){
-    var password = this.data.password
+    var pwdVal = this.data.pwdVal
+    // console.log(pwdVal)
     var describe = this.data.describe    //卖家备注
     var way = this.data.way             //支付方式
     var token = wx.getStorageSync('token') //token
@@ -304,15 +332,16 @@ queren(e){
     var address_id = this.data.address_id  //address_id
     var total = this.data.total         //总
     //过滤空格
-    password = password.replace(/ /g, '')
-    if(password==""){
+    pwdVal = pwdVal.replace(/ /g, '')
+    if (pwdVal==""){
       wx.showModal({
         title: '提示',
-        content: '请有输入密码！',
+        content: '请输入密码！',
       })
       return false
     }
     var that=this
+   // console.log(pwdVal)
     // 'token'
     // member_id
     // 'cart_id'=> []
@@ -326,7 +355,7 @@ queren(e){
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      url: ApiUrl.phplist + 'member/confirmPsw?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid') + '&psw=' + password,
+      url: ApiUrl.phplist + 'member/confirmPsw?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid') + '&psw=' + pwdVal,
     }).then((res) => {
       console.log(res)
       //成功
@@ -346,28 +375,40 @@ queren(e){
           url: ApiUrl.phplist + 'order/goodsPay',      //线上
         }).then((res) => {
           console.log(res)
-          if (res.data.code != 10000) {
+          if (res.data.msg != '支付成功') {
             wx.showModal({
               title: '提示',
               content: res.data.msg,
             })
+            that.setData({ showPayPwdInput: false})
+            if(res.data.msg=='账户余额不足'){
+              wx.navigateTo({
+                url: '../myOrder/myOrder?currtab=1',
+              })
+            }else{
+              return 
+            }
+          
           } else {
+            that.setData({showPayPwdInput:false})
             wx.showModal({
               title: '提示',
               content: '支付成功',
-            })
-            that.setData({
-              state: false
             })
           }
          
         })
       } else {
+       
         // 密码错误
         wx.showModal({
           title: '提示！',
           content: '密码错误',
         })
+        // wx.navigateTo({
+        //   url: '../myOrder/myOrder?currtab=1',
+        // })
+        return 
       }
     })
   },
@@ -424,6 +465,9 @@ queren(e){
                         
                       },
                       fail: function (res) {
+                        wx.navigateTo({
+                          url: '../myOrder/myOrder?currtab=1',
+                        })
                         // fail
                         console.log(res);
                       },
@@ -440,10 +484,9 @@ queren(e){
           }
       })
     }else if(way=="qianbao"){
-      var state=this.data.state
-      state=!state
+      var showPayPwdInput = this.data.showPayPwdInput
       this.setData({
-        state
+        showPayPwdInput: !showPayPwdInput
       })
       //确认密码
  
@@ -593,7 +636,7 @@ qqmapsdk.geocoder({ //获取目标地址的地图信息，把详细地址输入a
       } else {
         var address_id = res.data.lists.id
      console.log(defAddress)
-     defAddress.address=defAddress.address.replace("*","")
+    //  defAddress.address=defAddress.address.replace("*","")
         that.setData({
           defAddress,
           address_id
