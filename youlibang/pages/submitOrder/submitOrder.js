@@ -54,18 +54,24 @@ Page({
         var total = dataList[0].num * dataList[0].price
 
       } else if (dataList[0].way == '结算') {
-
+           
         for (let i = 0; i < dataList.length; i++) {
           total += (dataList[i].num * dataList[i].price)
         }
         console.log(total)
-
       }
+     // console.log(dataList[0].yd.toString().split(","))
       //循环拿到cart_id
       var cart_id = []
+      var arr=[]
       for (let i = 0; i < dataList.length; i++) {
         cart_id.push(dataList[i].cart_id)
+        dataList[i].yd=dataList[i].yd.split(",")
+      for(let t=0;t<dataList[i].yd.length;t++){
+        dataList[i].yd[t] = dataList[i].yd[t].split(":")[1]
       }
+      }
+      console.log(dataList)
       this.setData({
         total,
         dataList,

@@ -12,6 +12,7 @@ Page({
    */
   data: {
     isxianshi:true,
+    isMember:"",
     param:{},
     num:1,
     newarr:[],
@@ -35,10 +36,10 @@ Page({
       arr1:[],
       arr2:[],
       arr3:[],
-      zt:true
-      // yd:"",
-      // wd:"",
-      // cd:""
+      zt:true,
+      yd:"",
+      wd:"",
+      cd:""
   },
   //事件处理
   //点击查看购物车
@@ -71,7 +72,7 @@ Page({
     console.log(e)
     var idex = e.currentTarget.dataset.index + 1
     var wd = e.currentTarget.dataset.text
-    wd = '、' + wd
+    // wd = '、' + wd
     this.setData({
       wd,
       idex,
@@ -83,7 +84,7 @@ Page({
     console.log(e)
     var sx = e.currentTarget.dataset.index + 1
     var cd = e.currentTarget.dataset.text
-    cd = '、' + cd
+    // cd = '、' + cd
     this.setData({
       cd,
       sx,
@@ -128,14 +129,34 @@ Page({
     }
     var productsList=this.data.productsList
    console.log(productsList)
+   
+    var goods_attr_values = []
+    for (let i = 0; i < productsList.attr.length; i++) {
+      goods_attr_values.push(productsList.attr[i].attr_name)
+    }
+    console.log(goods_attr_values)
+    if (goods_attr_values.length >= 1) {
+      goods_attr_values[0] = goods_attr_values[0] + ':' + this.data.yd
+    }
+    console.log(goods_attr_values)
+    if (goods_attr_values.length >= 2) {
+      goods_attr_values[1] = goods_attr_values[1] + ':' + this.data.wd
+    }
+    console.log(goods_attr_values)
+    if (goods_attr_values.length >= 3) {
+      goods_attr_values[2] = goods_attr_values[2] + ':' + this.data.cd
+    }
+
+    goods_attr_values = goods_attr_values.toString()
+    console.log(goods_attr_values)
+
+
     //重组数据存入缓存
     var obj={}
     obj.goods_introduce = productsList.goods_introduce
     obj.id=productsList.id
     obj.title = productsList.goods_name
-    obj.yd = this.data.yd
-      obj.wd=this.data.wd
-      obj.cd=this.data.cd
+    obj.yd = goods_attr_values.split(",")
       obj.selected=true
     obj.img = productsList.goods_logo
     // obj.img = ApiUrl.url+productsList.goods_logo
@@ -169,9 +190,9 @@ Page({
     var member_id=wx.getStorageSync('vipid') //取得member_id
     var user_id=wx.getStorageSync('userid')
     //重组数据提交后端
-   
+    
+
   var  goods_id = productsList.id
-  var   goods_attr_values = productsList.goods_introduce
   var   goods_number = this.data.num
     console.log(token, member_id, goods_id, goods_attr_values, goods_number)
     console.log(this.data.yd)
@@ -182,7 +203,7 @@ Page({
         'Accept': 'application/json'
       },
       method:"POST",
-      data: { token, goods_id, goods_attr_values: goods_attr_values+this.data.yd, goods_number, member_id, user_id},
+      data: { token, goods_id, goods_attr_values: goods_attr_values, goods_number, member_id, user_id},
       url: ApiUrl.phplist+'cart/savecart'
     }).then((res) => {
       console.log(res)
@@ -324,8 +345,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(this.data.yd,this.data.wd,this.data.cd)
+   // console.log(this.data.yd,this.data.wd,this.data.cd)
     //console.log(options)
+    if(wx.getStorageSync("vipid")){
+      this.setData({
+        isMember:true
+      })
+    }else{
+      this.setData({
+        isMember: false
+      })
+    }
     var goodsId = options.goodsId;
     console.log(goodsId)
     httpReq({

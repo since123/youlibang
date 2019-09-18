@@ -174,7 +174,7 @@ Page({
      console.log(num)
      if(num>=carts.length){
       wx.showModal({
-        title: '亲',
+        title: '提示',
         content: '请至少选择一项商品！',
       })
        return false

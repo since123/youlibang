@@ -12,9 +12,12 @@
 <!-- 商品介绍 -->
 <view class='goodsjieshao'>
   <view class='price'>
-    <view class='money'><label>￥</label>{{productsList.goods_price}}</view>
-    <view class='money1'><label>￥</label>20.00</view>
-    <view class='superVIP'><label>超级会员</label></view>
+    <view class='money' wx:if="{{isMember}}"><label>￥</label>{{productsList.goods_price}}
+    </view>
+      <view class='money' wx:if="{{!isMember}}"><label>￥</label>{{productsList.goods_price}}
+    </view>
+    <view class='money1' wx:if="{{isMember}}"><label>￥</label>{{productsList.member_price}}</view>
+    <view class='superVIP' wx:if="{{isMember}}"><label>超级会员</label></view>
     <view class='yunfei'>运费:<label>{{productsList.freight}}</label>
   </view>
   </view>

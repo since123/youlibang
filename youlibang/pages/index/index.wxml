@@ -9,7 +9,7 @@
   <swiper class="swiper" indicator-dots="true" indecator-color="rgba(120,120,120,1)" autoplay="true" bindchange="" circular="true" indicator-active-color="red" >
     <block wx:for="{{movies}}" wx:key="{{movies}}" wx:for-index="index">
       <swiper-item>
-        <image src="{{item.url}}" class="slide-image" bindtap="changePath" data-id="{{item.id}}"/>
+        <image src="{{item.url}}" class="slide-image" bindtap="changePath" data-id="{{item.bind_goods_id}}"/>
       </swiper-item>
     </block>
   </swiper>

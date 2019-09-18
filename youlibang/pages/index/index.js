@@ -26,8 +26,8 @@ Page({
 
   //点击图片进行跳转
   changePath(e) {
-  
-    var id=e.target.dataset.id
+     console.log(e)
+    var id = e.target.dataset.id
     console.log(id)
     wx.navigateTo({
       url: '../goodsDetail/goodsDetail?goodsId='+id,

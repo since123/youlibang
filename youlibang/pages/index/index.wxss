@@ -108,11 +108,12 @@ float: left;
   /* margin-top: 5%; */
   /* background-color: green */
   /* 超出一行的文字替换成。。。 */
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-
-  white-space: nowrap;
+ overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+word-break: break-all;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2; 
 }
 .price{
   float: left;

@@ -34,10 +34,9 @@
 }
 .serviceinfo{
   width: 100%;
-  height: 100rpx;
   /* background-color: green; */
   margin-top: 30rpx;
-
+  overflow: hidden;
   float: left;
 }
 .serviceheadImg{
@@ -66,7 +65,7 @@
 .info{
   float: left;
   /* width:372rpx; */
-  height:80rpx;
+max-width: 650rpx;
   background:rgba(230,230,230,1);
   border-radius:20rpx;
   font-size:32rpx;
@@ -100,8 +99,9 @@
 }
 .infos{
   float: right;
+  max-width: 560rpx;
   /* width:372rpx; */
-  height:80rpx;
+  /* height:80rpx; */
   background:rgba(255,255,255,1);
   border-radius:20rpx;
   font-size:32rpx;
@@ -110,7 +110,7 @@
   color:rgba(51,51,51,1);
   line-height:70rpx;
   margin-right: 20rpx;
-
+  word-break:break-all;
 }
 .footer{
   width: 100%;

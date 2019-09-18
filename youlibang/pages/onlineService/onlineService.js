@@ -145,7 +145,7 @@ Page({
       url:ApiUrl.phplist+'user/searchCall?questions='+info,
     }).then((res) => {
      console.log(res)
-     var answer=res.data.msg
+     var answer=res.data.lists.answer
        //console.log(answer)
        var obj={}
       obj.userheadImg = '../../images/2012031220134655.jpg'

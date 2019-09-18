@@ -85,31 +85,6 @@ Page({
     }else {
       console.log('token获取失败')
     }
-
-    // if (wx.getStorageSync('token')) {
-    //   //判断是否是会员
-    //   that.isMember().then(() => {
-    //     console.log(wx.getStorageSync('vipid'))
-    //     if (wx.getStorageSync('userInfo') == '' || wx.getStorageSync('encryptedData') == '') {
-    //       // this.setData({
-    //       //   status: false,
-    //       //   ifUser: false
-    //       // })
-    //     } else {
-    //       this.setData({
-    //         status: true,
-    //         ifUser: true,
-    //         ifPhone: true,
-    //       })
-    //       //判断vipid并缓存
-    //       console.log('都授权成功')
-          
-    //     }
-    //   })
-      
-    // } else {
-      
-    // }
   },
   
   /**是会员时，后台返回数据，展示会员信息信息 */
@@ -170,7 +145,8 @@ Page({
       let can_rebate = Number(lists.can_rebate)//可提现返利
       inform.can_rebate = !can_rebate ? 0 : can_rebate
       inform.mobile = lists.phone//电话号码
-      inform.address = lists.address
+      inform.address = lists.address//地址
+      inform.level = lists.level//会员等级
       if (lists.address == '') {
         if (Number(lists.level) >= 6) {
           wx.showModal({
