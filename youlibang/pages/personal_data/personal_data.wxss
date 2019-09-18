@@ -22,13 +22,13 @@
 .rightImg{
   width: 80rpx;
   height: 80rpx;
-  border: 1rpx solid rgba(153,153,153,1);
-  border-radius: 15rpx;
   float: left;
   margin-top: 20rpx;
   margin-left: 70%;
 }
 .rightImg image{
+  border: 1rpx solid #fff;
+  border-radius: 50%;
   width: 80rpx;
   height: 80rpx;
 }

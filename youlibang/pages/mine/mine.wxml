@@ -83,13 +83,15 @@
 <view class="mubu"  hidden="{{status}}"></view>
 <view class='footer' bindchange="toastHide" hidden="{{ifUser}}">
   <view class="buttonInfo">
+    <image class="login-image" src="../../images/headImg.png"></image>
     <button  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">点击登陆账户</button>
     <button bindtap="cancelPay">暂不登录</button>
-    <text class='btnText'>您还未登录！</text>
+    <view class='btnText'>您还未登录!</view>
   </view>
 </view>
 <view class='footer' bindchange="toastHide" hidden="{{ifPhone}}">
   <view class="buttonInfo" >
+    <image class="login-image" src="../../images/headImg.png"></image>
     <button  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取用户手机号</button>
     <button bindtap="cancelPay">取消</button>
     <text class='btnText'>(发货时使用)</text>

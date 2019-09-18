@@ -27,7 +27,7 @@
           <view class='username'>{{item.userName}}</view>
           <view class='registertime'>注册时间：{{item.time}}</view>
       </view>
-      <view class='num'>推广{{item.personNun}}人</view>
+      <view class='num'>推广{{item.personNum}}人</view>
       <view class='li'></view>
       <view class='spand'>消费：{{item.money}}元</view>
       <view class='orderNum'>{{item.orderNum}}个订单</view>

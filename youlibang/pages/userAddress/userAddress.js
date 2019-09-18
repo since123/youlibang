@@ -29,7 +29,7 @@ Page({
       token: wx.getStorageSync('token'),
       region: wx.getStorageSync('region')
         || ['湖北省', '武汉市', '洪山区'],
-      address: ''
+      address: !wx.getStorageSync("address") ? "" : wx.getStorageSync("address")
     })
     qqmapsdk = new QQMapWX({
       key: 'KXRBZ-VZARV-YUYPW-USY6I-A7FIF-3ZBT4'

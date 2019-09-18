@@ -42,6 +42,7 @@
   .retailOrder {
     align-items: center;
     display: flex;
+    justify-content: space-between;
   }
   .retailOrderInfo {
     align-items: center;

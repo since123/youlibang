@@ -335,8 +335,8 @@ Page({
    * 确认微信付款
    */
   confirmWeixinPay: function(e) {
-    var that = this;
-    var token = wx.getStorageSync("token")
+    let that = this;
+    let token = wx.getStorageSync("token")
     console.log(that.data.orderid)
     httpReq({
       header: {
@@ -346,7 +346,7 @@ Page({
       url: ApiUrl.phplist + 'order/orderpay?token=' + wx.getStorageSync('token') + '&member_id=' + wx.getStorageSync('vipid') + '&pay_type=' + that.data.payway + '&order_id=' + that.data.orderid,
       // url: ApiUrl.phplist + 'order/orderpay?pay_amount=' + this.data.amount,
     }).then((res) => {
-      //console.log(res)
+      console.log(res)
       wx.requestPayment({
         timeStamp: res.data.lists.timeStamp,
         nonceStr: res.data.lists.nonceStr,
